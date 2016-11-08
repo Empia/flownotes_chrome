@@ -1,6 +1,14 @@
 // Copyright (c) 2014 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
+chrome.browserAction.onClicked.addListener(openPopupPage);
+
+function openPopupPage(callback) {
+    chrome.tabs.create({
+                           url: 'popup.html'
+                        });
+}
+
 
 /**
  * Get the current URL.
@@ -8,6 +16,8 @@
  * @param {function(string)} callback - called when the URL of the current tab
  *   is found.
  */
+
+
 function getCurrentTabUrl(callback) {
     // Query filter to be passed to chrome.tabs.query - see
     // https://developer.chrome.com/extensions/tabs#method-query
@@ -92,6 +102,22 @@ function renderStatus(statusText) {
     document.getElementById('status').textContent = statusText;
 }
 
+function extractDomain(url) {
+    var domain;
+    //find & remove protocol (http, ftp, etc.) and get domain
+    if (url.indexOf("://") > -1) {
+        domain = url.split('/')[2];
+    }
+    else {
+        domain = url.split('/')[0];
+    }
+
+    //find & remove port number
+    domain = domain.split(':')[0];
+
+    return domain;
+}
+
 function getWindowsAndTabs() {
     chrome.windows.getAll({populate: true}, function (windows) {
         var count = 1;
@@ -101,12 +127,22 @@ function getWindowsAndTabs() {
             console.log(tabs)
             var urls = [];
             var c = 0;
+            console.log('window', window);
+            document.getElementById('status').innerHTML += '<h2 class="window-separator"> window id:'+window.id+' '+count+'</h2>';            
             tabs.forEach(function (element) {
-                console.log(element.url);
+                //console.log(element.url);
                 urls[c] = element.url;
+                document.getElementById('status').innerHTML += `
+                <div class="link-object">
+                  <a href="${element.url}">${element.title}
+                  <span class="link-short">${extractDomain(element.url)}</span>
+
+                  </a>
+                </div>`;
+
                 c++;
             }, this);
-            // console.log("///////////////////////////urls//////////////////"+'\n'+urls[0])
+            //console.log("///////////////////////////urls//////////////////"+'\n'+urls[0])
             // var x = ""
             var jsonA = "{ \"windowName\":\"" + count + "\"";
             //jsonA += ", \"urls\":[ \"0\":\"" + urls[0] + "\""
@@ -123,6 +159,8 @@ function getWindowsAndTabs() {
             });
             count = count + 1;
         });
+
+        document.getElementById('link-length').innerHTML = `tabs ${document.querySelectorAll("#status a").length}`
     });
 }
 
