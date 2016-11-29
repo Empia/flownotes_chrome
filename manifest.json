@@ -15,8 +15,12 @@
   },
   "content_security_policy": "script-src 'self' http://192.168.253.219:3000; object-src 'self'",
 
-  "permissions": [
-    "storage",
-	"tabs"
-  ]
+"permissions": [
+  "tabs",
+  "bookmarks",
+  "http://www.blogger.com/",
+  "http://*.google.com/",
+  "unlimitedStorage",
+  "storage"
+]
 }

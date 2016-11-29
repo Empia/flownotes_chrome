@@ -1,6 +1,9 @@
 // Copyright (c) 2014 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
+
+window.React = {};
+
 chrome.browserAction.onClicked.addListener(openPopupPage);
 
 function openPopupPage(callback) {
@@ -162,7 +165,25 @@ function getWindowsAndTabs() {
 
         document.getElementById('link-length').innerHTML = `tabs ${document.querySelectorAll("#status a").length}`
     });
+//setTimeout(getWindowsAndTabs, 3000);
+
 }
+
+var myListener = function(tabId, changeInfo, updateTab) {
+    console.log(tabId, changeInfo, updateTab);
+}
+
+function injector(file, message) {
+    chrome.tabs.executeScript(tab.id, {file: file, runAt: 'document_end'}, function(r) {
+        chrome.tabs.sendMessage(tab.id, message, function(result) { });
+    });
+    chrome.tabs.onUpdated.removeListener(myListener);
+}
+
+chrome.tabs.onUpdated.addListener(myListener);
+
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     // getCurrentTabUrl(function(url) {
