@@ -8,3 +8,10 @@ List
 Img
 Link -> Heading, desk
 Code files -> Method, object
+
+_________________________
+Session for user
+Get all tabs
+Push session tabs
+Push deltas
+Calculate deltas for session
