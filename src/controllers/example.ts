@@ -11,6 +11,7 @@ module Example {
    * Return an empty 200 response
    */
   export function healthCheck (req: Request, res: Response) {
+    console.log("s")
     res.end();
   }
 

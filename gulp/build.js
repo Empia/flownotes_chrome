@@ -34,12 +34,14 @@ gulp.task('copyNonTs', false, () =>
 
 /**
  * Lints typescript code
- */
+
 gulp.task('lint', 'Runs a typescript linter on the application code', () =>
   gulp.src(config.tsLinter.sources)
     .pipe($.tslint(config.tsLinter.options))
     .pipe($.tslint.report())
 );
+*/
+
 
 /**
  * Compiles typescript app into js

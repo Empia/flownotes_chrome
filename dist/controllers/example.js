@@ -9,6 +9,7 @@ var Example;
      * Return an empty 200 response
      */
     function healthCheck(req, res) {
+        console.log("s");
         res.end();
     }
     Example.healthCheck = healthCheck;

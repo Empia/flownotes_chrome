@@ -18,7 +18,7 @@ gulp.task('tdd', 'Runs unit tests when file changes are detected', () => {
  * Watches for ts files
  */
 gulp.task('tsWatcher', false, () => {
-  gulp.watch(['src/**/*.ts', 'gulp/**/*.ts'], ['lint', 'compile'])
+  gulp.watch(['src/**/*.ts', 'gulp/**/*.ts'], ['compile'])
 });
 
 /**

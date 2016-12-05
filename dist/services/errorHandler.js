@@ -6,7 +6,7 @@ var ErrorHandler;
     /**
      * Generates a 500 response
      */
-    var handler = function (err, req, res, next, includeStackTrace) {
+    let handler = (err, req, res, next, includeStackTrace) => {
         res.status(res.statusCode || 500);
         res.render('error', {
             message: err.message,

@@ -1,17 +1,17 @@
 'use strict';
 // Include dependencies
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var favicon = require('serve-favicon');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const favicon = require('serve-favicon');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 // Modular Route definitions
-var exampleRoute = require('./routes/example');
+const exampleRoute = require('./routes/example');
 // Error handler service
-var errorHandler_1 = require('./services/errorHandler');
+const errorHandler_1 = require('./services/errorHandler');
 // Main app
-var app = express();
+const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -24,8 +24,8 @@ app.use(cookieParser());
 // Register routes (as middleware layer through express.Router())
 app.use(exampleRoute);
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
+app.use((req, res, next) => {
+    let err = new Error('Not Found');
     res.status(404);
     console.log('catching 404 error');
     return next(err);

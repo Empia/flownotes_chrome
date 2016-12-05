@@ -1,6 +1,7 @@
-Page, Page nesting
-Section on page
-Object on page [ordered]
+Page nesting  [CRUD]
+Section on page [CRUD]
+Object on page [ordered] [CRUD]
+_____________________________________-
 Object can be moved around pages 
 Heading object
 Paragraph
