@@ -1,16 +1,25 @@
 {
-    "compilerOptions": {
-        "target" : "ES6",
-        "module": "commonjs",
-        "noImplicitAny": false,
-        "removeComments": false,
-        "preserveConstEnums": true,
-        "outDir": "dist",
-        "sourceMap": true
-    },
-    "files": [
-        "typings/index.d.ts",
-        "src/**/*.ts",
-        "gulp/**/*.ts"
-    ]
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "jsx": "react",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "removeComments": false,
+    "sourceMap": false,
+    "inlineSourceMap": true,
+    "noEmitHelpers": true
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true,
+    "useCache": false,
+    "emitRequireType": false
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
