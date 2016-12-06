@@ -1,6 +1,6 @@
 /* eslint key-spacing:0 spaced-comment:0 */
 const path = require('path')
-const debug = require('debug')('app:config')
+const debug = require('debug')('app:config:project')
 const argv = require('yargs').argv
 const ip = require('ip')
 
@@ -16,14 +16,15 @@ const config = {
   // ----------------------------------
   path_base  : path.resolve(__dirname, '..'),
   dir_client : 'src',
-  dir_dist   : 'dist',
+  dir_dist   : 'client_dist',
+  dir_public : 'public',
   dir_server : 'server',
   dir_test   : 'tests',
 
   // ----------------------------------
   // Server Configuration
   // ----------------------------------
-  server_host : 'localhost', // ip.address() use string 'localhost' to prevent exposure on local network
+  server_host : 'localhost', // ip.address(), use string 'localhost' to prevent exposure on local network
   server_port : process.env.PORT || 3000,
 
   // ----------------------------------
@@ -109,9 +110,10 @@ function base () {
   return path.resolve.apply(path, args)
 }
 
-config.utils_paths = {
+config.paths = {
   base   : base,
   client : base.bind(null, config.dir_client),
+  public : base.bind(null, config.dir_public),
   dist   : base.bind(null, config.dir_dist)
 }
 
@@ -119,7 +121,7 @@ config.utils_paths = {
 // Environment Configuration
 // ========================================================
 debug(`Looking for environment overrides for NODE_ENV "${config.env}".`)
-const environments = require('./environments')
+const environments = require('./environments.config')
 const overrides = environments[config.env]
 if (overrides) {
   debug('Found overrides, applying to default configuration.')

@@ -3,14 +3,20 @@
 // Test routes
 import { Router } from 'express';
 import { healthCheck } from '../controllers/example';
-
+var path = require('path');
 var mongoose = require('mongoose');
+var express = require('express');
+
 
 let router = Router();
-router.get('/', healthCheck);
+//router.get('/', healthCheck);
 
+router.use(express.static('client_dist'));
 
-
+router.get('/', function(req, res, next) {
+  // res.sendFile(path.join(__dirname, '../', 'client', 'index.html'));
+  res.sendFile(path.join(__dirname, '../../', 'client_dist', 'index.html'));
+});
 
 
 var db = {
