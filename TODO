@@ -1,6 +1,11 @@
 Page nesting  [CRUD]
 Section on page [CRUD]
 Object on page [ordered] [CRUD]
+
+--------------
+ts for server files
+gulp for build process
+better logo
 _____________________________________-
 Object can be moved around pages 
 Heading object
