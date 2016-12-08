@@ -10,7 +10,7 @@ interface IGroceryItem extends Document {
 let GroceryItemSchema = new Schema({
 	name:String,
 	purchased:Boolean,
-	id:String
+	id:String,
 });
 
 let GroceryItem = model<IGroceryItem>('GroceryItem', GroceryItemSchema, "groceryItems");

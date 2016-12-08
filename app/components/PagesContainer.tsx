@@ -1,7 +1,7 @@
 import * as React from "react";
-
+import {Header} from './Header';
+import {PagesSidebar} from './PagesSidebar';
 interface PagesContainerProps extends React.Props<any>{
-  item:Item;
   key:string;
 }
 
@@ -17,9 +17,13 @@ class PagesContainer extends React.Component<PagesContainerProps, PagesContainer
   
   render(){
     return  (
-      <article className='grocery-item row'>
-      test
-      </article>
+      <div>
+        <Header />
+        <PagesSidebar key="test" />
+        <article className='grocery-item row'>
+        test
+        </article>
+      </div>
       );
   }
   

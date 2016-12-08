@@ -3,42 +3,89 @@ import * as ReactDOM from "react-dom";
 import {GroceryItemList} from './components/GroceryItemList';
 import {PagesContainer} from './components/PagesContainer';
 import {groceryItemStore} from './stores/GroceryItemStore';
-import { Router, Route, Link, hashHistory } from "react-router";
+import {FlowPageStore} from './stores/FlowPageStore';
+import { Router, Route, Link, hashHistory, withRouter } from "react-router";
 
 import {Item} from  './stores/GroceryItemStore';
-interface MyComponentProps extends React.Props<any>{items:Array<Item> }
-interface MyComponentState{}
-/*
-class MyComponent extends React.Component<MyComponentProps,MyComponentState> {
+
+interface MyComponentProps 
+extends ReactRouter.RouteComponentProps<{items:Array<Item>,store: any}, { }>{
+  items:Array<Item>;
+  st: any;
+}
+interface MyComponentState{
+  
+}
+
+class MyComponent extends React.Component<MyComponentProps, MyComponentState>{
+    myItems = [];
     constructor(){
       super();
-      let items = groceryItemStore.getItems();
+    }
+    componentWillReceiveProps(nextProp) {
+      console.log('nextProp', nextProp);
+    }
+    componentDidMount() {
+      this.myItems = this.props.items;
+      this.props.st.onChange((it) => { this.myItems = it } );
     }
     render() {
-        return <GroceryItemList items={this.items}/>
+        return <GroceryItemList st={this.props.st} items={this.myItems}/>
     }
 }
-*/
-
-const routes = (
-      <Route path="/" component={GroceryItemList} />
-      <Route path="/pages" component={PagesContainer} />
-);
 
 
-function render(items){
-  console.log('items', items);
+const Main = function(store, items) { return withRouter(
+  React.createClass({
 
-	ReactDOM.render(
-   <Router history={hashHistory}>
-   {routes}
-  </Router>, document.getElementById('app'));
+    getInitialState() {
+      return {
+        tacos: [
+          { name: 'duck confit' },
+          { name: 'carne asada' },
+          { name: 'shrimp' }
+        ]
+      }
+    },
+    render() {
+      return (
+        <div className="App">
+          <MyComponent items={items} st={store}/>
+        </div>
+      )
+    }
+  })
+)
+}
 
-//  ReactDOM.render(<GroceryItemList  items={items} />, document.getElementById('app'));
+const routes = function(store, items) {
+  return <Router history={hashHistory}>
+  <Route path="/" component={Main(store, items)} />
+  <Route path="/pages" component={PagesContainer} />
+  <Route path="/items" component={MyComponent} />
+</Router>
+};
 
+function render(groceryItemStore, items){
+  console.log('items main', groceryItemStore, items);
+	ReactDOM.render(routes(groceryItemStore, items), document.getElementById('app'));
+  //  ReactDOM.render(<GroceryItemList  items={items} />, document.getElementById('app'));
 }
 
 groceryItemStore.onChange(render);
 
 
-render(groceryItemStore.getItems());
+FlowPageStore.subscribe(() => {
+  console.log('state',FlowPageStore.getState());
+});
+
+
+FlowPageStore.dispatch({
+  type: 'ADD_PAGE',
+  data: {
+    front: 'front',
+    back: 'back'
+  }
+})
+
+render(groceryItemStore, groceryItemStore.getItems());
