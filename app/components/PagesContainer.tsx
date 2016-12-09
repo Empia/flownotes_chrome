@@ -1,12 +1,15 @@
 import * as React from "react";
 import {Header} from './Header';
-import {PagesSidebar} from './PagesSidebar';
+import PagesSidebar from './PagesSidebar';
+import { connect } from 'react-redux';
+
 interface PagesContainerProps extends React.Props<any>{
   key:string;
 }
 
 interface PagesContainerState{ 
 }
+
 
 class PagesContainer extends React.Component<PagesContainerProps, PagesContainerState>{
   
@@ -29,4 +32,4 @@ class PagesContainer extends React.Component<PagesContainerProps, PagesContainer
   
 }
 
-export {PagesContainer}
+export default PagesContainer;

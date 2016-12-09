@@ -1,91 +1,45 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {GroceryItemList} from './components/GroceryItemList';
-import {PagesContainer} from './components/PagesContainer';
+import PagesContainer from './components/PagesContainer';
 import {groceryItemStore} from './stores/GroceryItemStore';
-import {FlowPageStore} from './stores/FlowPageStore';
-import { Router, Route, Link, hashHistory, withRouter } from "react-router";
-
+import {card,addingPage,pages} from './stores/FlowPageStore';
+import { Router, Route, Link, browserHistory, withRouter } from "react-router";
+import {syncHistoryWithStore, routerReducer} from "react-router-redux";
+import {createStore,
+  applyMiddleware,
+  combineReducers,
+  compose,
+Middleware,} from 'redux';
 import {Item} from  './stores/GroceryItemStore';
-
-interface MyComponentProps 
-extends ReactRouter.RouteComponentProps<{items:Array<Item>,store: any}, { }>{
-  items:Array<Item>;
-  st: any;
-}
-interface MyComponentState{
-  
-}
-
-class MyComponent extends React.Component<MyComponentProps, MyComponentState>{
-    myItems = [];
-    constructor(){
-      super();
-    }
-    componentWillReceiveProps(nextProp) {
-      console.log('nextProp', nextProp);
-    }
-    componentDidMount() {
-      this.myItems = this.props.items;
-      this.props.st.onChange((it) => { this.myItems = it } );
-    }
-    render() {
-        return <GroceryItemList st={this.props.st} items={this.myItems}/>
-    }
-}
+import {Provider} from "react-redux";
 
 
-const Main = function(store, items) { return withRouter(
-  React.createClass({
 
-    getInitialState() {
-      return {
-        tacos: [
-          { name: 'duck confit' },
-          { name: 'carne asada' },
-          { name: 'shrimp' }
-        ]
-      }
-    },
-    render() {
-      return (
-        <div className="App">
-          <MyComponent items={items} st={store}/>
-        </div>
-      )
-    }
-  })
-)
-}
 
-const routes = function(store, items) {
-  return <Router history={hashHistory}>
-  <Route path="/" component={Main(store, items)} />
-  <Route path="/pages" component={PagesContainer} />
-  <Route path="/items" component={MyComponent} />
-</Router>
-};
 
-function render(groceryItemStore, items){
-  console.log('items main', groceryItemStore, items);
-	ReactDOM.render(routes(groceryItemStore, items), document.getElementById('app'));
+//reducers.routing = routerReducer;
+export const store = createStore(combineReducers({card,addingPage,pages, routing: routerReducer}));
+const history = syncHistoryWithStore(browserHistory, store);
+
+store.subscribe( () => console.log(store.getState() ))
+
+
+function render(){
+  console.log('items main');
+	ReactDOM.render(<Provider store={store}>
+    <Router history={browserHistory}>
+        <Route path="/" component={PagesContainer} />
+    </Router>
+    </Provider>, document.getElementById('app'));
   //  ReactDOM.render(<GroceryItemList  items={items} />, document.getElementById('app'));
 }
 
-groceryItemStore.onChange(render);
+//groceryItemStore.onChange(render);
 
 
-FlowPageStore.subscribe(() => {
-  console.log('state',FlowPageStore.getState());
+render();
+store.subscribe(() => {
+  console.log('rerender');
+  render() 
 });
-
-
-FlowPageStore.dispatch({
-  type: 'ADD_PAGE',
-  data: {
-    front: 'front',
-    back: 'back'
-  }
-})
-
-render(groceryItemStore, groceryItemStore.getItems());

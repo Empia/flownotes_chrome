@@ -12,8 +12,8 @@ class Header extends React.Component<HeaderProps, HeaderState>{
     return  (
     <div>
        <ul>
+        <li><Link to="/">Pages</Link></li>
         <li><Link to="/">Items</Link></li>
-        <li><Link to="/pages">Pages</Link></li>
       </ul>
     </div>
     );

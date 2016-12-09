@@ -6,7 +6,7 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "react/react.d.ts": {
-      "commit": "bddf14ed27fb8bb3940b54dcf0c57e029206f6a8"
+      "commit": "e80403239facb94b039a3266d5dc75bd5d0efc2a"
     },
     "react/react-dom.d.ts": {
       "commit": "bddf14ed27fb8bb3940b54dcf0c57e029206f6a8"
@@ -69,10 +69,19 @@
       "commit": "bddf14ed27fb8bb3940b54dcf0c57e029206f6a8"
     },
     "react-router/react-router.d.ts": {
-      "commit": "bddf14ed27fb8bb3940b54dcf0c57e029206f6a8"
+      "commit": "e80403239facb94b039a3266d5dc75bd5d0efc2a"
     },
     "react-router/history.d.ts": {
-      "commit": "bddf14ed27fb8bb3940b54dcf0c57e029206f6a8"
+      "commit": "e80403239facb94b039a3266d5dc75bd5d0efc2a"
+    },
+    "react-redux/react-redux.d.ts": {
+      "commit": "e80403239facb94b039a3266d5dc75bd5d0efc2a"
+    },
+    "redux/redux.d.ts": {
+      "commit": "e80403239facb94b039a3266d5dc75bd5d0efc2a"
+    },
+    "react-router-redux/react-router-redux.d.ts": {
+      "commit": "e80403239facb94b039a3266d5dc75bd5d0efc2a"
     }
   }
 }
