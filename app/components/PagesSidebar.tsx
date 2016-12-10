@@ -12,20 +12,31 @@ const mapStateToProps = ({addingPage, pages}) => ({
 
 
 const mapDispatchToProps = dispatch => ({
-    addPage: name => dispatch(actions.addPage(name)),
-    toggleAddPage: () => dispatch(actions.toggleAddPage())
+    toggleAddPage: () => dispatch(actions.toggleAddPage()),
+    removePage: (pageId) => dispatch(actions.removePage(pageId)),
+   // updatePage: (pageId) => dispatch(actions.removePage(pageId)),
+    addPage: (page) => dispatch(actions.addPage(page)),
+
+
+//    items: () => dispatch(actions.fetchPages())
 });
 
 interface PagesSidebarProps extends React.Props<any>{
   key:string;
-  pages:Array<any>;
+  pages:any;
   addingPage:boolean;
   addPage:any;
   toggleAddPage:any;
+  removePage: any;
 }
 
 interface PagesSidebarState{ 
 }
+
+function RemoveButton(props) {
+  return <button onClick={() => props.toRemove(props.pageId)}>Remove</button>
+}
+
 
 class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>{
   constructor(){
@@ -50,7 +61,12 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
     return  (<div className="page__sidebar">
       <button onClick={ e => this.props.toggleAddPage() }>Add page</button>
       <ul>
-        {props.pages.map((p, idx) => <li key={"page" + idx}>{p.title}</li>)}
+        {props.pages.items.map((p, idx) => 
+          <div className="page" key={p._id}>
+          <li>{p.title}</li>
+          <input ref={"update-"+p._id} onKeyPress={this.updatePage(idx)}/>
+          <RemoveButton pageId={p._id} toRemove={ this.removePageSender }/></div>)}
+
       </ul>
       { props.addingPage && <input ref="add" onKeyPress={this.createPage}/> }
       </div>);
@@ -61,9 +77,16 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
     if (evt.which !== 13) return;
     console.log('ref', this.refs);
     var title = (ReactDOM.findDOMNode(this.refs.add) as HTMLInputElement).value;
-    this.props.addPage(title );
+    this.props.addPage({title});
     this.props.toggleAddPage();
   }
+  updatePage = (evt) => {
+    console.log('ref', this.refs, evt.currentTarget);
+  //  this.props.addPage(title );
+  //  this.props.toggleAddPage();
+  }
+  removePageSender = ((pageId) => this.props.removePage(pageId))
+
   
 }
 

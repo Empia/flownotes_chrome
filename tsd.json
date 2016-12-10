@@ -56,9 +56,6 @@
     "jquery/jquery.d.ts": {
       "commit": "bddf14ed27fb8bb3940b54dcf0c57e029206f6a8"
     },
-    "es6-promise/es6-promise.d.ts": {
-      "commit": "bddf14ed27fb8bb3940b54dcf0c57e029206f6a8"
-    },
     "mongoose/mongoose.d.ts": {
       "commit": "bddf14ed27fb8bb3940b54dcf0c57e029206f6a8"
     },
@@ -78,10 +75,22 @@
       "commit": "e80403239facb94b039a3266d5dc75bd5d0efc2a"
     },
     "redux/redux.d.ts": {
-      "commit": "e80403239facb94b039a3266d5dc75bd5d0efc2a"
+      "commit": "e45879a3b4a6d7e265f21103ae044cefb3cee37c"
     },
     "react-router-redux/react-router-redux.d.ts": {
       "commit": "e80403239facb94b039a3266d5dc75bd5d0efc2a"
+    },
+    "react-css-modules/react-css-modules.d.ts": {
+      "commit": "e45879a3b4a6d7e265f21103ae044cefb3cee37c"
+    },
+    "isomorphic-fetch/isomorphic-fetch.d.ts": {
+      "commit": "e45879a3b4a6d7e265f21103ae044cefb3cee37c"
+    },
+    "redux-logger/redux-logger.d.ts": {
+      "commit": "e45879a3b4a6d7e265f21103ae044cefb3cee37c"
+    },
+    "redux-thunk/redux-thunk.d.ts": {
+      "commit": "e45879a3b4a6d7e265f21103ae044cefb3cee37c"
     }
   }
 }

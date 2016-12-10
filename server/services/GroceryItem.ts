@@ -10,6 +10,7 @@ class ItemService{
 	
 	add(req, res:Response){
 		let groceryItem = new GroceryItem(req.body);
+		console.log('req.body', req.body);
 		groceryItem.save((err, data:IGroceryItem) => 
 				res.status(200).send(data._id));
 	}

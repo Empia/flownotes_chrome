@@ -1,5 +1,4 @@
 /// <reference path="../../typings/jquery/jquery.d.ts" />
-/// <reference path="../../typings/es6-Promise/es6-Promise.d.ts" />
 import * as $ from 'jquery';
 //import {Promise} from 'es6-promise';
 class RestHelper{

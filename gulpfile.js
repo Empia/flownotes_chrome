@@ -70,7 +70,7 @@ gulp.task('bundle', function(){
 	}	
 });
 
-gulp.task('serve', ['watch-ts', 'watch-css', 'bundle', 'live-server', 'pack'], function(){
+gulp.task('serve', ['watch-ts', 'watch-css', 'bundle', 'live-server'], function(){
 	browserSync.init(null, {
 		proxy: 'http://localhost:7777',
 		port:3000,

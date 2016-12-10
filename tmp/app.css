@@ -1,0 +1,21 @@
+.table__table___1sKA- {
+    width: 200px;
+}
+
+.table__table___1sKA-,
+.table__row___qH8cJ,
+.table__cell___ysjV0 {
+    margin: 10px; overflow: hidden;
+}
+
+.table__table___1sKA- {
+    border: 1px solid #000;
+}
+
+.table__row___qH8cJ {
+    border: 1px solid #f00;
+}
+
+.table__cell___ysjV0 {
+    border: 1px solid #00f; padding: 10px;
+}

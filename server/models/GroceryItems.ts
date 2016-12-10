@@ -2,13 +2,13 @@ import {Mongoose, Schema, model,Document} from 'mongoose';
 
 interface IGroceryItem extends Document {
 	purchased?:boolean;
-	name:string;
+	title:string;
 	id?:string;
 }
 
 
 let GroceryItemSchema = new Schema({
-	name:String,
+	title:String,
 	purchased:Boolean,
 	id:String,
 });

@@ -5,6 +5,7 @@ import items from './routes/items';
 import {default as startup} from './appstart';
 
 require('./database');
+//require('css-modules-require-hook/preset');
 
 let bodyParser = require('body-parser');
 let express:any = require('express');	
