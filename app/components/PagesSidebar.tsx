@@ -60,7 +60,7 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
   createPage = (evt) => {
     if (evt.which !== 13) return;
     console.log('ref', this.refs);
-    var title = ReactDOM.findDOMNode(this.refs.add).value;
+    var title = (ReactDOM.findDOMNode(this.refs.add) as HTMLInputElement).value;
     this.props.addPage(title );
     this.props.toggleAddPage();
   }

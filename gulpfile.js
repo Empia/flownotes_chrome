@@ -22,18 +22,7 @@ var tsProject = typescript.createProject('tsconfig.json');
 
 gulp.task('pack', function() {
   return gulp.src('app/main.tsx')
-  .pipe(webpack({
-    watch: false,
-	 resolve: {
-	    // Add `.ts` and `.tsx` as a resolvable extension.
-	    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
-	  },    
-    module: {
-      loaders: [
-        { test: /\.tsx?$/, loader: 'ts-loader' }
-      ],
-    },
-  })).pipe(gulp.dest('.tmp/'));
+  .pipe(webpack(require('./webpack.config.js'))).pipe(gulp.dest('.tmp/'));
 });
 
 
@@ -81,7 +70,7 @@ gulp.task('bundle', function(){
 	}	
 });
 
-gulp.task('serve', ['watch-ts', 'watch-css', 'bundle', 'live-server'], function(){
+gulp.task('serve', ['watch-ts', 'watch-css', 'bundle', 'live-server', 'pack'], function(){
 	browserSync.init(null, {
 		proxy: 'http://localhost:7777',
 		port:3000,
