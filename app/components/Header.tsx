@@ -1,23 +1,23 @@
 import * as React from "react";
 import { Router, Route, IndexRoute, Link, IndexLink, hashHistory } from 'react-router';
 import Table from './Table';
+import * as styles from './header.css';
+import * as CSSModules from 'react-css-modules';
 
 interface HeaderProps extends React.Props<any>{
 }
 interface HeaderState{}
 class Header extends React.Component<HeaderProps, HeaderState>{
-  constructor(){
-    super();
-  }
+
   onSearch() {
     console.log('good');
   }
   render(){
     return  (
-     <div className="top-bar">
-        <div className="top-bar-left">
+     <div className={styles.top_bar}>
+        <div className="top_bar_left">
           <ul className="menu">
-            <li className="menu-text">Flownotes</li>
+            <li className="menu_text">Flownotes</li>
             <li>
               <IndexLink to="/" 
               activeClassName="active" 
@@ -33,7 +33,7 @@ class Header extends React.Component<HeaderProps, HeaderState>{
             </li>
           </ul>
         </div>
-        <div className="top-bar-right">
+        <div className="top_bar_right">
           <form onSubmit={this.onSearch}>
             <ul className="menu">
               <li>
@@ -50,4 +50,4 @@ class Header extends React.Component<HeaderProps, HeaderState>{
   }
 }
 
-export {Header}
+export default Header;

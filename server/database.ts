@@ -1,27 +1,20 @@
 /// <reference path="../typings/mongoose/mongoose.d.ts" />
 import {Mongoose, connect, connection} from "mongoose";
-import {GroceryItem, IGroceryItem} from './models/GroceryItems';
+import {FlowNotePage, IFlowNotePage} from './models/FlowNotePage';
+import {FlowNoteContent, IFlowNoteContent} from './models/FlowNoteContent';
+
 
 function conn(){
+  (<any>require('mongoose')).Promise = Promise;
+	//connection.db.dropDatabase();
 	
-	connection.db.dropDatabase();
-	
-	let items = [{
-		name:"Ice Cream"
-	},{
-		name:"Waffles"
-	},{
-		name:"Candy",
-		purchased:true
-	},{
-		name:"Snarks"
-	}];
+	let items = []
 	
 	for(let item of items){
-		new GroceryItem(item).save();
+		//new GroceryItem(item).save();
 	}
 }
 
-connect('mongodb://localhost/grocery', conn);
+connect('mongodb://localhost/flownotes', conn);
 
 export {};

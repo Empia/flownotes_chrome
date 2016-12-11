@@ -1,9 +1,9 @@
 import * as React from "react";
 import ReactDOM = require("react-dom");
-import {Header} from './Header';
 import { connect } from 'react-redux';
 import * as actions from '../stores/Actions';
 import {store} from '../main';
+import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 
 const mapStateToProps = ({addingPage, pages}) => ({
   addingPage,
@@ -63,12 +63,16 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
       <ul>
         {props.pages.items.map((p, idx) => 
           <div className="page" key={p._id}>
-          <li>{p.title}</li>
+
+          <li><Link to={'/page/'+p._id} activeClassName="active" 
+              activeStyle={{fontWeight: 'bold'}}>{p.title}</Link></li>
           <input ref={"update-"+p._id} onKeyPress={this.updatePage(idx)}/>
           <RemoveButton pageId={p._id} toRemove={ this.removePageSender }/></div>)}
 
       </ul>
-      { props.addingPage && <input ref="add" onKeyPress={this.createPage}/> }
+      <div className="new-page-input">
+        { props.addingPage && <input ref="add" onKeyPress={this.createPage}/> }
+      </div>
       </div>);
   }
 

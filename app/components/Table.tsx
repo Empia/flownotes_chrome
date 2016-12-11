@@ -11,12 +11,12 @@ interface TableState{
 
 class Table extends React.Component<TableProps, TableState>{
     render () {
-        return <div styleName='table'>
-            <div styleName='row'>
-                <div styleName='cell'>A0</div>
-                <div styleName='cell'>B0</div>
+        return <div className={styles.table}>
+            <div className={styles.row}>
+                <div className={styles.cell}>A0</div>
+                <div className={styles.cell}>B0</div>
             </div>
         </div>;
     }
 }
-export default CSSModules(Table, styles);
+export default Table;

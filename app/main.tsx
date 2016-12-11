@@ -2,6 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {GroceryItemList} from './components/GroceryItemList';
 import PagesContainer from './components/PagesContainer';
+import FocusedPageContainer from './components/FocusedPageContainer';
 import {groceryItemStore} from './stores/GroceryItemStore';
 import {card,addingPage,pages,pagesStore} from './stores/FlowPageStore';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
@@ -36,7 +37,9 @@ function render(){
   console.log('items main');
 	ReactDOM.render(<Provider store={store}>
     <Router history={browserHistory}>
-        <Route path="/" component={PagesContainer} />
+        <Route path="/" component={PagesContainer}>
+                <Route path="/page/:pageId" component={FocusedPageContainer} />
+        </Route>
         <Route path="/items" component={GroceryItemList} />
 
     </Router>
