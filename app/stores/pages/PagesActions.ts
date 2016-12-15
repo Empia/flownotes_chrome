@@ -99,7 +99,6 @@ export function removePage(pageId) {
 
     return fetch(`/api/pages/${pageId}`, {method: 'delete'})
       .then(response => { 
-          console.log(response);
           dispatch(receiveDeletedPage(pageId));
       })
       // In a real world app, you also want to

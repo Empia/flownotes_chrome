@@ -1,8 +1,8 @@
 import * as React from "react";
 import ReactDOM = require("react-dom");
 import { connect } from 'react-redux';
-import * as actions from '../stores/Actions';
-import {store} from '../main';
+import * as actions from '../../stores/pages/PagesActions';
+import {store} from '../../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 
 const mapStateToProps = ({addingPage, pages}) => ({

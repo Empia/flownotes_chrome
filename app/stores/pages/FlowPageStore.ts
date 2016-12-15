@@ -3,13 +3,13 @@ import {createStore,
   combineReducers,
   compose,
 Middleware,} from 'redux';
-import {dispatcher, IDispatchPayload} from '../dispatcher';
-import {Actions} from '../actions/BaseActions';
-import {restHelper} from  '../helpers/RestHelper';
+import {dispatcher, IDispatchPayload} from '../../dispatcher';
+import {Actions} from '../../actions/BaseActions';
+import {restHelper} from  '../../helpers/RestHelper';
 
 import {
   REQUEST_PAGES, RECEIVE_PAGES,REQUEST_REMOVING_PAGE,RECIEVE_REMOVING_PAGE
-} from './Actions'
+} from './PagesActions'
 
 interface Page{
   name:string;

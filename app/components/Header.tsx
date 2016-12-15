@@ -16,7 +16,7 @@ class Header extends React.Component<HeaderProps, HeaderState>{
     return  (
      <div className={styles.top_bar}>
         <div className="top_bar_left">
-          <ul className="menu">
+          <ul className={styles.menu}>
             <li className="menu_text">Flownotes</li>
             <li>
               <IndexLink to="/" 

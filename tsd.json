@@ -6,7 +6,7 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "react/react.d.ts": {
-      "commit": "e80403239facb94b039a3266d5dc75bd5d0efc2a"
+      "commit": "6b3bc735ad028ca115c06721fb1c71ffc0e7a546"
     },
     "react/react-dom.d.ts": {
       "commit": "bddf14ed27fb8bb3940b54dcf0c57e029206f6a8"
@@ -75,7 +75,7 @@
       "commit": "e80403239facb94b039a3266d5dc75bd5d0efc2a"
     },
     "redux/redux.d.ts": {
-      "commit": "e45879a3b4a6d7e265f21103ae044cefb3cee37c"
+      "commit": "6b3bc735ad028ca115c06721fb1c71ffc0e7a546"
     },
     "react-router-redux/react-router-redux.d.ts": {
       "commit": "e80403239facb94b039a3266d5dc75bd5d0efc2a"
@@ -91,6 +91,12 @@
     },
     "redux-thunk/redux-thunk.d.ts": {
       "commit": "e45879a3b4a6d7e265f21103ae044cefb3cee37c"
+    },
+    "redux-form/redux-form.d.ts": {
+      "commit": "6b3bc735ad028ca115c06721fb1c71ffc0e7a546"
+    },
+    "immutable/immutable.d.ts": {
+      "commit": "6b3bc735ad028ca115c06721fb1c71ffc0e7a546"
     }
   }
 }

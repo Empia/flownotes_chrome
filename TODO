@@ -18,7 +18,6 @@ https://github.com/gajus/react-css-modules
 https://github.com/webpack/webpack/issues/1754
 https://github.com/StevenIseki/react-router-redux-example/blob/master/serverDev.js
 
-
 better logo
 _____________________________________-
 Object can be moved around pages 
@@ -29,7 +28,7 @@ Img
 Link -> Heading, desk
 Code files -> Method, object
 
-_________________________
+_________________________ [browser's tab module]
 Session for user
 Get all tabs
 Push session tabs

@@ -1,10 +1,15 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {GroceryItemList} from './components/GroceryItemList';
-import PagesContainer from './components/PagesContainer';
-import FocusedPageContainer from './components/FocusedPageContainer';
-import {groceryItemStore} from './stores/GroceryItemStore';
-import {card,addingPage,pages,pagesStore} from './stores/FlowPageStore';
+import {GroceryItemList} from './components/items/GroceryItemList';
+import PagesContainer from './components/pages/PagesContainer';
+import FocusedPageContainer from './components/page/FocusedPageContainer';
+import {groceryItemStore, Item} from './stores/GroceryItemStore';
+import {card,addingPage,pages,pagesStore} from './stores/pages/FlowPageStore';
+import {addingPageContent,pageContents} from './stores/page/FlowPageContentStore';
+
+import {fetchPages} from './stores/pages/PagesActions';
+
+
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 import {syncHistoryWithStore, routerReducer} from "react-router-redux";
 import {createStore,
@@ -14,16 +19,22 @@ import {createStore,
 Middleware,} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import * as createLogger from 'redux-logger';
-import {fetchPages} from './stores/Actions';
-import {Item} from  './stores/GroceryItemStore';
 import {Provider} from "react-redux";
+import { reducer as formReducer } from 'redux-form';
 
 //require('style!css!foundation-sites/dist/css/foundation.min.css');
 ($(document) as any).foundation();
 
 const loggerMiddleware = createLogger();
 
-export const store = createStore(combineReducers({card,addingPage,pages, routing: routerReducer}),
+export const store = createStore(combineReducers({
+  card, 
+  addingPage, 
+  pages, 
+  addingPageContent,
+  pageContents, 
+  routing: routerReducer, form: formReducer }),
+  
     applyMiddleware(
     thunkMiddleware, // lets us dispatch() functions
     loggerMiddleware // neat middleware that logs actions

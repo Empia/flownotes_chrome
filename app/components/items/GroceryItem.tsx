@@ -1,6 +1,6 @@
 import * as React from "react";
-import {Item} from '../stores/GroceryItemStore';
-import {groceryItemActions} from '../actions/GroceryItemActionCreator';
+import {Item} from '../../stores/GroceryItemStore';
+import {groceryItemActions} from '../../actions/GroceryItemActionCreator';
 
 
 interface GroceryItemProps extends React.Props<any>{

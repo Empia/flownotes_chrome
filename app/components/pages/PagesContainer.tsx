@@ -1,6 +1,5 @@
 import * as React from "react";
-import Header from './Header';
-import Table from './Table';
+import Header from '../Header';
 import PagesSidebar from './PagesSidebar';
 import { connect } from 'react-redux';
 
@@ -24,7 +23,7 @@ class PagesContainer extends React.Component<PagesContainerProps, PagesContainer
       <div>
         <Header />
         <PagesSidebar key="test" />
-        <div className="focused-page-container">
+        <div className="focusedPageContainer">
           { this.props.children }
         </div>        
       </div>

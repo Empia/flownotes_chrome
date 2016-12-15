@@ -1,10 +1,10 @@
 import * as React from "react";
 import {GroceryItem} from './GroceryItem';
 import {GroceryListAddItem} from './GroceryListAddItem';
-import {Item} from  '../stores/GroceryItemStore';
+import {Item} from  '../../stores/GroceryItemStore';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
-import {groceryItemStore} from '../stores/GroceryItemStore';
-import Header from './Header';
+import {groceryItemStore} from '../../stores/GroceryItemStore';
+import Header from '../Header';
 
 interface GroceryItemListPr extends React.Props<any>{
 	items:Array<Item>;

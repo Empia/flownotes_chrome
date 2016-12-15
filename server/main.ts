@@ -18,8 +18,19 @@ var router:Router = express.Router();
 
 app.use('/api', router);
 
+/*
+app.get('*', function(request, response){
+  response.sendfile('./public/index.html');
+});
+*/
+
+app.get('/page/:pageId', startup)
+  .use((<any>express).static(__dirname + '/../.tmp'))
+
 app.get('/', startup)
-	.use((<any>express).static(__dirname + '/../.tmp'))
-	.listen(7777);
+  .use((<any>express).static(__dirname + '/../.tmp'))
+
+
+app.listen(7777);
 	
 items(router);
