@@ -55,6 +55,13 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
       console.log(store.getState())
     )    
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.params.pageId !== this.props.params.pageId) {
+      store.dispatch(actions.fetchPageContent(nextProps.params.pageId)).then(() =>
+        console.log(store.getState())
+      )    
+    }
+  }
   componentDidUpdate() {
 /*
     console.log('componentDidUpdate', this);

@@ -6,15 +6,15 @@ class FlowNoteContentService{
   
   getList(req, res:Response){
     // pageId
-    let pageId = req.params.id;
-    return FlowNoteContent.find((err, data) => res.send(data));
+    let pageId = req.params.pageId;
+    return FlowNoteContent.find({ inPageId: pageId},(err, data) => res.send(data));
   }
   
   add(req, res:Response){
     // pageId
     let pageId = req.params.id;
     console.log('add page content', pageId);
-    
+
     let flowNoteContent = new FlowNoteContent(req.body);
     console.log('req.body', req.body);
     flowNoteContent.save((err, data:IFlowNoteContent) => 

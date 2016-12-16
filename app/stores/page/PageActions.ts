@@ -73,7 +73,13 @@ export function addPageContent(pageId, content) {
   return function (dispatch) {
     dispatch(function(){ return { type: 'REQUEST_ADDING_PAGE' } });
     return fetch(`/api/content/page/${pageId}`, {method: 'post',
-      headers: {'Content-Type': 'application/json'},  body: JSON.stringify({title: content.title, name: content.title})})
+      headers: {'Content-Type': 'application/json'},  body: JSON.stringify({
+        title: content.title, 
+        content_type: content.content_type,
+        content_value: content.content_value,
+        inPageId: content.inPageId,
+        inContent: content.inContent,
+      })})
       .then(response => response.json())
       .then(json => dispatch(addedPageContent({_id: json, title: content.title})))
   }
