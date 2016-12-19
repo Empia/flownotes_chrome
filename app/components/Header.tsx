@@ -33,16 +33,16 @@ class Header extends React.Component<HeaderProps, HeaderState>{
             </li>
           </ul>
         </div>
-        <div className="top_bar_right">
+        <div className={styles.primaryHeader__secondaryMenu + ' top_bar_right'}>
           <form onSubmit={this.onSearch}>
-            <ul className="menu">
-              <li>
+            <div className={styles.menu}>
+              <div className={styles.primaryHeader__secondaryMenu_searchElement + " primaryHeader__secondaryMenu-searchInput"}>
                 <input type="search" placeholder="Search notes"/>
-              </li>
-              <li>
+              </div>
+              <div className={styles.primaryHeader__secondaryMenu_searchElement + " primaryHeader__secondaryMenu-searchButton"}>
                 <input type="submit" className="button" value="Create note"/>
-              </li>
-            </ul>
+              </div>
+            </div>
           </form>
         </div>
       </div>

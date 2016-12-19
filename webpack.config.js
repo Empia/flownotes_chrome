@@ -27,7 +27,7 @@ new webpack.DefinePlugin({
     }),
   new ExtractTextPlugin('app.css', {
             allChunks: true
-  }),   
+  }),    
   ],
   output: {
     path: path.resolve(__dirname, './.tmp'),
@@ -38,7 +38,7 @@ new webpack.DefinePlugin({
     //alias: {
     //  Main: 'app/main.tsx',
     //},
-    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css']
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css', '.ccss']
   },
   target: 'node',
   module: {

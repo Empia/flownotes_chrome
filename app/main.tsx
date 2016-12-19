@@ -22,6 +22,7 @@ import * as createLogger from 'redux-logger';
 import {Provider} from "react-redux";
 import { reducer as formReducer } from 'redux-form';
 
+
 //require('style!css!foundation-sites/dist/css/foundation.min.css');
 ($(document) as any).foundation();
 

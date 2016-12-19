@@ -2,3 +2,39 @@
     display: inline-block;
     margin-right: 22px;
 }
+.primaryHeader__secondaryMenu .primaryHeader__secondaryMenu_searchElement {
+  display: inline-block;
+}
+
+.primaryHeader__secondaryMenu .menu {
+  display: flex;
+width: 100%;
+justify-items: center;
+justify-content: space-around;
+}
+
+:global
+p {
+  font-size:12px;
+}
+
+:global b.menu {
+  color: red;
+}
+
+/*
+By default CSS exports all class names into a global selector scope. 
+Styles can be locally scoped to avoid globally scoping styles.
+
+The syntax :local(.className) can be used to declare className in the local scope. 
+The local identifiers are exported by the module.
+
+With :local (without brackets) local mode can be switched on for this selector. 
+:global(.className) can be used to declare an explicit global selector. 
+With :global (without brackets) global mode can be switched on for this selector.
+
+The loader replaces local selectors with unique identifiers. 
+The choosen unique identifiers are exported by the module.
+
+  :global
+*/
