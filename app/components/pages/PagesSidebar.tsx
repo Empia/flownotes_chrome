@@ -36,6 +36,9 @@ interface PagesSidebarState{
 function RemoveButton(props) {
   return <button onClick={() => props.toRemove(props.pageId)}>Remove</button>
 }
+function EditButton(props) {
+  return <button onClick={() => props.toEdit(props.pageId, props.currentObject)}>Edit</button>
+}
 
 
 class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>{
@@ -63,11 +66,16 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
       <ul>
         {props.pages.items.map((p, idx) => 
           <div className="page" key={p._id}>
-
-          <li><Link to={'/page/'+p._id} activeClassName="active" 
-              activeStyle={{fontWeight: 'bold'}}>{p.title}</Link></li>
-          <input ref={"update-"+p._id} onKeyPress={this.updatePage(idx)}/>
-          <RemoveButton pageId={p._id} toRemove={ this.removePageSender }/></div>)}
+            <li>
+              <Link to={'/page/'+p._id} activeClassName="active" 
+                    activeStyle={{fontWeight: 'bold'}}>{p.title}</Link>
+            </li>
+            <div className="pageControls">
+              <input type="text" ref={"update-"+p._id} value={p.title}/>
+              <EditButton pageId={p._id} currentObject={p} toEdit={ this.editPageSender }/>
+              <RemoveButton pageId={p._id} toRemove={ this.removePageSender }/>
+            </div>
+          </div>)}
 
       </ul>
       <div className="new-page-input">
@@ -90,6 +98,11 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
   //  this.props.toggleAddPage();
   }
   removePageSender = ((pageId) => this.props.removePage(pageId))
+  editPageSender = ((pageId, object) => {
+    console.log('editPageSender', pageId, object);
+    // this.updatePage()
+
+  });
 
   
 }

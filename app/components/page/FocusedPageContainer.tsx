@@ -19,12 +19,6 @@ const mapDispatchToProps = dispatch => ({
     addPageContent: (pageId,content) => dispatch(actions.addPageContent(pageId, content)),
 });
 
-
-interface PageContentProps extends React.Props<any>{
-  handleSubmit: any;
-}
-interface PageContentState{}
-
 interface FocusedPageContainerProps extends React.Props<any>{
   pageId:string;
   params: any;
@@ -33,7 +27,6 @@ interface FocusedPageContainerProps extends React.Props<any>{
   pageContents: any;
   toggleAddPageContent: any;
   addPageContent: any;
-
 }
 
 interface FocusedPageContainerState{ 

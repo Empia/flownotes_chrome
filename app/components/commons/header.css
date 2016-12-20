@@ -13,13 +13,17 @@ justify-items: center;
 justify-content: space-around;
 }
 
-:global
-p {
-  font-size:12px;
+:global .pagesSidebar_component {
+  display: inline-block;
+  float: left;
+  width: 40%;
+  border-right: 1px solid gray;
 }
-
-:global b.menu {
-  color: red;
+:global .focusedPageContainer {
+  display: inline-block;
+  float: left;
+  padding-left: 29px;
+  width: 55%;
 }
 
 /*
