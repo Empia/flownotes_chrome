@@ -6,18 +6,13 @@ import { connect } from 'react-redux';
 interface PagesContainerProps extends React.Props<any>{
   key:string;
 }
-
-interface PagesContainerState{ 
-}
-
+interface PagesContainerState{ }
 
 class PagesContainer extends React.Component<PagesContainerProps, PagesContainerState>{
-  
-  constructor(){
+    constructor(){
     super();
   }
   
-  //this.header = new Header();
   render(){
     return  (
       <div>
@@ -33,7 +28,6 @@ class PagesContainer extends React.Component<PagesContainerProps, PagesContainer
       </div>
       );
   }
-  
 }
 
 export default PagesContainer;

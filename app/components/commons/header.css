@@ -25,6 +25,9 @@ justify-content: space-around;
   padding-left: 29px;
   width: 55%;
 }
+:global .pageListContainer {
+    list-style: none;
+}
 
 /*
 By default CSS exports all class names into a global selector scope. 

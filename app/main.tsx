@@ -4,7 +4,8 @@ import {GroceryItemList} from './components/items/GroceryItemList';
 import PagesContainer from './components/pages/PagesContainer';
 import FocusedPageContainer from './components/page/FocusedPageContainer';
 import {groceryItemStore, Item} from './stores/GroceryItemStore';
-import {card,addingPage,pages,pagesStore} from './stores/pages/FlowPageStore';
+import {card,addingPage,pages} from './stores/pages/FlowPageStore';
+import {pagesStore} from './stores/pages/OldFlowPageStore';
 import {addingPageContent,pageContents} from './stores/page/FlowPageContentStore';
 
 import {fetchPages} from './stores/pages/PagesActions';
@@ -28,6 +29,14 @@ import { reducer as formReducer } from 'redux-form';
 
 const loggerMiddleware = createLogger();
 
+const initialState = {
+  card: {
+    t: 'fire',
+    isPageContentsFetching: false,
+    page_content: []
+  }
+}
+
 export const store = createStore(combineReducers({
   card, 
   addingPage, 
@@ -35,6 +44,7 @@ export const store = createStore(combineReducers({
   addingPageContent,
   pageContents, 
   routing: routerReducer, form: formReducer }),
+    initialState,
   
     applyMiddleware(
     thunkMiddleware, // lets us dispatch() functions
@@ -42,7 +52,7 @@ export const store = createStore(combineReducers({
   ));
 const history = syncHistoryWithStore(browserHistory, store);
 
-store.subscribe( () => console.log(store.getState() ))
+//store.subscribe( () => console.log(store.getState() ))
 
 
 function render(){

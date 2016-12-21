@@ -97,6 +97,9 @@
     },
     "immutable/immutable.d.ts": {
       "commit": "6b3bc735ad028ca115c06721fb1c71ffc0e7a546"
+    },
+    "react-select/react-select-0.9.10.d.ts": {
+      "commit": "5cdb98e158ccef8de9257a96d130c328754f1175"
     }
   }
 }

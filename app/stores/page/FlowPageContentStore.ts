@@ -6,13 +6,15 @@ Middleware,} from 'redux';
 import {dispatcher, IDispatchPayload} from '../../dispatcher';
 import {Actions} from '../../actions/BaseActions';
 import {restHelper} from  '../../helpers/RestHelper';
-
 import {
   REQUEST_PAGE_CONTENT,
   RECEIVE_PAGE_CONTENT,
   REQUEST_REMOVING_PAGE_CONTENT,
   RECIEVE_REMOVING_PAGE_CONTENT,
+  SELECT_PAGE
 } from './PageActions'
+
+
 
 export interface ILabels {
 value: string;
@@ -38,12 +40,12 @@ export const addingPageContent = (state, action) => {
   }
 };
 
-
-
-export const pageContents = (state = {
+const pageContentsInitialState = {
   isPageContentsFetching: false,
   page_content: []
-}, action) => {
+}
+
+export const pageContents = (state = pageContentsInitialState, action) => {
   switch (action.type) {
     case REQUEST_PAGE_CONTENT:
       return (<any>Object).assign({}, state, {

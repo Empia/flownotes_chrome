@@ -10,15 +10,11 @@ const mapStateToProps = ({addingPage, pages}) => ({
   pages
 });
 
-
 const mapDispatchToProps = dispatch => ({
     toggleAddPage: () => dispatch(actions.toggleAddPage()),
     removePage: (pageId) => dispatch(actions.removePage(pageId)),
    // updatePage: (pageId) => dispatch(actions.removePage(pageId)),
     addPage: (page) => dispatch(actions.addPage(page)),
-
-
-//    items: () => dispatch(actions.fetchPages())
 });
 
 interface PagesSidebarProps extends React.Props<any>{
@@ -30,8 +26,7 @@ interface PagesSidebarProps extends React.Props<any>{
   removePage: any;
 }
 
-interface PagesSidebarState{ 
-}
+interface PagesSidebarState{}
 
 function RemoveButton(props) {
   return <button onClick={() => props.toRemove(props.pageId)}>Remove</button>
@@ -42,9 +37,6 @@ function EditButton(props) {
 
 
 class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>{
-  constructor(){
-    super();
-  }
   refs: {
     [key: string]: (Element);
     add: (HTMLInputElement);
@@ -63,17 +55,19 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
     let props = this.props;
     return  (<div className="page__sidebar">
       <button onClick={ e => this.props.toggleAddPage() }>Add page</button>
-      <ul>
+      <ul className="pageListContainer">
         {props.pages.items.map((p, idx) => 
-          <div className="page" key={p._id}>
+          <div className="pageContainer" key={p._id}>
             <li>
               <Link to={'/page/'+p._id} activeClassName="active" 
                     activeStyle={{fontWeight: 'bold'}}>{p.title}</Link>
             </li>
             <div className="pageControls">
-              <input type="text" ref={"update-"+p._id} value={p.title}/>
-              <EditButton pageId={p._id} currentObject={p} toEdit={ this.editPageSender }/>
-              <RemoveButton pageId={p._id} toRemove={ this.removePageSender }/>
+              <form className="editPageForm">
+                <input type="text" ref={"update-"+p._id} defaultValue={p.title}/>
+                <EditButton pageId={p._id} currentObject={p} toEdit={ this.editPageSender }/>
+                <RemoveButton pageId={p._id} toRemove={ this.removePageSender }/>
+              </form>
             </div>
           </div>)}
 
