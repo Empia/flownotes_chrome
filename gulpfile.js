@@ -29,7 +29,7 @@ gulp.task('pack', function() {
 gulp.task('compile', function(){
 	console.log("Compiling TS.......");	
 	var tsResult = tsProject.src() 
-        .pipe(typescript(tsProject));
+        .pipe(tsProject());
 
 	return tsResult.pipe(gulp.dest('./'));
 });

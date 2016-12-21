@@ -80,6 +80,17 @@ export const pages = (state = pagesInitialState, action) => {
       });
     case 'REQUEST_ADDING_PAGE':
       return state;
+    case 'REQUEST_UPDATE_PAGE':
+      return state;
+    case 'UPDATE_PAGE':
+      let pageToUpdate = (<any>Object).assign({}, action.data);
+      let resultToUpdate = state.items.filter(el => el._id !== action.pageId).concat([pageToUpdate]);
+      return (<any>Object).assign({}, state, {
+        isFetching: false,
+        items: resultToUpdate,
+        lastUpdated: action.recievedAt
+      });
+
     case REQUEST_REMOVING_PAGE:
       return (<any>Object).assign({}, state, {
         isFetching: true,

@@ -78,6 +78,18 @@ export function addPage(page) {
       .then(json => dispatch(addedPage({_id: json, title: page.title})))
   }
 }
+
+export function updatePage(pageId, page) {
+  return function (dispatch) {
+    dispatch(function(){ return { type: 'REQUEST_UPDATE_PAGE' } });
+    return fetch(`/api/pages/${pageId}`, {method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},  body: JSON.stringify({_id: pageId, title: page.title})})
+      .then(response => response.json())
+      .then(json => dispatch(updatedPage(pageId, {_id: pageId, title: page.title})))
+  }
+}
+export function updatedPage(pageId, page) { return {type: 'UPDATE_PAGE', data: page, pageId: pageId} };
+
 export function removePage(pageId) {
 
   // Thunk middleware knows how to handle functions.

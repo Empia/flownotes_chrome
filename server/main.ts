@@ -1,5 +1,5 @@
-/// <reference path="../typings/node/node.d.ts" />
-/// <reference path="../typings/express/express.d.ts" />
+/// <reference path="../typings/globals/node/index.d.ts" />
+/// <reference path="../typings/globals/express/index.d.ts" />
 import {IRoute, Express, Router} from 'express';
 import general_routes from './routes/general';
 import {default as startup} from './appstart';

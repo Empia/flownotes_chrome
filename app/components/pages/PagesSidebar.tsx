@@ -15,6 +15,7 @@ const mapDispatchToProps = dispatch => ({
     removePage: (pageId) => dispatch(actions.removePage(pageId)),
    // updatePage: (pageId) => dispatch(actions.removePage(pageId)),
     addPage: (page) => dispatch(actions.addPage(page)),
+    updatePage: (pageId, page) => dispatch(actions.updatePage(pageId, page)),
 });
 
 interface PagesSidebarProps extends React.Props<any>{
@@ -23,6 +24,7 @@ interface PagesSidebarProps extends React.Props<any>{
   addingPage:boolean;
   addPage:any;
   toggleAddPage:any;
+  updatePage: any;
   removePage: any;
 }
 
@@ -32,7 +34,7 @@ function RemoveButton(props) {
   return <button onClick={() => props.toRemove(props.pageId)}>Remove</button>
 }
 function EditButton(props) {
-  return <button onClick={() => props.toEdit(props.pageId, props.currentObject)}>Edit</button>
+  return <button onClick={ e => props.toEdit(e, props.pageId, props.currentObject) }>Edit</button>
 }
 
 
@@ -86,17 +88,15 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
     this.props.addPage({title});
     this.props.toggleAddPage();
   }
-  updatePage = (evt) => {
-    console.log('ref', this.refs, evt.currentTarget);
-  //  this.props.addPage(title );
-  //  this.props.toggleAddPage();
-  }
-  removePageSender = ((pageId) => this.props.removePage(pageId))
-  editPageSender = ((pageId, object) => {
-    console.log('editPageSender', pageId, object);
-    // this.updatePage()
+  editPageSender =  (evt, pageId, page) => {
+      evt.preventDefault();
+      console.log('editPageSender', this.refs, evt.currentTarget);
+      var title = (ReactDOM.findDOMNode(this.refs['update-'+pageId]) as HTMLInputElement).value;
+      this.props.updatePage(pageId, {title})
+  };
 
-  });
+
+  removePageSender = ((pageId) => this.props.removePage(pageId))
 
   
 }

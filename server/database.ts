@@ -1,4 +1,4 @@
-/// <reference path="../typings/mongoose/mongoose.d.ts" />
+/// <reference path="../typings/globals/mongoose/index.d.ts" />
 import {Mongoose, connect, connection} from "mongoose";
 import {FlowNotePage, IFlowNotePage} from './models/FlowNotePage';
 import {FlowNoteContent, IFlowNoteContent} from './models/FlowNoteContent';

@@ -16,15 +16,21 @@ class FlowNotePageService{
 	}
 	
 	update(req, res:Response){
+		console.log('update', req.body.title);
 		FlowNotePage.findOne({_id:req.body._id}, (err, doc) => {
 			
-			for(let key in req.body){
-				doc[key] = req.body[key];
+			if (doc) {
+				for(let key in req.body){
+					console.log('key', key, req.body[key]);
+					console.log('k', doc[key]);
+					doc[key] = req.body[key];
+				}
+				doc.save();
+				res.status(200).send({status: 'updated', pageId: req.body._id});
 			}
-			
-			doc.save();
-			
-			res.status(200).send(null);
+			else {
+				res.status(200).send({status: 'error', reason: 'not found', pageId: req.body._id});
+			}
 		});
 	}
 	
