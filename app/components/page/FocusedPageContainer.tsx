@@ -5,6 +5,8 @@ let PageContentForm = require('./PageContentForm.jsx');
 import * as actions from '../../stores/page/PageActions';
 import {store} from '../../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
+var Select = require('react-select');
+import 'react-select/dist/react-select.css';
 
 const mapStateToProps = ({addingPageContent, pageContents, pages, selectedPage}) => ({
   addingPageContent,
@@ -99,13 +101,29 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
     this.props.toggleAddPageContent();
   }
   updatePage = (evt) => {
-    console.log('ref', this.refs, evt.currentTarget);
-  //  this.props.addPage(title );
-  //  this.props.toggleAddPage();
+    return (id) => { 
+      console.log('ref', this.refs, evt.currentTarget);
+    //  this.props.addPage(title );
+    //  this.props.toggleAddPage();
+      return false;
+    }
   }
   removePageSender = ((pageId, pageContentId) => this.props.removePageContent(pageId, pageContentId))
 
 
+  options = (pages) => {
+    if (pages !== undefined && pages.length > 0) {
+      return pages.map((page) => {
+        return {value: page._id, label: page.title}
+      });
+    } else {
+      return [];
+    }
+   }
+
+  logChange(val) {
+      console.log("Selected: ", val);
+  }
 
   render(){
     let initialValues = {
@@ -115,6 +133,14 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
       <div className="pageContent">
         <h3 className="pageContent__pageHeader">Page {this.props.pages.selectedPage ? this.props.pages.selectedPage.title : '' } 
         </h3>
+
+        <Select
+            name="form-field-name"
+            value="two"
+            options={this.options(this.props.pages.items)}
+            onChange={this.logChange}
+        />
+
         <button onClick={ e => this.props.toggleAddPageContent() }>Add page</button>
         <div className="pageContent__contentCreateToggle">
            { this.props.addingPageContent && <PageContentForm.default 
