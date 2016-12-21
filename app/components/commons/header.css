@@ -14,19 +14,28 @@ justify-content: space-around;
 }
 
 :global .pagesSidebar_component {
-  display: inline-block;
-  float: left;
-  width: 40%;
-  border-right: 1px solid gray;
+    display: inline-block;
+    float: left;
+    width: 30%;
+    border-right: 1px solid gray;
 }
 :global .focusedPageContainer {
   display: inline-block;
   float: left;
   padding-left: 29px;
-  width: 55%;
+  width: 66%;
 }
 :global .pageListContainer {
     list-style: none;
+}
+:global .pageContent__contentList .page {
+    display: inline-block;
+    float: left;
+    width: 30%;
+    padding: 4px 10px;
+}
+:global .pageContent__contentList ul {
+  list-style: none;
 }
 
 /*

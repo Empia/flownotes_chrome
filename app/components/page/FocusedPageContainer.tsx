@@ -46,7 +46,13 @@ interface FocusedPageContainerState{
 function RemoveButton(props) {
   return <button onClick={() => props.toRemove(props.pageId, props.contentId)}>Remove</button>
 }
-
+function ContentRender(props) {
+  if (props.content_type === 'Link') {
+    return <a href={props.content_value}>{props.content_value}</a>
+  } else {
+    return <span>{props.content_value}</span>
+  }
+}
 class FocusedPageContainer extends React.Component<FocusedPageContainerProps, FocusedPageContainerState>{
   constructor(){
     super();
@@ -127,6 +133,7 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
 
   render(){
     let initialValues = {
+        content_type: 'Link',
         inPageId: this.props.params.pageId
     };
     return  (
@@ -152,12 +159,18 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
           <ul>
             {this.props.pageContents.page_content.map((p, idx) => 
               <div className="page" key={p._id}>
-              <li>{p.title}</li>
+              <li>Title: {p.title}</li>
+                {/* 
                 <div className="pageContent__contentResource-content_type">content_type: { p.content_type}</div>
-                <div className="pageContent__contentResource-content_value">content_value: { p.content_value}</div>
+                */}
+                <div className="pageContent__contentResource-content_value">
+                  <ContentRender content_type={p.content_type} content_value={p.content_value} />
+                </div>
+                {/*
                 <div className="pageContent__contentResource-inPageId">inPageId: { p.inPageId}</div>
                 <div className="pageContent__contentResource-inContent">inContent: { p.inContent}</div>
                 <div className="pageContent__contentResource-labels">labels: { p.labels}</div>              
+                */}
               <input ref={"update-"+p._id} onKeyPress={this.updatePage(idx)}/>
               <RemoveButton pageId={p.pageId} contentId={p._id} toRemove={ this.removePageSender }/></div>)}
 
