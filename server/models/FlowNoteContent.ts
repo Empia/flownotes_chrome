@@ -13,6 +13,9 @@ interface IFlowNoteContent extends Document {
   inContent?:string;
   labels:Array<ILabels>;
   id?:string;
+
+  inPagesIds?:Array<string>;
+  order?:number;  
 }
 
 
@@ -27,6 +30,7 @@ let FlowNoteContentSchema = new Schema({
         name: { type: String}
   }],
   id:String,
+  order: Number,
 });
 
 let FlowNoteContent = model<IFlowNoteContent>('FlowNoteContent', FlowNoteContentSchema, "flowNoteContents");

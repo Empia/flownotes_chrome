@@ -6,6 +6,7 @@ interface IFlowNotePage extends Document {
   inPageId?:string;
   labels:Array<ILabels>;
 	id?:string;
+  order?:number;
 }
 
 
@@ -17,6 +18,7 @@ let FlowNotePageSchema = new Schema({
         name: { type: String}
   }],
 	id:String,
+  order: Number,
 });
 
 let FlowNotePage = model<IFlowNotePage>('FlowNotePage', FlowNotePageSchema, "flowNotePages");
