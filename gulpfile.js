@@ -10,8 +10,9 @@ var react_tools = require('react-tools');
 var watchify = require('watchify');
 var webpack = require('gulp-webpack');
 
+var server = new LiveServer('server/main.js');
+
 gulp.task('live-server', function(){
-	var server = new LiveServer('server/main.js');
 	server.start();
 });
 
@@ -36,7 +37,11 @@ gulp.task('compile', function(){
 
 gulp.task('watch-ts', ['compile'], function() {
     gulp.watch('app/**/*.ts*', ['compile']); //, 'server/**/*.ts'
-	gulp.watch('server/**/*.ts', ['compile']);
+	gulp.watch('server/**/*.ts', ['compile', function() {
+		  console.log('restart server')
+      server.stop();
+      server.start();
+	}]);
 });
 
 gulp.task('watch-css', ['copy-css'], function(){

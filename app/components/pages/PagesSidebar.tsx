@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../stores/pages/PagesActions';
 import {store} from '../../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
+import * as Modal from 'react-modal';
 
 const mapStateToProps = ({addingPage, pages}) => ({
   addingPage,
@@ -27,8 +28,19 @@ interface PagesSidebarProps extends React.Props<any>{
   updatePage: any;
   removePage: any;
 }
-
-interface PagesSidebarState{}
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+interface PagesSidebarState{
+  modalIsOpen: any;
+}
 
 function RemoveButton(props) {
   return <button onClick={() => props.toRemove(props.pageId)}>Remove</button>
@@ -43,6 +55,12 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
     [key: string]: (Element);
     add: (HTMLInputElement);
   }
+
+constructor(props) {
+  super(props);
+  this.state = { modalIsOpen: false };
+}
+
   componentWillMount() {
     store.subscribe( () => this.render() )
   }
@@ -52,10 +70,52 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
     if (el) el.focus();
   }
 
+
+  openModal = () => {
+    this.setState({modalIsOpen: true});
+  }
+
+  afterOpenModal = () => {
+    // references are now sync'd and can be accessed.
+    let el = this.refs as any
+    el.subtitle.style.color = '#f00';
+  }
+
+  closeModal = () => {
+    this.setState({modalIsOpen: false});
+  }
+
   render(){
     console.log('rerendered', this);
     let props = this.props;
     return  (<div className="page__sidebar">
+      
+
+      <div>
+        <button onClick={this.openModal}>Open Modal</button>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+
+          <h2 ref="subtitle">Hello</h2>
+          <button onClick={this.closeModal}>close</button>
+          <div>I am a modal</div>
+          <form>
+            <input />
+            <button>tab navigation</button>
+            <button>stays</button>
+            <button>inside</button>
+            <button>the modal</button>
+          </form>
+        </Modal>
+      </div>
+
+
+
       <button onClick={ e => this.props.toggleAddPage() }>Add page</button>
       <ul className="pageListContainer">
         {props.pages.items.map((p, idx) => 
@@ -64,6 +124,7 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
               <Link to={'/page/'+p._id} activeClassName="active" 
                     activeStyle={{fontWeight: 'bold'}}>{p.title}</Link>
             </li>
+            {/*
             <div className="pageControls">
               <form className="editPageForm">
                 <input type="text" ref={"update-"+p._id} defaultValue={p.title}/>
@@ -71,9 +132,13 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
                 <RemoveButton pageId={p._id} toRemove={ this.removePageSender }/>
               </form>
             </div>
-          </div>)}
+            */}
 
+          </div>)}
       </ul>
+
+
+
       <div className="new-page-input">
         { props.addingPage && <input ref="add" onKeyPress={this.createPage}/> }
       </div>
@@ -96,9 +161,7 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
   };
 
 
-  removePageSender = ((pageId) => this.props.removePage(pageId))
-
-  
+  removePageSender = ((pageId) => this.props.removePage(pageId));
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PagesSidebar);

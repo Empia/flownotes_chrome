@@ -30,7 +30,7 @@ let FlowNoteContentSchema = new Schema({
         name: { type: String}
   }],
   id:String,
-  order: Number,
+  order: {type: Number, required: false},
 });
 
 let FlowNoteContent = model<IFlowNoteContent>('FlowNoteContent', FlowNoteContentSchema, "flowNoteContents");

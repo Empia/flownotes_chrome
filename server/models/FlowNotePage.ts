@@ -18,7 +18,7 @@ let FlowNotePageSchema = new Schema({
         name: { type: String}
   }],
 	id:String,
-  order: Number,
+  order: {type: Number, required: false},
 });
 
 let FlowNotePage = model<IFlowNotePage>('FlowNotePage', FlowNotePageSchema, "flowNotePages");
