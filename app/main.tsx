@@ -29,6 +29,11 @@ import { reducer as formReducer } from 'redux-form';
 
 const loggerMiddleware = createLogger();
 
+var z = require("querystring");
+
+
+console.log('isomorphic', z);
+
 const initialState = {
   card: {
     t: 'fire',

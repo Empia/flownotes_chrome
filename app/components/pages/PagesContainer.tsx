@@ -2,6 +2,8 @@ import * as React from "react";
 import Header from '../commons/Header';
 import PagesSidebar from './PagesSidebar';
 import { connect } from 'react-redux';
+//import { EmailSignUpForm } from "redux-auth/default-theme";
+
 
 interface PagesContainerProps extends React.Props<any>{
   key:string;

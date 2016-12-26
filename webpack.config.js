@@ -16,6 +16,8 @@ module.exports = {
    //replace({
     //  'process.env.NODE_ENV': JSON.stringify( 'production' )
     //}),
+
+
 new webpack.DefinePlugin({
   "process.env": {
     NODE_ENV: JSON.stringify("development")
@@ -38,11 +40,24 @@ new webpack.DefinePlugin({
     //alias: {
     //  Main: 'app/main.tsx',
     //},
-    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css', '.ccss']
+    modulesDirectories: [
+      "src",
+      "../src",
+      "node_modules",
+      "../node_modules",
+      "web_modules"
+    ],
+
+    extensions: ['', '.json', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css']
   },
   target: 'node',
   module: {
+
     loaders: [
+      { test: /\.js$/, loaders: ["babel?cacheDirectory&presets[]=es2015&presets[]=react&presets[]=stage-0"], 
+      exclude: /node_modules/ },
+
+       {test: /\.json$/, loader: 'json-loader'},    
       {
         loader: 'babel-loader',
         query: {
@@ -51,11 +66,9 @@ new webpack.DefinePlugin({
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/
       },
-      {
-        test: /\.json$/,
-        loader: 'json'
-      },
+
   /*
+      { test: /\.json$/, loader: "json-loader"},
       { test: /\.css$/,
           loaders: [
               'style?sourceMap',
@@ -84,5 +97,6 @@ new webpack.DefinePlugin({
       { test: /\.tsx?$/, loader: 'ts-loader',      exclude: /node_modules/ }
     ]
   },
+
   //devtool: 'cheap-module-eval-source-map'
 };
