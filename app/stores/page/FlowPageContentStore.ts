@@ -58,7 +58,8 @@ export const pageContents = (state = pageContentsInitialState, action) => {
         lastUpdated: action.receivedAt
       });    
     case 'ADD_PAGE_CONTENT':
-      let newPage = (<any>Object).assign({}, action.data);
+      console.log('addPageContent', action.data);
+      let newPage = (<any>Object).assign({}, action.data.content, {_id: action.data._id});
       let result = state.page_content.concat([newPage]);
       return (<any>Object).assign({}, state, {
         isPageContentsFetching: false,

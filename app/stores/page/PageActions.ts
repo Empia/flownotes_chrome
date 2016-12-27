@@ -58,16 +58,17 @@ export function addedPageContent(content) { return {type: 'ADD_PAGE_CONTENT', da
 export function addPageContent(pageId, content) {
   return function (dispatch) {
     dispatch(function(){ return { type: 'REQUEST_ADDING_PAGE' } });
-    return fetch(`/api/content/page/${pageId}`, {method: 'post',
-      headers: {'Content-Type': 'application/json'},  body: JSON.stringify({
+    let contentToAdd = {
         title: content.title, 
         content_type: content.content_type,
         content_value: content.content_value,
         inPageId: content.inPageId,
         inContent: content.inContent,
-      })})
+    }
+    return fetch(`/api/content/page/${pageId}`, {method: 'post',
+      headers: {'Content-Type': 'application/json'},  body: JSON.stringify(contentToAdd)})
       .then(response => response.json())
-      .then(json => dispatch(addedPageContent({_id: json, title: content.title})))
+      .then(json => dispatch(addedPageContent({_id: json, content: contentToAdd})))
   }
 }
 export function removePageContent(pageId, pageContentId) {

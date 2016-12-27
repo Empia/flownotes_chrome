@@ -167,12 +167,12 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
                 <div className="pageContent__contentResource-content_value">
                   <ContentRender content_type={p.content_type} content_value={p.content_value} />
                 </div>
+                <RemoveButton pageId={p.pageId} contentId={p._id} toRemove={ this.removePageSender }/>
                 {/*
                 <div className="pageContent__contentResource-inPageId">inPageId: { p.inPageId}</div>
                 <div className="pageContent__contentResource-inContent">inContent: { p.inContent}</div>
                 <div className="pageContent__contentResource-labels">labels: { p.labels}</div>              
               <input ref={"update-"+p._id} onKeyPress={this.updatePage(idx)}/>
-              <RemoveButton pageId={p.pageId} contentId={p._id} toRemove={ this.removePageSender }/>
                 */}
 
               </div>)}

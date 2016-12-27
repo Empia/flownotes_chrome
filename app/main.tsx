@@ -23,16 +23,14 @@ import * as createLogger from 'redux-logger';
 import {Provider} from "react-redux";
 import { reducer as formReducer } from 'redux-form';
 
+import * as authStateReducer from './redux-auth/src/actions/authenticate';
 
 //require('style!css!foundation-sites/dist/css/foundation.min.css');
 ($(document) as any).foundation();
 
 const loggerMiddleware = createLogger();
 
-var z = require("querystring");
-
-
-console.log('isomorphic', z);
+console.log('authStateReducer', authStateReducer);
 
 const initialState = {
   card: {
