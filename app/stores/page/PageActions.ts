@@ -7,6 +7,12 @@ export const SELECT_PAGE = 'SELECT_PAGE'
 export const REQUEST_REMOVING_PAGE_CONTENT = 'REQUEST_REMOVING_PAGE_CONTENT'
 export const RECIEVE_REMOVING_PAGE_CONTENT = 'RECIEVE_REMOVING_PAGE_CONTENT'
 
+//
+export const RECIEVE_UPDATING_PAGE_CONTENT = 'RECIEVE_UPDATING_PAGE_CONTENT'
+export const REQUEST_UPDATING_PAGE_CONTENT = 'REQUEST_UPDATING_PAGE_CONTENT'
+export const REQUEST_MOVING_ORDER_PAGE_CONTENT = 'REQUEST_MOVING_ORDER_PAGE_CONTENT'
+export const RECIEVE_ORDERED_PAGE_CONTENT = 'RECIEVE_ORDERED_PAGE_CONTENT'
+
 export const selectPage = (pageId) => {
 console.log('selectPage');
  return {
@@ -68,9 +74,62 @@ export function addPageContent(pageId, content) {
     return fetch(`/api/content/page/${pageId}`, {method: 'post',
       headers: {'Content-Type': 'application/json'},  body: JSON.stringify(contentToAdd)})
       .then(response => response.json())
-      .then(json => dispatch(addedPageContent({_id: json, content: contentToAdd})))
+      .then(json => { 
+        let response:any = json;
+        dispatch(addedPageContent({_id: response._id, content: response }))
+      })
   }
 }
+
+export function requestMovingOrderPageContent(pageId, pageContentId) {
+  return {
+    type: REQUEST_MOVING_ORDER_PAGE_CONTENT
+  }  
+}
+export function moveOrderPageContent(pageId, pageContentId, content) {
+  return function (dispatch) {
+    dispatch(requestMovingOrderPageContent(pageId, pageContentId))
+    return fetch(`/api/content/order/${pageContentId}`, {method: 'patch'})
+      .then(response => { 
+          console.log(response);
+          dispatch(receiveOrderedPageContent(pageId, pageContentId));
+      })
+  }
+}
+export function receiveOrderedPageContent(pageId, pageContentId) {
+  return {
+    type: RECIEVE_ORDERED_PAGE_CONTENT,
+    pageId: pageId,
+    pageContentId: pageContentId,
+    recievedAt: Date.now()
+  }
+}
+
+
+export function requestUpdatingPageContent(pageId, pageContentId) {
+  return {
+    type: REQUEST_UPDATING_PAGE_CONTENT
+  }  
+}
+export function updatePageContent(pageId, pageContentId, content) {
+  return function (dispatch) {
+    dispatch(requestUpdatingPageContent(pageId, pageContentId))
+    return fetch(`/api/content/${pageContentId}`, {method: 'patch'})
+      .then(response => { 
+          console.log(response);
+          dispatch(receiveUpdatePageContent(pageId, pageContentId));
+      })
+  }
+}
+export function receiveUpdatePageContent(pageId, pageContentId) {
+  return {
+    type: RECIEVE_UPDATING_PAGE_CONTENT,
+    pageId: pageId,
+    pageContentId: pageContentId,
+    recievedAt: Date.now()
+  }
+}
+
 export function removePageContent(pageId, pageContentId) {
   return function (dispatch) {
     dispatch(requestRemovingPageContent(pageId, pageContentId))

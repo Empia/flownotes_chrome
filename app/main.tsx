@@ -76,12 +76,12 @@ function render(){
 //groceryItemStore.onChange(render);
 
 store.dispatch(fetchPages()).then(() =>
-  console.log(store.getState())
+   console.log('store.getState ',store.getState())
 )
 
 
 render();
 store.subscribe(() => {
-  console.log('rerender');
+  //console.log('rerender');
   render() 
 });

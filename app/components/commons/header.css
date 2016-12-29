@@ -8,32 +8,50 @@
 
 .primaryHeader__secondaryMenu .menu {
   display: flex;
-width: 100%;
-justify-items: center;
-justify-content: space-around;
+  width: 100%;
+  justify-items: center;
+  justify-content: space-around;
 }
 
+:global .global_container {
+    width: 100%;
+    max-width: 100%;
+    padding: 4px 24px;
+}
 :global .pagesSidebar_component {
     display: inline-block;
     float: left;
-    width: 30%;
+    width: 15%;
     border-right: 1px solid gray;
 }
+
 :global .focusedPageContainer {
   display: inline-block;
   float: left;
   padding-left: 29px;
   width: 66%;
 }
+
 :global .pageListContainer {
     list-style: none;
 }
+:global .pageContent__contentList {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: stretch;
+}
 :global .pageContent__contentList .page {
     display: inline-block;
-    float: left;
-    width: 30%;
-    padding: 4px 10px;
+    padding: 5px 1px 4px 1px;
+    flex-basis: auto;
+    flex-grow: 1;
+    margin-right: 10px;
+    min-width: 150px;
+    max-width: 226px;
+    margin-bottom: 10px;
 }
+
 :global .pageContent__contentList ul {
   list-style: none;
 }

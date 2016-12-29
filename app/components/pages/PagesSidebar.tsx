@@ -57,7 +57,7 @@ constructor(props) {
     store.subscribe( () => this.render() )
   }
   componentDidUpdate() {
-    console.log('componentDidUpdate', this);
+    //console.log('componentDidUpdate', this);
     var el =ReactDOM.findDOMNode(this.refs.add) as HTMLElement
     if (el) el.focus();
   }

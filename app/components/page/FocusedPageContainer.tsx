@@ -22,7 +22,8 @@ const mapDispatchToProps = dispatch => ({
     toggleAddPageContent: () => dispatch(actions.toggleAddPageContent()),
     selectPage: (pageId) => dispatch(actions.selectPage(pageId)),
     removePageContent: (pageId, pageContentId) => dispatch(actions.removePageContent(pageId, pageContentId)),
-   // updatePage: (pageId) => dispatch(actions.removePage(pageId)),
+    updatePageContent: (pageId, pageContentId, content) => dispatch(actions.updatePageContent(pageId, pageContentId, content)),
+    updateContentOrder: (pageId, pageContentId, content) => dispatch(actions.moveOrderPageContent(pageId, pageContentId, content)),
     addPageContent: (pageId,content) => dispatch(actions.addPageContent(pageId, content)),
 });
 
@@ -30,14 +31,18 @@ interface FocusedPageContainerProps extends React.Props<any>{
   pageId:string;
   currentPage?:any;
   params: any;
-  removePageContent: any;
   addingPageContent: any;
   pageContents: any;
-  selectPage: any;
   selectedPage: any;
   pages: any;
-  toggleAddPageContent: any;
-  addPageContent: any;
+
+  // actions
+  removePageContent: (pageId: void, pageContentId: void) => void;
+  selectPage: (pageId: string) => void;
+  toggleAddPageContent: () => void;
+  addPageContent: (pageId:string, content:any) => void;
+  updatePageContent: (pageId:string, pageContentId:string, content:any) => void;
+  updateContentOrder:any;
 }
 
 interface GeneralState {
