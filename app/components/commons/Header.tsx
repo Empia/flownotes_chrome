@@ -24,8 +24,8 @@ class Header extends React.Component<HeaderProps, HeaderState>{
               activeStyle={{fontWeight: 'bold'}}>Pages</IndexLink>
             </li>
             <li>
-              <Link to="/items" activeClassName="active"  
-              activeStyle={{fontWeight: 'bold'}}>Items</Link>
+              <Link to="/about" activeClassName="active"  
+              activeStyle={{fontWeight: 'bold'}}>About</Link>
             </li>
             <li>
               <Link to="/examples" activeClassName="active" 

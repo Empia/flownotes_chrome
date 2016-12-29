@@ -57,6 +57,11 @@ client.ogLocale             # Open Graph Locale - for languages
             //console.log(colors.white("Links: " + client.links )); //.join(",")) );
             //for(let key in req.body){
               doc['title'] = client.title;
+              doc['states'] = [{
+                name: 'initiated',
+                ison: true,
+                ison_rate: 100                
+              }];
               doc['order'] = 0;
             //}            
             doc.save();        

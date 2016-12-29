@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import * as actions from '../../stores/pages/PagesActions';
 import {store} from '../../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
-import * as Modal from 'react-modal';
+
+
 
 const mapStateToProps = ({addingPage, pages}) => ({
   addingPage,
@@ -28,16 +29,7 @@ interface PagesSidebarProps extends React.Props<any>{
   updatePage: any;
   removePage: any;
 }
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
+
 interface PagesSidebarState{
   modalIsOpen: any;
 }
@@ -90,32 +82,6 @@ constructor(props) {
     let props = this.props;
     return  (<div className="page__sidebar">
       
-
-      <div>
-        <button onClick={this.openModal}>Open Modal</button>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-
-          <h2 ref="subtitle">Hello</h2>
-          <button onClick={this.closeModal}>close</button>
-          <div>I am a modal</div>
-          <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
-          </form>
-        </Modal>
-      </div>
-
-
-
       <button onClick={ e => this.props.toggleAddPage() }>Add page</button>
       <ul className="pageListContainer">
         {props.pages.items.map((p, idx) => 

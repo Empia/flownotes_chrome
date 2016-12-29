@@ -24,9 +24,11 @@ app.get('*', function(request, response){
 });
 */
 
+/* Static routes for JS */
+app.get('/about', startup)
+  .use((<any>express).static(__dirname + '/../.tmp'))
 app.get('/page/:pageId', startup)
   .use((<any>express).static(__dirname + '/../.tmp'))
-
 app.get('/', startup)
   .use((<any>express).static(__dirname + '/../.tmp'))
 

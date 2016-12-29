@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {GroceryItemList} from './components/items/GroceryItemList';
+import {AboutApplication} from './components/about/AboutApplication';
 import PagesContainer from './components/pages/PagesContainer';
 import FocusedPageContainer from './components/page/FocusedPageContainer';
 import {groceryItemStore, Item} from './stores/GroceryItemStore';
@@ -23,14 +24,14 @@ import * as createLogger from 'redux-logger';
 import {Provider} from "react-redux";
 import { reducer as formReducer } from 'redux-form';
 
-import * as authStateReducer from './redux-auth/src/actions/authenticate';
+//import * as authStateReducer from './redux-auth/src/actions/authenticate';
 
 //require('style!css!foundation-sites/dist/css/foundation.min.css');
 ($(document) as any).foundation();
 
 const loggerMiddleware = createLogger();
 
-console.log('authStateReducer', authStateReducer);
+//console.log('authStateReducer', authStateReducer);
 
 const initialState = {
   card: {
@@ -65,7 +66,7 @@ function render(){
         <Route path="/" component={PagesContainer}>
                 <Route path="/page/:pageId" component={FocusedPageContainer} />
         </Route>
-        <Route path="/items" component={GroceryItemList} />
+        <Route path="/about" component={AboutApplication} />
 
     </Router>
     </Provider>, document.getElementById('app'));
