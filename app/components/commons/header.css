@@ -26,10 +26,10 @@
 }
 
 :global .focusedPageContainer {
-  display: inline-block;
-  float: left;
-  padding-left: 29px;
-  width: 66%;
+    display: inline-block;
+    float: left;
+    padding-left: 29px;
+    width: 80%;
 }
 
 :global .pageListContainer {

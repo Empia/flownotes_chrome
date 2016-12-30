@@ -10,10 +10,11 @@ export default function (router:Router){
 	  .patch('/pages/:id', flowNotePageService.update)
     .get('/content/page/:pageId', flowNoteContentService.getList)
     .post('/content/page/:pageId', flowNoteContentService.add)
+    .post('/content/bulk/page/:pageId', flowNoteContentService.addBulk)
 
     .delete('/content/:id', flowNoteContentService.remove)
     .patch('/content/:id', flowNoteContentService.update)
-    .patch('/content/order/:pageId', flowNoteContentService.updateOrder)
+    .patch('/content/order/:id', flowNoteContentService.updateOrder)
     
     .get('/migrate', migrateService.apply)
 

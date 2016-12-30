@@ -3,6 +3,7 @@ import {FlowNotePage, IFlowNotePage} from '../models/FlowNotePage';
 import {FlowNoteContent, IFlowNoteContent} from '../models/FlowNoteContent';
 var colors = require('colors/safe');
 var MetaInspector = require('node-metainspector');
+import OrderingService from './OrderingService';
 
 class MigrateService{
   constructor(){}
@@ -11,6 +12,9 @@ class MigrateService{
 //var scrape = require('html-metadata');
 
 var url = "https://minorityapp.com";
+function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index;
+}
 
 //scrape(url, function(error, metadata){
 //    console.log(colors.white(metadata) );
@@ -37,15 +41,26 @@ client.ogType               # Open Graph Object Type
 client.ogUpdatedTime        # Open Graph Updated Time
 client.ogLocale             # Open Graph Locale - for languages
 */
-
+    
+  
     FlowNoteContent.find((err,data) => {
-
       data.forEach((d) => {
-      if (d.content_type === "Link") {
-        updateTitle(d);
-      }
+        if (d.content_type === "Link") {
+          //updateTitle(d);
+        }
       });
 
+      let pagesIds = data.map((c) => c.inPageId).filter(onlyUnique);
+
+      pagesIds.forEach((pageId) => {
+        let orderingService = new OrderingService(data.filter((c) => c.inPageId === pageId));
+        orderingService.initiateOrdering().forEach((d) => {
+          FlowNoteContent.findOne({_id: d._id}, (err, doc) => {
+              doc['order'] = d.order;
+              doc.save();        
+          });
+        });
+      });
     });    
 
     let updateTitle = ((d) => {
@@ -62,7 +77,6 @@ client.ogLocale             # Open Graph Locale - for languages
                 ison: true,
                 ison_rate: 100                
               }];
-              doc['order'] = 0;
             //}            
             doc.save();        
         });
@@ -70,14 +84,6 @@ client.ogLocale             # Open Graph Locale - for languages
         client.fetch();
       });
     });
-
-
-    FlowNotePage.find((err, data) => data.forEach((d) => {
-      FlowNotePage.findOne({_id: d._id}, (err, doc) => {
-        doc['order'] = 0;
-        doc.save();
-      });
-    }));
 
     console.log('do some migration work');
     return FlowNotePage.find((err, data) => res.send(data));

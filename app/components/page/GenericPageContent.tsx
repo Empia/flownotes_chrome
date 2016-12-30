@@ -1,28 +1,101 @@
 import * as React from "react";
-import { connect } from 'react-redux';
-let PageContentForm = require('./PageContentForm.jsx');
+let PageContentForm = require('./forms/PageContentForm.jsx');
 import * as actions from '../../stores/page/PageActions';
 import {store} from '../../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
+import { connect } from 'react-redux';
+import { openDialog, closeDialog } from 'redux-dialog';
 
 
-interface GenericPageContentProps extends React.Props<any>{}
-interface GenericPageContentState{ }
-
-class GenericPageContent extends React.Component<GenericPageContentProps, GenericPageContentState>{
-  constructor(){
-    super();
-    //this.pageId = this.props.params.pageId
-  } 
-  componentDidUpdate() {
+function RemoveButton(props) {
+  return <button onClick={() => props.toRemove(props.pageId, props.contentId)}>Remove</button>
+}
+function ContentRender(props) {
+  if (props.content_type === 'Link') {
+    return <a href={props.content_value}>{props.content_value}</a>
+  } else {
+    return <span>{props.content_value}</span>
   }
+}
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+interface StateProps {}
+const mapStateToProps = ({addingPageContent, pageContents, pages, selectedPage}) => ({});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+interface DispatchProps {
+  removePageContent: (pageId: void, pageContentId: void) => void;
+  openDialog: any;
+}
+const mapDispatchToProps = dispatch => ({
+    removePageContent: (pageId, pageContentId) => dispatch(actions.removePageContent(pageId, pageContentId)),
+    openDialog: (dialogId) => dispatch(openDialog(dialogId))
+});
+////////////////////////////////////////////////////////
+interface GenericPageContentOwnProps extends React.Props<any>{
+  contentObject: any;
+  contentIdx: any;
+}
+interface GenericPageContentState{}
+type GenericPageContentProps = GenericPageContentOwnProps & StateProps & DispatchProps;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
+  componentDidUpdate() {}
+
+  removePageSender = ((pageId, pageContentId) => this.props.removePageContent(pageId, pageContentId));
+
+  openModalWindow = (evt) => {
+          evt.preventDefault();
+          this.props.openDialog('signupDialog'); 
+  };
 
   render(){
+    let p = this.props.contentObject;
+    let idx = this.props.contentIdx;
     return  (
-      <div className="pageContent">
+      <div className="page" key={p._id}>
+        <a href="#" onClick={this.openModalWindow}>Modal</a>
+
+      {/*
+      <div>
+        <button onClick={this.openModal}>Open Modal</button>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}>
+              <PageContentForm.default 
+                pageId={p.pageId} 
+                initialValues={p} 
+                form={'update_content_form'+p._id}
+                onSubmit={this.updatePageContent}/>
+        </Modal>
       </div>
-      );
+      */}
+
+      <h3><span>{p.order+" "}</span>{p.title}</h3>
+        {/* 
+        <div className="pageContent__contentResource-content_type">content_type: { p.content_type}</div>
+        
+        */}
+        <div className="pageContent__contentResource-content_value">
+          <ContentRender content_type={p.content_type} content_value={p.content_value} />
+        </div>
+        <RemoveButton pageId={p.pageId} contentId={p._id} toRemove={ this.removePageSender }/>
+        {/*
+        <div className="pageContent__contentResource-inPageId">inPageId: { p.inPageId}</div>
+        <div className="pageContent__contentResource-inContent">inContent: { p.inContent}</div>
+        <div className="pageContent__contentResource-labels">labels: { p.labels}</div>              
+      <input ref={"update-"+p._id} onKeyPress={this.updatePage(idx)}/>
+        */}
+      </div>);
   }  
 }
  
-export default GenericPageContent;
+
+export default connect<StateProps,DispatchProps,GenericPageContentOwnProps>(mapStateToProps, mapDispatchToProps)(GenericPageContent);

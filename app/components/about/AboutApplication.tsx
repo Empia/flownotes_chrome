@@ -20,7 +20,12 @@ class AboutApplication extends React.Component<AboutApplicationPr, AboutApplicat
         <div className="header_component">
           <Header />
         </div>
-        <h1>About</h1>      
+        <h1>About</h1>     
+        <ul>
+          <li>Update for content + move order</li>
+          <li>Minority compatibility</li>
+          <li>Bulk addition</li>
+        </ul> 
       </div>
     );
   }

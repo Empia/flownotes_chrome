@@ -8,6 +8,7 @@ import {groceryItemStore, Item} from './stores/GroceryItemStore';
 import {card,addingPage,pages} from './stores/pages/FlowPageStore';
 import {pagesStore} from './stores/pages/OldFlowPageStore';
 import {addingPageContent,pageContents} from './stores/page/FlowPageContentStore';
+import { dialogReducer } from 'redux-dialog';
 
 import {fetchPages} from './stores/pages/PagesActions';
 
@@ -47,6 +48,7 @@ export const store = createStore(combineReducers({
   pages, 
   addingPageContent,
   pageContents, 
+  dialogReducer: dialogReducer,
   routing: routerReducer, form: formReducer }),
     initialState,
   
