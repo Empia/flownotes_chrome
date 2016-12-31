@@ -44,7 +44,7 @@ module.exports = {
             "../node_modules",
             "web_modules"
         ],
-        extensions: ['', '.json', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css']
+        extensions: ['', '.js', '.json', '.webpack.js', '.web.js', '.ts', '.tsx', '.css']
     },
     target: 'node',
     module: {
