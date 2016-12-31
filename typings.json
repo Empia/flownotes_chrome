@@ -11,7 +11,6 @@
     "mime": "github:DefinitelyTyped/DefinitelyTyped/mime/mime.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "mongodb": "github:DefinitelyTyped/DefinitelyTyped/mongodb/mongodb.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "mongoose": "github:DefinitelyTyped/DefinitelyTyped/mongoose/mongoose.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
-    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "react": "github:DefinitelyTyped/DefinitelyTyped/react/react.d.ts#6b3bc735ad028ca115c06721fb1c71ffc0e7a546",
     "react-addons-create-fragment": "github:DefinitelyTyped/DefinitelyTyped/react/react-addons-create-fragment.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "react-addons-css-transition-group": "github:DefinitelyTyped/DefinitelyTyped/react/react-addons-css-transition-group.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",

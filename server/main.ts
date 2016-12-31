@@ -1,4 +1,4 @@
-/// <reference path="../typings/globals/node/index.d.ts" />
+/// <reference types="node" />
 /// <reference path="../typings/globals/express/index.d.ts" />
 import {IRoute, Express, Router} from 'express';
 import general_routes from './routes/general';
