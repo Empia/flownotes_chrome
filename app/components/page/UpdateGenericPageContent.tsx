@@ -1,5 +1,4 @@
 import * as React from "react";
-let PageContentForm = require('./forms/PageContentForm.jsx');
 import * as actions from '../../stores/page/PageActions';
 import {store} from '../../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";

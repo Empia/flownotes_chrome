@@ -5,7 +5,7 @@ import Header from '../commons/Header';
 interface AboutApplicationPr extends React.Props<any>{}
 interface AboutApplicationState{}
 
-class AboutApplication extends React.Component<AboutApplicationPr, AboutApplicationState>{
+export class AboutApplication extends React.Component<AboutApplicationPr, AboutApplicationState>{
   constructor(){
     super();
     console.log(this);
@@ -17,18 +17,18 @@ class AboutApplication extends React.Component<AboutApplicationPr, AboutApplicat
   render(){
     return  (
       <div>
-        <div className="header_component">
-          <Header />
-        </div>
         <h1>About</h1>     
+        <h4>Paper concept</h4>
         <ul>
-          <li>Update for content + move order</li>
+          <h4>Tasks</h4>
+          <li>Update for content(in modal window) + move order</li>
           <li>Minority compatibility</li>
           <li>Bulk addition</li>
+          <li> auth for backend</li>
+          <li>browser plugin</li>
+          <li>Winds repo get info</li>
         </ul> 
       </div>
     );
   }
 }
-
-export {AboutApplication}

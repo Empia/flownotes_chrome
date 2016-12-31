@@ -3,6 +3,8 @@ import Header from '../commons/Header';
 import PagesSidebar from './PagesSidebar';
 import { connect } from 'react-redux';
 //import { EmailSignUpForm } from "redux-auth/default-theme";
+import * as url2 from 'url-browser';
+
 
 
 interface PagesContainerProps extends React.Props<any>{
@@ -21,6 +23,7 @@ class PagesContainer extends React.Component<PagesContainerProps, PagesContainer
         <div className="header_component">
           <Header />
         </div>
+
         <div className="pagesSidebar_component">  
           <PagesSidebar key="test" />
         </div>

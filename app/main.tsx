@@ -9,12 +9,14 @@ import {card,addingPage,pages} from './stores/pages/FlowPageStore';
 import {pagesStore} from './stores/pages/OldFlowPageStore';
 import {addingPageContent,pageContents} from './stores/page/FlowPageContentStore';
 import { dialogReducer } from 'redux-dialog';
+import {userReducer} from './stores/userReducer'
+import Login from './components/auth/Login';
 
 import {fetchPages} from './stores/pages/PagesActions';
 
 
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
-import {syncHistoryWithStore, routerReducer} from "react-router-redux";
+import {syncHistoryWithStore, routerReducer, routerActions, routerMiddleware} from "react-router-redux";
 import {createStore,
   applyMiddleware,
   combineReducers,
@@ -24,6 +26,7 @@ import thunkMiddleware from 'redux-thunk';
 import * as createLogger from 'redux-logger';
 import {Provider} from "react-redux";
 import { reducer as formReducer } from 'redux-form';
+import {UserIsAuthenticated} from './utils/wrappers';
 
 //import * as authStateReducer from './redux-auth/src/actions/authenticate';
 
@@ -31,6 +34,7 @@ import { reducer as formReducer } from 'redux-form';
 ($(document) as any).foundation();
 
 const loggerMiddleware = createLogger();
+const routingMiddleware = routerMiddleware(browserHistory)
 
 //console.log('authStateReducer', authStateReducer);
 
@@ -48,11 +52,13 @@ export const store = createStore(combineReducers({
   pages, 
   addingPageContent,
   pageContents, 
+  user: userReducer,
   dialogReducer: dialogReducer,
   routing: routerReducer, form: formReducer }),
     initialState,
   
     applyMiddleware(
+    routingMiddleware,  
     thunkMiddleware, // lets us dispatch() functions
     loggerMiddleware // neat middleware that logs actions
   ));
@@ -67,8 +73,10 @@ function render(){
     <Router history={browserHistory}>
         <Route path="/" component={PagesContainer}>
                 <Route path="/page/:pageId" component={FocusedPageContainer} />
+                <Route path="/foo" component={UserIsAuthenticated(AboutApplication)}/>
+                <Route path="/about" component={AboutApplication} />
+                <Route path="/login" component={Login} />
         </Route>
-        <Route path="/about" component={AboutApplication} />
 
     </Router>
     </Provider>, document.getElementById('app'));

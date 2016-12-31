@@ -5,7 +5,7 @@ import {store} from '../../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 import { connect } from 'react-redux';
 import { openDialog, closeDialog } from 'redux-dialog';
-
+import * as BasicDialog from './forms/BasicDialog';
 
 function RemoveButton(props) {
   return <button onClick={() => props.toRemove(props.pageId, props.contentId)}>Remove</button>
@@ -61,6 +61,7 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
     return  (
       <div className="page" key={p._id}>
         <a href="#" onClick={this.openModalWindow}>Modal</a>
+        
 
       {/*
       <div>

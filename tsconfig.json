@@ -9,6 +9,7 @@
     },
     "exclude": [
         "node_modules",
+        "app/redux-auth",
         "bower_components"
     ]
 }
