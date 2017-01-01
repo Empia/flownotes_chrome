@@ -1,6 +1,5 @@
 Page nesting  [CRUD]
 Section on page [CRUD]
-Object on page [ordered] [CRUD]
 
 --------------
 CSS MODULE BUG SERVERSIDE

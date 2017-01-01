@@ -20,13 +20,13 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
         <h1>About</h1>     
         <h4>Paper concept</h4>
         <ul>
-          <h4>Tasks</h4>
-          <li>Update for content(in modal window) + move order</li>
-          <li>Minority compatibility</li>
-          <li>Bulk addition</li>
-          <li> auth for backend</li>
-          <li>browser plugin</li>
-          <li>Winds repo get info</li>
+          <h4>Tasks(10 hours):</h4>
+            <li>Update for content(in modal window) + move order</li>
+            <li>Minority compatibility</li>
+            <li>Bulk addition</li>
+            <li> auth for backend</li>
+            <li>browser plugin[tab push]</li>
+            <li>Winds repo get info</li>
         </ul> 
       </div>
     );

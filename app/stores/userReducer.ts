@@ -9,7 +9,6 @@ const initialState = {
 
 export const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'ADD_CARD':  
     case USER_LOGGING_IN:
       return { ...initialState, isLoading: true }
     case USER_LOGGED_IN:
