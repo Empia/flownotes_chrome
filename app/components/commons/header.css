@@ -36,19 +36,20 @@
     list-style: none;
 }
 :global .pageContent__contentList {
+  /*
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     align-content: stretch;
+*/
 }
 :global .pageContent__contentList .page {
-    display: inline-block;
     padding: 5px 1px 4px 1px;
     flex-basis: auto;
     flex-grow: 1;
     margin-right: 10px;
     min-width: 150px;
-    max-width: 226px;
+    max-width: 100%;
     margin-bottom: 10px;
 }
 
@@ -56,7 +57,8 @@
   list-style: none;
 }
 :global .pageContent__contentList h3 {
-  font-size: 16px;
+    font-size: 16px;
+    margin-bottom: 4px;
 }
 /*
 By default CSS exports all class names into a global selector scope. 

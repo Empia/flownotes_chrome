@@ -1,0 +1,1 @@
+// LinkContent.ts

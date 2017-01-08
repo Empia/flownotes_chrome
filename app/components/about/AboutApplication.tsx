@@ -24,9 +24,30 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
             <li>Update for content(in modal window) + move order</li>
             <li>Minority compatibility</li>
             <li>Bulk addition</li>
+            <li>Neural Modes</li>
             <li> auth for backend</li>
             <li>browser plugin[tab push]</li>
             <li>Winds repo get info</li>
+            <hr />
+            <li>Page nesting  [CRUD]</li>
+            <li>Section on page [CRUD]</li>
+            <li>better logo</li>
+            <hr />
+            <li>Object can be moved around pages </li>
+            <li>Heading object</li>
+            <li>Paragraph</li>
+            <li>List</li>
+            <li>Img</li>
+            <li>Link -> Heading, desk</li>
+            <li>Code files -> Method, object</li>
+            <p>[browser's tab module]</p>
+            <li>Session for user</li>
+            <li>Get all tabs</li>
+            <li>Push session tabs</li>
+            <li>Push deltas</li>
+            <li>Calculate deltas for session</li>
+            
+
         </ul> 
       </div>
     );

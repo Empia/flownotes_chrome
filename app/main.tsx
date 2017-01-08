@@ -28,6 +28,27 @@ import {Provider} from "react-redux";
 import { reducer as formReducer } from 'redux-form';
 import {UserIsAuthenticated} from './utils/wrappers';
 
+var socket = new WebSocket("ws://localhost:7777/websocket");
+socket.onopen = function() {
+  console.log("Соединение установлено.");
+};
+
+socket.onclose = function(event) {
+  if (event.wasClean) {
+    console.log('Соединение закрыто чисто');
+  } else {
+    console.log('Обрыв соединения'); // например, "убит" процесс сервера
+  }
+  console.log('Код: ' + event.code + ' причина: ' + event.reason);
+};
+socket.onmessage = function(event) {
+  console.log("Получены данные " + event.data);
+};
+
+socket.onerror = function(error) {
+  console.log("Ошибка " + error.message);
+};
+
 //import * as authStateReducer from './redux-auth/src/actions/authenticate';
 
 //require('style!css!foundation-sites/dist/css/foundation.min.css');

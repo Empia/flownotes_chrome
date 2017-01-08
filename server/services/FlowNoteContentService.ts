@@ -17,23 +17,8 @@ class FlowNoteContentService{
     let pageId = req.params.pageId;
     return FlowNoteContent.find({ inPageId: pageId},(err, data) => res.send(data));
   }
-  
-  /**
-   * Function for adding content
-   * @method myFunction
-   * @param {String} myParam
-   */    
-  addContentFn = (pageId, content, flowNoteContent, res) => {
-    console.log('main pageId', pageId);
-   // Init content
-    var client = new MetaInspector(flowNoteContent.content_value, { timeout: 15000 });
-    client.on("fetch", () => {
-          flowNoteContent['title'] = client.title;
-          flowNoteContent['states'] = [{
-            name: 'initiated',
-            ison: true,
-            ison_rate: 100                
-          }];         
+   
+  addOrderToContent = (flowNoteContent, pageId, flowNoteContentSaveFn) => {
     FlowNoteContent.find({ inPageId: pageId},(err, data) => {
         let filteredData = data.filter((c) => c.inPageId === pageId)
         console.log('filteredData', filteredData.length);
@@ -41,22 +26,52 @@ class FlowNoteContentService{
         let lastOrder:number = orderingService.getLastOrder();
         console.log('last order', lastOrder);
         flowNoteContent['order'] = lastOrder+1;         
-        flowNoteContent.save((err, data:IFlowNoteContent) => {
-            //let initiated = this.initiateContent(data);
-            console.log('trying to save', data);
-            if (res !== undefined && data !== undefined) {
-              return res.status(200).send(data);
-            } else {
-              console.log('err', err);
-              return flowNoteContent;
-            }
-        })
+        return flowNoteContentSaveFn(flowNoteContent);
     });
-
-    });
-    client.on("error", (err) => console.log('err',err));
-    client.fetch();
   }
+  /**
+   * Function for adding content
+   * @method myFunction
+   * @param {String} myParam
+   */    
+  addContentFn = (pageId, content, flowNoteContent, res) => {
+    console.log('main pageId', pageId);
+    const saveContentFn = (flowNoteContent) => {
+          flowNoteContent.save((err, data:IFlowNoteContent) => {
+              //let initiated = this.initiateContent(data);
+              console.log('trying to save', data);
+              if (res !== undefined && data !== undefined) {
+                return res.status(200).send(data);
+              } else {
+                console.log('err', err);
+                return flowNoteContent;
+              }
+          })      
+    };
+   // Init content
+    if (flowNoteContent.content_type == "Link") {
+      var client = new MetaInspector(flowNoteContent.content_value, { timeout: 15000 });
+      client.on("fetch", () => {
+            flowNoteContent['title'] = client.title;
+            flowNoteContent['states'] = [{
+              name: 'initiated',
+              ison: true,
+              ison_rate: 100                
+            }];       
+        console.log('fetch', flowNoteContent.title);
+        return this.addOrderToContent(flowNoteContent, pageId, (flowNoteContent) => saveContentFn(flowNoteContent));
+      });
+      client.on("error", (err) => console.log('err',err));
+      return client.fetch(); 
+    } else {
+            flowNoteContent['states'] = [{
+              name: 'initiated',
+              ison: true,
+              ison_rate: 100                
+            }];           
+      return this.addOrderToContent(flowNoteContent, pageId, (flowNoteContent) => saveContentFn(flowNoteContent));
+    }    
+  };
 
   /**
    * Add multiple content for pageId

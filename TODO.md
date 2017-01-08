@@ -1,6 +1,3 @@
-Page nesting  [CRUD]
-Section on page [CRUD]
-
 --------------
 CSS MODULE BUG SERVERSIDE
 https://github.com/css-modules/css-modules-require-hook/tree/master/demo
@@ -17,19 +14,3 @@ https://github.com/gajus/react-css-modules
 https://github.com/webpack/webpack/issues/1754
 https://github.com/StevenIseki/react-router-redux-example/blob/master/serverDev.js
 
-better logo
-_____________________________________-
-Object can be moved around pages 
-Heading object
-Paragraph
-List
-Img
-Link -> Heading, desk
-Code files -> Method, object
-
-_________________________ [browser's tab module]
-Session for user
-Get all tabs
-Push session tabs
-Push deltas
-Calculate deltas for session

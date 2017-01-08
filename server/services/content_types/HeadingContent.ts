@@ -1,0 +1,1 @@
+// HeadingContent.ts
