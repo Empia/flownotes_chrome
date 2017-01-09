@@ -32,5 +32,8 @@
     "redux-logger": "github:DefinitelyTyped/DefinitelyTyped/redux-logger/redux-logger.d.ts#e45879a3b4a6d7e265f21103ae044cefb3cee37c",
     "redux-thunk": "github:DefinitelyTyped/DefinitelyTyped/redux-thunk/redux-thunk.d.ts#e45879a3b4a6d7e265f21103ae044cefb3cee37c",
     "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8"
+  },
+  "dependencies": {
+    "passport": "registry:npm/passport#0.3.0+20161028163825"
   }
 }
