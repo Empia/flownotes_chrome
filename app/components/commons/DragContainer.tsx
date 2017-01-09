@@ -39,7 +39,6 @@ export default class DragContainer extends React.Component<any, any> {
       }]
     };
   }
-
   moveCard(dragIndex, hoverIndex) {
     const { cards } = this.state;
     const dragCard = cards[dragIndex];
