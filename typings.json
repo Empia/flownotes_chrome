@@ -34,6 +34,7 @@
     "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8"
   },
   "dependencies": {
-    "passport": "registry:npm/passport#0.3.0+20161028163825"
+    "passport": "registry:npm/passport#0.3.0+20161028163825",
+    "react-addons-update": "registry:npm/react-addons-update#0.14.0+20160324044346"
   }
 }

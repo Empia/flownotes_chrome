@@ -1,5 +1,6 @@
 import * as React from "react";
-import update from 'react/lib/update';
+var update = require('react/lib/update');
+//import * as Addons from 'react-addons-update';
 import DragCard from './drag/DragCard';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
