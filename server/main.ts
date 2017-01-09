@@ -14,19 +14,18 @@ let bodyParser = require('body-parser');
 let express:any = require('express');
 var passport = require('passport');
 //var Strategy = require('passport-local').Strategy;
-//var JwtStrategy = require('passport-jwt').Strategy,
-var ExtractJwt = require('passport-jwt').ExtractJwt;
-var JwtStrategy = require('./JwtStrategy');
-
+var JwtStrategy = require('passport-jwt').Strategy,
+    ExtractJwt = require('passport-jwt').ExtractJwt;
 import {authService} from './services/AuthService';
 
 
-/*
+
 
 passport.use(new JwtStrategy(authService.confOpts, function(jwt_payload, done) {
-  console.log('jwt_payload.sub', jwt_payload.sub);
+  console.log('jwt_payload', jwt_payload);
     //var user = users[payload.id] || null;
-        authService.findByUsername({id: jwt_payload.id}, function(err, user) {
+        authService.findById({id: jwt_payload.id}, function(err, user) {
+          console.log('user', user);
             if (err) {
                 return done(err, false);
             }
@@ -38,6 +37,7 @@ passport.use(new JwtStrategy(authService.confOpts, function(jwt_payload, done) {
             }        
         });
 }));
+/*
 passport.use(new Strategy(
   function(username, password, cb) {
     authService.findByUsername(username, function(err, user) {
@@ -71,22 +71,9 @@ app.use(bodyParser.json());
 //app.use(require('cookie-parser')());
 //app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 
-var strategy = new JwtStrategy(authService.confOpts, function(jwt_payload, next) {
-  console.log('payload received', jwt_payload);
-  // usually this would be a database call:
-  var user = {}
-  if (user) {
-    next(null, user);
-  } else {
-    next(null, false);
-  }
-});
-
-passport.use(strategy);
 app.use(passport.initialize());
 //pp.use(passport.session());
 
-console.log('passport', passport);
 
 var router:Router = express.Router(); 
 

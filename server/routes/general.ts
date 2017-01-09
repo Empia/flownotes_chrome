@@ -23,36 +23,12 @@ export default function (router:Router){
     .get('/migrate', migrateService.apply)
 
     .get('/profile', passport.authenticate("jwt", {session: false}),
-      function(req, res){
-        res.send({ user: req.user });
-    })    
-    .post('/login', passport.authenticate('local', { session: false}), function(req, res) {res.redirect('/api/profile')})
-    .post("/token", function(req, res) {  
-    if (req.body.email && req.body.password) {
-        var email = req.body.email;
-        var password = req.body.password;
-
-
-    authService.findByUsername(email, function(err, user) {
-      if (err) { return res.sendStatus(401); }
-      if (!user) { return res.sendStatus(401) }
-      if (user.password != password) { return res.sendStatus(401) }
-        var payload = {
-            id: user.id,
-            aud: 'localhost'
-        };
-        var token = jwt.encode(payload, authService.confOpts.secretOrKey);
-        console.log('encode', payload, authService.confOpts.secretOrKey);
-        return res.json({
-            token: 'JWT '+ token
-        });      
-    });
-    } else { return res.sendStatus(401) }
-}) 
-    .get('/logout', function(req, res){
-                                          req.logout();
-                                          res.redirect('/');
-                                        })
+        function(req, res){
+          res.send({ user: req.user });
+  })    
+    .post('/login', authService.login)
+    .post("/token", authService.generateToken) 
+    .get('/logout', authService.logout)
 
 
 }

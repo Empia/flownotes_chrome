@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import Header from '../commons/Header';
+import DragContainer from '../commons/DragContainer';
 
 interface AboutApplicationPr extends React.Props<any>{}
 interface AboutApplicationState{}
@@ -17,6 +18,7 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
   render(){
     return  (
       <div>
+        <DragContainer />
         <h1>About</h1>     
         <h4>Paper concept</h4>
         <ul>

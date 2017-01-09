@@ -1,5 +1,7 @@
 var JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
+var jwt = require("jwt-simple");
+import * as passport from 'passport';
 
 const Records = [
     { id: 1, username: 'jack', password: 'secret', displayName: 'Jack', emails: [ { value: 'jack@example.com' } ] }
@@ -8,15 +10,51 @@ const Records = [
 class AuthService {
   constructor(){}
 
+// Endpoints
+login = (req, res) => {
+  return passport.authenticate('local', { session: false}), function(req, res) {res.redirect('/api/profile')}
+}
 
+generateToken = (req, res) => {
+let email = req.body.email;
+let password = req.body.password;  
+if (req.body.email && req.body.password) {
+    authService.findByUsername(email, function(err, user) {
+      if (err) { return res.sendStatus(401); }
+      if (!user) { return res.sendStatus(401) }
+      if (user.password != password) { return res.sendStatus(401) }
+        var payload = {
+            id: user.id,
+            aud: 'localhost'
+        };
+        var token = jwt.encode(payload, authService.confOpts.secretOrKey);
+        console.log('encode', payload, authService.confOpts.secretOrKey);
+        return res.json({
+            token: 'JWT '+ token
+        });      
+    });
+} else { return res.sendStatus(401) }
+}
+
+logout = (req, res) => {
+  req.logout();
+  res.redirect('/');
+}
+
+//////
 findById(id, cb) {
   process.nextTick(function() {
+    let user = Records.find(c => (c.id === id.id))
+    console.log(user, id);
+    cb(null, user);
+    /*
     var idx = id - 1;
     if (Records[idx]) {
       cb(null, Records[idx]);
     } else {
       cb(new Error('User ' + id + ' does not exist'));
     }
+  */
   });
 }
 
