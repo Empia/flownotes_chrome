@@ -24,6 +24,9 @@ interface IFlowNoteContent extends Document {
 
   inPagesIds?:Array<string>;
   order?:number;  
+
+  createdAt?:Date;
+  updatedAt?:Date;  
 }
 
 
@@ -45,6 +48,9 @@ let FlowNoteContentSchema = new Schema({
   }],  
   id:String,
   order: {type: Number, required: false},
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+  
 });
 
 let FlowNoteContent = model<IFlowNoteContent>('FlowNoteContent', FlowNoteContentSchema, "flowNoteContents");
