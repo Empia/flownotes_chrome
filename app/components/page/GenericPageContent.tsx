@@ -6,13 +6,17 @@ import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 import { connect } from 'react-redux';
 import { openDialog, closeDialog } from 'redux-dialog';
 import * as BasicDialog from './forms/BasicDialog';
+import {DropdownButton} from 'react-bootstrap';
 
 function RemoveButton(props) {
   return <button onClick={() => props.toRemove(props.pageId, props.contentId)}>Remove</button>
 }
 function ContentRender(props) {
   if (props.content_type === 'Link') {
-    return <a href={props.content_value}>{props.content_value}</a>
+    return <div>
+     <h3><span>{props.content_order+" "}</span>{props.content_title}</h3>
+      <a href={props.content_value}>{props.content_value}</a>
+    </div>
   } else {
     return <span>{props.content_value}</span>
   }
@@ -79,21 +83,31 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
       </div>
       */}
 
-      <h3><span>{p.order+" "}</span>{p.title}</h3>
         {/* 
         <div className="pageContent__contentResource-content_type">content_type: { p.content_type}</div>
         
         */}
         <div className="pageContent__contentResource-content_value">
-          <ContentRender content_type={p.content_type} content_value={p.content_value} />
+          <ContentRender content_type={p.content_type} content_title={p.title} content_value={p.content_value} />
         </div>
-        <RemoveButton pageId={p.pageId} contentId={p._id} toRemove={ this.removePageSender }/>
-        {/*
-        <div className="pageContent__contentResource-inPageId">inPageId: { p.inPageId}</div>
-        <div className="pageContent__contentResource-inContent">inContent: { p.inContent}</div>
-        <div className="pageContent__contentResource-labels">labels: { p.labels}</div>              
-      <input ref={"update-"+p._id} onKeyPress={this.updatePage(idx)}/>
-        */}
+
+        <div className="pageContent__contentResource-content_controls">
+
+          <DropdownButton bsStyle="default" title={...} key={'dropdown-'+p._id} id={`dropdown-basic-${p._id}`}>
+            <RemoveButton pageId={p.pageId} contentId={p._id} toRemove={ this.removePageSender }/>
+            <MenuItem eventKey="1">Action</MenuItem>
+            <MenuItem eventKey="2">Another action</MenuItem>
+            <MenuItem eventKey="3" active>Active Item</MenuItem>
+            <MenuItem divider />
+            <MenuItem eventKey="4">Separated link</MenuItem>
+          </DropdownButton>
+          {/*
+          <div className="pageContent__contentResource-inPageId">inPageId: { p.inPageId}</div>
+          <div className="pageContent__contentResource-inContent">inContent: { p.inContent}</div>
+          <div className="pageContent__contentResource-labels">labels: { p.labels}</div>              
+        <input ref={"update-"+p._id} onKeyPress={this.updatePage(idx)}/>
+          */}
+        </div>
       </div>);
   }  
 }

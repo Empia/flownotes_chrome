@@ -39,6 +39,7 @@ export default function (router:Router){
           res.send({ user: req.user });
   })    
     .post('/login', authService.login)
+    .post('/signUp', authService.signUp)
     .post("/token", authService.generateToken) 
     .get('/logout', authService.logout)
 

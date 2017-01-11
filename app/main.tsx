@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import {GroceryItemList} from './components/items/GroceryItemList';
 import {AboutApplication} from './components/about/AboutApplication';
 import PagesContainer from './components/pages/PagesContainer';
+import UserModes from './components/user_modes/UserModes';
 import FocusedPageContainer from './components/page/FocusedPageContainer';
 import {groceryItemStore, Item} from './stores/GroceryItemStore';
 import {card,addingPage,pages} from './stores/pages/FlowPageStore';
@@ -96,6 +97,8 @@ function render(){
                 <Route path="/page/:pageId" component={FocusedPageContainer} />
                 <Route path="/foo" component={UserIsAuthenticated(AboutApplication)}/>
                 <Route path="/about" component={AboutApplication} />
+                <Route path="/modes" component={UserModes} />
+
                 <Route path="/login" component={Login} />
         </Route>
 

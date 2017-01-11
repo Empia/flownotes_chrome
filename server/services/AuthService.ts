@@ -15,6 +15,11 @@ login = (req, res) => {
   return passport.authenticate('local', { session: false}), function(req, res) {res.redirect('/api/profile')}
 }
 
+signUp = (req, res) => {
+  return passport.authenticate('local', { session: false}), function(req, res) {res.redirect('/api/profile')}
+}
+
+
 generateToken = (req, res) => {
 let email = req.body.email;
 let password = req.body.password;  

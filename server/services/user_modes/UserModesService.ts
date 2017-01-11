@@ -27,10 +27,10 @@ class UserModesService {
           doc[key] = req.body[key];
         }
         doc.save();
-        res.status(200).send({status: 'updated', pageId: req.body._id});
+        res.status(200).send({status: 'updated', modeId: req.body._id});
       }
       else {
-        res.status(200).send({status: 'error', reason: 'not found', pageId: req.body._id});
+        res.status(200).send({status: 'error', reason: 'not found', modeId: req.body._id});
       }
     });
   }

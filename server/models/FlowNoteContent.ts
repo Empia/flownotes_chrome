@@ -13,6 +13,7 @@ export interface IConState {
 
 interface IFlowNoteContent extends Document {
   title:string;
+  content_desc?:String
   content_type: string;
   content_value: string;
   inPageId?:string;
@@ -32,6 +33,7 @@ interface IFlowNoteContent extends Document {
 
 let FlowNoteContentSchema = new Schema({
   title:String,
+  content_desc: {type: String, required: false, default: ''},
   content_type: String,
   content_value: String,
   inPageId: {type: String, required: false},

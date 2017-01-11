@@ -51,6 +51,10 @@ class Header extends React.Component<HeaderProps, HeaderState>{
               activeStyle={{fontWeight: 'bold'}}>Foo</IndexLink>
             </li>
             <li>
+              <Link to="/modes" activeClassName="active"  
+              activeStyle={{fontWeight: 'bold'}}>Modes</Link>
+            </li>
+            <li>
               <Link to="/about" activeClassName="active"  
               activeStyle={{fontWeight: 'bold'}}>About</Link>
             </li>

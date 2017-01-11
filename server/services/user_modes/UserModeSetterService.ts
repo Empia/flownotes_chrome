@@ -14,6 +14,8 @@ class UserModeSetterService {
     // find user
     // find mode
     UserModes.findOne({ _id: req.params.id})
+    // add mode & save
+    
     res.status(202).send(null);
   }
 
