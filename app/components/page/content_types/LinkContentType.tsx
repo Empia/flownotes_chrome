@@ -16,6 +16,6 @@ class LinkContentType extends React.Component<LinkContentTypeProps, LinkContentT
         </div>;
     }
 }
-export default LinkContentType;
+export {LinkContentType};
 
 // LinkContentType.ts

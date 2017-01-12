@@ -22,3 +22,5 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
     );
   }
 }
+
+export default UserModes;

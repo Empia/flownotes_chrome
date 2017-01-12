@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
+    noParse: ['ws', 'tty'],
     entry: [
         'script!jquery/dist/jquery.min.js',
         'script!foundation-sites/dist/js/foundation.min.js',
@@ -9,7 +10,9 @@ module.exports = {
     ],
     externals: {
         jquery: 'jQuery',
-        React: 'react'
+        React: 'react',
+        ws: 'ws',
+        tty: 'tty'
     },
     plugins: [
         //replace({
@@ -21,6 +24,7 @@ module.exports = {
             }
         }),
         new webpack.ProvidePlugin({
+            io: 'socket.io-client',
             '$': 'jquery',
             'jQuery': 'jquery'
         }),

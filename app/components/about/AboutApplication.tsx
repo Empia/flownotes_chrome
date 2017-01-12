@@ -18,16 +18,18 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
   render(){
     return  (
       <div>
-        <DragContainer />
+        {/*<DragContainer /> */}
         <h1>About</h1>     
         <h4>Paper concept</h4>
         <ul>
           <h4>Tasks(10 hours):</h4>
-            <li>Update for content(in modal window) + move order</li>
+            <li>Auth for backend</li>
+            <li>Neural Modes</li>
+            <hr />
+            
+            <li>Update for content(in modal window)</li>
             <li>Minority compatibility</li>
             <li>Bulk addition</li>
-            <li>Neural Modes</li>
-            <li> auth for backend</li>
             <li>browser plugin[tab push]</li>
             <li>Winds repo get info</li>
             <hr />
@@ -35,7 +37,7 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
             <li>Section on page [CRUD]</li>
             <li>better logo</li>
             <hr />
-            <li>Object can be moved around pages </li>
+            <li>Object can be moved around pages Drag And drop + move order </li>
             <li>Heading object</li>
             <li>Paragraph</li>
             <li>List</li>

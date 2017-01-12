@@ -40,11 +40,13 @@ class Header extends React.Component<HeaderProps, HeaderState>{
               activeClassName="active" 
               activeStyle={{fontWeight: 'bold'}}>Pages</IndexLink>
             </li>
-           <li>
-              <IndexLink to="/login" 
-              activeClassName="active" 
-              activeStyle={{fontWeight: 'bold'}}>login</IndexLink>
-            </li> 
+              { this.props.user.data === null ?  
+               <li>
+                <IndexLink to="/login" 
+                activeClassName="active" 
+                activeStyle={{fontWeight: 'bold'}}>login</IndexLink> : ""
+               </li> : ""
+              }           
             <li>
               <IndexLink to="/foo" 
               activeClassName="active" 
@@ -62,13 +64,13 @@ class Header extends React.Component<HeaderProps, HeaderState>{
               <Link to="/examples" activeClassName="active" 
               activeStyle={{fontWeight: 'bold'}}>Examples</Link>
             </li>
-            <li>
-              { this.props.user.name !== undefined ?  
+              { this.props.user.data !== null && this.props.user.data.name !== undefined ?  
+              <li>
                 <div>
-                <p>User: {this.props.user.name + " "}</p>
-                <a onClick={this.onClick2}>Log out</a></div> : ""
+                <p>User: {this.props.user.data.name + " "}</p>
+                <a onClick={this.onClick2}>Log out</a></div>
+              </li>  : ""            
               }
-            </li>            
           </ul>
         </div>
         <div className={styles.primaryHeader__secondaryMenu + ' top_bar_right'}>

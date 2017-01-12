@@ -25,7 +25,7 @@ gulp.task('compile', function () {
     return tsResult.pipe(gulp.dest('./'));
 });
 gulp.task('watch-ts', ['compile'], function () {
-    gulp.watch('app/**/*.ts*', ['compile']); //, 'server/**/*.ts'
+    //gulp.watch('app/**/*.ts*', ['compile']); //, 'server/**/*.ts'
     gulp.watch('server/**/*.ts', ['compile', function () {
             console.log('restart server');
             server.stop();
@@ -56,7 +56,7 @@ gulp.task('bundle', function () {
             .pipe(gulp.dest('./.tmp'));
     }
 });
-gulp.task('serve', ['watch-ts', 'watch-css', 'bundle', 'live-server'], function () {
+gulp.task('serve', ['watch-ts', 'watch-css', 'live-server'], function () {
     browserSync.init(null, {
         proxy: 'http://localhost:7777',
         port: 3000,

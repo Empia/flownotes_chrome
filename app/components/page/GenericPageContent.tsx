@@ -6,7 +6,7 @@ import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 import { connect } from 'react-redux';
 import { openDialog, closeDialog } from 'redux-dialog';
 import * as BasicDialog from './forms/BasicDialog';
-import {DropdownButton} from 'react-bootstrap';
+import {DropdownButton, MenuItem} from 'react-bootstrap';
 
 function RemoveButton(props) {
   return <button onClick={() => props.toRemove(props.pageId, props.contentId)}>Remove</button>
@@ -64,9 +64,6 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
     let idx = this.props.contentIdx;
     return  (
       <div className="page" key={p._id}>
-        <a href="#" onClick={this.openModalWindow}>Modal</a>
-        
-
       {/*
       <div>
         <button onClick={this.openModal}>Open Modal</button>
@@ -93,13 +90,14 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
 
         <div className="pageContent__contentResource-content_controls">
 
-          <DropdownButton bsStyle="default" title={...} key={'dropdown-'+p._id} id={`dropdown-basic-${p._id}`}>
+          <DropdownButton bsStyle="default" title={'...'} key={'dropdown-'+p._id} id={`dropdown-basic-${p._id}`}>
             <RemoveButton pageId={p.pageId} contentId={p._id} toRemove={ this.removePageSender }/>
-            <MenuItem eventKey="1">Action</MenuItem>
-            <MenuItem eventKey="2">Another action</MenuItem>
-            <MenuItem eventKey="3" active>Active Item</MenuItem>
+            <MenuItem eventKey="1" onClick={this.openModalWindow}>Modal</MenuItem>
+            <MenuItem eventKey="2">Action</MenuItem>
+            <MenuItem eventKey="3">Another action</MenuItem>
+            <MenuItem eventKey="4" active>Active Item</MenuItem>
             <MenuItem divider />
-            <MenuItem eventKey="4">Separated link</MenuItem>
+            <MenuItem eventKey="5">Separated link</MenuItem>
           </DropdownButton>
           {/*
           <div className="pageContent__contentResource-inPageId">inPageId: { p.inPageId}</div>

@@ -29,8 +29,8 @@ class HeadingContentType extends React.Component<HeadingContentTypeProps, Headin
     }    
     render () {
         return <div className="heading-fow-content">
-          {renderH1(this.props.content_title)}
+          {this.renderH1(this.props.content_title)}
         </div>;
     }
 }
-export default HeadingContentType;
+export {HeadingContentType};

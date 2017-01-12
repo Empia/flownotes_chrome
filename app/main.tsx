@@ -12,10 +12,7 @@ import {addingPageContent,pageContents} from './stores/page/FlowPageContentStore
 import { dialogReducer } from 'redux-dialog';
 import {userReducer} from './stores/userReducer'
 import Login from './components/auth/Login';
-
 import {fetchPages} from './stores/pages/PagesActions';
-
-
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 import {syncHistoryWithStore, routerReducer, routerActions, routerMiddleware} from "react-router-redux";
 import {createStore,
@@ -29,26 +26,14 @@ import {Provider} from "react-redux";
 import { reducer as formReducer } from 'redux-form';
 import {UserIsAuthenticated} from './utils/wrappers';
 
-var socket = new WebSocket("ws://localhost:7777/websocket");
-socket.onopen = function() {
-  console.log("Соединение установлено.");
-};
+/*
+import * as io from 'socket.io-client';
+var socket = io('ws://localhost:7777/websocket');
+socket.on('connect', function(){console.log("Соединение установлено.");});
+socket.on('event', function(data){console.log("Получены данные " + data);});
+socket.on('disconnect', function(){console.log('Соединение закрыто чисто');});
+*/
 
-socket.onclose = function(event) {
-  if (event.wasClean) {
-    console.log('Соединение закрыто чисто');
-  } else {
-    console.log('Обрыв соединения'); // например, "убит" процесс сервера
-  }
-  console.log('Код: ' + event.code + ' причина: ' + event.reason);
-};
-socket.onmessage = function(event) {
-  console.log("Получены данные " + event.data);
-};
-
-socket.onerror = function(error) {
-  console.log("Ошибка " + error.message);
-};
 
 //import * as authStateReducer from './redux-auth/src/actions/authenticate';
 

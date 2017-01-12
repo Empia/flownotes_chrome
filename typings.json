@@ -31,7 +31,8 @@
     "redux-form": "github:DefinitelyTyped/DefinitelyTyped/redux-form/redux-form.d.ts#6b3bc735ad028ca115c06721fb1c71ffc0e7a546",
     "redux-logger": "github:DefinitelyTyped/DefinitelyTyped/redux-logger/redux-logger.d.ts#e45879a3b4a6d7e265f21103ae044cefb3cee37c",
     "redux-thunk": "github:DefinitelyTyped/DefinitelyTyped/redux-thunk/redux-thunk.d.ts#e45879a3b4a6d7e265f21103ae044cefb3cee37c",
-    "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8"
+    "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
+    "socket.io-client": "registry:dt/socket.io-client#1.4.4+20161116080703"
   },
   "dependencies": {
     "passport": "registry:npm/passport#0.3.0+20161028163825",

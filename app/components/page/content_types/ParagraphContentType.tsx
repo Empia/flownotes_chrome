@@ -16,4 +16,4 @@ class ParagraphContentType extends React.Component<ParagraphContentTypeProps, Pa
         </div>;
     }
 }
-export default ParagraphContentType;
+export {ParagraphContentType};
