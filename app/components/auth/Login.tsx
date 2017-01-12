@@ -3,7 +3,7 @@ import { routerActions } from 'react-router-redux'
 import { connect } from 'react-redux'
 import Header from '../commons/Header';
 
-import {login, logout} from '../../stores/userActions';
+import {startLogin, logout} from '../../stores/userActions';
 //import LoginForm from './LoginForm';
 let LoginForm = require('./LoginForm.jsx');
 
@@ -24,7 +24,7 @@ interface StateProps {
     redirect?:any;
 }
 interface DispatchProps {
-    login: any;
+    startLogin: any;
     logout: any;
     replace: any;
 }
@@ -33,7 +33,8 @@ type AuthGeneralProps = AuthProps & StateProps & DispatchProps;
 class Auth extends React.Component<AuthGeneralProps, {}>{
   refs: {
     [key: string]: (Element);
-    name: (HTMLInputElement);
+    username: (HTMLInputElement);
+    password: (HTMLInputElement);
     admin: (HTMLInputElement);
   }
 
@@ -55,8 +56,9 @@ class Auth extends React.Component<AuthGeneralProps, {}>{
 
   onClick = (e) => {
     e.preventDefault()
-    this.props.login({
-      name: this.refs.name.value,
+    this.props.startLogin({
+      username: this.refs.username.value,
+      password: this.refs.password.value,
       isAdmin: this.refs.admin.checked
     })
   };
@@ -73,7 +75,9 @@ class Auth extends React.Component<AuthGeneralProps, {}>{
           <div>
             <h2>Sign In</h2>
             <LoginForm.default />
-            <input type="text" ref="name" />
+            <input type="text" ref="username" />
+            <input type="text" ref="password" />
+
             <br/>
             {'Admin?'}
             <input type="checkbox" ref="admin" />
@@ -89,4 +93,4 @@ class Auth extends React.Component<AuthGeneralProps, {}>{
 
 
 
-export default connect<StateProps,DispatchProps,AuthProps>(select, { login, logout, replace: routerActions.replace })(Auth);
+export default connect<StateProps,DispatchProps,AuthProps>(select, { startLogin, logout, replace: routerActions.replace })(Auth);

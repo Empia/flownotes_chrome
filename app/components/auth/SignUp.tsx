@@ -3,7 +3,7 @@ import { routerActions } from 'react-router-redux'
 import { connect } from 'react-redux'
 import Header from '../commons/Header';
 
-import {login, logout} from '../../stores/userActions';
+import {signinStart, logout} from '../../stores/userActions';
 //import SignUpForm from './SignUpForm';
 let SignUpForm = require('./SignUpForm.jsx');
 
@@ -24,7 +24,7 @@ interface StateProps {
     redirect?:any;
 }
 interface DispatchProps {
-    login: any;
+    signinStart: any;
     logout: any;
     replace: any;
 }
@@ -55,7 +55,7 @@ class SignUp extends React.Component<SignUpGeneralProps, {}>{
 
   onClick = (e) => {
     e.preventDefault()
-    this.props.login({
+    this.props.signinStart({
       name: this.refs.name.value,
       isAdmin: this.refs.admin.checked
     })
@@ -79,7 +79,7 @@ class SignUp extends React.Component<SignUpGeneralProps, {}>{
             <input type="checkbox" ref="admin" />
             <br/>
             */}
-            <button onClick={this.onClick}>Login</button>
+            <button onClick={this.onClick}>signinStart</button>
           </div>
         </div>        
       </div>
@@ -90,4 +90,4 @@ class SignUp extends React.Component<SignUpGeneralProps, {}>{
 
 
 
-export default connect<StateProps,DispatchProps,SignUpProps>(select, { login, logout, replace: routerActions.replace })(SignUp);
+export default connect<StateProps,DispatchProps,SignUpProps>(select, { signinStart, logout, replace: routerActions.replace })(SignUp);

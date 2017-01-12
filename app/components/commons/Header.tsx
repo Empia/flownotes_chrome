@@ -45,14 +45,14 @@ class Header extends React.Component<HeaderProps, HeaderState>{
                <li>
                 <IndexLink to="/login" 
                 activeClassName="active" 
-                activeStyle={{fontWeight: 'bold'}}>login</IndexLink> : ""
+                activeStyle={{fontWeight: 'bold'}}>login</IndexLink>
                </li> : <span></span>
               }    
               { this.props.user.data === null ?                  
               <li>
                 <IndexLink to="/signup" 
                 activeClassName="active" 
-                activeStyle={{fontWeight: 'bold'}}>signup</IndexLink> : ""
+                activeStyle={{fontWeight: 'bold'}}>signup</IndexLink>
                </li> : <span></span>
               }       
             <li>
@@ -72,10 +72,10 @@ class Header extends React.Component<HeaderProps, HeaderState>{
               <Link to="/examples" activeClassName="active" 
               activeStyle={{fontWeight: 'bold'}}>Examples</Link>
             </li>
-              { this.props.user.data !== null && this.props.user.data.name !== undefined ?  
+              { this.props.user.data !== null && this.props.user.data.username !== undefined ?  
               <li>
                 <div>
-                <p>User: {this.props.user.data.name + " "}</p>
+                <p>User: {this.props.user.data.username + " "}</p>
                 <a onClick={this.onClick2}>Log out</a></div>
               </li>  : ""            
               }

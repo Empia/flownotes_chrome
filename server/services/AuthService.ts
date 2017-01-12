@@ -3,6 +3,8 @@ var JwtStrategy = require('passport-jwt').Strategy,
 var jwt = require("jwt-simple");
 import * as passport from 'passport';
 
+import {Accounts} from '../models/Account';
+
 const Records = [
     { id: 1, username: 'jack', password: 'secret', displayName: 'Jack', emails: [ { value: 'jack@example.com' } ] }
   , { id: 2, username: 'jill', password: 'birthday', displayName: 'Jill', emails: [ { value: 'jill@example.com' } ] }
@@ -12,18 +14,24 @@ class AuthService {
 
 // Endpoints
 login = (req, res) => {
-  return passport.authenticate('local', { session: false}), function(req, res) {res.redirect('/api/profile')}
+  console.log('login');
+  return passport.authenticate('local', { session: false}), function(req, res) {res.send({status: 'good'})}
 }
 
-signUp = (req, res) => {
-  return passport.authenticate('local', { session: false}), function(req, res) {res.redirect('/api/profile')}
+signUp = (req, res, next) => {
+  // Accounts
+  //var user = new User({ username: req.body.email, password: req.body.password});
+  //user.save(function(err) {
+
+  //});
 }
 
 
 generateToken = (req, res) => {
-let email = req.body.email;
+let email = req.body.username;
 let password = req.body.password;  
-if (req.body.email && req.body.password) {
+console.log('token', req.body.username)
+if (req.body.username && req.body.password) {
     authService.findByUsername(email, function(err, user) {
       if (err) { return res.sendStatus(401); }
       if (!user) { return res.sendStatus(401) }
@@ -35,7 +43,9 @@ if (req.body.email && req.body.password) {
         var token = jwt.encode(payload, authService.confOpts.secretOrKey);
         console.log('encode', payload, authService.confOpts.secretOrKey);
         return res.json({
-            token: 'JWT '+ token
+            token: 'JWT '+ token,
+            username: req.body.username,
+            email: user.email
         });      
     });
 } else { return res.sendStatus(401) }

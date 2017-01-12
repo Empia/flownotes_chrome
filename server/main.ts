@@ -13,7 +13,7 @@ var wss = new ws.Server({ noServer: true });
 let bodyParser = require('body-parser');
 let express:any = require('express');
 var passport = require('passport');
-//var Strategy = require('passport-local').Strategy;
+var Strategy = require('passport-local').Strategy;
 var JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 import {authService} from './services/AuthService';
@@ -21,7 +21,7 @@ import {authService} from './services/AuthService';
 
 
 
-passport.use(new JwtStrategy(authService.confOpts, function(jwt_payload, done) {
+passport.use('jwt',new JwtStrategy(authService.confOpts, function(jwt_payload, done) {
   console.log('jwt_payload', jwt_payload);
     //var user = users[payload.id] || null;
         authService.findById({id: jwt_payload.id}, function(err, user) {
@@ -37,8 +37,8 @@ passport.use(new JwtStrategy(authService.confOpts, function(jwt_payload, done) {
             }        
         });
 }));
-/*
-passport.use(new Strategy(
+
+passport.use('local', new Strategy(
   function(username, password, cb) {
     authService.findByUsername(username, function(err, user) {
       if (err) { return cb(err); }
@@ -47,7 +47,7 @@ passport.use(new Strategy(
       return cb(null, user);
     });
 }));
-*/
+
 
 passport.serializeUser(function(user, cb) {
   cb(null, user.id);
