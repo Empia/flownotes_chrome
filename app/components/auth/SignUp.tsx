@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import Header from '../commons/Header';
 
 import {login, logout} from '../../stores/userActions';
-//import LoginForm from './LoginForm';
-let LoginForm = require('./LoginForm.jsx');
+//import SignUpForm from './SignUpForm';
+let SignUpForm = require('./SignUpForm.jsx');
 
 function select(state, ownProps) {
   const isAuthenticated = state.user.name || false
@@ -16,7 +16,7 @@ function select(state, ownProps) {
   }
 }
 
-interface AuthProps extends React.Props<any>{
+interface SignUpProps extends React.Props<any>{
 }
 
 interface StateProps {
@@ -28,9 +28,9 @@ interface DispatchProps {
     logout: any;
     replace: any;
 }
-type AuthGeneralProps = AuthProps & StateProps & DispatchProps;
+type SignUpGeneralProps = SignUpProps & StateProps & DispatchProps;
 
-class Auth extends React.Component<AuthGeneralProps, {}>{
+class SignUp extends React.Component<SignUpGeneralProps, {}>{
   refs: {
     [key: string]: (Element);
     name: (HTMLInputElement);
@@ -71,13 +71,14 @@ class Auth extends React.Component<AuthGeneralProps, {}>{
       <div>
         <div className="focusedPageContainer">
           <div>
-            <h2>Sign In</h2>
-            <LoginForm.default />
+            <h2>Sign Up</h2>
+            <SignUpForm.default />
             <input type="text" ref="name" />
             <br/>
-            {'Admin?'}
+            {/* 'Admin?'
             <input type="checkbox" ref="admin" />
             <br/>
+            */}
             <button onClick={this.onClick}>Login</button>
           </div>
         </div>        
@@ -89,4 +90,4 @@ class Auth extends React.Component<AuthGeneralProps, {}>{
 
 
 
-export default connect<StateProps,DispatchProps,AuthProps>(select, { login, logout, replace: routerActions.replace })(Auth);
+export default connect<StateProps,DispatchProps,SignUpProps>(select, { login, logout, replace: routerActions.replace })(SignUp);

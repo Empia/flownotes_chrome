@@ -18,7 +18,7 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
   render(){
     return  (
       <div>
-        {/*<DragContainer /> */}
+        <DragContainer />
         <h1>About</h1>     
         <h4>Paper concept</h4>
         <ul>

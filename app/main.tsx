@@ -12,6 +12,8 @@ import {addingPageContent,pageContents} from './stores/page/FlowPageContentStore
 import { dialogReducer } from 'redux-dialog';
 import {userReducer} from './stores/userReducer'
 import Login from './components/auth/Login';
+import SignUp from './components/auth/SignUp';
+
 import {fetchPages} from './stores/pages/PagesActions';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 import {syncHistoryWithStore, routerReducer, routerActions, routerMiddleware} from "react-router-redux";
@@ -28,11 +30,12 @@ import {UserIsAuthenticated} from './utils/wrappers';
 
 
 import * as io from 'socket.io-client';
+/*
 var socket = io('ws://localhost:7777/websocket');
 socket.on('connect', function(){console.log("Соединение установлено.");});
 socket.on('event', function(data){console.log("Получены данные " + data);});
 socket.on('disconnect', function(){console.log('Соединение закрыто чисто');});
-
+*/
 
 
 //import * as authStateReducer from './redux-auth/src/actions/authenticate';
@@ -85,6 +88,8 @@ function render(){
                 <Route path="/modes" component={UserModes} />
 
                 <Route path="/login" component={Login} />
+                <Route path="/signup" component={SignUp} />
+
         </Route>
 
     </Router>

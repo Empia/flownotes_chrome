@@ -11,7 +11,7 @@ const mapStateToProps = ({user}) => ({
   user
 });
 const mapDispatchToProps = dispatch => ({
-  logout
+  logout: () => dispatch(logout())
 })
 interface HeaderProps extends React.Props<any>{
   user: any;
@@ -24,8 +24,9 @@ class Header extends React.Component<HeaderProps, HeaderState>{
     console.log('good');
   }
   onClick2 = (e) => {
-    e.preventDefault()
+    console.log('logout')
     this.props.logout();
+    e.preventDefault();
   };
 
   render(){
@@ -45,8 +46,15 @@ class Header extends React.Component<HeaderProps, HeaderState>{
                 <IndexLink to="/login" 
                 activeClassName="active" 
                 activeStyle={{fontWeight: 'bold'}}>login</IndexLink> : ""
-               </li> : ""
-              }           
+               </li> : <span></span>
+              }    
+              { this.props.user.data === null ?                  
+              <li>
+                <IndexLink to="/signup" 
+                activeClassName="active" 
+                activeStyle={{fontWeight: 'bold'}}>signup</IndexLink> : ""
+               </li> : <span></span>
+              }       
             <li>
               <IndexLink to="/foo" 
               activeClassName="active" 
