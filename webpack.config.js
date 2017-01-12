@@ -2,7 +2,6 @@ var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
-    noParse: ['ws', 'tty'],
     entry: [
         'script!jquery/dist/jquery.min.js',
         'script!foundation-sites/dist/js/foundation.min.js',
@@ -10,9 +9,7 @@ module.exports = {
     ],
     externals: {
         jquery: 'jQuery',
-        React: 'react',
-        ws: 'ws',
-        tty: 'tty'
+        React: 'react'
     },
     plugins: [
         //replace({
@@ -50,7 +47,7 @@ module.exports = {
         ],
         extensions: ['', '.json', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css']
     },
-    target: 'node',
+    target: 'web',
     module: {
         loaders: [
             { test: /\.js$/, loaders: ["babel?cacheDirectory&presets[]=es2015&presets[]=react&presets[]=stage-0"],

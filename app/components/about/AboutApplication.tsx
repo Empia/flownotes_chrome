@@ -23,9 +23,9 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
         <h4>Paper concept</h4>
         <ul>
           <h4>Tasks(10 hours):</h4>
-            <li>Auth for backend</li>
-            <li>Neural Modes</li>
-            <hr />
+          <li>Auth for backend</li>
+          <li>Neural Modes</li>
+          <hr />
             
             <li>Update for content(in modal window)</li>
             <li>Minority compatibility</li>
