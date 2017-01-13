@@ -9,10 +9,13 @@ let SignUpForm = require('./SignUpForm.jsx');
 
 function select(state, ownProps) {
   const isAuthenticated = state.user.name || false
+  const signup_form = state.form.signup_form || {}
+
   const redirect = ownProps.location.query.redirect || '/'
   return {
     isAuthenticated,
-    redirect
+    redirect,
+    signup_form
   }
 }
 
@@ -22,6 +25,8 @@ interface SignUpProps extends React.Props<any>{
 interface StateProps {
     isAuthenticated: any;
     redirect?:any;
+    signup_form:any;
+
 }
 interface DispatchProps {
     signinStart: any;
@@ -66,21 +71,23 @@ class SignUp extends React.Component<SignUpGeneralProps, {}>{
     this.props.logout();
   };
 
-
+  handleSignUp = (values) => {
+    values.preventDefault();
+    console.log(values, this.props.signup_form);
+    this.props.signinStart({
+      email: this.props.signup_form.values.email,
+      password: this.props.signup_form.values.password,
+    })    
+  }
   render() {
     return (
       <div>
         <div className="focusedPageContainer">
           <div>
             <h2>Sign Up</h2>
-            <SignUpForm.default />
-            <input type="text" ref="email" />
-            <br/>
-            {/* 'Admin?'
-            <input type="checkbox" ref="admin" />
-            <br/>
-            */}
-            <button onClick={this.onClick}>signinStart</button>
+            <SignUpForm.default 
+            initialValues={{email: '', password: ''}} 
+            handleSubmit={this.handleSignUp} />
           </div>
         </div>        
       </div>

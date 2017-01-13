@@ -17,6 +17,7 @@ var Strategy = require('passport-local').Strategy;
 var JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 import {authService} from './services/AuthService';
+import {Accounts} from './models/Account';
 
 
 
@@ -24,7 +25,7 @@ import {authService} from './services/AuthService';
 passport.use('jwt',new JwtStrategy(authService.confOpts, function(jwt_payload, done) {
   console.log('jwt_payload', jwt_payload);
     //var user = users[payload.id] || null;
-        authService.findById({id: jwt_payload.id}, function(err, user) {
+        Accounts.find({_id: jwt_payload.id}, function(err, user) {
           console.log('user', user);
             if (err) {
                 return done(err, false);
@@ -140,6 +141,9 @@ app.get('/modes', startup)
   .use((<any>express).static(__dirname + '/../.tmp'))
 app.get('/login', startup)
   .use((<any>express).static(__dirname + '/../.tmp'))
+app.get('/signup', startup)
+  .use((<any>express).static(__dirname + '/../.tmp'))
+
 
 app.get('/page/:pageId', startup)
   .use((<any>express).static(__dirname + '/../.tmp'))

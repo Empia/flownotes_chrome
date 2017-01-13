@@ -1,19 +1,20 @@
 import {Mongoose, Schema, model,Document} from 'mongoose';
-var passportLocalMongoose = require('passport-local-mongoose');
+//var passportLocalMongoose = require('passport-local-mongoose');
 
 
 interface IAccounts extends Document {
-  username: string;
+  username?: string;
   email: string;
   password: string;
   id?:string;
+  _id:string;  
   createdAt?:Date;
   updatedAt?:Date;
 }
 
 
 let AccountSchema = new Schema({
-  username: String,
+  username: {type: String, required: false},
   email: {
       type: String,
       unique: true,

@@ -3,7 +3,7 @@ var JwtStrategy = require('passport-jwt').Strategy,
 var jwt = require("jwt-simple");
 import * as passport from 'passport';
 
-import {Accounts} from '../models/Account';
+import {Accounts,IAccounts} from '../models/Account';
 
 const Records = [
     { id: 1, username: 'jack', password: 'secret', displayName: 'Jack', email: 'jack@example.com', emails: [ { value: 'jack@example.com' } ] }
@@ -22,7 +22,10 @@ signUp = (req, res, next) => {
   // Accounts
   //var user = new User({ username: req.body.email, password: req.body.password});
   //user.save(function(err) {
-
+    let account = new Accounts(req.body);
+    console.log('req.body', req.body);
+    account.save((err, data:IAccounts) => 
+        res.status(200).send(Object.assign(req.body, {_id: data._id}) ));
   //});
 }
 
@@ -32,12 +35,13 @@ let email = req.body.email;
 let password = req.body.password;  
 console.log('token', req.body.email)
 if (req.body.email && req.body.password) {
-    authService.findByUsername(email, function(err, user) {
+    Accounts.find({email: email, password: password}, function(err, users) {
+      let user = users[0];
       if (err) { return res.sendStatus(401); }
       if (!user) { return res.sendStatus(401) }
       if (user.password != password) { return res.sendStatus(401) }
         var payload = {
-            id: user.id,
+            id: user._id,
             aud: 'localhost'
         };
         var token = jwt.encode(payload, authService.confOpts.secretOrKey);

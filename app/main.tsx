@@ -28,7 +28,7 @@ import {Provider} from "react-redux";
 import { reducer as formReducer } from 'redux-form';
 import {UserIsAuthenticated} from './utils/wrappers';
 
-
+import {persistStore, getStoredState,createPersistor, autoRehydrate} from 'redux-persist'
 import * as io from 'socket.io-client';
 /*
 var socket = io('ws://localhost:7777/websocket');
@@ -56,23 +56,33 @@ const initialState = {
   }
 }
 
+
+
+const autoRehydrateVal = autoRehydrate()
 export const store = createStore(combineReducers({
   card, 
   addingPage, 
   pages, 
   addingPageContent,
   pageContents, 
+  autoRehydrateVal,
   user: userReducer,
   dialogReducer: dialogReducer,
   routing: routerReducer, form: formReducer }),
     initialState,
-  
     applyMiddleware(
     routingMiddleware,  
     thunkMiddleware, // lets us dispatch() functions
     loggerMiddleware // neat middleware that logs actions
   ));
 const history = syncHistoryWithStore(browserHistory, store);
+persistStore(store);
+
+const persistConfig = { /* ... */ }
+getStoredState(persistConfig, (err, restoredState) => {
+  // restore user
+  console.log('restoredState',restoredState)
+})
 
 //store.subscribe( () => console.log(store.getState() ))
 
@@ -106,6 +116,6 @@ store.dispatch(fetchPages()).then(() =>
 
 render();
 store.subscribe(() => {
-  //console.log('rerender');
+  //console.log('user', store.getState().user);
   render() 
 });
