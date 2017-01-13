@@ -7,7 +7,14 @@ import q from 'q';
 class UserModeSetterService {
     constructor(){}
 
-    
+  getAllSetsMode(req, res:Response){
+    console.log('update', req.body.title);
+    // find user
+    // find mode
+    UserModes.findOne({ _id: req.params.id})
+    // add mode & save    
+    res.status(202).send(null);
+  }
 
   setMode(req, res:Response){
     console.log('update', req.body.title);
@@ -18,7 +25,16 @@ class UserModeSetterService {
     
     res.status(202).send(null);
   }
-
+  removeSetMode(req, res:Response){
+    console.log('update', req.body.title);
+    // find user
+    // find mode
+    UserModes.findOne({ _id: req.params.id})
+    // add mode & save
+    
+    res.status(202).send(null);
+  }
+  
 }
 
 

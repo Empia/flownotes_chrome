@@ -2,8 +2,8 @@ import {createStore,applyMiddleware,combineReducers,compose,Middleware,} from 'r
 import {dispatcher, IDispatchPayload} from '../../dispatcher';
 import {Actions} from '../../actions/BaseActions';
 import {restHelper} from  '../../helpers/RestHelper';
-import {REQUEST_ADDING_MODE,
-REQUEST_UPDATE_MODE,UPDATE_MODE,
+import {REQUEST_ADDING_MODE,REQUEST_ADD_SET_MODE,SET_MODE_UPDATED,REQUEST_REMOVING_SET_MODE,RECIEVE_REMOVING_SET_MODE,
+REQUEST_UPDATE_MODE,UPDATE_MODE,REQUEST_SETS_MODES,REQUEST_SET_MODE,SET_MODE_REQUESTED,RECEIVE_SETS_MODES,
   REQUEST_MODES, ADD_MODE,TOGGLE_ADD_MODE,HIDE_ADD_MODE, RECEIVE_MODES,REQUEST_REMOVING_MODE,RECIEVE_REMOVING_MODE
 } from './UserModesActions'
 
@@ -85,3 +85,50 @@ export const modes = (state = modesInitialState, action) => {
     
   }
 };
+
+
+const sets_modesInitialState = {
+  isFetching: false,
+  isFetched: false,
+  sets_modes: [],
+}
+
+export const sets_modes = (state = sets_modesInitialState, action) => {
+  switch (action.type) {
+    case REQUEST_SET_MODE:
+      return state
+    case RECEIVE_SETS_MODES:
+      return (<any>Object).assign({}, state, {
+          isFetching: false,
+          sets_modes: state.sets_modes,
+          lastUpdated: action.receivedAt
+        })  
+    case SET_MODE_REQUESTED:
+      return (<any>Object).assign({}, state, {
+        isFetching: true,
+      })
+    case REQUEST_ADD_SET_MODE: 
+      return state
+    case SET_MODE_UPDATED: 
+      let newMode = (<any>Object).assign({}, action.data);
+      let result = state.sets_modes.concat([newMode]);
+      return (<any>Object).assign({}, state, {
+        isFetching: false,
+        sets_modes: result,
+        lastUpdated: action.recievedAt
+      })
+
+    case REQUEST_REMOVING_SET_MODE:
+      return (<any>Object).assign({}, state, {
+        isFetching: true,
+      })    
+    case RECIEVE_REMOVING_SET_MODE:
+      return (<any>Object).assign({}, state, {
+          isFetching: false,
+          sets_modes: state.sets_modes.filter(el => el._id !== action.modeId),
+          lastUpdated: action.receivedAt
+      })          
+    default:
+        return state || {isFetching: false, sets_modes: []};      
+  }    
+}

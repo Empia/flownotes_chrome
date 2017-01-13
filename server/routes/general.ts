@@ -29,7 +29,9 @@ export default function (router:Router){
     .delete('/user_modes/:modeId', userModesService.remove)
     .patch('/user_modes/:modeId', userModesService.update)
 
+    .post('/set_modes/', userModeSetterService.getAllSetsMode)
     .post('/set_mode/:modeId', userModeSetterService.setMode)
+    .delete('/set_mode/:modeId', userModeSetterService.removeSetMode)
 
 
     .get('/migrate', migrateService.apply)
