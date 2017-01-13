@@ -34,6 +34,7 @@ class SignUp extends React.Component<SignUpGeneralProps, {}>{
   refs: {
     [key: string]: (Element);
     name: (HTMLInputElement);
+    email: (HTMLInputElement);
     admin: (HTMLInputElement);
   }
 
@@ -56,7 +57,7 @@ class SignUp extends React.Component<SignUpGeneralProps, {}>{
   onClick = (e) => {
     e.preventDefault()
     this.props.signinStart({
-      name: this.refs.name.value,
+      name: this.refs.email.value,
       isAdmin: this.refs.admin.checked
     })
   };
@@ -73,7 +74,7 @@ class SignUp extends React.Component<SignUpGeneralProps, {}>{
           <div>
             <h2>Sign Up</h2>
             <SignUpForm.default />
-            <input type="text" ref="name" />
+            <input type="text" ref="email" />
             <br/>
             {/* 'Admin?'
             <input type="checkbox" ref="admin" />

@@ -40,7 +40,7 @@ export default function (router:Router){
   })    
     .post('/login', authService.login)
     .post('/signUp', authService.signUp)
-    .post("/token", authService.generateToken) 
+    .post('/token', authService.generateToken) 
     .get('/logout', authService.logout)
 
 

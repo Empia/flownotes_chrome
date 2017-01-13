@@ -9,10 +9,12 @@ let LoginForm = require('./LoginForm.jsx');
 
 function select(state, ownProps) {
   const isAuthenticated = state.user.name || false
+  const loginForm = state.form.login_form || {}
   const redirect = ownProps.location.query.redirect || '/'
   return {
     isAuthenticated,
-    redirect
+    redirect,
+    loginForm
   }
 }
 
@@ -22,6 +24,7 @@ interface AuthProps extends React.Props<any>{
 interface StateProps {
     isAuthenticated: any;
     redirect?:any;
+    loginForm:any;
 }
 interface DispatchProps {
     startLogin: any;
@@ -35,6 +38,7 @@ class Auth extends React.Component<AuthGeneralProps, {}>{
     [key: string]: (Element);
     username: (HTMLInputElement);
     password: (HTMLInputElement);
+    email: (HTMLInputElement);
     admin: (HTMLInputElement);
   }
 
@@ -54,12 +58,20 @@ class Auth extends React.Component<AuthGeneralProps, {}>{
     }
   }
 
+  handleLogin = (values) => {
+    values.preventDefault();
+    console.log(values, this.props.loginForm);
+    this.props.startLogin({
+      email: this.props.loginForm.values.email,
+      password: this.props.loginForm.values.password,
+    })    
+  }
   onClick = (e) => {
     e.preventDefault()
+    console.log('handle submit', e);   
     this.props.startLogin({
-      username: this.refs.username.value,
+      email: this.refs.email.value,
       password: this.refs.password.value,
-      isAdmin: this.refs.admin.checked
     })
   };
   onClick2 = (e) => {
@@ -74,8 +86,11 @@ class Auth extends React.Component<AuthGeneralProps, {}>{
         <div className="focusedPageContainer">
           <div>
             <h2>Sign In</h2>
-            <LoginForm.default />
-            <input type="text" ref="username" />
+            <LoginForm.default 
+              initialValues={{email: '', password: ''}} 
+              form={'login_form'}
+              handleSubmit={this.handleLogin} />
+            <input type="text" ref="email" />
             <input type="text" ref="password" />
 
             <br/>

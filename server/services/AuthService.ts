@@ -6,8 +6,8 @@ import * as passport from 'passport';
 import {Accounts} from '../models/Account';
 
 const Records = [
-    { id: 1, username: 'jack', password: 'secret', displayName: 'Jack', emails: [ { value: 'jack@example.com' } ] }
-  , { id: 2, username: 'jill', password: 'birthday', displayName: 'Jill', emails: [ { value: 'jill@example.com' } ] }
+    { id: 1, username: 'jack', password: 'secret', displayName: 'Jack', email: 'jack@example.com', emails: [ { value: 'jack@example.com' } ] }
+  , { id: 2, username: 'jill', password: 'birthday', displayName: 'Jill', email: 'jill@example.com', emails: [ { value: 'jill@example.com' } ] }
 ];
 class AuthService {
   constructor(){}
@@ -28,10 +28,10 @@ signUp = (req, res, next) => {
 
 
 generateToken = (req, res) => {
-let email = req.body.username;
+let email = req.body.email;
 let password = req.body.password;  
-console.log('token', req.body.username)
-if (req.body.username && req.body.password) {
+console.log('token', req.body.email)
+if (req.body.email && req.body.password) {
     authService.findByUsername(email, function(err, user) {
       if (err) { return res.sendStatus(401); }
       if (!user) { return res.sendStatus(401) }
@@ -44,7 +44,7 @@ if (req.body.username && req.body.password) {
         console.log('encode', payload, authService.confOpts.secretOrKey);
         return res.json({
             token: 'JWT '+ token,
-            username: req.body.username,
+            username: user.username,
             email: user.email
         });      
     });
