@@ -3,6 +3,7 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import * as actions from '../../stores/user_modes/UserModesActions';
 import { connect } from 'react-redux';
 import ReactDOM = require("react-dom");
+import {store} from '../../main';
 
 interface UserModesPr extends React.Props<any>{
   addingMode:any;
@@ -21,8 +22,8 @@ function EditButton(props) {
 }
 
 
-const mapStateToProps = ({addingMode, modes}) => ({
-  addingMode,
+const mapStateToProps = ({addingModes, modes}) => ({
+  addingModes,
   modes
 });
 
@@ -38,6 +39,9 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
   constructor(){
     super();
     console.log(this);
+    store.dispatch(actions.fetchModes()).then(() =>
+       console.log('')
+    )    
   }
   refs: {
     [key: string]: (Element);
@@ -64,10 +68,9 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
 
   render(){
     let props = this.props;
-    return  (
-      <div className="">
-      
-      <button onClick={ e => this.props.toggleAddMode() }>Add mode</button>
+    return  (<div className="">
+      <button onClick={ e =>
+                           this.props.toggleAddMode() }>Add mode</button>
       <ul className="">
         {props.modes.items.map((p, idx) => 
           <div className="" key={p._id}>
@@ -81,11 +84,8 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
             </div>
           </div>)}
       </ul>
-
-
-
       <div className="new-mode-input">
-        { props.addingMode && <input ref="add" onKeyPress={this.createMode}/> }
+        { this.props.addingModes ? <input ref="add" onKeyPress={this.createMode}/> : <div></div> }
       </div>
       </div>
     );

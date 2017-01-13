@@ -4,6 +4,13 @@ export const REQUEST_MODES = 'REQUEST_MODES'
 export const RECEIVE_MODES = 'RECEIVE_MODES'
 export const REQUEST_REMOVING_MODE = 'REQUEST_REMOVING_MODE'
 export const RECIEVE_REMOVING_MODE = 'RECIEVE_REMOVING_MODE'
+export const ADD_MODE = 'ADD_MODE';
+export const TOGGLE_ADD_MODE = 'TOGGLE_ADD_MODE';
+export const HIDE_ADD_MODE = 'HIDE_ADD_MODE';
+export const REQUEST_ADDING_MODE = 'REQUEST_ADDING_MODE';
+export const UPDATE_MODE = 'UPDATE_MODE';
+export const REQUEST_UPDATE_MODE = 'REQUEST_UPDATE_MODE';
+
 export const requestModes = () => {
   return {
     type: REQUEST_MODES
@@ -39,10 +46,10 @@ export function receiveDeletedMode(modeId) {
     recievedAt: Date.now()
   }
 }
-export function addedMode(mode) { return {type: 'ADD_MODE', data: mode} };
+export function addedMode(mode) { return {type: ADD_MODE, data: mode} };
 export function addMode(mode) {
   return function (dispatch) {
-    dispatch(function(){ return { type: 'REQUEST_ADDING_MODE' } });
+    dispatch(function(){ return { type: REQUEST_ADDING_MODE } });
     return fetch(`/api/pages/`, {method: 'post',
       headers: {'Content-Type': 'application/json'},  body: JSON.stringify({title: mode.title, name: mode.title})})
       .then(response => response.json())
@@ -51,14 +58,14 @@ export function addMode(mode) {
 }
 export function updateMode(modeId, mode) {
   return function (dispatch) {
-    dispatch(function(){ return { type: 'REQUEST_UPDATE_MODE' } });
+    dispatch(function(){ return { type: REQUEST_UPDATE_MODE } });
     return fetch(`/api/pages/${modeId}`, {method: 'PATCH',
       headers: {'Content-Type': 'application/json'},  body: JSON.stringify({_id: modeId, title: mode.title})})
       .then(response => response.json())
       .then(json => dispatch(updatedMode(modeId, {_id: modeId, title: mode.title})))
   }
 }
-export function updatedMode(modeId, mode) { return {type: 'UPDATE_MODE', data: mode, modeId: modeId} };
+export function updatedMode(modeId, mode) { return {type: UPDATE_MODE, data: mode, modeId: modeId} };
 
 export function removeMode(modeId) {
   return function (dispatch) {
