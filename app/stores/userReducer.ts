@@ -3,7 +3,7 @@ export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 export const USER_LOGGING_IN = 'USER_LOGGING_IN';
 export const USER_SIGNED_IN = 'USER_SIGNED_IN';
 export const USER_SIGNING_IN = 'USER_SIGNING_IN';
-
+export const RESTORE_USER = 'RESTORE_USER';
 
 const initialState = {
   data: null,
@@ -12,6 +12,8 @@ const initialState = {
 
 export const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case RESTORE_USER:
+      return { ...initialState, data: payload }
     case USER_LOGGING_IN:
       return { ...initialState, isLoading: true }
     case USER_LOGGED_IN:

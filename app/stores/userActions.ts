@@ -11,11 +11,18 @@ export function startLogin(data) {
   }
 }
 
+export function restoreUser(data) {
+  return {
+    type: constants.RESTORE_USER,
+    payload: data
+  }
+}
+
 export function login(data) {
   let username = data.username || data.email
   return {
     type: constants.USER_LOGGED_IN,
-    payload: Object.assign(data, {username: username})
+    payload: <any>Object.assign(data, {username: username})
   }
 }
 

@@ -10,7 +10,8 @@ import {card,addingPage,pages} from './stores/pages/FlowPageStore';
 import {pagesStore} from './stores/pages/OldFlowPageStore';
 import {addingPageContent,pageContents} from './stores/page/FlowPageContentStore';
 import { dialogReducer } from 'redux-dialog';
-import {userReducer} from './stores/userReducer'
+import {userReducer} from './stores/userReducer';
+import {restoreUser} from './stores/userActions';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 
@@ -79,10 +80,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 persistStore(store);
 
 const persistConfig = { /* ... */ }
-getStoredState(persistConfig, (err, restoredState) => {
-  // restore user
-  console.log('restoredState',restoredState)
-})
+
 
 //store.subscribe( () => console.log(store.getState() ))
 
@@ -108,14 +106,30 @@ function render(){
 }
 
 //groceryItemStore.onChange(render);
-
+getStoredState(persistConfig, (err, restoredState:any) => {
+  // restore user
+console.log('restoredState',restoredState)
+store.dispatch(restoreUser(restoredState.user.data));
 store.dispatch(fetchPages()).then(() =>
    console.log('store.getState ',store.getState())
 )
+})
 
-
+var firstLoad = false 
 render();
 store.subscribe(() => {
+  firstLoad = firstLoad || true;
+  if (!firstLoad){
+    getStoredState(persistConfig, (err, restoredState:any) => {
+      // restore user
+    console.log('restoredState',restoredState)
+    store.dispatch(restoreUser(restoredState.user.data));
+    store.dispatch(fetchPages()).then(() =>
+       console.log('store.getState ',store.getState())
+    )
+    })
+  }
+
   //console.log('user', store.getState().user);
   render() 
 });
