@@ -14,7 +14,7 @@ export default function (router:Router){
 	.get('/pages', flowNotePageService.getList)
 	.post('/pages', flowNotePageService.add)
 	.delete('/pages/:id', flowNotePageService.remove)
-    .patch('/pages/:id', flowNotePageService.update)
+  .patch('/pages/:id', flowNotePageService.update)
     .get('/content/page/:pageId', flowNoteContentService.getList)
     .post('/content/page/:pageId', flowNoteContentService.add)
     .post('/content/bulk/page/:pageId', flowNoteContentService.addBulk)
@@ -24,12 +24,12 @@ export default function (router:Router){
     .patch('/content/order/:id', flowNoteContentService.updateOrder)
     
 
-    .get('/modes', userModesService.getList)
-    .post('/modes', userModesService.add)
-    .delete('/modes/:id', userModesService.remove)
-    .patch('/modes/:id', userModesService.update)
+    .get('/user_modes', userModesService.getList)
+    .post('/user_modes', userModesService.add)
+    .delete('/user_modes/:modeId', userModesService.remove)
+    .patch('/user_modes/:modeId', userModesService.update)
 
-    .post('/set_mode/:id', userModeSetterService.setMode)
+    .post('/set_mode/:modeId', userModeSetterService.setMode)
 
 
     .get('/migrate', migrateService.apply)

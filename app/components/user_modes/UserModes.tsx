@@ -6,7 +6,7 @@ import ReactDOM = require("react-dom");
 import {store} from '../../main';
 
 interface UserModesPr extends React.Props<any>{
-  addingMode:any;
+  addingModes:any;
   modes:any;
   toggleAddMode:any;
   removeMode:any;

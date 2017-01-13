@@ -2,8 +2,9 @@ import {createStore,applyMiddleware,combineReducers,compose,Middleware,} from 'r
 import {dispatcher, IDispatchPayload} from '../../dispatcher';
 import {Actions} from '../../actions/BaseActions';
 import {restHelper} from  '../../helpers/RestHelper';
-import {
-  REQUEST_MODES, RECEIVE_MODES,REQUEST_REMOVING_MODE,RECIEVE_REMOVING_MODE
+import {REQUEST_ADDING_MODE,
+REQUEST_UPDATE_MODE,UPDATE_MODE,
+  REQUEST_MODES, ADD_MODE,TOGGLE_ADD_MODE,HIDE_ADD_MODE, RECEIVE_MODES,REQUEST_REMOVING_MODE,RECIEVE_REMOVING_MODE
 } from './UserModesActions'
 
 interface UserMode{
@@ -13,7 +14,7 @@ interface UserMode{
 
 export const mode = (state,action) => {
   switch (action.type) {
-    case 'ADD_MODE':
+    case ADD_MODE:
       let newCard = { name: action.data, id: +new Date};
       return state.concat([newCard]);
     default:
@@ -22,8 +23,8 @@ export const mode = (state,action) => {
 }
 export const addingModes = (state, action) => {
   switch (action.type) {
-    case 'TOGGLE_ADD_MODE': return state ? false : true;
-    case 'HIDE_ADD_MODE': return false;
+    case TOGGLE_ADD_MODE: return state ? false : true;
+    case HIDE_ADD_MODE: return false;
     default: return !!state;
   }
 };
@@ -47,7 +48,7 @@ export const modes = (state = modesInitialState, action) => {
         items: action.modes,
         lastUpdated: action.receivedAt
       });    
-    case 'ADD_MODE':
+    case ADD_MODE:
       let newMode = (<any>Object).assign({}, action.data);
       let result = state.items.concat([newMode]);
       return (<any>Object).assign({}, state, {
@@ -55,11 +56,11 @@ export const modes = (state = modesInitialState, action) => {
         items: result,
         lastUpdated: action.recievedAt
       });
-    case 'REQUEST_ADDING_MODE':
+    case REQUEST_ADDING_MODE:
       return state;
-    case 'REQUEST_UPDATE_MODE':
+    case REQUEST_UPDATE_MODE:
       return state;
-    case 'UPDATE_MODE':
+    case UPDATE_MODE:
       let modeToUpdate = (<any>Object).assign({}, action.data);
       let resultToUpdate = state.items.filter(el => el._id !== action.modeId).concat([modeToUpdate]);
       return (<any>Object).assign({}, state, {

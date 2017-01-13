@@ -27,7 +27,7 @@ export const receiveModes = (json) => {
 export function fetchModes() {
   return function (dispatch) {
     dispatch(requestModes())
-    return fetch(`/api/pages/`)
+    return fetch(`/api/user_modes/`)
       .then(response => response.json())
       .then(json =>
         dispatch(receiveModes(json))
@@ -50,7 +50,7 @@ export function addedMode(mode) { return {type: ADD_MODE, data: mode} };
 export function addMode(mode) {
   return function (dispatch) {
     dispatch(function(){ return { type: REQUEST_ADDING_MODE } });
-    return fetch(`/api/pages/`, {method: 'post',
+    return fetch(`/api/user_modes/`, {method: 'post',
       headers: {'Content-Type': 'application/json'},  body: JSON.stringify({title: mode.title, name: mode.title})})
       .then(response => response.json())
       .then(json => dispatch(addedMode({_id: json, title: mode.title})))
@@ -59,7 +59,7 @@ export function addMode(mode) {
 export function updateMode(modeId, mode) {
   return function (dispatch) {
     dispatch(function(){ return { type: REQUEST_UPDATE_MODE } });
-    return fetch(`/api/pages/${modeId}`, {method: 'PATCH',
+    return fetch(`/api/user_modes/${modeId}`, {method: 'PATCH',
       headers: {'Content-Type': 'application/json'},  body: JSON.stringify({_id: modeId, title: mode.title})})
       .then(response => response.json())
       .then(json => dispatch(updatedMode(modeId, {_id: modeId, title: mode.title})))
@@ -70,9 +70,20 @@ export function updatedMode(modeId, mode) { return {type: UPDATE_MODE, data: mod
 export function removeMode(modeId) {
   return function (dispatch) {
     dispatch(requestRemovingMode(modeId))
-    return fetch(`/api/pages/${modeId}`, {method: 'delete'})
+    return fetch(`/api/user_modes/${modeId}`, {method: 'delete'})
       .then(response => { 
           dispatch(receiveDeletedMode(modeId));
       })
+  }
+}
+
+
+export function setMode(modeId, mode) {
+  return function (dispatch) {
+    dispatch(function(){ return { type: REQUEST_UPDATE_MODE } });
+    return fetch(`/api/set_mode/${modeId}`, {method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},  body: JSON.stringify({_id: modeId, title: mode.title})})
+      .then(response => response.json())
+      .then(json => dispatch(updatedMode(modeId, {_id: modeId, title: mode.title})))
   }
 }

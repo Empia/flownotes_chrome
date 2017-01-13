@@ -36,7 +36,7 @@ class UserModesService {
   }
   
   remove(req, res:Response){
-    UserModes.findOne({ _id: req.params.id})
+    UserModes.findOne({ _id: req.params.modeId})
     .remove((err, doc) => {
         res.status(202).send(null);
       });
