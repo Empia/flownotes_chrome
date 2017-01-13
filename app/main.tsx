@@ -7,6 +7,8 @@ import UserModes from './components/user_modes/UserModes';
 import FocusedPageContainer from './components/page/FocusedPageContainer';
 import {groceryItemStore, Item} from './stores/GroceryItemStore';
 import {card,addingPage,pages} from './stores/pages/FlowPageStore';
+import {modes, mode, addingModes} from './stores/user_modes/UserModesReducers';
+
 import {pagesStore} from './stores/pages/OldFlowPageStore';
 import {addingPageContent,pageContents} from './stores/page/FlowPageContentStore';
 import { dialogReducer } from 'redux-dialog';
@@ -64,6 +66,7 @@ export const store = createStore(combineReducers({
   card, 
   addingPage, 
   pages, 
+  modes, mode, addingModes,
   addingPageContent,
   pageContents, 
   autoRehydrateVal,
