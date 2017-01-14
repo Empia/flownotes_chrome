@@ -24,14 +24,14 @@ export default function (router:Router){
     .patch('/content/order/:id', flowNoteContentService.updateOrder)
     
 
-    .get('/user_modes', userModesService.getList)
-    .post('/user_modes', userModesService.add)
-    .delete('/user_modes/:modeId', userModesService.remove)
-    .patch('/user_modes/:modeId', userModesService.update)
+    .get('/user_modes', passport.authenticate("jwt", {session: false}), userModesService.getList)
+    .post('/user_modes', passport.authenticate("jwt", {session: false}), userModesService.add)
+    .delete('/user_modes/:modeId', passport.authenticate("jwt", {session: false}), userModesService.remove)
+    .patch('/user_modes/:modeId', passport.authenticate("jwt", {session: false}), userModesService.update)
 
-    .post('/set_modes/', userModeSetterService.getAllSetsMode)
-    .post('/set_mode/:modeId', userModeSetterService.setMode)
-    .delete('/set_mode/:modeId', userModeSetterService.removeSetMode)
+    .post('/set_modes/', passport.authenticate("jwt", {session: false}), userModeSetterService.getAllSetsMode)
+    .post('/set_mode/:modeId', passport.authenticate("jwt", {session: false}), userModeSetterService.setMode)
+    .delete('/set_mode/:modeId', passport.authenticate("jwt", {session: false}), userModeSetterService.removeSetMode)
 
 
     .get('/migrate', migrateService.apply)

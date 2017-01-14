@@ -20,6 +20,9 @@ function RemoveButton(props) {
 function EditButton(props) {
   return <button onClick={ e => props.toEdit(e, props.modeId, props.currentObject) }>Edit</button>
 }
+function SwitchButton(props) {
+  return <button onClick={ e => props.toEdit(e, props.modeId, props.currentObject) }>Switch</button>
+}
 
 
 const mapStateToProps = ({addingModes, modes}) => ({
@@ -78,6 +81,7 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
             <div className="pageControls">
               <form className="editPageForm">
                 <input type="text" ref={"update-"+p._id} defaultValue={p.title}/>
+                <SwitchButton modeId={p._id} toEdit={ this.removeModeSender }/>
                 <EditButton modeId={p._id} currentObject={p} toEdit={ this.editModeSender }/>
                 <RemoveButton modeId={p._id} toRemove={ this.removeModeSender }/>
               </form>

@@ -20,11 +20,27 @@ export const SET_MODE_UPDATED = 'SET_MODE_UPDATED';
 export const REQUEST_REMOVING_SET_MODE = 'REQUEST_REMOVING_SET_MODE';
 export const RECIEVE_REMOVING_SET_MODE = 'RECIEVE_REMOVING_SET_MODE';
 
+import {store} from '../../main';
+
+
 export const requestModes = () => {
   return {
     type: REQUEST_MODES
   }
 }
+
+export const getJWT = () => {
+  if (localStorage.getItem('reduxPersist:user') !== undefined) {
+    let st = JSON.parse(localStorage.getItem('reduxPersist:user'))
+    let jwt:string = st.data ? st.data.token : '';
+    console.log('jwt', jwt);
+    return jwt; 
+  } else {
+    return ''
+  }
+
+}
+
 export const receiveModes = (json) => {
   console.log('json', json);
   return {
@@ -36,7 +52,7 @@ export const receiveModes = (json) => {
 export function fetchModes() {
   return function (dispatch) {
     dispatch(requestModes())
-    return fetch(`/api/user_modes/`)
+    return fetch(`/api/user_modes/`, {headers: {'Authorization': getJWT()} } )
       .then(response => response.json())
       .then(json =>
         dispatch(receiveModes(json))
@@ -49,7 +65,7 @@ export function addMode(mode) {
   return function (dispatch) {
     dispatch(function(){ return { type: REQUEST_ADDING_MODE } });
     return fetch(`/api/user_modes/`, {method: 'post',
-      headers: {'Content-Type': 'application/json'},  body: JSON.stringify({title: mode.title, name: mode.title})})
+      headers: {'Content-Type': 'application/json', 'Authorization': getJWT()},  body: JSON.stringify({title: mode.title, name: mode.title})})
       .then(response => response.json())
       .then(json => dispatch(addedMode({_id: json, title: mode.title})))
   }
@@ -58,7 +74,7 @@ export function updateMode(modeId, mode) {
   return function (dispatch) {
     dispatch(function(){ return { type: REQUEST_UPDATE_MODE } });
     return fetch(`/api/user_modes/${modeId}`, {method: 'PATCH',
-      headers: {'Content-Type': 'application/json'},  body: JSON.stringify({_id: modeId, title: mode.title})})
+      headers: {'Content-Type': 'application/json','Authorization': getJWT()},  body: JSON.stringify({_id: modeId, title: mode.title})})
       .then(response => response.json())
       .then(json => dispatch(updatedMode(modeId, {_id: modeId, title: mode.title})))
   }
@@ -68,7 +84,7 @@ export function updatedMode(modeId, mode) { return {type: UPDATE_MODE, data: mod
 export function removeMode(modeId) {
   return function (dispatch) {
     dispatch(requestRemovingMode(modeId))
-    return fetch(`/api/user_modes/${modeId}`, {method: 'delete'})
+    return fetch(`/api/user_modes/${modeId}`, {headers: {'Authorization': getJWT()}, method: 'delete'})
       .then(response => { 
           dispatch(receiveDeletedMode(modeId));
       })
@@ -103,7 +119,7 @@ export const receiveSetsModes = (json) => {
 export function fetchSetsModes() {
   return function (dispatch) {
     dispatch(requestSetsModes())
-    return fetch(`/api/set_modes/`)
+    return fetch(`/api/set_modes/`, {method: 'get', headers: {'Authorization': getJWT()} })
       .then(response => response.json())
       .then(json =>
         dispatch(receiveSetsModes(json))
@@ -116,7 +132,7 @@ export function setMode(modeId, mode) {
   return function (dispatch) {
     dispatch(function(){ return { type: REQUEST_ADD_SET_MODE } });
     return fetch(`/api/set_mode/${modeId}`, {method: 'PATCH',
-      headers: {'Content-Type': 'application/json'},  body: JSON.stringify({_id: modeId, title: mode.title})})
+      headers: {'Content-Type': 'application/json', 'Authorization': getJWT()},  body: JSON.stringify({_id: modeId, title: mode.title})})
       .then(response => response.json())
       .then(json => dispatch(updatedSetMode(modeId, {_id: modeId, title: mode.title})))
   }
@@ -139,7 +155,7 @@ export function receiveDeletedModeSet(modeId) {
 export function removeSetMode(modeId) {
   return function (dispatch) {
     dispatch(requestRemovingSetMode(modeId))
-    return fetch(`/api/set_mode/${modeId}`, {method: 'delete'})
+    return fetch(`/api/set_mode/${modeId}`, {headers: {'Authorization': getJWT()}, method: 'delete'})
       .then(response => { 
           dispatch(receiveDeletedModeSet(modeId));
       })
