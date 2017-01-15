@@ -79,17 +79,18 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
         </Modal>
       </div>
       */}
-
         {/* 
         <div className="pageContent__contentResource-content_type">content_type: { p.content_type}</div>
-        
         */}
         <div className="pageContent__contentResource-content_value">
-          <ContentRender content_type={p.content_type} content_title={p.title} content_value={p.content_value} />
+          <ContentRender content_page={p.page} 
+                         content_order={p.order}
+                         content_type={p.content_type} 
+                         content_title={p.title} 
+                         content_value={p.content_value} />
         </div>
 
         <div className="pageContent__contentResource-content_controls">
-
           <DropdownButton bsStyle="default" title={'...'} key={'dropdown-'+p._id} id={`dropdown-basic-${p._id}`}>
             <RemoveButton pageId={p.pageId} contentId={p._id} toRemove={ this.removePageSender }/>
             <MenuItem eventKey="1" onClick={this.openModalWindow}>Modal</MenuItem>

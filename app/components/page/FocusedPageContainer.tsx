@@ -207,17 +207,14 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <PageContentForm.default 
-            pageId={this.props.params.pageId} 
-            initialValues={initialValues} 
-            form={'new_content_form'}
-            onSubmit={this.createPageContent}/>
+          contentLabel="Example Modal">
+            <PageContentForm.default 
+              pageId={this.props.params.pageId} 
+              initialValues={initialValues} 
+              form={'new_content_form'}
+              onSubmit={this.createPageContent}/>
         </Modal>
       </div>
-
-
 
         </div>        
         <div className="pageContent__contentList">
