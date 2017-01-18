@@ -12,15 +12,7 @@ interface UserMode{
   _id?:any;
 }
 
-export const mode = (state,action) => {
-  switch (action.type) {
-    case ADD_MODE:
-      let newCard = { name: action.data, id: +new Date};
-      return state.concat([newCard]);
-    default:
-      return state || [];  
-    }
-}
+
 export const addingModes = (state, action) => {
   switch (action.type) {
     case TOGGLE_ADD_MODE: return state ? false : true;
@@ -90,7 +82,7 @@ export const modes = (state = modesInitialState, action) => {
 const sets_modesInitialState = {
   isFetching: false,
   isFetched: false,
-  sets_modes: [],
+  items: [],
 }
 
 export const sets_modes = (state = sets_modesInitialState, action) => {
@@ -100,7 +92,7 @@ export const sets_modes = (state = sets_modesInitialState, action) => {
     case RECEIVE_SETS_MODES:
       return (<any>Object).assign({}, state, {
           isFetching: false,
-          sets_modes: state.sets_modes,
+          items: state.items,
           lastUpdated: action.receivedAt
         })  
     case SET_MODE_REQUESTED:
@@ -111,10 +103,10 @@ export const sets_modes = (state = sets_modesInitialState, action) => {
       return state
     case SET_MODE_UPDATED: 
       let newMode = (<any>Object).assign({}, action.data);
-      let result = state.sets_modes.concat([newMode]);
+      let result = state.items.concat([newMode]);
       return (<any>Object).assign({}, state, {
         isFetching: false,
-        sets_modes: result,
+        items: result,
         lastUpdated: action.recievedAt
       })
 
@@ -125,10 +117,10 @@ export const sets_modes = (state = sets_modesInitialState, action) => {
     case RECIEVE_REMOVING_SET_MODE:
       return (<any>Object).assign({}, state, {
           isFetching: false,
-          sets_modes: state.sets_modes.filter(el => el._id !== action.modeId),
+          items: state.items.filter(el => el._id !== action.modeId),
           lastUpdated: action.receivedAt
       })          
     default:
-        return state || {isFetching: false, sets_modes: []};      
+        return state || {isFetching: false, items: []};      
   }    
 }

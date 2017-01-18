@@ -21,24 +21,12 @@ export const REQUEST_REMOVING_SET_MODE = 'REQUEST_REMOVING_SET_MODE';
 export const RECIEVE_REMOVING_SET_MODE = 'RECIEVE_REMOVING_SET_MODE';
 
 import {store} from '../../main';
-
+import {getJWT} from '../jwt';
 
 export const requestModes = () => {
   return {
     type: REQUEST_MODES
   }
-}
-
-export const getJWT = () => {
-  if (localStorage.getItem('reduxPersist:user') !== undefined) {
-    let st = JSON.parse(localStorage.getItem('reduxPersist:user'))
-    let jwt:string = st.data ? st.data.token : '';
-    console.log('jwt', jwt);
-    return jwt; 
-  } else {
-    return ''
-  }
-
 }
 
 export const receiveModes = (json) => {

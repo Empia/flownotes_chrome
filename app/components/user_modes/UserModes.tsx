@@ -6,12 +6,17 @@ import ReactDOM = require("react-dom");
 import {store} from '../../main';
 
 interface UserModesPr extends React.Props<any>{
-  addingModes:any;
+   addingModes:any;
   modes:any;
-  toggleAddMode:any;
-  removeMode:any;
-  addMode:any;
-  updateMode:any;  
+  sets_modes:any;
+ toggleAddMode:any;
+removeMode:any;
+switchMode:any;
+addMode:any;
+updateMode:any;
+fetchSetsModes:any;
+updatedSetMode:any;
+removeSetMode:any;
 }
 interface UserModesState{}
 function RemoveButton(props) {
@@ -21,11 +26,15 @@ function EditButton(props) {
   return <button onClick={ e => props.toEdit(e, props.modeId, props.currentObject) }>Edit</button>
 }
 function SwitchButton(props) {
-  return <button onClick={ e => props.toEdit(e, props.modeId, props.currentObject) }>Switch</button>
+  let switchF = (e) => {
+    e.preventDefault(); 
+    props.toSwitch(props.modeId, props.currentObject)
+  };
+  return <button onClick={ switchF }>Switch</button>
 }
 
 
-const mapStateToProps = ({addingModes, modes}) => ({
+const mapStateToProps = ({addingModes, modes, sets_modes}) => ({
   addingModes,
   modes,
   sets_modes
@@ -38,10 +47,9 @@ const mapDispatchToProps = dispatch => ({
    // updatePage: (modeId) => dispatch(actions.removePage(modeId)),
     addMode: (mode) => dispatch(actions.addMode(mode)),
     updateMode: (modeId, mode) => dispatch(actions.updateMode(modeId, mode)),
-
-fetchSetsModes:() => dispatch(fetchSetsModes()),
-updatedSetMode:(modeId, mode) => dispatch(updatedSetMode(modeId, mode)),
-removeSetMode:(modeId) => dispatch(removeSetMode(modeId)),
+    fetchSetsModes:() => dispatch(actions.fetchSetsModes()),
+    updatedSetMode:(modeId, mode) => dispatch(actions.updatedSetMode(modeId, mode)),
+    removeSetMode:(modeId) => dispatch(actions.removeSetMode(modeId)),
 
 });
 
@@ -76,7 +84,6 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
   };
   removeModeSender = ((modeId) => this.props.removeMode(modeId));
   removeSetModeSender = ((modeId) => this.props.removeSetMode(modeId));
-
   switchModeSender = ((modeId,mode) => this.props.switchMode(modeId,mode));
 
 
@@ -93,7 +100,7 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
             <div className="pageControls">
               <form className="editPageForm">
                 <input type="text" ref={"update-"+p._id} defaultValue={p.title}/>
-                <SwitchButton modeId={p._id} toEdit={ this.switchModeSender(p._id, p) }/>
+                <SwitchButton modeId={p._id} currentObject={p} toSwitch={ this.switchModeSender }/>
                 <EditButton modeId={p._id} currentObject={p} toEdit={ this.editModeSender }/>
                 <RemoveButton modeId={p._id} toRemove={ this.removeModeSender }/>
               </form>

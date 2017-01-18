@@ -7,7 +7,7 @@ import UserModes from './components/user_modes/UserModes';
 import FocusedPageContainer from './components/page/FocusedPageContainer';
 import {groceryItemStore, Item} from './stores/GroceryItemStore';
 import {card,addingPage,pages} from './stores/pages/FlowPageStore';
-import {modes, mode, addingModes, sets_modes} from './stores/user_modes/UserModesReducers';
+import {modes, addingModes, sets_modes} from './stores/user_modes/UserModesReducers';
 
 import {pagesStore} from './stores/pages/OldFlowPageStore';
 import {addingPageContent,pageContents} from './stores/page/FlowPageContentStore';
@@ -66,7 +66,7 @@ export const store = createStore(combineReducers({
   card, 
   addingPage, 
   pages, 
-  modes, mode, addingModes,sets_modes,
+  modes, addingModes,sets_modes,
   addingPageContent,
   pageContents, 
   autoRehydrateVal,

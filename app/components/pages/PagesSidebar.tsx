@@ -7,9 +7,10 @@ import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 let NewPageForm = require('./NewPageForm.jsx');
 
 
-const mapStateToProps = ({addingPage, pages}) => ({
+const mapStateToProps = ({addingPage, pages, form}) => ({
   addingPage,
-  pages
+  pages,
+  form
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -28,6 +29,7 @@ interface PagesSidebarProps extends React.Props<any>{
   toggleAddPage:any;
   updatePage: any;
   removePage: any;
+  form: any;
 }
 
 interface PagesSidebarState{
@@ -113,12 +115,12 @@ constructor(props) {
 
 
   createPage = (evt) => {
-    if (evt.which !== 13) return;
-    console.log('ref', this.refs);
-    var title = (ReactDOM.findDOMNode(this.refs.add) as HTMLInputElement).value;
-    this.props.addPage({title});
+    console.log('evt', evt, this.props.form.values);
+    evt.preventDefault();
+    this.props.addPage(this.props.form['new-page-form'].values);
     this.props.toggleAddPage();
   }
+  
   editPageSender =  (evt, pageId, page) => {
       evt.preventDefault();
       console.log('editPageSender', this.refs, evt.currentTarget);
