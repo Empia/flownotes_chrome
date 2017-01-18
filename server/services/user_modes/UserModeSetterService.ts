@@ -23,7 +23,7 @@ class UserModeSetterService {
     UserModes.findOne({ _id: req.params.id})
     // add mode & save
     
-    res.status(202).send(null);
+    res.status(202).send({'status': 'good', userId: req.user[0]._id });
   }
   removeSetMode(req, res:Response){
     console.log('update', req.body.title);

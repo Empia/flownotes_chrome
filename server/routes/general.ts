@@ -30,7 +30,7 @@ export default function (router:Router){
     .patch('/user_modes/:modeId', passport.authenticate("jwt", {session: false}), userModesService.update)
 
     .post('/set_modes/', passport.authenticate("jwt", {session: false}), userModeSetterService.getAllSetsMode)
-    .post('/set_mode/:modeId', passport.authenticate("jwt", {session: false}), userModeSetterService.setMode)
+    .post('/set_mode', passport.authenticate("jwt", {session: false}), userModeSetterService.setMode)
     .delete('/set_mode/:modeId', passport.authenticate("jwt", {session: false}), userModeSetterService.removeSetMode)
 
 

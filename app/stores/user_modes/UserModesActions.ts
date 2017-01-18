@@ -116,13 +116,17 @@ export function fetchSetsModes() {
 }
 
 
-export function setMode(modeId, mode) {
+export function setMode(setModeId, mode) {
   return function (dispatch) {
     dispatch(function(){ return { type: REQUEST_ADD_SET_MODE } });
-    return fetch(`/api/set_mode/${modeId}`, {method: 'PATCH',
-      headers: {'Content-Type': 'application/json', 'Authorization': getJWT()},  body: JSON.stringify({_id: modeId, title: mode.title})})
+    return fetch(`/api/set_mode`, {method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Authorization': getJWT()},  body: JSON.stringify(mode)})
       .then(response => response.json())
-      .then(json => dispatch(updatedSetMode(modeId, {_id: modeId, title: mode.title})))
+      .then(json => dispatch(updatedSetMode(setModeId, {_id: setModeId,  // replace id from mongo
+        userId: json.userId, 
+        userModeId: mode.userModeId,
+        createdAt: mode.createdAt,
+      })))
   }
 }
 export function updatedSetMode(modeId, mode) { return {type: SET_MODE_UPDATED, data: mode, modeId: modeId} };
