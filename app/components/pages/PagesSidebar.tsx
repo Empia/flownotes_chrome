@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../stores/pages/PagesActions';
 import {store} from '../../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
-
+let NewPageForm = require('./NewPageForm.jsx');
 
 
 const mapStateToProps = ({addingPage, pages}) => ({
@@ -106,7 +106,7 @@ constructor(props) {
 
 
       <div className="new-page-input">
-        { props.addingPage && <input ref="add" onKeyPress={this.createPage}/> }
+        { props.addingPage && <NewPageForm.default pages={props.pages.items} handleSubmit={this.createPage}/> }
       </div>
       </div>);
   }
