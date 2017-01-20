@@ -11,10 +11,7 @@ class UserModeSetterService {
     console.log('update', req.body.title);
     // find user
     // find mode
-    UserModeSets.find({ userId: req.user[0]._id}).then(c =>
-      // add mode & save    
-        res.status(202).send(c);
-    )
+    UserModeSets.find({ userId: req.user[0]._id}).then(c => res.status(202).send(c))
   }
 
   setMode(req, res:Response){

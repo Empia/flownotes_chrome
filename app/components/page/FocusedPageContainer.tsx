@@ -11,6 +11,17 @@ import GenericPageContent from './GenericPageContent';
 import BasicDialog from './forms/BasicDialog';
 
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var update = require('react/lib/update');
+//import * as Addons from 'react-addons-update';
+import DragCard from '../commons/drag/DragCard';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 const mapStateToProps = ({addingPageContent, pageContents, pages, selectedPage}) => ({
   addingPageContent,
   pageContents,
@@ -35,6 +46,7 @@ interface FocusedPageContainerProps extends React.Props<any>{
   pageContents: any;
   selectedPage: any;
   pages: any;
+  moveCard?:any;
 
   // actions
   removePageContent: (pageId: void, pageContentId: void) => void;
@@ -47,10 +59,12 @@ interface FocusedPageContainerProps extends React.Props<any>{
 
 interface GeneralState {
   pages: any;
+  cards?:any;
 }
 
 interface FocusedPageContainerState{ 
   modalIsOpen: boolean;
+  cards?:any;
 }
 
 const customStyles = {
@@ -64,15 +78,61 @@ const customStyles = {
     }
 };
   
+
+const style = {
+  width: 400
+};
+
+@DragDropContext(HTML5Backend)  
 class FocusedPageContainer extends React.Component<FocusedPageContainerProps, FocusedPageContainerState>{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+    this.moveCard = this.moveCard.bind(this);
     //this.page = this.props.pages;
     //this.pageId = this.props.params.pageId
     console.log('BasicDialog', BasicDialog);
-    this.state = { modalIsOpen: false };
-  }
+    this.state = {
+      cards: [{
+        id: 1,
+        text: 'Write a cool JS library'
+      }, {
+        id: 2,
+        text: 'Make it generic enough'
+      }, {
+        id: 3,
+        text: 'Write README'
+      }, {
+        id: 4,
+        text: 'Create some examples'
+      }, {
+        id: 5,
+        text: 'Spam in Twitter and IRC to promote it (note that this element is taller than the others)'
+      }, {
+        id: 6,
+        text: '???'
+      }, {
+        id: 7,
+        text: 'PROFIT'
+      }],
+      modalIsOpen: false
+    };
+  }  
   
+
+  moveCard(dragIndex, hoverIndex) {
+    const { cards } = this.state;
+    const dragCard = cards[dragIndex];
+
+    this.setState(update(this.state, {
+      cards: {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, dragCard]
+        ]
+      }
+    }));
+  }
+
   componentWillMount() {
     store.dispatch(actions.fetchPageContent(this.props.params.pageId)).then(() =>
       console.log(store.getState())
@@ -180,7 +240,17 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
         <h3 className="pageContent__pageHeader">
           Page {this.props.pages.selectedPage ? this.props.pages.selectedPage.title : '' } 
         </h3>
-        
+
+{this.state.cards.map((card, i) => {
+          return (
+            <DragCard key={card.id}
+                  index={i}
+                  id={card.id}
+                  text={card.text}
+                  moveCard={this.moveCard} />
+          );
+})}        
+
         <BasicDialog />
         <Select
             name="form-field-name"

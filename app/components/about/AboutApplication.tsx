@@ -24,6 +24,7 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
         <ul>
           <h4>Tasks(9 hours):</h4>            
             <li>Update for content(in modal window)</li>
+            <li>Object can be moved around pages Drag And drop + move order </li>
             <li>Minority compatibility</li>
             <li>Bulk addition</li>
             <li>browser plugin[tab push]</li>
@@ -33,7 +34,6 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
             <li>Section on page [CRUD]</li>
             <li>better logo</li>
             <hr />
-            <li>Object can be moved around pages Drag And drop + move order </li>
             <li>Heading object</li>
             <li>Paragraph</li>
             <li>List</li>

@@ -7,20 +7,26 @@ import { connect } from 'react-redux';
 import { openDialog, closeDialog } from 'redux-dialog';
 import * as BasicDialog from './forms/BasicDialog';
 import {DropdownButton, MenuItem} from 'react-bootstrap';
+import {ParagraphContentType,LinkContentType, HeadingContentType} from './content_types/index'
+
+
 
 function RemoveButton(props) {
   return <button onClick={() => props.toRemove(props.pageId, props.contentId)}>Remove</button>
 }
 function ContentRender(props) {
-  if (props.content_type === 'Link') {
-    return <div>
-     <h3><span>{props.content_order+" "}</span>{props.content_title}</h3>
-      <a href={props.content_value}>{props.content_value}</a>
-    </div>
-  } else {
-    return <span>{props.content_value}</span>
-  }
+  switch (props.content_type) {
+    case 'Link':
+        return <LinkContentType {...props} />
+    case 'Heading':
+        return <HeadingContentType {...props} />
+    case 'Paragraph':
+        return <ParagraphContentType {...props} />
+    default:  
+        return <span>{props.content_value}</span>
+    }
 }
+
 
 
 
@@ -63,6 +69,7 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
     let p = this.props.contentObject;
     let idx = this.props.contentIdx;
     return  (
+      <div>
       <div className="page" key={p._id}>
       {/*
       <div>
@@ -106,6 +113,7 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
           <div className="pageContent__contentResource-labels">labels: { p.labels}</div>              
         <input ref={"update-"+p._id} onKeyPress={this.updatePage(idx)}/>
           */}
+        </div>
         </div>
       </div>);
   }  

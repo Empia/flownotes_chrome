@@ -11,8 +11,9 @@ interface ParagraphContentTypeState{
 
 class ParagraphContentType extends React.Component<ParagraphContentTypeProps, ParagraphContentTypeState>{
     render () {
+      let props = this.props
         return <div>
-          <p>{this.props.content_desc}</p>
+          <p>{props.content_title}{props.content_desc}</p>
         </div>;
     }
 }
