@@ -22,10 +22,7 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
         <h1>About</h1>     
         <h4>Paper concept</h4>
         <ul>
-          <h4>Tasks(9 hours):</h4>
-          <li>Neural Modes</li>
-          <hr />
-            
+          <h4>Tasks(9 hours):</h4>            
             <li>Update for content(in modal window)</li>
             <li>Minority compatibility</li>
             <li>Bulk addition</li>

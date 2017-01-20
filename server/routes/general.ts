@@ -29,7 +29,7 @@ export default function (router:Router){
     .delete('/user_modes/:modeId', passport.authenticate("jwt", {session: false}), userModesService.remove)
     .patch('/user_modes/:modeId', passport.authenticate("jwt", {session: false}), userModesService.update)
 
-    .post('/set_modes/', passport.authenticate("jwt", {session: false}), userModeSetterService.getAllSetsMode)
+    .get('/set_modes/', passport.authenticate("jwt", {session: false}), userModeSetterService.getAllSetsMode)
     .post('/set_mode', passport.authenticate("jwt", {session: false}), userModeSetterService.setMode)
     .delete('/set_mode/:modeId', passport.authenticate("jwt", {session: false}), userModeSetterService.removeSetMode)
 

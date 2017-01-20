@@ -11,28 +11,30 @@ class UserModeSetterService {
     console.log('update', req.body.title);
     // find user
     // find mode
-    UserModes.findOne({ _id: req.params.id})
-    // add mode & save    
-    res.status(202).send(null);
+    UserModeSets.find({ userId: req.user[0]._id}).then(c =>
+      // add mode & save    
+        res.status(202).send(c);
+    )
   }
 
   setMode(req, res:Response){
     console.log('update', req.body.title);
     // find user
     // find mode
-    UserModes.findOne({ _id: req.params.id})
+    UserModeSets.findOne({ _id: req.params.id})
     // add mode & save
-    
-    res.status(202).send({'status': 'good', userId: req.user[0]._id });
+    let userModeSet = new UserModeSets(Object.assign(req.body, {userId: req.user[0]._id}));
+    console.log('req.body', req.body);
+    userModeSet.save((err, data:IUserModeSets) => 
+        res.status(200).send(Object.assign(data, {userId: req.user[0]._id })  ));    
+    //res.status(202).send({'status': 'good', userId: req.user[0]._id });
   }
+
   removeSetMode(req, res:Response){
-    console.log('update', req.body.title);
-    // find user
-    // find mode
-    UserModes.findOne({ _id: req.params.id})
-    // add mode & save
-    
-    res.status(202).send(null);
+     UserModeSets.findOne({ _id: req.params.modeId})
+      .remove((err, doc) => {
+          res.status(200).send({status: 'removed'});
+      });    
   }
   
 }

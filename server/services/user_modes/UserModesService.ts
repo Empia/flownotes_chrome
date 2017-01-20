@@ -8,18 +8,15 @@ class UserModesService {
   getList(req, res:Response){
     return UserModes.find((err, data) => res.send(data));
   }
-  
   add(req, res:Response){
     let userMode = new UserModes(req.body);
     console.log('req.body', req.body);
     userMode.save((err, data:IUserModes) => 
         res.status(200).send(data._id));
   }
-  
   update(req, res:Response){
     console.log('update', req.body.title);
-    UserModes.findOne({_id:req.body._id}, (err, doc) => {
-      
+    UserModes.findOne({_id:req.body._id}, (err, doc) => {      
       if (doc) {
         for(let key in req.body){
           console.log('key', key, req.body[key]);
@@ -34,7 +31,6 @@ class UserModesService {
       }
     });
   }
-  
   remove(req, res:Response){
     UserModes.findOne({ _id: req.params.modeId})
     .remove((err, doc) => {

@@ -100,7 +100,7 @@ export const receiveSetsModes = (json) => {
   console.log('json', json);
   return {
     type: RECEIVE_SETS_MODES,
-    modes: json,//.data.children.map(child => child.data),
+    items: json,//.data.children.map(child => child.data),
     receivedAt: Date.now()
   }
 }
@@ -117,6 +117,7 @@ export function fetchSetsModes() {
 
 interface UserJSON {
   userId:    string;
+  id: string;
 }
 export function setMode(setModeId, mode) {
   return function (dispatch) {
@@ -124,7 +125,7 @@ export function setMode(setModeId, mode) {
     return fetch(`/api/set_mode`, {method: 'POST',
       headers: {'Content-Type': 'application/json', 'Authorization': getJWT()},  body: JSON.stringify(mode)})
       .then(response => <Promise<UserJSON>>response.json())
-      .then((json) => dispatch(updatedSetMode(setModeId, {_id: setModeId,  // replace id from mongo
+      .then((json) => dispatch(updatedSetMode(setModeId, {_id: json.setModeId,  // replace id from mongo
         userId: json.userId, 
         userModeId: mode.userModeId,
         createdAt: mode.createdAt,

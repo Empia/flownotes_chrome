@@ -67,7 +67,9 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
     super();
     console.log(this);
     store.dispatch(actions.fetchModes()).then(() =>
-       console.log('')
+       store.dispatch(actions.fetchSetsModes()).then(() =>
+        console.log('')
+       )
     )    
   }
   refs: {

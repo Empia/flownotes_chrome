@@ -12,7 +12,15 @@ interface UserMode{
   _id?:any;
 }
 
-
+export const mode = (state,action) => {
+  switch (action.type) {
+    case ADD_MODE:
+      let newCard = { name: action.data, id: +new Date};
+      return state.concat([newCard]);
+    default:
+      return state || [];  
+    }
+}
 export const addingModes = (state, action) => {
   switch (action.type) {
     case TOGGLE_ADD_MODE: return state ? false : true;
@@ -91,8 +99,9 @@ export const sets_modes = (state = sets_modesInitialState, action) => {
       return state
     case RECEIVE_SETS_MODES:
       return (<any>Object).assign({}, state, {
+          isFetched: true,
           isFetching: false,
-          items: state.items,
+          items: action.items,
           lastUpdated: action.receivedAt
         })  
     case SET_MODE_REQUESTED:
