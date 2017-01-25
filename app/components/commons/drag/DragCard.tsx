@@ -26,7 +26,8 @@ interface DragCardProps extends React.Props<any>{
     index: number;
     isDragging?: boolean;
     id: any;
-    text: string;
+    text: any;
+    children?:any;
     moveCard: any;
 }
 
@@ -87,12 +88,13 @@ const cardTarget = {
 export default class DragCard extends React.Component<DragCardProps, any> {
  
   render() {
-    const { text, isDragging, connectDragSource, connectDropTarget } = this.props;
+    const { text, children, isDragging, connectDragSource, connectDropTarget } = this.props;
     const opacity = isDragging ? 0 : 1;
 
     return connectDragSource(connectDropTarget(
       <div style={{ ...style, opacity }}>
         {text}
+        {children}
       </div>
     ));
   }

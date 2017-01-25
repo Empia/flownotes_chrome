@@ -12,6 +12,7 @@ export const RECIEVE_UPDATING_PAGE_CONTENT = 'RECIEVE_UPDATING_PAGE_CONTENT'
 export const REQUEST_UPDATING_PAGE_CONTENT = 'REQUEST_UPDATING_PAGE_CONTENT'
 export const REQUEST_MOVING_ORDER_PAGE_CONTENT = 'REQUEST_MOVING_ORDER_PAGE_CONTENT'
 export const RECIEVE_ORDERED_PAGE_CONTENT = 'RECIEVE_ORDERED_PAGE_CONTENT'
+export const RECEIVE_PAGE_CONTENT_ORDERING = 'RECEIVE_PAGE_CONTENT_ORDERING'
 
 export const selectPage = (pageId) => {
 console.log('selectPage');
@@ -35,6 +36,14 @@ export const receivePageContent = (json) => {
     receivedAt: Date.now()
   }
 }
+
+export const recievePageOrdering = (updatedOrdering) => {
+  return {
+    type: RECEIVE_PAGE_CONTENT_ORDERING,
+    page_content: updatedOrdering
+  }
+}
+
 export function fetchPageContent(pageId) {
   return function (dispatch) {
     dispatch(requestPageContent(pageId))

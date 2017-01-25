@@ -51,6 +51,7 @@
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
+    "pino": "^3.2.0",
     "preprocessor-loader": "^1.0.5",
     "pretty-error": "^2.0.2",
     "q": "^1.4.1",

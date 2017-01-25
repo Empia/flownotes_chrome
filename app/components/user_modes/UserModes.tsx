@@ -114,7 +114,14 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
      }
     this.props.switchMode(objectId,mode)
   };
-
+  getMode = (modeId) => {
+    let mode = this.props.modes.items.find(c => c._id === modeId)
+    if (mode) {
+      return mode.title
+    } else {
+      return ''
+    }
+  }
 
   render(){
     let props = this.props;
@@ -141,9 +148,9 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
       </div>      
       Switched modes
     <ul className="">
-        {props.sets_modes.items.map((p, idx) => 
+        {props.sets_modes.items.sort((c,b) => +new Date(b.createdAt) - +new Date(c.createdAt)).map((p, idx) => 
           <div className="" key={p._id}>
-            <li>{p._id}:{p.createdAt}</li>
+            <li>{this.getMode(p.userModeId)}:{p._id}:{+new Date(p.createdAt)}</li>
             <div className="pageControls">
               <form className="editPageForm">
                 <RemoveButton modeId={p._id} removeSetMode={this.props.removeSetMode} toRemove={ this.removeSetModeSender }/>

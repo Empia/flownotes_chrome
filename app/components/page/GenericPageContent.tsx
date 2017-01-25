@@ -60,10 +60,12 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
 
   removePageSender = ((pageId, pageContentId) => this.props.removePageContent(pageId, pageContentId));
 
-  openModalWindow = (evt) => {
+  openModalWindow = (modalId) => {
+   return (evt) => {
           evt.preventDefault();
-          this.props.openDialog('signupDialog'); 
-  };
+          this.props.openDialog(modalId); 
+    }
+  }
 
   render(){
     let p = this.props.contentObject;
@@ -100,7 +102,7 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
         <div className="pageContent__contentResource-content_controls">
           <DropdownButton bsStyle="default" title={'...'} key={'dropdown-'+p._id} id={`dropdown-basic-${p._id}`}>
             <RemoveButton pageId={p.pageId} contentId={p._id} toRemove={ this.removePageSender }/>
-            <MenuItem eventKey="1" onClick={this.openModalWindow}>Modal</MenuItem>
+            <MenuItem eventKey="1" onClick={this.openModalWindow('editContentModal')}>Modal</MenuItem>
             <MenuItem eventKey="2">Action</MenuItem>
             <MenuItem eventKey="3">Another action</MenuItem>
             <MenuItem eventKey="4" active>Active Item</MenuItem>

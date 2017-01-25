@@ -11,7 +11,8 @@ import {
   RECEIVE_PAGE_CONTENT,
   REQUEST_REMOVING_PAGE_CONTENT,
   RECIEVE_REMOVING_PAGE_CONTENT,
-  SELECT_PAGE
+  SELECT_PAGE,
+  RECEIVE_PAGE_CONTENT_ORDERING
 } from './PageActions'
 
 
@@ -56,7 +57,11 @@ export const pageContents = (state = pageContentsInitialState, action) => {
         isPageContentsFetching: false,
         page_content: action.page_content,
         lastUpdated: action.receivedAt
-      });    
+      });   
+    case RECEIVE_PAGE_CONTENT_ORDERING:
+      return (<any>Object).assign({}, state, {
+        page_content: action.page_content,
+      });          
     case 'ADD_PAGE_CONTENT':
       console.log('addPageContent', action.data);
       let newPage = (<any>Object).assign({}, action.data.content, {_id: action.data._id});

@@ -9,7 +9,7 @@ import 'react-select/dist/react-select.css';
 import * as Modal from 'react-modal';
 import GenericPageContent from './GenericPageContent';
 import BasicDialog from './forms/BasicDialog';
-
+import EditContentModal from './forms/EditContentModal';
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,6 +36,7 @@ const mapDispatchToProps = dispatch => ({
     updatePageContent: (pageId, pageContentId, content) => dispatch(actions.updatePageContent(pageId, pageContentId, content)),
     updateContentOrder: (pageId, pageContentId, content) => dispatch(actions.moveOrderPageContent(pageId, pageContentId, content)),
     addPageContent: (pageId,content) => dispatch(actions.addPageContent(pageId, content)),
+    recievePageOrdering: (updateOrdering) => dispatch(actions.recievePageOrdering(updateOrdering)),
 });
 
 interface FocusedPageContainerProps extends React.Props<any>{
@@ -119,18 +120,30 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
   }  
   
 
-  moveCard(dragIndex, hoverIndex) {
-    const { cards } = this.state;
-    const dragCard = cards[dragIndex];
-
-    this.setState(update(this.state, {
-      cards: {
+  moveCard(dragOrder, hoverIndex) {
+    const cards = this.props.pageContents.page_content;
+    const dragCard = cards.find(c => c.order === dragOrder);
+    const dragIndex = cards.indexOf(cards.find(c => c.order === dragOrder))
+    console.log('moveCard dragCard dragIndex,  hoverIndex,cards',dragCard, dragIndex, hoverIndex,cards);
+    let newOrder = update(cards,{ 
         $splice: [
           [dragIndex, 1],
           [hoverIndex, 0, dragCard]
-        ]
+        ]});
+    let newOrder2 = cards.map(c => {
+      if (c.order == dragIndex) {
+        c.order = hoverIndex
+      } 
+      if (c.order == hoverIndex) {
+        c.order = dragIndex;
       }
-    }));
+      return c; 
+    });
+
+    console.log('newOrder', newOrder2);
+    this.props.recievePageOrdering(
+       newOrder2
+    )
   }
 
   componentWillMount() {
@@ -241,7 +254,7 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
           Page {this.props.pages.selectedPage ? this.props.pages.selectedPage.title : '' } 
         </h3>
 
-{this.state.cards.map((card, i) => {
+{/*this.state.cards.map((card, i) => {
           return (
             <DragCard key={card.id}
                   index={i}
@@ -249,9 +262,10 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
                   text={card.text}
                   moveCard={this.moveCard} />
           );
-})}        
+})*/}        
 
         <BasicDialog />
+        <EditContentModal />
         <Select
             name="form-field-name"
             value="two"
@@ -289,7 +303,13 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
         </div>        
         <div className="pageContent__contentList">
             {this.props.pageContents.page_content.sort((c,b) => c.order - b.order).map((p, idx) => 
-              <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />)}
+        <DragCard key={idx}
+                  index={p.order}
+                  id={p.order}
+                  text={p._id}
+                  moveCard={this.moveCard}>
+                    <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
+                  </DragCard>)}
         </div>
       </div>);
   }  
