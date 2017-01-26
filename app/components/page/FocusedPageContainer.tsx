@@ -120,22 +120,53 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
   }  
   
 
-  moveCard(dragOrder, hoverIndex) {
+  moveCard(dragOrder, hoverIndex, item) {
     const cards = this.props.pageContents.page_content;
     const dragCard = cards.find(c => c.order === dragOrder);
     const dragIndex = cards.indexOf(cards.find(c => c.order === dragOrder))
-    console.log('moveCard dragCard dragIndex,  hoverIndex,cards',dragCard, dragIndex, hoverIndex,cards);
+   var direction = null
+    if (dragOrder < hoverIndex) {
+      direction = 'down';
+    } else {
+      direction = 'up';
+    };
+
+    console.log('dragOrder, hoverIndex', dragOrder, hoverIndex, direction);
+/*
+moveCard(dragIndex, hoverIndex) {
+    const { cards } = this.state;
+    const dragCard = cards[dragIndex];
+
+    this.setState(update(this.state, {
+      cards: {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, dragCard]
+        ]
+      }
+    }));
+  }
+
     let newOrder = update(cards,{ 
         $splice: [
           [dragIndex, 1],
           [hoverIndex, 0, dragCard]
         ]});
+    */
+    // [1,2,3,4]
+    // 2 -> 1 == 2=1
+    // 1 -> 3 == 1=3
+ 
     let newOrder2 = cards.map(c => {
-      if (c.order == dragIndex) {
+      if (c._id == item.id) {
         c.order = hoverIndex
-      } 
-      if (c.order == hoverIndex) {
-        c.order = dragIndex;
+      } else {
+        if (c.order >= hoverIndex && direction === 'up') {
+          c.order = c.order+1;
+        }
+        if (c.order <= hoverIndex && direction === 'down') {
+          c.order = c.order-1;
+        }        
       }
       return c; 
     });
@@ -305,7 +336,7 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
             {this.props.pageContents.page_content.sort((c,b) => c.order - b.order).map((p, idx) => 
         <DragCard key={idx}
                   index={p.order}
-                  id={p.order}
+                  id={p._id}
                   text={p._id}
                   moveCard={this.moveCard}>
                     <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />

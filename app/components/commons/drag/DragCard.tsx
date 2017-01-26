@@ -33,7 +33,10 @@ interface DragCardProps extends React.Props<any>{
 
 const cardTarget = {
   hover(props, monitor, component) {
+    // index of item
     const dragIndex = monitor.getItem().index;
+    //console.log('monitor', monitor.getItem());
+    // index of item to drag
     const hoverIndex = props.index;
 
     // Don't replace items with themselves
@@ -59,16 +62,20 @@ const cardTarget = {
 
     // Dragging downwards
     if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+      var direction = 'down';
+      console.log('Dragging downwards dragIndex hoverIndex', dragIndex, hoverIndex, direction);
       return;
     }
 
     // Dragging upwards
     if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+      var direction = 'up';
+      console.log('Dragging upwards dragIndex hoverIndex', dragIndex, hoverIndex, direction);
       return;
     }
 
     // Time to actually perform the action
-    props.moveCard(dragIndex, hoverIndex);
+    props.moveCard(dragIndex, hoverIndex, monitor.getItem(), direction);
 
     // Note: we're mutating the monitor item here!
     // Generally it's better to avoid mutations,
