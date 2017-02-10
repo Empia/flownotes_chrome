@@ -18,6 +18,9 @@ var update = require('react/lib/update');
 import DragCard from '../commons/drag/DragCard';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import * as MouseBackEnd from 'react-dnd-mouse-backend';
+
+import {CustomDragLayer} from './../commons/drag/CustomDragLayer' 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -56,6 +59,7 @@ interface FocusedPageContainerProps extends React.Props<any>{
   addPageContent: (pageId:string, content:any) => void;
   updatePageContent: (pageId:string, pageContentId:string, content:any) => void;
   updateContentOrder:any;
+  recievePageOrdering: any;
 }
 
 interface GeneralState {
@@ -162,10 +166,10 @@ moveCard(dragIndex, hoverIndex) {
         c.order = hoverIndex
       } else {
         if (c.order >= hoverIndex && direction === 'up') {
-          c.order = c.order+1;
+          //c.order = c.order+1;
         }
         if (c.order <= hoverIndex && direction === 'down') {
-          c.order = c.order-1;
+          //c.order = c.order-1;
         }        
       }
       return c; 
@@ -334,13 +338,15 @@ moveCard(dragIndex, hoverIndex) {
         </div>        
         <div className="pageContent__contentList">
             {this.props.pageContents.page_content.sort((c,b) => c.order - b.order).map((p, idx) => 
+        <div>
         <DragCard key={idx}
                   index={p.order}
                   id={p._id}
                   text={p._id}
                   moveCard={this.moveCard}>
                     <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
-                  </DragCard>)}
+        </DragCard>
+        {/*<CustomDragLayer p={p}></CustomDragLayer>*/}</div>)}
         </div>
       </div>);
   }  

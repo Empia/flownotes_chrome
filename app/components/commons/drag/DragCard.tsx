@@ -2,6 +2,7 @@ import * as React from "react";
 import { findDOMNode } from 'react-dom';
 import ItemTypes from './ItemTypes';
 import { DragSource, DropTarget } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 
 const style = {
   border: '1px dashed gray',
@@ -10,6 +11,30 @@ const style = {
   backgroundColor: 'white',
   cursor: 'move'
 };
+
+
+
+const boxSource = {
+  beginDrag(props) {
+    const { id, title, left, top } = props;
+    return { id, title, left, top };
+  },
+};
+
+function getStyles(props) {
+  const { left, top, isDragging } = props;
+  const transform = `translate3d(${left}px, ${top}px, 0)`;
+
+  return {
+    position: 'absolute',
+    transform,
+    WebkitTransform: transform,
+    // IE fallback: hide the real node using CSS when dragging
+    // because IE will ignore our custom "empty image" drag preview.
+    opacity: isDragging ? 0 : 1,
+    height: isDragging ? 0 : '',
+  };
+}
 
 const cardSource = {
   beginDrag(props) {
@@ -27,6 +52,7 @@ interface DragCardProps extends React.Props<any>{
     isDragging?: boolean;
     id: any;
     text: any;
+    connectDragPreview?: any;
     children?:any;
     moveCard: any;
 }
@@ -88,18 +114,34 @@ const cardTarget = {
 @DropTarget(ItemTypes.CARD, cardTarget, connect => ({
   connectDropTarget: connect.dropTarget()
 }))
+// style={getStyles(this.props)}
+
+
 @DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
+  //connectDragPreview: connect.dragPreview(),
   isDragging: monitor.isDragging()
 }))
 export default class DragCard extends React.Component<DragCardProps, any> {
  
+   componentDidMount() {
+    // Use empty image as a drag preview so browsers don't draw it
+    // and we can draw whatever we want on the custom drag layer instead.
+    /*
+    this.props.connectDragPreview(getEmptyImage(), {
+      captureDraggingState: true,
+    });
+    */
+}
+
   render() {
-    const { text, children, isDragging, connectDragSource, connectDropTarget } = this.props;
+    const { text, children, isDragging, connectDragSource, connectDropTarget } = this.props; // connectDragPreview
     const opacity = isDragging ? 0 : 1;
+    const className = isDragging ? 'dragging': ''
+    const display = isDragging ? 'none' : 'visible';
 
     return connectDragSource(connectDropTarget(
-      <div style={{ ...style, opacity }}>
+      <div className={className} style={{ ...style, opacity }}>
         {text}
         {children}
       </div>
