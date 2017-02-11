@@ -9,7 +9,6 @@ const style = {
   width: 400
 };
 
-@DragDropContext(HTML5Backend)
 export default class DragContainer extends React.Component<any, any> {
   constructor(props) {
     super(props);

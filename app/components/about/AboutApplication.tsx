@@ -2,10 +2,14 @@ import * as React from "react";
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import Header from '../commons/Header';
 import DragContainer from '../commons/DragContainer';
+import DragContainer2 from '../commons/DragContainer2';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 interface AboutApplicationPr extends React.Props<any>{}
 interface AboutApplicationState{}
 
+@DragDropContext(HTML5Backend)
 export class AboutApplication extends React.Component<AboutApplicationPr, AboutApplicationState>{
   constructor(){
     super();
@@ -19,6 +23,8 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
     return  (
       <div>
         <DragContainer />
+        <p>............</p>
+        <DragContainer2 />        
         <h1>About</h1>     
         <h4>Paper concept</h4>
         <ul>
