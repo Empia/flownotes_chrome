@@ -3,28 +3,54 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import Header from '../commons/Header';
 import DragContainer from '../commons/DragContainer';
 import DragContainer2 from '../commons/DragContainer2';
+import CustomDragLayer from '../commons/CustomDragLayer';
+
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 interface AboutApplicationPr extends React.Props<any>{}
-interface AboutApplicationState{}
+interface AboutApplicationState{
+    snapToGridAfterDrop?:any;
+    snapToGridWhileDragging?:any;    
+}
 
 @DragDropContext(HTML5Backend)
 export class AboutApplication extends React.Component<AboutApplicationPr, AboutApplicationState>{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+  this.handleSnapToGridAfterDropChange = this.handleSnapToGridAfterDropChange.bind(this);
+    this.handleSnapToGridWhileDraggingChange = this.handleSnapToGridWhileDraggingChange.bind(this);
+
+    this.state = {
+      snapToGridAfterDrop: false,
+      snapToGridWhileDragging: false,
+    };
+
     console.log(this);
   }
+ handleSnapToGridAfterDropChange() {
+    this.setState({
+      snapToGridAfterDrop: !this.state.snapToGridAfterDrop,
+    });
+  }
 
+  handleSnapToGridWhileDraggingChange() {
+    this.setState({
+      snapToGridWhileDragging: !this.state.snapToGridWhileDragging,
+    });
+}
  componentDidMount () {}  
  componentDidUpdate () {}  
 
   render(){
+     const { snapToGridAfterDrop, snapToGridWhileDragging } = this.state;
+
     return  (
       <div>
         <DragContainer />
         <p>............</p>
-        <DragContainer2 />        
+        <DragContainer2 /> 
+        <CustomDragLayer snapToGrid={snapToGridWhileDragging} />       
         <h1>About</h1>     
         <h4>Paper concept</h4>
         <ul>

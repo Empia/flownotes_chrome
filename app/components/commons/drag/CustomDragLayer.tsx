@@ -1,7 +1,7 @@
-let CardDragPreview = require('./CardDragPreview.jsx');
 let snapToGrid = require('./snapToGrid');
 import * as React from "react";
 import { DragLayer } from 'react-dnd';
+import CardDragPreview from './CardDragPreview';
 
 const layerStyles = {
   position: 'fixed',
@@ -62,7 +62,7 @@ export class CustomDragLayer extends React.Component<any, any> {
     switch (type) {
       case 'card':
         return (
-          <CardDragPreview.default p={p} />
+          <CardDragPreview p={p} />
         );
       default:
         return null;
