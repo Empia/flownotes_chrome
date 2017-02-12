@@ -55,13 +55,14 @@ module.exports = function (config) {
                 },
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/
-            },          
+          },          
           { test: /\.json$/, loader: 'json-loader' },
           { test: /\.less$/, loader: 'style!css!less' },
-            {
-                test: /\.css$/i,
-                loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]_[local]__[hash:base64:5]'),
-            },          
+          {
+            test: /\.css$/i,
+            loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]_[local]__[hash:base64:5]'),
+          },     
+          { test: /\.tsx?$/, loader: 'ts-loader', exclude: /node_modules/ },
           { test: /\.scss$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap' }
         ]
       },
@@ -70,7 +71,7 @@ module.exports = function (config) {
           'src',
           'node_modules'
         ],
-        extensions: ['', '.json', '.js', '.jsx', '.css']
+        extensions: ['', '.json', '.js', '.jsx', '.tsx', '.css']
       },
       plugins: [
         new webpack.IgnorePlugin(/\.json$/),

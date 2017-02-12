@@ -1,4 +1,5 @@
-### Mongo, Express, React, Node, Typescript
+### Flownotes
+![Status](https://travis-ci.org/Empia/flownotes_chrome.svg?branch=master)
 
 ##Usage Instructions
 
