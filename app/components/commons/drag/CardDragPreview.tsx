@@ -11,7 +11,7 @@ const styles = {
 };
 
 const propTypes = {
-  p: React.PropTypes.object,
+  title: React.PropTypes.string,
   idx: React.PropTypes.number
 };
 

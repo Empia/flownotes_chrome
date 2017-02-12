@@ -71,51 +71,48 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
     let p = this.props.contentObject;
     let idx = this.props.contentIdx;
     return  (
-      <div>
-      <div className="page" key={p._id}>
-      {/*
-      <div>
-        <button onClick={this.openModal}>Open Modal</button>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}>
-              <PageContentForm.default 
-                pageId={p.pageId} 
-                initialValues={p} 
-                form={'update_content_form'+p._id}
-                onSubmit={this.updatePageContent}/>
-        </Modal>
-      </div>
-      */}
-        {/* 
-        <div className="pageContent__contentResource-content_type">content_type: { p.content_type}</div>
+      <div class="pageContentRoot">
+      <div className="pageContentRootContainer" key={p._id}>
+        {/*
+        <div>
+          <button onClick={this.openModal}>Open Modal</button>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}>
+                <PageContentForm.default 
+                  pageId={p.pageId} 
+                  initialValues={p} 
+                  form={'update_content_form'+p._id}
+                  onSubmit={this.updatePageContent}/>
+          </Modal>
+        </div>
         */}
-        <div className="pageContent__contentResource-content_value">
-          <ContentRender content_page={p.page} 
-                         content_order={p.order}
-                         content_type={p.content_type} 
-                         content_title={p.title} 
-                         content_value={p.content_value} />
-        </div>
-
-        <div className="pageContent__contentResource-content_controls">
-          <DropdownButton bsStyle="default" title={'...'} key={'dropdown-'+p._id} id={`dropdown-basic-${p._id}`}>
-            <RemoveButton pageId={p.pageId} contentId={p._id} toRemove={ this.removePageSender }/>
-            <MenuItem eventKey="1" onClick={this.openModalWindow('editContentModal')}>Modal</MenuItem>
-            <MenuItem eventKey="2">Action</MenuItem>
-            <MenuItem eventKey="3">Another action</MenuItem>
-            <MenuItem eventKey="4" active>Active Item</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey="5">Separated link</MenuItem>
-          </DropdownButton>
-          {/*
-          <div className="pageContent__contentResource-inPageId">inPageId: { p.inPageId}</div>
-          <div className="pageContent__contentResource-inContent">inContent: { p.inContent}</div>
-          <div className="pageContent__contentResource-labels">labels: { p.labels}</div>              
-        <input ref={"update-"+p._id} onKeyPress={this.updatePage(idx)}/>
-          */}
-        </div>
+          <div className="pageContent__contentResource-content_value">
+            <ContentRender content_page={p.page} 
+                           content_order={p.order}
+                           content_type={p.content_type} 
+                           content_title={p.title} 
+                           content_value={p.content_value} />
+          </div>
+          <div className="pageContent__contentResource-content_controls">
+            <DropdownButton bsStyle="default" title={'...'} key={'dropdown-'+p._id} id={`dropdown-basic-${p._id}`}>
+              <RemoveButton pageId={p.pageId} contentId={p._id} toRemove={ this.removePageSender }/>
+              <MenuItem eventKey="1" onClick={this.openModalWindow('editContentModal')}>Modal</MenuItem>
+              <MenuItem eventKey="2">Action</MenuItem>
+              <MenuItem eventKey="3">Another action</MenuItem>
+              <MenuItem eventKey="4" active>Active Item</MenuItem>
+              <MenuItem divider />
+              <MenuItem eventKey="5">Separated link</MenuItem>
+            </DropdownButton>
+            {/*
+            <div className="pageContent__contentResource-inPageId">inPageId: { p.inPageId}</div>
+            <div className="pageContent__contentResource-inContent">inContent: { p.inContent}</div>
+            <div className="pageContent__contentResource-labels">labels: { p.labels}</div>              
+          <input ref={"update-"+p._id} onKeyPress={this.updatePage(idx)}/>
+            */}
+          </div>
+          <div className="pageContent__contentResource-content_type">order: { p.order } date: {p.createdAt} content_type: {p.content_type}</div>
         </div>
       </div>);
   }  

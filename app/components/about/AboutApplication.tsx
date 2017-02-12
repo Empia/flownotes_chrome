@@ -55,6 +55,7 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
         <h4>Paper concept</h4>
         <ul>
           <h4>Tasks(9 hours):</h4>            
+            <li>Sorting content by date</li>
             <li>Update for content(in modal window)</li>
             <li>Object can be moved around pages Drag And drop + move order </li>
             <li>Minority compatibility</li>

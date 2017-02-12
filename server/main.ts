@@ -20,6 +20,13 @@ import {authService} from './services/AuthService';
 import {Accounts} from './models/Account';
 var pino = require('pino')()
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var cluster = require('cluster');
+var http = require('http');
+var numCPUs = require('os').cpus().length;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
 pino.info('hello world')
 pino.error('this is at error level')
 pino.info('the answer is %d', 42)
@@ -32,11 +39,11 @@ setImmediate(function () {
 pino.error(new Error('an error'))
 
 var child = pino.child({ a: 'property' })
-child.info('hello child!')
+//child.info('hello child!')
 
 var childsChild = child.child({ another: 'property' })
-childsChild.info('hello baby..')
-
+//childsChild.info('hello baby..')
+*/
 
 
 passport.use('jwt',new JwtStrategy(authService.confOpts, function(jwt_payload, done) {
@@ -80,7 +87,7 @@ passport.deserializeUser(function(id, cb) {
 
 
 let app = express();
-var server = http.createServer(app);
+
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -168,8 +175,25 @@ app.get('/', startup)
   .use((<any>express).static(__dirname + '/../.tmp'))
 
 
-server.on('upgrade', handleUpgrade(app, wss));
 
-server.listen(7777);
+
+if (cluster.isMaster) {
+  // Fork workers.
+  for (var i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on('exit', function(worker, code, signal) {
+    console.log('worker ' + worker.process.pid + ' died');
+  });
+} else {
+  // Workers can share any TCP connection
+  // In this case its a HTTP server
+  var server = http.createServer(app);
+  server.on('upgrade', handleUpgrade(app, wss));
+  server.listen(7777);
+}
+
+
 	
 general_routes(router);
