@@ -78,6 +78,10 @@
     display: inline-block;
     float: right;
 }
+:global @keyframes appears-drag-preview {
+    from {  transform: rotate(0deg) }
+    to {transform: rotate(-7deg) }
+}
 
 /*
 By default CSS exports all class names into a global selector scope. 

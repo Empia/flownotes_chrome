@@ -6,9 +6,12 @@ import Box from './Box';
 const styles = {
   display: 'inline-block',
   transform: 'rotate(-7deg)',
+  transition: 'all 2s',
   WebkitTransform: 'rotate(-7deg)',
   width: '100%',
   height: '100%',  
+  animationName: 'appears-drag-preview',
+  animationDuration:'3s',
 };
 
 const propTypes = {
