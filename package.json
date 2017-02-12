@@ -4,7 +4,8 @@
   "description": "Online notepad with dynamic content recognition and deep content type interactions",
   "main": "index.js",
   "scripts": {
-    "test": "karma start",
+    "test": "jest",
+    "test3": "karma start",
     "lint": "eslint -c .eslintrc app",
     "test2": "node scripts/test.js --env=jsdom",
     "test-node": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register",
@@ -129,7 +130,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{ts,tsx}"
+      "app/**/*.{ts,tsx}"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
@@ -155,6 +156,6 @@
       "tsx",
       "js"
     ],
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$"
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$"
   }
 }

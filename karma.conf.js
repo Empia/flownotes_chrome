@@ -4,7 +4,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = function (config) {
     config.set({
         browsers: ['PhantomJS'],
-        singleRun: !!process.env.CI,
+        singleRun: true,
         frameworks: ['mocha'],
         files: [
             './node_modules/phantomjs-polyfill/bind-polyfill.js',
