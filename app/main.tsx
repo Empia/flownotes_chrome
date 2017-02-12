@@ -44,7 +44,6 @@ socket.on('disconnect', function(){console.log('Соединение закры�
 //import * as authStateReducer from './redux-auth/src/actions/authenticate';
 
 //require('style!css!foundation-sites/dist/css/foundation.min.css');
-($(document) as any).foundation();
 
 const loggerMiddleware = createLogger();
 const routingMiddleware = routerMiddleware(browserHistory)

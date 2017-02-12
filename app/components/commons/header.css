@@ -96,6 +96,10 @@
     to {transform: rotate(-7deg) }
 }
 
+:global html, :global body {
+  background: rgb(249, 249, 249);
+  background-color: rgb(249, 249, 249);
+}
 /*
 By default CSS exports all class names into a global selector scope. 
 Styles can be locally scoped to avoid globally scoping styles.

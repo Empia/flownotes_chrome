@@ -1,4 +1,11 @@
-node_modules
+.idea/
+node_modules/
+dist/
+*.iml
+webpack-assets.json
+webpack-stats.json
+npm-debug.log
+*.swp
 bower_components
 .tmp
 .vscode

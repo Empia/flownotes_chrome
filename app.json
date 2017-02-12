@@ -1,0 +1,23 @@
+{
+  "name": "flonotes",
+  "description": "Online notepad with dynamic content recognition and deep content type interactions",
+  "repository": "https://github.com/Empia/flownotes-chrome",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": [
+    "react",
+    "isomorphic",
+    "universal",
+    "webpack",
+    "express",
+    "hot reloading",
+    "react-hot-reloader",
+    "redux",
+    "starter",
+    "boilerplate",
+    "babel",
+    "flow",
+    "notes",
+    "evernote",
+    "realtime"
+  ]
+}
