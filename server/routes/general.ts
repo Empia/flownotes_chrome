@@ -38,8 +38,9 @@ export default function (router:Router){
 
     .get('/profile', passport.authenticate("jwt", {session: false}),
         function(req, res){
-          res.send({ user: req.user });
-  })    
+          let req2:any = req;
+          res.send({ user: req2.user });
+     })    
     .post('/login', authService.login)
     .post('/signUp', authService.signUp)
     .post('/token', authService.generateToken) 

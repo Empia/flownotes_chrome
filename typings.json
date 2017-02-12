@@ -23,7 +23,6 @@
     "react-css-modules": "github:DefinitelyTyped/DefinitelyTyped/react-css-modules/react-css-modules.d.ts#e45879a3b4a6d7e265f21103ae044cefb3cee37c",
     "react-dom": "github:DefinitelyTyped/DefinitelyTyped/react/react-dom.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "react-global": "github:DefinitelyTyped/DefinitelyTyped/react/react-global.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
-    "react-modal": "registry:dt/react-modal#1.3.0+20161121205806",
     "react-redux": "github:DefinitelyTyped/DefinitelyTyped/react-redux/react-redux.d.ts#e80403239facb94b039a3266d5dc75bd5d0efc2a",
     "react-router": "github:DefinitelyTyped/DefinitelyTyped/react-router/react-router.d.ts#e80403239facb94b039a3266d5dc75bd5d0efc2a",
     "react-router-redux": "github:DefinitelyTyped/DefinitelyTyped/react-router-redux/react-router-redux.d.ts#e80403239facb94b039a3266d5dc75bd5d0efc2a",
@@ -36,6 +35,5 @@
   },
   "dependencies": {
     "passport": "registry:npm/passport#0.3.0+20161028163825",
-    "react-addons-update": "registry:npm/react-addons-update#0.14.0+20160324044346"
   }
 }
