@@ -15,4 +15,3 @@ script:
   - typings install
   - gulp compile
   - npm test
-  - npm run test-node
