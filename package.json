@@ -128,7 +128,7 @@
     "typescript": "^2.1.4",
     "webpack-node-externals": "^1.5.4"
   },
-  "jest": {
+  "jest2": {
     "collectCoverageFrom": [
       "app/**/*.{ts,tsx}"
     ],
@@ -154,8 +154,9 @@
     "moduleFileExtensions": [
       "ts",
       "tsx",
-      "js"
+      "js",
+      "jsx"
     ],
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$"
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|jsx)$"
   }
 }
