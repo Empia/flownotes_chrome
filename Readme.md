@@ -10,6 +10,6 @@
  - Install MongoDB and start the server using the command `mongod` or by `service mongodb start`
  - Define mongodb credentials `nano server/database.ts`
  - Make mongodb migration `mongorestore --db flownotes collections/flownotes/*`
- - Install typings with `tsd install` (If this does not work use tsd reinstall)
+ - Install typings with `typings install` (If this does not work use typings reinstall)
  - Run app with `gulp serve`
 
