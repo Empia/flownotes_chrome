@@ -19,6 +19,7 @@ import DragCard from '../commons/drag/DragCard';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import * as MouseBackEnd from 'react-dnd-mouse-backend';
+import {DropdownButton, MenuItem} from 'react-bootstrap';
 
 import {CustomDragLayer} from './../commons/drag/CustomDragLayer' 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -317,25 +318,35 @@ moveCard(dragIndex, hoverIndex) {
                                           initialValues={initialValues} 
                                           form={'new_content_form'}
                                           onSubmit={this.createPageContent}/>}
+           <div className="pageContentModal">
+            <button onClick={this.openModal}>Open Modal</button>
+            <Modal
+              isOpen={this.state.modalIsOpen}
+              onAfterOpen={this.afterOpenModal}
+              onRequestClose={this.closeModal}
+              style={customStyles}
+              contentLabel="Example Modal">
+                <PageContentForm.default 
+                  pageId={this.props.params.pageId} 
+                  initialValues={initialValues} 
+                  form={'new_content_form'}
+                  onSubmit={this.createPageContent}/>
+            </Modal>
+          </div>
+        </div> 
 
 
-     <div>
-        <button onClick={this.openModal}>Open Modal</button>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="Example Modal">
-            <PageContentForm.default 
-              pageId={this.props.params.pageId} 
-              initialValues={initialValues} 
-              form={'new_content_form'}
-              onSubmit={this.createPageContent}/>
-        </Modal>
-      </div>
+        <div className="pageContent__sortableDropdown">
+          <DropdownButton bsStyle="default" title={'Sort'} key={'dropdown-'} id={`dropdown-basic-`}>
+            <MenuItem eventKey="1" active>By Order</MenuItem>
+            <MenuItem eventKey="2">By Date</MenuItem>
+            <MenuItem divider />
+            <MenuItem eventKey="3" active>ASC</MenuItem>
+            <MenuItem eventKey="4">DESC</MenuItem>
+          </DropdownButton>          
+        </div>
 
-        </div>        
+
         <div className="pageContent__contentList">
             {this.props.pageContents.page_content.sort((c,b) => c.order - b.order).map((p, idx) => 
         <div>
