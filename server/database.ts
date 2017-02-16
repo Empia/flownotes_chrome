@@ -15,6 +15,13 @@ function conn(){
 	}
 }
 
-connect('mongodb://localhost/flownotes', conn);
+connect('mongodb://localhost/flownotes', {
+  server: {
+    socketOptions: {
+      socketTimeoutMS: 0,
+      connectionTimeout: 0
+    }
+  }
+});
 
 export {};
