@@ -23,7 +23,6 @@ class PagesContainer extends React.Component<PagesContainerProps, PagesContainer
         <div className="header_component">
           <Header />
         </div>
-
         <div className="pagesSidebar_component">  
           <PagesSidebar key="test" />
         </div>

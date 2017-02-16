@@ -7,10 +7,11 @@ import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 let NewPageForm = require('./NewPageForm.jsx');
 
 
-const mapStateToProps = ({addingPage, pages, form}) => ({
+const mapStateToProps = ({addingPage, pages, form, routing}) => ({
   addingPage,
   pages,
-  form
+  form,
+  routing
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -30,6 +31,7 @@ interface PagesSidebarProps extends React.Props<any>{
   updatePage: any;
   removePage: any;
   form: any;
+  routing: any;
 }
 
 interface PagesSidebarState{
@@ -50,11 +52,10 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
     add: (HTMLInputElement);
   }
 
-constructor(props) {
-  super(props);
-  this.state = { modalIsOpen: false };
-}
-
+  constructor(props) {
+    super(props);
+    this.state = { modalIsOpen: false };
+  }
   componentWillMount() {
     store.subscribe( () => this.render() )
   }
@@ -78,13 +79,24 @@ constructor(props) {
   closeModal = () => {
     this.setState({modalIsOpen: false});
   }
+  sideBarVisibility = () => {
+    
+    let pathname = this.props.routing.locationBeforeTransitions.pathname;
+    console.log('sideBarVisibility', pathname);
+    let matchPage = pathname.match('/page')
+    if (pathname === "/" || (matchPage && matchPage[0] === "/page")) {
+      return {
+      }
+    } else {
+      return {display: 'none'}
+    }
+  }
 
   render(){
     console.log('rerendered', this);
     let props = this.props;
-    return  (<div className="page__sidebar">
-      
-      <button onClick={ e => this.props.toggleAddPage() }>Add page</button>
+    return  (<div className="page__sidebar" style={this.sideBarVisibility()}>
+      <button onClick={ e => this.props.toggleAddPage() } className="addPageBtn btn btn-success">Add page</button>
       <ul className="pageListContainer">
         {props.pages.items.map((p, idx) => 
           <div className="pageContainer" key={p._id}>

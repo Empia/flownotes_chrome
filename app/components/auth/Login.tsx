@@ -90,7 +90,7 @@ class Auth extends React.Component<AuthGeneralProps, {}>{
               initialValues={{email: '', password: ''}} 
               form={'login_form'}
               handleSubmit={this.handleLogin} />
-            <input type="text" ref="email" />
+            {/*<input type="text" ref="email" />
             <input type="text" ref="password" />
 
             <br/>
@@ -98,6 +98,7 @@ class Auth extends React.Component<AuthGeneralProps, {}>{
             <input type="checkbox" ref="admin" />
             <br/>
             <button onClick={this.onClick}>Login</button>
+            */}
           </div>
         </div>        
       </div>

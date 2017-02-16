@@ -1,7 +1,28 @@
+
+.top_bar {
+  background: white;
+padding: 17px 13px 14px 14px;
+margin-bottom: 17px;
+margin-top: -4px;
+width: 100%;
+box-shadow: 1px 1px 3px #8181811a;
+
+}
+
 .top_bar .menu li {
     display: inline-block;
     margin-right: 22px;
 }
+.top_bar .menu li a {
+font-size: 14px;
+font-weight: 700;
+color: #589adb;
+}
+
+.top_bar .menu li a.active {
+  color: #636363;
+}
+
 .primaryHeader__secondaryMenu .primaryHeader__secondaryMenu_searchElement {
   display: inline-block;
 }
@@ -22,9 +43,17 @@
     display: inline-block;
     float: left;
     width: 15%;
-    border-right: 1px solid gray;
+    border-right: 1px solid #e6e6e6;
+    background: white;
+    padding: 17px 7px;
 }
-
+:global .pagesSidebar_component .addPageBtn {
+    margin-bottom: 10px;
+    margin-left: 11px;
+    display: block;
+    clear: both;
+    width: 90%;
+}
 :global .focusedPageContainer {
     display: inline-block;
     float: left;
@@ -34,6 +63,7 @@
 
 :global .pageListContainer {
     list-style: none;
+    padding-left: 15px;
 }
 :global .pageContent__contentList {
   /*
@@ -95,7 +125,15 @@
     from {  transform: rotate(0deg) }
     to {transform: rotate(-7deg) }
 }
-
+:global .HeaderUserCredentials {
+  float: right;
+}
+:global .HeaderUserCredentials a {
+  cursor: pointer;
+ font-size: 14px;
+font-weight: 700;
+color: #589adb;
+}
 :global html, :global body {
   background: rgb(249, 249, 249);
   background-color: rgb(249, 249, 249);

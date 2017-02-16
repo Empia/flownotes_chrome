@@ -28,6 +28,31 @@ class Header extends React.Component<HeaderProps, HeaderState>{
     this.props.logout();
     e.preventDefault();
   };
+  subpanelStyles = {
+    display: 'none'
+  };
+  aditionalStuff = () => {
+    return (<span>
+            <li>
+              <IndexLink to="/foo" 
+              activeClassName={styles.active}  
+              activeStyle={{fontWeight: 'bold'}}>Foo</IndexLink>
+            </li>
+            <li>
+            <Link to="/modes" activeClassName={styles.active}   
+              activeStyle={{fontWeight: 'bold'}}>Modes</Link>
+            </li>
+            <li>
+              <Link to="/about" activeClassName={styles.active}  
+              activeStyle={{fontWeight: 'bold'}}>About</Link>
+            </li>
+            <li>
+              <Link to="/examples" activeClassName={styles.active}  
+              activeStyle={{fontWeight: 'bold'}}>Examples</Link>
+            </li>
+            </span>
+    )
+  }
 
   render(){
     return  (
@@ -35,56 +60,45 @@ class Header extends React.Component<HeaderProps, HeaderState>{
         <div className="top_bar_left">
           <ul className={styles.menu}>
             <li className="menu_text product_logo">
-<IndexLink to="/" 
-              activeClassName="active" 
-              activeStyle={{fontWeight: 'bold'}}>Flownotes</IndexLink></li>
+              <IndexLink to="/" 
+                activeClassName={styles.active}  
+                activeStyle={{fontWeight: 'bold'}}>Flownotes</IndexLink></li>
+
+            { this.props.user.data !== null ?
 
             <li>
               <IndexLink to="/" 
-              activeClassName="active" 
+              activeClassName={styles.active} 
               activeStyle={{fontWeight: 'bold'}}>Pages</IndexLink>
             </li>
+            : <li></li>}
               { this.props.user.data === null ?  
                <li>
                 <IndexLink to="/login" 
-                activeClassName="active" 
-                activeStyle={{fontWeight: 'bold'}}>login</IndexLink>
+                activeClassName={styles.active}  
+                activeStyle={{fontWeight: 'bold'}}>Login</IndexLink>
                </li> : <span></span>
               }    
               { this.props.user.data === null ?                  
               <li>
                 <IndexLink to="/signup" 
-                activeClassName="active" 
-                activeStyle={{fontWeight: 'bold'}}>signup</IndexLink>
+                activeClassName={styles.active}  
+                activeStyle={{fontWeight: 'bold'}}>Sign Up</IndexLink>
                </li> : <span></span>
               }       
-            <li>
-              <IndexLink to="/foo" 
-              activeClassName="active" 
-              activeStyle={{fontWeight: 'bold'}}>Foo</IndexLink>
-            </li>
-            <li>
-              <Link to="/modes" activeClassName="active"  
-              activeStyle={{fontWeight: 'bold'}}>Modes</Link>
-            </li>
-            <li>
-              <Link to="/about" activeClassName="active"  
-              activeStyle={{fontWeight: 'bold'}}>About</Link>
-            </li>
-            <li>
-              <Link to="/examples" activeClassName="active" 
-              activeStyle={{fontWeight: 'bold'}}>Examples</Link>
-            </li>
+            { this.props.user.data !== null ?
+             this.aditionalStuff() : <span></span>
+            }
               { this.props.user.data !== null && this.props.user.data.username !== undefined ?  
-              <li>
-                <div>
-                <p>User: {this.props.user.data.username + " "}</p>
+              <li className="HeaderUserCredentials">
+                <div className="HeaderUserCredentialsContainer">
+                <span>{this.props.user.data.username + " "}</span>
                 <a onClick={this.onClick2}>Log out</a></div>
               </li>  : ""            
               }
           </ul>
         </div>
-        <div className={styles.primaryHeader__secondaryMenu + ' top_bar_right'}>
+        <div style={this.subpanelStyles} className={styles.primaryHeader__secondaryMenu + ' top_bar_right'}>
           <form onSubmit={this.onSearch}>
             <div className={styles.menu}>
               <div className={styles.primaryHeader__secondaryMenu_searchElement + " primaryHeader__secondaryMenu-searchInput"}>
