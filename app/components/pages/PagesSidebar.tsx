@@ -80,15 +80,21 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
     this.setState({modalIsOpen: false});
   }
   sideBarVisibility = () => {
-    
+    let defaultStyles = {
+      display: "inline-block",
+      float: "left",
+      width: "15%",
+      borderRight: "1px solid #e6e6e6",
+      background: "white",
+      padding: "17px 7px"
+    }
     let pathname = this.props.routing.locationBeforeTransitions.pathname;
     console.log('sideBarVisibility', pathname);
     let matchPage = pathname.match('/page')
     if (pathname === "/" || (matchPage && matchPage[0] === "/page")) {
-      return {
-      }
+      return defaultStyles;
     } else {
-      return {display: 'none'}
+      return Object.assign(defaultStyles, {display: 'none'});
     }
   }
 
@@ -96,7 +102,7 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
     console.log('rerendered', this);
     let props = this.props;
     return  (<div className="page__sidebar" style={this.sideBarVisibility()}>
-      <button onClick={ e => this.props.toggleAddPage() } className="addPageBtn btn btn-success">Add page</button>
+      <button onClick={ e => this.props.toggleAddPage() } className="btn btn-success">Add page</button>
       <ul className="pageListContainer">
         {props.pages.items.map((p, idx) => 
           <div className="pageContainer" key={p._id}>

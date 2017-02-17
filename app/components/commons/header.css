@@ -39,14 +39,7 @@ color: #589adb;
     max-width: 100%;
     padding: 4px 24px;
 }
-:global .pagesSidebar_component {
-    display: inline-block;
-    float: left;
-    width: 15%;
-    border-right: 1px solid #e6e6e6;
-    background: white;
-    padding: 17px 7px;
-}
+
 :global .pagesSidebar_component .addPageBtn {
     margin-bottom: 10px;
     margin-left: 11px;
