@@ -5,6 +5,7 @@ export const REQUEST_PAGES = 'REQUEST_PAGES'
 export const RECEIVE_PAGES = 'RECEIVE_PAGES'
 export const REQUEST_REMOVING_PAGE = 'REQUEST_REMOVING_PAGE'
 export const RECIEVE_REMOVING_PAGE = 'RECIEVE_REMOVING_PAGE'
+import {getJWT} from '../jwt';
 
 export const requestPages = () => {
   return {
@@ -39,7 +40,7 @@ export function fetchPages() {
     // In this case, we return a promise to wait for.
     // This is not required by thunk middleware, but it is convenient for us.
 
-    return fetch(`/api/pages/`)
+    return fetch(`/api/pages/`, {headers: {'Authorization': getJWT()} })
       .then(response => response.json())
       .then(json =>
 
@@ -73,7 +74,7 @@ export function addPage(page) {
   return function (dispatch) {
     dispatch(function(){ return { type: 'REQUEST_ADDING_PAGE' } });
     return fetch(`/api/pages/`, {method: 'post',
-      headers: {'Content-Type': 'application/json'},  body: JSON.stringify({title: page.title, name: page.title})})
+      headers: {'Content-Type': 'application/json', 'Authorization': getJWT()},  body: JSON.stringify({title: page.title, name: page.title})})
       .then(response => response.json())
       .then(json => dispatch(addedPage({_id: json, title: page.title})))
   }
@@ -83,7 +84,7 @@ export function updatePage(pageId, page) {
   return function (dispatch) {
     dispatch(function(){ return { type: 'REQUEST_UPDATE_PAGE' } });
     return fetch(`/api/pages/${pageId}`, {method: 'PATCH',
-      headers: {'Content-Type': 'application/json'},  body: JSON.stringify({_id: pageId, title: page.title})})
+      headers: {'Content-Type': 'application/json', 'Authorization': getJWT() },  body: JSON.stringify({_id: pageId, title: page.title})})
       .then(response => response.json())
       .then(json => dispatch(updatedPage(pageId, {_id: pageId, title: page.title})))
   }
@@ -109,7 +110,7 @@ export function removePage(pageId) {
     // In this case, we return a promise to wait for.
     // This is not required by thunk middleware, but it is convenient for us.
 
-    return fetch(`/api/pages/${pageId}`, {method: 'delete'})
+    return fetch(`/api/pages/${pageId}`, {method: 'delete', headers: {'Authorization': getJWT() }})
       .then(response => { 
           dispatch(receiveDeletedPage(pageId));
       })

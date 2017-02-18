@@ -13,6 +13,7 @@ export const REQUEST_UPDATING_PAGE_CONTENT = 'REQUEST_UPDATING_PAGE_CONTENT'
 export const REQUEST_MOVING_ORDER_PAGE_CONTENT = 'REQUEST_MOVING_ORDER_PAGE_CONTENT'
 export const RECIEVE_ORDERED_PAGE_CONTENT = 'RECIEVE_ORDERED_PAGE_CONTENT'
 export const RECEIVE_PAGE_CONTENT_ORDERING = 'RECEIVE_PAGE_CONTENT_ORDERING'
+import {getJWT} from '../jwt';
 
 export const selectPage = (pageId) => {
 console.log('selectPage');
@@ -47,7 +48,7 @@ export const recievePageOrdering = (updatedOrdering) => {
 export function fetchPageContent(pageId) {
   return function (dispatch) {
     dispatch(requestPageContent(pageId))
-    return fetch(`/api/content/page/${pageId}`)
+    return fetch(`/api/content/page/${pageId}`, {headers: {'Authorization': getJWT()} })
       .then(response => response.json())
       .then(json =>
         dispatch(receivePageContent(json))
@@ -81,7 +82,7 @@ export function addPageContent(pageId, content) {
         inContent: content.inContent,
     }
     return fetch(`/api/content/page/${pageId}`, {method: 'post',
-      headers: {'Content-Type': 'application/json'},  body: JSON.stringify(contentToAdd)})
+      headers: {'Content-Type': 'application/json', 'Authorization': getJWT() },  body: JSON.stringify(contentToAdd)})
       .then(response => response.json())
       .then(json => { 
         let response:any = json;
@@ -98,7 +99,7 @@ export function requestMovingOrderPageContent(pageId, pageContentId) {
 export function moveOrderPageContent(pageId, pageContentId, content) {
   return function (dispatch) {
     dispatch(requestMovingOrderPageContent(pageId, pageContentId))
-    return fetch(`/api/content/order/${pageContentId}`, {method: 'patch'})
+    return fetch(`/api/content/order/${pageContentId}`, {method: 'patch', {headers: {'Authorization': getJWT()} } })
       .then(response => { 
           console.log(response);
           dispatch(receiveOrderedPageContent(pageId, pageContentId));
@@ -123,7 +124,7 @@ export function requestUpdatingPageContent(pageId, pageContentId) {
 export function updatePageContent(pageId, pageContentId, content) {
   return function (dispatch) {
     dispatch(requestUpdatingPageContent(pageId, pageContentId))
-    return fetch(`/api/content/${pageContentId}`, {method: 'patch'})
+    return fetch(`/api/content/${pageContentId}`, {method: 'patch', {headers: {'Authorization': getJWT()} }})
       .then(response => { 
           console.log(response);
           dispatch(receiveUpdatePageContent(pageId, pageContentId));
@@ -142,7 +143,7 @@ export function receiveUpdatePageContent(pageId, pageContentId) {
 export function removePageContent(pageId, pageContentId) {
   return function (dispatch) {
     dispatch(requestRemovingPageContent(pageId, pageContentId))
-    return fetch(`/api/content/${pageContentId}`, {method: 'delete'})
+    return fetch(`/api/content/${pageContentId}`, {method: 'delete', {headers: {'Authorization': getJWT()} }})
       .then(response => { 
           console.log(response);
           dispatch(receiveDeletedPageContent(pageId, pageContentId));
