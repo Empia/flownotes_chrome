@@ -19,13 +19,14 @@ class FlowNoteContentService{
   }
    
   addOrderToContent = (flowNoteContent, pageId, flowNoteContentSaveFn) => {
-    FlowNoteContent.find({ inPageId: pageId},(err, data) => {
+    FlowNoteContent.find({ userId: req.user[0]._id, inPageId: pageId},(err, data) => {
         let filteredData = data.filter((c) => c.inPageId === pageId)
         console.log('filteredData', filteredData.length);
         let orderingService = new OrderingService(filteredData);
         let lastOrder:number = orderingService.getLastOrder();
         console.log('last order', lastOrder);
-        flowNoteContent['order'] = lastOrder+1;         
+        flowNoteContent['order'] = lastOrder+1;    
+        flowNoteContent[userId] = req.user[0]._id     
         return flowNoteContentSaveFn(flowNoteContent);
     });
   }
@@ -110,7 +111,7 @@ class FlowNoteContentService{
    * @param {String} myParam
    */  
   update(req, res:Response){
-    FlowNoteContent.findOne({_id:req.body._id}, (err, doc) => {
+    FlowNoteContent.findOne({_id:req.body._id, userId: req.user[0]._id}, (err, doc) => {
       for(let key in req.body){
         doc[key] = req.body[key];
       }
@@ -127,7 +128,7 @@ class FlowNoteContentService{
   updateOrder(req, res:Response){
     let order = req.body.order
     let contentId = req.params.id;
-    FlowNoteContent.findOne({_id:req.body._id}, (err, doc) => {
+    FlowNoteContent.findOne({_id:req.body._id, userId: req.user[0]._id}, (err, doc) => {
       doc['order'] = req.body['order'];
       // update order of others in this page
       doc.save();
@@ -142,7 +143,7 @@ class FlowNoteContentService{
    * @param {String} myParam
    */  
   remove(req, res:Response){
-    FlowNoteContent.findOne({ _id: req.params.id})
+    FlowNoteContent.findOne({ _id: req.params.id, userId: req.user[0]._id})
     .remove((err, doc) => {
         res.status(202).send(null);
       });

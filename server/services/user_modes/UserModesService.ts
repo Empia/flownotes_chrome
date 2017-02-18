@@ -6,7 +6,7 @@ class UserModesService {
   constructor(){}
 
   getList(req, res:Response){
-    return UserModes.find((err, data) => res.send(data));
+    return UserModes.find({ userId: req.user[0]._id}, (err, data) => res.send(data));
   }
   add(req, res:Response){
     let userMode = new UserModes(req.body);

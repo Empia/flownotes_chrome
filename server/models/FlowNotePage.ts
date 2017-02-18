@@ -7,7 +7,7 @@ interface IFlowNotePage extends Document {
   labels:Array<ILabels>;
 	id?:string;
   order?:number;
-
+  userId:string;
   createdAt?:Date;
   updatedAt?:Date;  
 }
@@ -22,7 +22,7 @@ let FlowNotePageSchema = new Schema({
   }],
 	id:String,
   order: {type: Number, required: false},
-
+  userId:String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 

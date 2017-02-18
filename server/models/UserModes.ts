@@ -4,6 +4,7 @@ import {Mongoose, Schema, model,Document} from 'mongoose';
 interface IUserModes extends Document {
   title:string;
   id?:string;
+  userId:string;
   createdAt?:Date;
   updatedAt?:Date;
 }
@@ -12,6 +13,7 @@ interface IUserModes extends Document {
 let UserModesSchema = new Schema({
   title:String,
   id:String,
+  userId:String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

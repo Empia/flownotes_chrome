@@ -32,6 +32,7 @@
     "connect-ensure-login": "^0.1.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
+    "crypto": "0.0.3",
     "css-modules-require-hook": "^4.0.5",
     "ejs": "^2.3.4",
     "es6-promise": "^4.0.5",

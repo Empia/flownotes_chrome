@@ -20,7 +20,8 @@ interface IFlowNoteContent extends Document {
   inContent?:string;
   labels:Array<ILabels>;
   id?:string;
-
+  userId:string;
+  
   states:Array<IConState>;
 
   inPagesIds?:Array<string>;
@@ -49,6 +50,7 @@ let FlowNoteContentSchema = new Schema({
         opposite: { type: String, required: false}
   }],  
   id:String,
+  userId:String,
   order: {type: Number, required: false},
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },

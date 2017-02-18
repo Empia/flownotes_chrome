@@ -6,6 +6,7 @@ interface IAccounts extends Document {
   username?: string;
   email: string;
   password: string;
+  salt?:string;
   id?:string;
   _id:string;  
   createdAt?:Date;
@@ -21,6 +22,7 @@ let AccountSchema = new Schema({
       required: true
   },
   password: String,
+  salt: {type: String, required: false},
   id:String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
