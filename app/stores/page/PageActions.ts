@@ -1,3 +1,4 @@
+import {getJWT} from '../jwt';
 
 export const toggleAddPageContent= () => ({type: 'TOGGLE_ADD_PAGE_CONTENT'});
 export const REQUEST_PAGE_CONTENT = 'REQUEST_PAGE_CONTENT'
@@ -13,7 +14,6 @@ export const REQUEST_UPDATING_PAGE_CONTENT = 'REQUEST_UPDATING_PAGE_CONTENT'
 export const REQUEST_MOVING_ORDER_PAGE_CONTENT = 'REQUEST_MOVING_ORDER_PAGE_CONTENT'
 export const RECIEVE_ORDERED_PAGE_CONTENT = 'RECIEVE_ORDERED_PAGE_CONTENT'
 export const RECEIVE_PAGE_CONTENT_ORDERING = 'RECEIVE_PAGE_CONTENT_ORDERING'
-import {getJWT} from '../jwt';
 
 export const selectPage = (pageId) => {
 console.log('selectPage');
@@ -99,7 +99,7 @@ export function requestMovingOrderPageContent(pageId, pageContentId) {
 export function moveOrderPageContent(pageId, pageContentId, content) {
   return function (dispatch) {
     dispatch(requestMovingOrderPageContent(pageId, pageContentId))
-    return fetch(`/api/content/order/${pageContentId}`, {method: 'patch', {headers: {'Authorization': getJWT()} } })
+    return fetch(`/api/content/order/${pageContentId}`, { method: 'patch', headers: {'Authorization': getJWT()} })
       .then(response => { 
           console.log(response);
           dispatch(receiveOrderedPageContent(pageId, pageContentId));
@@ -124,7 +124,7 @@ export function requestUpdatingPageContent(pageId, pageContentId) {
 export function updatePageContent(pageId, pageContentId, content) {
   return function (dispatch) {
     dispatch(requestUpdatingPageContent(pageId, pageContentId))
-    return fetch(`/api/content/${pageContentId}`, {method: 'patch', {headers: {'Authorization': getJWT()} }})
+    return fetch(`/api/content/${pageContentId}`, {method: 'patch', headers: {'Authorization': getJWT()} })
       .then(response => { 
           console.log(response);
           dispatch(receiveUpdatePageContent(pageId, pageContentId));
@@ -143,7 +143,7 @@ export function receiveUpdatePageContent(pageId, pageContentId) {
 export function removePageContent(pageId, pageContentId) {
   return function (dispatch) {
     dispatch(requestRemovingPageContent(pageId, pageContentId))
-    return fetch(`/api/content/${pageContentId}`, {method: 'delete', {headers: {'Authorization': getJWT()} }})
+    return fetch(`/api/content/${pageContentId}`, {method: 'delete', headers: {'Authorization': getJWT()} })
       .then(response => { 
           console.log(response);
           dispatch(receiveDeletedPageContent(pageId, pageContentId));

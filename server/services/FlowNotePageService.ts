@@ -11,7 +11,7 @@ class FlowNotePageService{
 	add(req, res:Response){
 		let flowNotePage = new FlowNotePage(req.body);
 		console.log('req.body', req.body);
-		flowNotePage[userId] = req.user[0]._id
+		flowNotePage.userId = req.user[0]._id
 		flowNotePage.save((err, data:IFlowNotePage) => 
 				res.status(200).send(data._id));
 	}

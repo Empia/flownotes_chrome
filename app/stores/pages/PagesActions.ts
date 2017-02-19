@@ -1,3 +1,4 @@
+import {getJWT} from '../jwt';
 
 export const toggleAddPage= () => ({type: 'TOGGLE_ADD_CARD'});
 export const hideAddPage= () => ({type: 'HIDE_ADD_CARD'});
@@ -5,7 +6,6 @@ export const REQUEST_PAGES = 'REQUEST_PAGES'
 export const RECEIVE_PAGES = 'RECEIVE_PAGES'
 export const REQUEST_REMOVING_PAGE = 'REQUEST_REMOVING_PAGE'
 export const RECIEVE_REMOVING_PAGE = 'RECIEVE_REMOVING_PAGE'
-import {getJWT} from '../jwt';
 
 export const requestPages = () => {
   return {

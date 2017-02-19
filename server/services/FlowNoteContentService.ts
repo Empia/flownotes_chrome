@@ -18,7 +18,7 @@ class FlowNoteContentService{
     return FlowNoteContent.find({ inPageId: pageId},(err, data) => res.send(data));
   }
    
-  addOrderToContent = (flowNoteContent, pageId, flowNoteContentSaveFn) => {
+  addOrderToContent = (flowNoteContent, pageId, flowNoteContentSaveFn, req) => {
     FlowNoteContent.find({ userId: req.user[0]._id, inPageId: pageId},(err, data) => {
         let filteredData = data.filter((c) => c.inPageId === pageId)
         console.log('filteredData', filteredData.length);
@@ -26,7 +26,7 @@ class FlowNoteContentService{
         let lastOrder:number = orderingService.getLastOrder();
         console.log('last order', lastOrder);
         flowNoteContent['order'] = lastOrder+1;    
-        flowNoteContent[userId] = req.user[0]._id     
+        flowNoteContent['userId'] = req.user[0]._id     
         return flowNoteContentSaveFn(flowNoteContent);
     });
   }
@@ -35,7 +35,7 @@ class FlowNoteContentService{
    * @method myFunction
    * @param {String} myParam
    */    
-  addContentFn = (pageId, content, flowNoteContent, res) => {
+  addContentFn = (pageId, content, flowNoteContent, res, req) => {
     console.log('main pageId', pageId);
     const saveContentFn = (flowNoteContent) => {
           flowNoteContent.save((err, data:IFlowNoteContent) => {
@@ -60,7 +60,7 @@ class FlowNoteContentService{
               ison_rate: 100                
             }];       
         console.log('fetch', flowNoteContent.title);
-        return this.addOrderToContent(flowNoteContent, pageId, (flowNoteContent) => saveContentFn(flowNoteContent));
+        return this.addOrderToContent(flowNoteContent, pageId, (flowNoteContent) => saveContentFn(flowNoteContent), req);
       });
       client.on("error", (err) => console.log('err',err));
       return client.fetch(); 
@@ -70,7 +70,7 @@ class FlowNoteContentService{
               ison: true,
               ison_rate: 100                
             }];           
-      return this.addOrderToContent(flowNoteContent, pageId, (flowNoteContent) => saveContentFn(flowNoteContent));
+      return this.addOrderToContent(flowNoteContent, pageId, (flowNoteContent) => saveContentFn(flowNoteContent), req);
     }    
   };
 
@@ -84,7 +84,7 @@ class FlowNoteContentService{
    let contents = req.body
     q.all(contents.map((content) => {
         let flowNoteContent = new FlowNoteContent(req.body);
-         this.addContentFn(pageId, content, flowNoteContent, undefined);
+         this.addContentFn(pageId, content, flowNoteContent, undefined, req);
        })).then(function(data) {
         res.status(200).send(data);
     });
@@ -101,7 +101,7 @@ class FlowNoteContentService{
     console.log('add page content', pageId);
     let flowNoteContent = new FlowNoteContent(req.body);
     console.log('req.body', req.body);
-    this.addContentFn(pageId, flowNoteContent, flowNoteContent, res);
+    this.addContentFn(pageId, flowNoteContent, flowNoteContent, res, req);
   }
 
   

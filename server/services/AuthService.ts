@@ -41,7 +41,7 @@ function saltHashPassword(userpassword) {
     console.log('Passwordhash = '+passwordData.passwordHash);
     console.log('\nSalt = '+passwordData.salt);
     return {
-      passowrd: passwordData.passwordHash,
+      password: passwordData.passwordHash,
       salt: passwordData.salt
     }
 }
@@ -62,9 +62,9 @@ signUp = (req, res, next) => {
   //user.save(function(err) {
     let account = new Accounts(req.body);
     console.log('req.body', req.body);
-    let pass = saltHashPassword(account[password])
-    account[password] = pass.password
-    account[salt]     = pass.salt
+    let pass = saltHashPassword(account.password)
+    account.password = pass.password
+    account.salt     = pass.salt
     account.save((err, data:IAccounts) => 
         res.status(200).send(Object.assign(req.body, {_id: data._id}) ));
   //});
@@ -103,6 +103,40 @@ if (req.body.email && req.body.password) {
 logout = (req, res) => {
   req.logout();
   res.redirect('/');
+}
+
+Records = [
+    { id: 1, username: 'jack', password: 'secret', displayName: 'Jack', emails: [ { value: 'jack@example.com' } ] }
+  , { id: 2, username: 'jill', password: 'birthday', displayName: 'Jill', emails: [ { value: 'jill@example.com' } ] }
+];
+////
+findById(id, cb) {
+  process.nextTick(function() {
+    let user = this.Records.find(c => (c.id === id.id))
+    console.log(user, id);
+    cb(null, user);
+    /*
+    var idx = id - 1;
+    if (Records[idx]) {
+      cb(null, Records[idx]);
+    } else {
+      cb(new Error('User ' + id + ' does not exist'));
+    }
+  */
+  });
+}
+
+findByUsername(username, cb) {
+  console.log('findByUsername(username', username);
+  process.nextTick(function() {
+    for (var i = 0, len = this.Records.length; i < len; i++) {
+      var record = this.Records[i];
+      if (record.username === username) {
+        return cb(null, record);
+      }
+    }
+    return cb(null, null);
+  });
 }
 
 
