@@ -41,6 +41,7 @@ const mapDispatchToProps = dispatch => ({
     updateContentOrder: (pageId, pageContentId, content) => dispatch(actions.moveOrderPageContent(pageId, pageContentId, content)),
     addPageContent: (pageId,content) => dispatch(actions.addPageContent(pageId, content)),
     recievePageOrdering: (updateOrdering) => dispatch(actions.recievePageOrdering(updateOrdering)),
+    contentSortBy: (param) => dispatch(actions.sortBy(param)),
 });
 
 interface FocusedPageContainerProps extends React.Props<any>{
@@ -61,6 +62,7 @@ interface FocusedPageContainerProps extends React.Props<any>{
   updatePageContent: (pageId:string, pageContentId:string, content:any) => void;
   updateContentOrder:any;
   recievePageOrdering: any;
+  contentSortBy: any;
 }
 
 interface GeneralState {
@@ -279,6 +281,28 @@ moveCard(dragIndex, hoverIndex) {
     this.setState({modalIsOpen: false});
   }
 
+
+  sortingBy = (sortParam) => {
+    console.log('sortingBy', sortParam, this.props.pageContents);
+    if (sortParam === 'date') {
+      return this.props.pageContents.sortBy === 'date';
+    } else {
+      if (sortParam === 'order') {
+        return this.props.pageContents.sortBy === 'order';
+      }
+    }
+  }
+  toggleSortingTo = (param) => {
+     return this.props.contentSortBy(param);
+  }
+  sortFunction = (page_content) => {
+    if (this.props.pageContents.sortBy === 'order') {
+      return page_content.sort((c,b) => c.order - b.order)
+    } else {
+      return page_content.sort((c,b) => c.createdAt - b.createdAt)
+    }
+  }
+
   render(){
     let initialValues = {
         content_type: 'Link',
@@ -338,8 +362,8 @@ moveCard(dragIndex, hoverIndex) {
 
         <div className="pageContent__sortableDropdown">
           <DropdownButton bsStyle="default" title={'Sort'} key={'dropdown-'} id={`dropdown-basic-`}>
-            <MenuItem eventKey="1" active>By Order</MenuItem>
-            <MenuItem eventKey="2">By Date</MenuItem>
+            <MenuItem eventKey="1" onClick={ e => this.toggleSortingTo('order') } active={this.sortingBy('order') }>By Order</MenuItem>
+            <MenuItem eventKey="2" onClick={ e => this.toggleSortingTo('date') } active={this.sortingBy('date') }>By Date</MenuItem>
             <MenuItem divider />
             <MenuItem eventKey="3" active>ASC</MenuItem>
             <MenuItem eventKey="4">DESC</MenuItem>
@@ -348,7 +372,7 @@ moveCard(dragIndex, hoverIndex) {
 
 
         <div className="pageContent__contentList">
-            {this.props.pageContents.page_content.sort((c,b) => c.order - b.order).map((p, idx) => 
+            {this.sortFunction(this.props.pageContents.page_content).map((p, idx) => 
         <div>
         <DragCard key={idx}
                   index={p.order}

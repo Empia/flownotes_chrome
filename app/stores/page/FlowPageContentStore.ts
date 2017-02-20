@@ -43,6 +43,7 @@ export const addingPageContent = (state, action) => {
 
 const pageContentsInitialState = {
   isPageContentsFetching: false,
+  sortBy: 'order',
   page_content: []
 }
 
@@ -71,6 +72,12 @@ export const pageContents = (state = pageContentsInitialState, action) => {
         page_content: result,
         lastUpdated: action.recievedAt
       });
+
+    case 'SORT_BY_ORDER':
+      return (<any>Object).assign({}, state, {sortBy: 'order'})
+    case 'SORT_BY_DATE':
+      return (<any>Object).assign({}, state, {sortBy: 'date'})
+
     case 'REQUEST_ADDING_PAGE_CONTENT':
       return state;
     case REQUEST_REMOVING_PAGE_CONTENT:
