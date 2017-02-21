@@ -26,6 +26,7 @@
     "react-redux": "github:DefinitelyTyped/DefinitelyTyped/react-redux/react-redux.d.ts#e80403239facb94b039a3266d5dc75bd5d0efc2a",
     "react-router": "github:DefinitelyTyped/DefinitelyTyped/react-router/react-router.d.ts#e80403239facb94b039a3266d5dc75bd5d0efc2a",
     "react-router-redux": "github:DefinitelyTyped/DefinitelyTyped/react-router-redux/react-router-redux.d.ts#e80403239facb94b039a3266d5dc75bd5d0efc2a",
+    "react-sortable-hoc": "registry:dt/react-sortable-hoc#0.0.7+20170123203653",
     "redux": "github:DefinitelyTyped/DefinitelyTyped/redux/redux.d.ts#6b3bc735ad028ca115c06721fb1c71ffc0e7a546",
     "redux-form": "github:DefinitelyTyped/DefinitelyTyped/redux-form/redux-form.d.ts#6b3bc735ad028ca115c06721fb1c71ffc0e7a546",
     "redux-logger": "github:DefinitelyTyped/DefinitelyTyped/redux-logger/redux-logger.d.ts#e45879a3b4a6d7e265f21103ae044cefb3cee37c",

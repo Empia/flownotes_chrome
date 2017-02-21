@@ -14,7 +14,7 @@ class LinkContentType extends React.Component<LinkContentTypeProps, LinkContentT
     render () {
         let props = this.props
         return <div>
-         <h3><span>{props.content_order+" "}</span>{props.content_title}</h3>
+         <h3>{props.content_title}</h3>
           <a href={props.content_value}>{props.content_value}</a>
         </div>;
     }

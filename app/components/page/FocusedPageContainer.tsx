@@ -24,6 +24,7 @@ import {DropdownButton, MenuItem} from 'react-bootstrap';
 import {CustomDragLayer} from './../commons/drag/CustomDragLayer' 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
 
 const mapStateToProps = ({addingPageContent, pageContents, pages, selectedPage}) => ({
@@ -299,7 +300,7 @@ moveCard(dragIndex, hoverIndex) {
     if (this.props.pageContents.sortBy === 'order') {
       return page_content.sort((c,b) => c.order - b.order)
     } else {
-      return page_content.sort((c,b) => c.createdAt - b.createdAt)
+      return page_content.sort((c,b) => (+ new Date(c.createdAt)) - (+ new Date(b.createdAt)))
     }
   }
 
@@ -313,7 +314,6 @@ moveCard(dragIndex, hoverIndex) {
         <h3 className="pageContent__pageHeader">
           Page {this.props.pages.selectedPage ? this.props.pages.selectedPage.title : '' } 
         </h3>
-
 {/*this.state.cards.map((card, i) => {
           return (
             <DragCard key={card.id}
@@ -323,7 +323,6 @@ moveCard(dragIndex, hoverIndex) {
                   moveCard={this.moveCard} />
           );
 })*/}        
-
         <BasicDialog />
         <EditContentModal />
         <Select
@@ -371,20 +370,51 @@ moveCard(dragIndex, hoverIndex) {
         </div>
 
 
+       <SortableList2 items={this.props.pageContents.page_content} onSortEnd={this.onSortEnd}>
+          SortableItem
+        </SortableList2>
+
         <div className="pageContent__contentList">
             {this.sortFunction(this.props.pageContents.page_content).map((p, idx) => 
         <div>
-        <DragCard key={idx}
+
+        <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
+        {/*<DragCard key={idx}
                   index={p.order}
                   id={p._id}
                   text={p._id}
                   moveCard={this.moveCard}>
-                    <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
+                <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
         </DragCard>
-        {/*<CustomDragLayer p={p}></CustomDragLayer>*/}</div>)}
+        <CustomDragLayer p={p}></CustomDragLayer>*/}</div>)}
         </div>
       </div>);
-  }  
+  }    
+  onSortEnd = ({oldIndex, newIndex}) => {
+    console.log('onSortEnd', oldIndex, newIndex);
+        //this.setState({
+            //items: arrayMove(this.state.items, oldIndex, newIndex)
+        //});
+  };  
+}
+//const SortableItem = SortableElement(({value:FocusedPageContainerProps}) => <GenericPageContent {...value} />);
+const SortableItem = SortableElement(GenericPageContent);
+
+const SortableList2 = SortableContainer((props: SortableListProps): JSX.Element => {
+    const items: Array<JSX.Element> = props.items.map((value: any, index: number): JSX.Element => {
+        return <div className="pageContent__contentList">      
+        <SortableItem key={`item-${index}`} index={index} contentIdx={value._id} contentObject={value} />
+        </div>;
+    });
+    return <ul>{items}</ul>;
+});
+
+interface SortableItemProps {
+    value: string;
+}
+
+interface SortableListProps {
+    items: Array<string>;
 }
  
 export default connect(mapStateToProps, mapDispatchToProps)(FocusedPageContainer);
