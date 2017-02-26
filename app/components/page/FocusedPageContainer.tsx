@@ -303,6 +303,9 @@ moveCard(dragIndex, hoverIndex) {
       return page_content.sort((c,b) => (+ new Date(c.createdAt)) - (+ new Date(b.createdAt)))
     }
   }
+  disableDragging = () => {
+    return !(this.props.pageContents.sortBy === 'order')
+  }
 
   render(){
     let initialValues = {
@@ -370,23 +373,20 @@ moveCard(dragIndex, hoverIndex) {
         </div>
 
 
-       <SortableList2 items={this.props.pageContents.page_content} onSortEnd={this.onSortEnd}>
-          SortableItem
-        </SortableList2>
+        <SortableList2 disabled={this.disableDragging()} items={this.sortFunction(this.props.pageContents.page_content)} onSortEnd={this.onSortEnd} />
 
         <div className="pageContent__contentList">
             {this.sortFunction(this.props.pageContents.page_content).map((p, idx) => 
-        <div>
-
-        <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
-        {/*<DragCard key={idx}
-                  index={p.order}
-                  id={p._id}
-                  text={p._id}
-                  moveCard={this.moveCard}>
-                <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
-        </DragCard>
-        <CustomDragLayer p={p}></CustomDragLayer>*/}</div>)}
+          <div>
+          <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
+          {/*<DragCard key={idx}
+                    index={p.order}
+                    id={p._id}
+                    text={p._id}
+                    moveCard={this.moveCard}>
+                  <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
+          </DragCard>
+          <CustomDragLayer p={p}></CustomDragLayer>*/}</div>)}
         </div>
       </div>);
   }    
@@ -403,8 +403,10 @@ const SortableItem = SortableElement(GenericPageContent);
 const SortableList2 = SortableContainer((props: SortableListProps): JSX.Element => {
     const items: Array<JSX.Element> = props.items.map((value: any, index: number): JSX.Element => {
         return <div className="pageContent__contentList">      
-        <SortableItem key={`item-${index}`} index={index} contentIdx={value._id} contentObject={value} />
-        </div>;
+                <SortableItem disabled={props.disabled} 
+                              key={`item-${index}`} 
+                              index={index} contentIdx={value._id} contentObject={value} />
+               </div>;
     });
     return <ul>{items}</ul>;
 });
@@ -415,6 +417,7 @@ interface SortableItemProps {
 
 interface SortableListProps {
     items: Array<string>;
+    disabled?: boolean;
 }
  
 export default connect(mapStateToProps, mapDispatchToProps)(FocusedPageContainer);
