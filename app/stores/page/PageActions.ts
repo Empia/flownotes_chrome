@@ -72,13 +72,23 @@ export function receiveDeletedPageContent(pageId, pageContentId) {
 
 export function addedPageContent(content) { return {type: 'ADD_PAGE_CONTENT', data: content} };
 export function sortBy(param) { 
-  if (param === 'order') {
+  if (param === 'order_asc') {
     return {
-      type: 'SORT_BY_ORDER'
+      type: 'SORT_BY_ORDER_ASC'
+    }
+  }
+  if (param === 'order_desc') {
+    return {
+      type: 'SORT_BY_ORDER_DESC'
+    }
+  }
+  if (param === 'date_asc') {
+    return {
+      type: 'SORT_BY_DATE_ASC'
     }
   } else {
     return {
-      type: 'SORT_BY_DATE'
+      type: 'SORT_BY_DATE_DESC'
     }
   }
 }

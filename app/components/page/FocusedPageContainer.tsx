@@ -284,27 +284,37 @@ moveCard(dragIndex, hoverIndex) {
 
 
   sortingBy = (sortParam) => {
-    console.log('sortingBy', sortParam, this.props.pageContents);
-    if (sortParam === 'date') {
-      return this.props.pageContents.sortBy === 'date';
-    } else {
-      if (sortParam === 'order') {
-        return this.props.pageContents.sortBy === 'order';
-      }
-    }
+    return this.props.pageContents.sortBy.split('_')[0] === sortParam.split('_')[0]
   }
-  toggleSortingTo = (param) => {
+  sortingPosBy = (sortParam) => {
+    return this.props.pageContents.sortBy.split('_')[1] === sortParam.split('_')[1]    
+  }
+
+
+  toggleSortInfo = (name, param = "object") => {
+    if (param !== "pos") {
      return this.props.contentSortBy(param);
+    } else {
+     return this.props.contentSortBy(this.props.pageContents.sortBy.split('_')[0]+"_"+name);    
+    }
   }
   sortFunction = (page_content) => {
-    if (this.props.pageContents.sortBy === 'order') {
+    if (this.props.pageContents.sortBy === 'order_asc') {
       return page_content.sort((c,b) => c.order - b.order)
-    } else {
+    } 
+    if (this.props.pageContents.sortBy === 'order_desc') {
+      return page_content.sort((c,b) => b.order - c.order)
+    } 
+    if (this.props.pageContents.sortBy === 'date_asc') {
       return page_content.sort((c,b) => (+ new Date(c.createdAt)) - (+ new Date(b.createdAt)))
-    }
+    } 
+    if (this.props.pageContents.sortBy === 'date_desc') {
+      return page_content.sort((c,b) => (+ new Date(b.createdAt)) - (+ new Date(c.createdAt)))
+    }     
+    
   }
   disableDragging = () => {
-    return !(this.props.pageContents.sortBy === 'order')
+    return !(this.props.pageContents.sortBy === 'order_asc' || this.props.pageContents.sortBy === 'order_desc')
   }
 
   render(){
@@ -366,11 +376,11 @@ moveCard(dragIndex, hoverIndex) {
           </div> 
           <div className="pageContent__sortableDropdown">
             <DropdownButton bsStyle="default" title={'Sort'} key={'dropdown-'} id={`dropdown-basic-`}>
-              <MenuItem eventKey="1" onClick={ e => this.toggleSortingTo('order') } active={this.sortingBy('order') }>By Order</MenuItem>
-              <MenuItem eventKey="2" onClick={ e => this.toggleSortingTo('date') } active={this.sortingBy('date') }>By Date</MenuItem>
+              <MenuItem eventKey="1" onClick={ e => this.toggleSortInfo('order_asc') } active={this.sortingBy('order_asc') }>By Order</MenuItem>
+              <MenuItem eventKey="2" onClick={ e => this.toggleSortInfo('date_asc') } active={this.sortingBy('date_asc') }>By Date</MenuItem>
               <MenuItem divider />
-              <MenuItem eventKey="3" active>ASC</MenuItem>
-              <MenuItem eventKey="4">DESC</MenuItem>
+              <MenuItem eventKey="3" active={this.sortingPosBy('order_asc') } onClick={ e => this.toggleSortInfo('asc', 'pos') }>ASC</MenuItem>
+              <MenuItem eventKey="4" active={this.sortingPosBy('order_desc') } onClick={ e => this.toggleSortInfo('desc', 'pos') }>DESC</MenuItem>
             </DropdownButton>          
           </div>
         </div>
