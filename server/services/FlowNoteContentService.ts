@@ -3,6 +3,7 @@ import {FlowNoteContent, IFlowNoteContent} from '../models/FlowNoteContent';
 var MetaInspector = require('node-metainspector');
 import q from 'q';
 import OrderingService from './OrderingService';
+const normalizeUrl = require('normalize-url');
 
 class FlowNoteContentService{
   constructor(){}
@@ -51,7 +52,7 @@ class FlowNoteContentService{
     };
    // Init content
     if (flowNoteContent.content_type == "Link") {
-      var client = new MetaInspector(flowNoteContent.content_value, { timeout: 15000 });
+      var client = new MetaInspector(normalizeUrl(flowNoteContent.content_value), { timeout: 15000 });
       client.on("fetch", () => {
             flowNoteContent['title'] = client.title;
             flowNoteContent['states'] = [{
