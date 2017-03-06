@@ -97,7 +97,7 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
           </div>
           <div className="pageContent__contentResource-content_controls">
             <DropdownButton bsStyle="default" title={'...'} key={'dropdown-'+p._id} id={`dropdown-basic-${p._id}`}>
-              <RemoveButton pageId={p.pageId} contentId={p._id} toRemove={ this.removePageSender }/>
+              <MenuItem eventKey="0" onClick={() => this.removePageSender(p.pageId,p._id)}>Remove</MenuItem>
               <MenuItem eventKey="1" onClick={this.openModalWindow('editContentModal')}>Modal</MenuItem>
               <MenuItem eventKey="2">Action</MenuItem>
               <MenuItem eventKey="3">Another action</MenuItem>
