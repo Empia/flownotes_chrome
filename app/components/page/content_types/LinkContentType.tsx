@@ -14,9 +14,9 @@ interface LinkContentTypeState{
 class LinkContentType extends React.Component<LinkContentTypeProps, LinkContentTypeState>{
     render () {
         let props = this.props
-        return <div>
-         <h3>{props.content_title}</h3>
-          <a href={normalizeUrl(props.content_value)}>{normalizeUrl(props.content_value)}</a>
+        return <div className="LinkContentLinkContainer">
+         <h3 className="LinkContentLinkTitle">{props.content_title}</h3>
+          <a className="LinkContentLinkA" href={normalizeUrl(props.content_value)}>{normalizeUrl(props.content_value)}</a>
         </div>;
     }
 }

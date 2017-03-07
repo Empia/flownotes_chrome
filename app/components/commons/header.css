@@ -103,7 +103,7 @@ color: #589adb;
     clear: both;
     display: inline-block;
     float: left;
-
+    width: 65%;
 }
 :global .pageContent__contentResource-content_controls {
     display: inline-block;
@@ -145,8 +145,28 @@ color: #589adb;
     width: 35%;
     margin: 0 0;
 }
-
-
+/*
+Content type
+*/
+:global .LinkContentLinkA {
+    display: block;
+    max-width: 555px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+:global .LinkContentLinkTitle {
+    display: block;
+    max-width: 755px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+/*
+// END Content type
+*/
 
 :global .pageContent__contentResource-content_type {
     display: inline-block;

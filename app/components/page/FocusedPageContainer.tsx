@@ -386,7 +386,7 @@ moveCard(dragIndex, hoverIndex) {
         </div>
 
         <SortableList2 disabled={this.disableDragging()} 
-                       pressDelay={50}
+                       pressDelay={10}
                        items={this.sortFunction(this.props.pageContents.page_content)} 
                        onSortEnd={this.onSortEnd} />
 
