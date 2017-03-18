@@ -32,7 +32,6 @@ connection.once('open', function() {
 connection.on('disconnected', function () {
    //Reconnect on timeout
    connect(config.mongoUrl);
-   db = connection;
 });
 
-export {};
+export {db, conn};
