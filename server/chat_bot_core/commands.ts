@@ -149,4 +149,4 @@ switchMode: function(msg:any):responseExecutedCommandObject {
     }
   }
 }
-export default commands;
+export {commands};
