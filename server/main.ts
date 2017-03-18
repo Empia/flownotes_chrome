@@ -18,6 +18,13 @@ var JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 import {authService} from './services/AuthService';
 import {Accounts} from './models/Account';
+var TelegramBot = require('node-telegram-bot-api');
+
+
+
+
+
+
 var pino = require('pino')()
 
 
@@ -178,6 +185,18 @@ app.get('/', startup)
 
 
 if (cluster.isMaster) {
+
+const token = '371326189:AAElUEd4uwvnejKWruqn4AXIMmboiak-OUE';
+const bot = new TelegramBot(token, {workers: 1, polling: true});
+bot.on('message', function (msg) {
+    var chatId = msg.chat.id;
+    console.log(msg);
+    bot.sendMessage(chatId, msg+' fuck bitches', {caption: "I'm a bot!"});
+});
+bot.on('polling_error', (error) => {
+  console.log(error);  // => 'EFATAL'
+});
+
   // Fork workers.
   for (var i = 0; i < numCPUs; i++) {
     cluster.fork();
