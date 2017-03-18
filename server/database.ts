@@ -14,14 +14,25 @@ function conn(){
 		//new GroceryItem(item).save();
 	}
 }
-
-connect('mongodb://localhost/flownotes', {
+var config = {
+  mongoUrl: 'mongodb://localhost/flownotes'
+}
+var db = connect(config.mongoUrl, {
   server: {
     socketOptions: {
       socketTimeoutMS: 0,
       connectionTimeout: 0
     }
   }
+});
+//db.on('error', console.error.bind(console, 'error connecting with mongodb database:'));
+connection.once('open', function() {
+  console.log('connected to mongodb database');
+});    
+connection.on('disconnected', function () {
+   //Reconnect on timeout
+   connect(config.mongoUrl);
+   db = connection;
 });
 
 export {};
