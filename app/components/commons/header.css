@@ -14,9 +14,10 @@ box-shadow: 1px 1px 3px #8181811a;
     margin-right: 22px;
 }
 .top_bar .menu li a {
-font-size: 14px;
-font-weight: 700;
-color: #589adb;
+    font-size: 14px;
+    font-weight: 700;
+    color: #589adb;
+    margin-top: 10px;
 }
 
 .top_bar .menu li a.active {
@@ -37,7 +38,7 @@ color: #589adb;
 :global .global_container {
     width: 100%;
     max-width: 100%;
-    padding: 4px 24px;
+    padding: 4px 0px;
 }
 
 :global .pagesSidebar_component .addPageBtn {
@@ -192,6 +193,13 @@ color: #589adb;
   background: rgb(249, 249, 249);
   background-color: rgb(249, 249, 249);
 }
+:global .flonotes_logo {
+    width: 104px;
+    display: inline-block;
+    float: left;
+    margin-top: -28px;
+}
+
 /*
 By default CSS exports all class names into a global selector scope. 
 Styles can be locally scoped to avoid globally scoping styles.

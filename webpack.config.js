@@ -61,6 +61,20 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/
             },
+            {
+                test: /\.svg$/,
+                loaders: ['babel',
+                    {
+                        loader: 'react-svg',
+                        query: {
+                            svgo: {
+                                plugins: [{ removeTitle: false }],
+                                floatPrecision: 2
+                            }
+                        }
+                    }
+                ]
+            },
             /*
                 { test: /\.json$/, loader: "json-loader"},
                 { test: /\.css$/,

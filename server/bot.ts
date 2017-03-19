@@ -29,7 +29,7 @@ const bot = {
                 one_time_keyboard: true,
                 keyboard: [
                   ['/help'],
-                  ['/start']
+                  ['/mode']
                 ]
               })
             };          
@@ -39,25 +39,37 @@ const bot = {
 
     });
 
-bot.onText(/\/love/, function onLoveText(msg) {
+bot.onText(/\/start/, function onLoveText(msg) {
   const opts = {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
+      one_time_keyboard: true,
       keyboard: [
-        ['Yes, you are the bot of my life ❤'],
-        ['No, sorry there is another one...']
+        ['English'],
+        ['Russian']
       ]
     })
   };
-  bot.sendMessage(msg.chat.id, 'Do you love me?', opts);
+  bot.sendMessage(msg.chat.id, '.............?', opts);
 });
+
+/////////////////////////////////////////////
+/////////////////////////////////////////////
+var incTest = function(st?:string) {
+  console.log('incTest', st);
+  if (st !== undefined && parseInt(st)) {
+    return (parseInt(st)+1)+'';
+  } else {
+    return '1';
+  }
+}
 bot.onText(/\/editable/, function onEditableText(msg) {
   const opts = {
     reply_markup: {
       inline_keyboard: [
         [
           {
-            text: 'Edit Text',
+            text: incTest('2'),
              // we shall check for this value when we listen
              // for "callback_query"
             callback_data: 'edit'
@@ -66,12 +78,42 @@ bot.onText(/\/editable/, function onEditableText(msg) {
       ]
     }
   };
-  bot.sendMessage(msg.from.id, 'Original Text', opts);
+  bot.sendMessage(msg.from.id, incTest('1'), opts);
+});
+bot.on('callback_query', function onCallbackQuery(callbackQuery) {
+  const action = callbackQuery.data;
+  const msg = callbackQuery.message;
+  const textMsg = msg.text.toString()
+  const opts = {
+    chat_id: msg.chat.id,
+    message_id: msg.message_id,
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: incTest(incTest(textMsg)),
+             // we shall check for this value when we listen
+             // for "callback_query"
+            callback_data: 'edit'
+          }
+        ]
+      ]
+    }
+  };
+  let text;
+
+  if (action === 'edit') {
+    text = incTest(incTest(textMsg));
+  }
+
+  bot.editMessageText(text, opts);
 });
 
-    bot.on('polling_error', (error) => {
+bot.on('polling_error', (error) => {
       console.log(error);  // => 'EFATAL'
-    });    
+});    
+
+
   }
 }
 

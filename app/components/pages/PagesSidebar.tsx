@@ -86,7 +86,9 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
       width: "15%",
       borderRight: "1px solid #e6e6e6",
       background: "white",
-      padding: "17px 7px"
+      padding: "17px 7px",
+      position: 'fixed',
+      marginTop: '-17px'    
     }
     let pathname = this.props.routing.locationBeforeTransitions.pathname;
     console.log('sideBarVisibility', pathname);
