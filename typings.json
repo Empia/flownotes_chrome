@@ -7,7 +7,6 @@
     "history": "github:DefinitelyTyped/DefinitelyTyped/react-router/history.d.ts#e80403239facb94b039a3266d5dc75bd5d0efc2a",
     "immutable": "github:DefinitelyTyped/DefinitelyTyped/immutable/immutable.d.ts#6b3bc735ad028ca115c06721fb1c71ffc0e7a546",
     "isomorphic-fetch": "github:DefinitelyTyped/DefinitelyTyped/isomorphic-fetch/isomorphic-fetch.d.ts#e45879a3b4a6d7e265f21103ae044cefb3cee37c",
-    "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "mime": "github:DefinitelyTyped/DefinitelyTyped/mime/mime.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "mocha": "registry:dt/mocha#2.2.5+20170311011848",
