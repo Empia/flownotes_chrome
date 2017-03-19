@@ -5,6 +5,7 @@ import * as actions from '../../stores/pages/PagesActions';
 import {store} from '../../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 let NewPageForm = require('./NewPageForm.jsx');
+import {DropdownButton, MenuItem, Button} from 'react-bootstrap';
 
 
 const mapStateToProps = ({addingPage, pages, form, routing}) => ({
@@ -24,6 +25,7 @@ const mapDispatchToProps = dispatch => ({
 
 interface PagesSidebarProps extends React.Props<any>{
   key:string;
+  sideBarStyles: any;
   pages:any;
   addingPage:boolean;
   addPage:any;
@@ -79,38 +81,24 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
   closeModal = () => {
     this.setState({modalIsOpen: false});
   }
-  sideBarVisibility = () => {
-    let defaultStyles = {
-      display: "inline-block",
-      float: "left",
-      width: "15%",
-      borderRight: "1px solid #e6e6e6",
-      background: "white",
-      padding: "17px 7px",
-      position: 'fixed',
-      marginTop: '-17px'    
-    }
-    let pathname = this.props.routing.locationBeforeTransitions.pathname;
-    console.log('sideBarVisibility', pathname);
-    let matchPage = pathname.match('/page')
-    if (pathname === "/" || (matchPage && matchPage[0] === "/page")) {
-      return defaultStyles;
-    } else {
-      return Object.assign(defaultStyles, {display: 'none'});
-    }
-  }
 
   render(){
     console.log('rerendered', this);
     let props = this.props;
-    return  (<div className="page__sidebar" style={this.sideBarVisibility()}>
-      <button onClick={ e => this.props.toggleAddPage() } className="btn btn-success">Add page</button>
+    return  (<div className="page__sidebar" style={this.props.sideBarStyles}>
+      <button onClick={ e => this.props.toggleAddPage() } className="btn btn-success addPage">Add page</button>
       <ul className="pageListContainer">
         {props.pages.items.map((p, idx) => 
           <div className="pageContainer" key={p._id}>
             <li>
-              <Link to={'/page/'+p._id} activeClassName="active" 
+              <Link to={'/page/'+p._id} activeClassName="active" className="pagePrimaryLink"
                     activeStyle={{fontWeight: 'bold'}}>{p.title}</Link>
+              <div className="pageDropdownButton">
+                <DropdownButton bsStyle="default" title={''} key={'dropdown-'} id={`dropdown-basic-`}>
+                  <MenuItem eventKey="1" onClick={ e => console.log(e) } >Rename</MenuItem>
+                  <MenuItem eventKey="2" onClick={ e => console.log(e) } >Remove</MenuItem>
+                </DropdownButton>                          
+              </div>
             </li>
             {/*
             <div className="pageControls">

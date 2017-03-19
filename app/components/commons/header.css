@@ -1,12 +1,11 @@
 
 .top_bar {
-  background: white;
-padding: 17px 13px 14px 14px;
+background: white;
+padding: 23px 13px 0px 14px;
 margin-bottom: 17px;
 margin-top: -4px;
 width: 100%;
 box-shadow: 1px 1px 3px #8181811a;
-
 }
 
 .top_bar .menu li {
@@ -55,10 +54,53 @@ box-shadow: 1px 1px 3px #8181811a;
     width: 80%;
 }
 
+:global .croped.focusedPageContainer {
+    margin-left: 15%;
+    margin-top: -5px;
+}
 :global .pageListContainer {
     list-style: none;
-    padding-left: 15px;
+    padding-left: 0px;
+    overflow-x: scroll;
+    height: 100%;
 }
+:global .pageListContainer .pageContainer {
+    padding: 4px 4px 6px 4px;
+    font-size: 16px;
+    border: none;
+    clear: both;
+}
+:global .pageListContainer .pageContainer:hover .pageDropdownButton {
+    opacity: 1;
+}
+:global .pageDropdownButton {
+    display: inline-block;
+    float: right;
+    clear: both;
+    opacity: 0;
+    transition: all .3s;
+}
+:global .pageDropdownButton .dropdown-toggle {
+    border: solid 1px #e3e3e3;
+    border-radius: 90px;
+    width: 28px;
+    height: 27px;
+}
+:global .pagePrimaryLink {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 65%;
+    display: inline-block;
+    color: #303030;
+}
+
+:global .pageDropdownButton .caret {
+    margin-left: -3px;
+    color: #6b6161;
+}
+
+
 :global .pageContent__contentList {
   /*
     display: flex;
@@ -85,6 +127,7 @@ box-shadow: 1px 1px 3px #8181811a;
 :global .pageContent__contentResource-content_value h3 {
     font-size: 16px;
     margin-bottom: 4px;
+    margin-top: 15px;
 }
 :global ul.pageContent__contentList {
     margin-left: 0px;
@@ -199,7 +242,28 @@ color: #589adb;
     float: left;
     margin-top: -28px;
 }
-
+:global .header_component {
+    position: relative;
+    z-index: 3;
+}
+:global .btn.btn-success {
+    background: none;
+background: linear-gradient(to bottom,#5cb85c 0,#59C359 100%);
+box-shadow: none;
+border: none;
+border-radius: 2px;
+font-weight: 700;
+text-shadow: none;
+transition: all 1s;
+}
+:global .btn.btn-success:hover {
+    background: linear-gradient(to bottom,#479547 0,#419641 100%);
+}
+:global .btn.btn-success.addPage {
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 16px;
+}
 /*
 By default CSS exports all class names into a global selector scope. 
 Styles can be locally scoped to avoid globally scoping styles.
