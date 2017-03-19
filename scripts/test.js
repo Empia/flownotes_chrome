@@ -4,8 +4,8 @@ process.env.PUBLIC_URL = '';
 // if this file is missing. dotenv will never modify any environment variables
 // that have already been set.
 // https://github.com/motdotla/dotenv
-require('dotenv').config({ silent: true });
-const jest = require('jest');
+//require('dotenv').config({ silent: true });
+va1r jest2 = require('jest');
 const argv = process.argv.slice(2);
 // Watch unless on CI or in coverage mode
 if (!process.env.CI && argv.indexOf('--coverage') < 0) {

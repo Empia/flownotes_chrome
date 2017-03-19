@@ -1,6 +1,7 @@
 {
   "name": "react-express-tsx",
   "globalDependencies": {
+    "chai": "registry:dt/chai#3.4.0+20170217154556",
     "express": "github:DefinitelyTyped/DefinitelyTyped/express/express.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "express-serve-static-core": "github:DefinitelyTyped/DefinitelyTyped/express-serve-static-core/express-serve-static-core.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "history": "github:DefinitelyTyped/DefinitelyTyped/react-router/history.d.ts#e80403239facb94b039a3266d5dc75bd5d0efc2a",
@@ -9,6 +10,7 @@
     "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "mime": "github:DefinitelyTyped/DefinitelyTyped/mime/mime.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
+    "mocha": "registry:dt/mocha#2.2.5+20170311011848",
     "mongodb": "github:DefinitelyTyped/DefinitelyTyped/mongodb/mongodb.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "mongoose": "github:DefinitelyTyped/DefinitelyTyped/mongoose/mongoose.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "react": "github:DefinitelyTyped/DefinitelyTyped/react/react.d.ts#6b3bc735ad028ca115c06721fb1c71ffc0e7a546",
@@ -32,6 +34,7 @@
     "redux-logger": "github:DefinitelyTyped/DefinitelyTyped/redux-logger/redux-logger.d.ts#e45879a3b4a6d7e265f21103ae044cefb3cee37c",
     "redux-thunk": "github:DefinitelyTyped/DefinitelyTyped/redux-thunk/redux-thunk.d.ts#e45879a3b4a6d7e265f21103ae044cefb3cee37c",
     "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
+    "sinon": "registry:dt/sinon#1.16.1+20161208163514",
     "socket.io-client": "registry:dt/socket.io-client#1.4.4+20161116080703"
   },
   "dependencies": {
