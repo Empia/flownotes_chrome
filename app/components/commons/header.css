@@ -65,11 +65,16 @@ box-shadow: 1px 1px 3px #8181811a;
     height: 100%;
 }
 :global .pageListContainer .pageContainer {
-    padding: 4px 4px 6px 4px;
+    padding: 5px 7px 3px 13px;
     font-size: 16px;
     border: none;
     clear: both;
+    margin-left: -3px;
 }
+:global .pageListContainer .pageContainer:hover {
+    background: #8080801a;
+}
+
 :global .pageListContainer .pageContainer:hover .pageDropdownButton {
     opacity: 1;
 }
@@ -96,7 +101,7 @@ box-shadow: 1px 1px 3px #8181811a;
 }
 
 :global .pageDropdownButton .caret {
-    margin-left: -3px;
+    margin-left: -2px;
     color: #6b6161;
 }
 
@@ -160,11 +165,13 @@ box-shadow: 1px 1px 3px #8181811a;
     min-height: 79px;
     background: white;
     margin-bottom: 10px;
-    box-shadow: 1px 1px 2px gray;
+    box-shadow: 1px 1px 2px #dbdbdb;
     padding: 2px 14px;
 }
 :global .btn.btn-default {
     background: white;
+    box-shadow: 1px 1px 3px #8080804D;
+    border: none;
 }
 :global .pageContent__mainControlGroup div.pageContent__sortableDropdown, 
 :global .pageContent__mainControlGroup div.pageContent__contentCreateButton,
@@ -233,8 +240,8 @@ font-weight: 700;
 color: #589adb;
 }
 :global html, :global body {
-  background: rgb(249, 249, 249);
-  background-color: rgb(249, 249, 249);
+  background: rgba(164, 180, 176, 0.04);
+
 }
 :global .flonotes_logo {
     width: 104px;
