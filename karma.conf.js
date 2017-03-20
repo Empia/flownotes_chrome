@@ -1,24 +1,19 @@
 module.exports = function(config) {
     config.set({
-     frameworks: ["mocha", "chai", "sinon", "karma-typescript"],
-     singleRun: true,
 
-     plugins: [
-            require("karma-typescript"),
-            require("karma-mocha"),
-            require("karma-chai"),
-            require("karma-sinon"),                        
-            require("karma-mocha-reporter"),
-            require("karma-phantomjs-launcher"),
-            require("karma-sourcemap-loader")
-        ],
+        frameworks: ["mocha", "karma-typescript"],
+
         files: [
-            { pattern: "app/components/__tests__/*.tsx" }, // *.tsx for React Jsx 
+            { pattern: "node_modules/expect.js/index.js" },
+            { pattern: "app/components/__tests__/*.tsx" }
         ],
+
         preprocessors: {
-            "app/components/__tests__/*.tsx": ["karma-typescript"], // *.tsx for React Jsx 
+            "app/components/__tests__/*.tsx": ["karma-typescript"]
         },
-        reporters: ["mocha","progress", "karma-typescript"],
-        browsers: ['PhantomJS']
+
+        reporters: ["progress", "karma-typescript"],
+
+        browsers: ["PhantomJS"]
     });
 };

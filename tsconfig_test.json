@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "jsx": "react",
+        "allowJs":false
+    },
+    "include": ["app/components/__tests__"],
+    "exclude": [
+        "node_modules",
+        "app/redux-auth",
+        "bower_components"
+    ]
+}
