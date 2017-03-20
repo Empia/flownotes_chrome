@@ -20,21 +20,18 @@ module.exports = function (config) {
             { pattern: "app/components/__tests__/*.tsx" },
         ],
         webpack: {
-          module: webpackConfig.module,
-          resolve: webpackConfig.resolve
+            module: webpackConfig.module,
+            resolve: webpackConfig.resolve
         },
         karmaTypescriptConfig: {
             tsconfig: "./tsconfig_test.json"
         },
-
         webpackMiddleware: {
             quiet: true,
             stats: {
                 colors: true
             }
         },
-
-
         preprocessors: {
             "app/components/__tests__/*.tsx": ["karma-typescript"],
         },

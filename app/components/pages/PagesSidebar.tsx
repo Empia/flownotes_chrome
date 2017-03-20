@@ -89,10 +89,11 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
       <button onClick={ e => this.props.toggleAddPage() } className="btn btn-success addPage">Add page</button>
       <ul className="pageListContainer">
         {props.pages.items.map((p, idx) => 
-          <div className="pageContainer" key={p._id}>
+          <Link to={'/page/'+p._id} key={p._id} activeClassName="active"
+                    activeStyle={{fontWeight: 'bold'}}>
+          <div className="pageContainer">
             <li>
-              <Link to={'/page/'+p._id} activeClassName="active" className="pagePrimaryLink"
-                    activeStyle={{fontWeight: 'bold'}}>{p.title}</Link>
+            <span className="pagePrimaryLink">{p.title}</span>
               <div className="pageDropdownButton">
                 <DropdownButton bsStyle="default" title={''} key={'dropdown-'} id={`dropdown-basic-`}>
                   <MenuItem eventKey="1" onClick={ e => console.log(e) } >Rename</MenuItem>
@@ -109,8 +110,7 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
               </form>
             </div>
             */}
-
-          </div>)}
+          </div></Link>)}
       </ul>
 
 
