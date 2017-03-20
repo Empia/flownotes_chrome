@@ -9,7 +9,7 @@ module.exports = function (config) {
         preprocessors: {
             "app/components/__tests__/*.tsx": ["karma-typescript"]
         },
-        reporters: ["progress", "karma-typescript"],
+        reporters: ["mocha", "progress", "karma-typescript"],
         browsers: ["PhantomJS"]
     });
 };
