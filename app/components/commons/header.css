@@ -276,6 +276,10 @@ transition: all 1s;
     margin-top: 0px;
     margin-bottom: 16px;
 }
+:global .active.btn.btn-success.addPage {
+    box-shadow: black 1px 1px 7px inset;
+    background: #3AA13A;
+}
 /*
 By default CSS exports all class names into a global selector scope. 
 Styles can be locally scoped to avoid globally scoping styles.

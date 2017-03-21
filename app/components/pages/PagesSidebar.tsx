@@ -6,7 +6,7 @@ import {store} from '../../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 let NewPageForm = require('./NewPageForm.jsx');
 import {DropdownButton, MenuItem, Button} from 'react-bootstrap';
-
+import styled from 'styled-components'
 
 const mapStateToProps = ({addingPage, pages, form, routing}) => ({
   addingPage,
@@ -47,6 +47,22 @@ function EditButton(props) {
   return <button onClick={ e => props.toEdit(e, props.pageId, props.currentObject) }>Edit</button>
 }
 
+const LinkTest = styled.div`
+    font-family: 'Cabin';
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    color: {props => props.theme.primaryColor};
+    display: block;
+    cursor: pointer;
+
+    transition: 0.3s background ease-out;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+`;
+
 
 class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>{
   refs: {
@@ -85,8 +101,12 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
   render(){
     console.log('rerendered', this);
     let props = this.props;
-    return  (<div className="page__sidebar" style={this.props.sideBarStyles}>
-      <button onClick={ e => this.props.toggleAddPage() } className="btn btn-success addPage">Add page</button>
+    let addBtnActive = props.addingPage ? 'active ' : '' 
+    return  (<div className="page__sidebar" style={props.sideBarStyles}>
+      <div className="new-page-input">
+        { props.addingPage && <NewPageForm.default pages={props.pages.items} handleSubmit={this.createPage}/> }
+      </div>      
+      <button onClick={ e => props.toggleAddPage() } active="props.addingPage" className={addBtnActive+'btn btn-success addPage'}>Add page</button>
       <ul className="pageListContainer">
         {props.pages.items.map((p, idx) => 
           <Link to={'/page/'+p._id} key={p._id} activeClassName="active"
@@ -112,12 +132,6 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
             */}
           </div></Link>)}
       </ul>
-
-
-
-      <div className="new-page-input">
-        { props.addingPage && <NewPageForm.default pages={props.pages.items} handleSubmit={this.createPage}/> }
-      </div>
       </div>);
   }
 
