@@ -118,6 +118,8 @@ height: 23px;
     justify-content: space-around;
     align-content: stretch;
 */
+-moz-user-select: none;
+user-select: none;
 }
 :global .pageContent__contentList .page {
     padding: 5px 1px 4px 1px;
@@ -138,6 +140,8 @@ height: 23px;
     font-size: 16px;
     margin-bottom: 4px;
     margin-top: 15px;
+    -moz-user-select: text;
+    user-select: text;
 }
 :global ul.pageContent__contentList {
     margin-left: 0px;

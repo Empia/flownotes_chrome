@@ -5,7 +5,6 @@ import * as styles from './header.css';
 import * as CSSModules from 'react-css-modules';
 import {login, logout} from '../../stores/userActions';
 import { connect } from 'react-redux'
-var ReactSVG = require('react-svg');
 
 const mapStateToProps = ({user}) => ({
   user

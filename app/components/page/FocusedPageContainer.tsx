@@ -389,22 +389,6 @@ moveCard(dragIndex, hoverIndex) {
                        pressDelay={10}
                        items={this.sortFunction(this.props.pageContents.page_content)} 
                        onSortEnd={this.onSortEnd} />
-
-        {/*<div className="pageContent__contentList">
-            {this.sortFunction(this.props.pageContents.page_content).map((p, idx) => 
-          <div>
-          <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
-          <DragCard key={idx}
-                    index={p.order}
-                    id={p._id}
-                    text={p._id}
-                    moveCard={this.moveCard}>
-                  <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
-          </DragCard>
-          <CustomDragLayer p={p}></CustomDragLayer></div>)}
-        </div>
-        */}
-
       </div>);
   }    
   onSortEnd = ({oldIndex, newIndex}) => {

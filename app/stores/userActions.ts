@@ -1,5 +1,12 @@
 import * as constants from './userReducer'
 
+/*
+interface Item{
+  email:string;
+  purchased?:boolean;
+  _id?:any;
+}
+*/
 
 export function startLogin(data) {
   return function (dispatch) {
