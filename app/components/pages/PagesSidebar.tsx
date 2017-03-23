@@ -14,7 +14,6 @@ const mapStateToProps = ({addingPage, pages, form, routing}) => ({
   form,
   routing
 });
-
 const mapDispatchToProps = dispatch => ({
     toggleAddPage: () => dispatch(actions.toggleAddPage()),
     removePage: (pageId) => dispatch(actions.removePage(pageId)),
@@ -22,22 +21,26 @@ const mapDispatchToProps = dispatch => ({
     addPage: (page) => dispatch(actions.addPage(page)),
     updatePage: (pageId, page) => dispatch(actions.updatePage(pageId, page)),
 });
-
 interface PagesSidebarProps extends React.Props<any>{
-  sideBarStyles: Object;
-  pages:any;
-  addingPage:boolean;
-  addPage:any;
-  toggleAddPage:any;
-  updatePage: any;
-  removePage: any;
-  form: any;
-  routing: any;
+  sideBarStyles?: any;
 }
 
-interface PagesSidebarState{
-  modalIsOpen: any;
+interface PagesSidebarState{modalIsOpen: any;}
+interface StateProps {
+  addingPage:any;
+  pages:any;
+  form:any;
+  routing:any;  
 }
+interface DispatchProps {
+  toggleAddPage:any;
+  removePage:any;
+  addPage:any;
+  updatePage:any;
+}
+type GenericPageContentProps = PagesSidebarProps & StateProps & DispatchProps;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 function RemoveButton(props) {
   return <button onClick={() => props.toRemove(props.pageId)}>Remove</button>
@@ -61,7 +64,9 @@ const LinkTest = styled.div`
 `;
 
 
-class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>{
+
+
+class PagesSidebar extends React.Component<GenericPageContentProps, PagesSidebarState>{
   refs: {
     [key: string]: (Element);
     add: (HTMLInputElement);
@@ -151,4 +156,4 @@ class PagesSidebar extends React.Component<PagesSidebarProps, PagesSidebarState>
   removePageSender = ((pageId) => this.props.removePage(pageId));
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PagesSidebar);
+export default connect<StateProps,DispatchProps,PagesSidebarProps>(mapStateToProps, mapDispatchToProps)(PagesSidebar);

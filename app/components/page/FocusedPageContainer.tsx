@@ -15,13 +15,13 @@ import EditContentModal from './forms/EditContentModal';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var update = require('react/lib/update');
 //import * as Addons from 'react-addons-update';
-import DragCard from '../commons/drag/DragCard';
+import DragCard from '../commons/commons_drag/drag/DragCard';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import * as MouseBackEnd from 'react-dnd-mouse-backend';
 import {DropdownButton, MenuItem, Button} from 'react-bootstrap';
 
-import {CustomDragLayer} from './../commons/drag/CustomDragLayer' 
+import {CustomDragLayer} from './../commons/commons_drag/drag/CustomDragLayer' 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';

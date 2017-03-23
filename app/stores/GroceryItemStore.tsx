@@ -1,5 +1,4 @@
 import {dispatcher, IDispatchPayload} from '../dispatcher';
-import {Actions} from '../actions/BaseActions';
 import {restHelper} from  '../helpers/RestHelper';
 
 interface Item{
@@ -85,19 +84,19 @@ class GroceryItemStore{
 			
 		if(mainKey === 'grocery-item'){
 			switch(action){
-				case Actions.add:
+				case 1:
 					this.addItem(event.payload);
 				break;
 				
-				case Actions.delete:
+				case 1:
 					this.deleteItem(event.payload);
 					break;
 				
-				case Actions.buy:
+				case 1:
 					this.updatePurchaseStatus(event.payload, true);
 					break;
 				
-				case Actions.unbuy:
+				case 1:
 					this.updatePurchaseStatus(event.payload, false);
 					break;
 			}

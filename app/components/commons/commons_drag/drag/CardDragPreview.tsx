@@ -1,6 +1,6 @@
 import * as React from "react";
 //import Card from './Cards/Card';
-import GenericPageContent from '../../page/GenericPageContent';
+import GenericPageContent from './../../../page/GenericPageContent';
 
 const styles = {
   display: 'inline-block',

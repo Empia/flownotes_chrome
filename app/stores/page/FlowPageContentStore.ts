@@ -4,7 +4,6 @@ import {createStore,
   compose,
 Middleware,} from 'redux';
 import {dispatcher, IDispatchPayload} from '../../dispatcher';
-import {Actions} from '../../actions/BaseActions';
 import {restHelper} from  '../../helpers/RestHelper';
 import {
   REQUEST_PAGE_CONTENT,

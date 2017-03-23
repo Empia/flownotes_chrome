@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import Header from '../commons/Header';
-import DragContainer from '../commons/DragContainer';
-import DragContainer2 from '../commons/DragContainer2';
-import CustomDragLayer from '../commons/CustomDragLayer';
+import DragContainer from '../commons/commons_drag/DragContainer';
+import DragContainer2 from '../commons/commons_drag/DragContainer2';
+import CustomDragLayer from '../commons/commons_drag/CustomDragLayer';
 
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
