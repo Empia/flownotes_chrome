@@ -21,7 +21,6 @@
     "react-addons-transition-group": "github:DefinitelyTyped/DefinitelyTyped/react/react-addons-transition-group.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "react-addons-update": "github:DefinitelyTyped/DefinitelyTyped/react/react-addons-update.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "react-css-modules": "github:DefinitelyTyped/DefinitelyTyped/react-css-modules/react-css-modules.d.ts#e45879a3b4a6d7e265f21103ae044cefb3cee37c",
-    "react-dnd": "registry:dt/react-dnd#2.0.2+20170123203653",
     "react-dom": "github:DefinitelyTyped/DefinitelyTyped/react/react-dom.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "react-global": "github:DefinitelyTyped/DefinitelyTyped/react/react-global.d.ts#bddf14ed27fb8bb3940b54dcf0c57e029206f6a8",
     "react-redux": "github:DefinitelyTyped/DefinitelyTyped/react-redux/react-redux.d.ts#e80403239facb94b039a3266d5dc75bd5d0efc2a",
@@ -37,10 +36,6 @@
     "socket.io-client": "registry:dt/socket.io-client#1.4.4+20161116080703"
   },
   "dependencies": {
-    "passport": "registry:npm/passport#0.3.0+20161028163825",
-    "react": "registry:dt/react#15.0.0+20170321201724",
-    "react-bootstrap": "registry:dt/react-bootstrap#0.0.0+20170317163524",
-    "react-dnd-html5-backend": "registry:dt/react-dnd-html5-backend#2.1.0+20170123203653",
-    "redux-persist": "registry:npm/redux-persist#3.2.2+20160817092816"
+    "passport": "registry:npm/passport#0.3.0+20161028163825"
   }
 }
