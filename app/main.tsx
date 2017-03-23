@@ -1,14 +1,14 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {AboutApplication} from './components/about/AboutApplication';
-import PagesContainer from './components/pages/PagesContainer';
+import GlobalAppContainer from './components/GlobalAppContainer';
 import UserModes from './components/user_modes/UserModes';
 import FocusedPageContainer from './components/page/FocusedPageContainer';
 import {card,addingPage,pages} from './stores/pages/FlowPageStore';
 import {modes, addingModes, sets_modes} from './stores/user_modes/UserModesReducers';
-import {pagesStore} from './stores/pages/OldFlowPageStore';
 import {addingPageContent,pageContents} from './stores/page/FlowPageContentStore';
-import {dialogReducer} from 'redux-dialog';
+var dialogReducer = require('redux-dialog');
+
 import {userReducer} from './stores/userReducer';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
@@ -27,8 +27,8 @@ import { reducer as formReducer } from 'redux-form';
 import {UserIsAuthenticated} from './utils/wrappers';
 import {initiateStore} from './session_storage';
 import {persistStore, getStoredState,createPersistor, autoRehydrate} from 'redux-persist'
-import * as io from 'socket.io-client';
 /*
+import * as io from 'socket.io-client';
 var socket = io('ws://localhost:7777/websocket');
 socket.on('connect', function(){console.log("Connected.");});
 socket.on('event', function(data){console.log("New data " + data);});
@@ -39,7 +39,6 @@ const loggerMiddleware = createLogger();
 const routingMiddleware = routerMiddleware(browserHistory)
 const initialState:Object = {
   card: {
-    t: 'fire',
     isPageContentsFetching: false,
     page_content: []
   }
@@ -68,7 +67,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 const render = () => {
 	ReactDOM.render(<Provider store={store}>
     <Router history={browserHistory}>
-        <Route path="/" component={PagesContainer}>
+        <Route path="/" component={GlobalAppContainer}>
                 <Route path="/page/:pageId" component={FocusedPageContainer} />
                 <Route path="/foo" component={UserIsAuthenticated(AboutApplication)}/>
                 <Route path="/about" component={AboutApplication} />

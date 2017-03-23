@@ -20,12 +20,10 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
     super(props);
   this.handleSnapToGridAfterDropChange = this.handleSnapToGridAfterDropChange.bind(this);
     this.handleSnapToGridWhileDraggingChange = this.handleSnapToGridWhileDraggingChange.bind(this);
-
     this.state = {
       snapToGridAfterDrop: false,
       snapToGridWhileDragging: false,
     };
-
     console.log(this);
   }
  handleSnapToGridAfterDropChange() {
@@ -33,7 +31,6 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
       snapToGridAfterDrop: !this.state.snapToGridAfterDrop,
     });
   }
-
   handleSnapToGridWhileDraggingChange() {
     this.setState({
       snapToGridWhileDragging: !this.state.snapToGridWhileDragging,
@@ -41,11 +38,9 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
 }
  componentDidMount () {}  
  componentDidUpdate () {}  
-
-  render(){
-     const { snapToGridAfterDrop, snapToGridWhileDragging } = this.state;
-
-    return  (
+ render(){
+  const { snapToGridAfterDrop, snapToGridWhileDragging } = this.state;
+  return  (
       <div>
         <DragContainer />
         <p>............</p>
@@ -79,8 +74,6 @@ export class AboutApplication extends React.Component<AboutApplicationPr, AboutA
             <li>Push session tabs</li>
             <li>Push deltas</li>
             <li>Calculate deltas for session</li>
-            
-
         </ul> 
       </div>
     );

@@ -32,24 +32,6 @@ export const addingPage = (state, action) => {
     default: return !!state;
   }
 };
-
-
-
-/*
-function postsBySubreddit(state = {}, action) {
-  switch (action.type) {
-    case INVALIDATE_SUBREDDIT:
-    case RECEIVE_POSTS:
-    case REQUEST_POSTS:
-      return Object.assign({}, state, {
-        [action.subreddit]: posts(state[action.subreddit], action)
-      })
-    default:
-      return state
-  }
-}
-*/
-
 const pagesInitialState = {
   isFetching: false,
   isFetched: false,

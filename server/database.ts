@@ -29,8 +29,10 @@ var db = connect(config.mongoUrl, {
 connection.once('open', function() {
   console.log('connected to mongodb database');
 });    
+console.log('connection on', connection.on);
 connection.on('disconnected', function () {
    //Reconnect on timeout
+   console.log('timeout')
    connect(config.mongoUrl);
 });
 

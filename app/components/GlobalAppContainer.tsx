@@ -1,35 +1,33 @@
 import * as React from "react";
-import Header from '../commons/Header';
-import PagesSidebar from './PagesSidebar';
+import Header from './commons/Header';
+import PagesSidebar from './pages/PagesSidebar';
 import { connect } from 'react-redux';
 //import { EmailSignUpForm } from "redux-auth/default-theme";
-import * as url2 from 'url-browser';
-import * as actions from '../../stores/pages/PagesActions';
-import {store} from '../../main';
+//import * as url2 from 'url-browser';
+import * as actions from '../stores/pages/PagesActions';
+import {store} from '../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 
 
-const mapStateToProps = ({routing}) => ({
-  routing
-});
+const mapStateToProps = ({routing}) => ({routing});
+const mapDispatchToProps = dispatch => ({});
 
-const mapDispatchToProps = dispatch => ({
-});
-
-
-
-interface PagesContainerProps extends React.Props<any>{
+interface GlobalAppContainerProps extends React.Props<any>{
   key:string;
   routing: any;
 }
-interface PagesContainerState{ }
+interface sideBarStylerProperties {
+  withBar: boolean;
+  styles: any;
+}
+interface GlobalAppContainerState{ }
 
-class PagesContainer extends React.Component<PagesContainerProps, PagesContainerState>{
+class GlobalAppContainer extends React.Component<GlobalAppContainerProps, GlobalAppContainerState>{
   constructor(){
     super();
   }
 
- sideBarVisibility = () => {
+ sideBarVisibility = ():sideBarStylerProperties => {
     let defaultStyles = {
       display: "inline-block",
       float: "left",
@@ -55,7 +53,7 @@ class PagesContainer extends React.Component<PagesContainerProps, PagesContainer
   
   render(){
     const sideBarProp = this.sideBarVisibility();
-    let croped = sideBarProp.withBar ? 'croped' : '';
+    let croped:string = sideBarProp.withBar ? 'croped' : '';
     const containerLayout = `${croped} focusedPageContainer`
     return  (
       <div>
@@ -63,7 +61,7 @@ class PagesContainer extends React.Component<PagesContainerProps, PagesContainer
           <Header />
         </div>
         <div className="pagesSidebar_component">  
-          <PagesSidebar key="te" sideBarStyles={sideBarProp.styles} />
+          <PagesSidebar sideBarStyles={sideBarProp.styles} />
         </div>
         <div className={containerLayout}>
           { this.props.children }
@@ -72,4 +70,4 @@ class PagesContainer extends React.Component<PagesContainerProps, PagesContainer
       );
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(PagesContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(GlobalAppContainer);

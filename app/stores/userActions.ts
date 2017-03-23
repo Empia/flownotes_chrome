@@ -1,14 +1,17 @@
 import * as constants from './userReducer'
 
-/*
-interface Item{
-  email:string;
-  purchased?:boolean;
-  _id?:any;
-}
-*/
 
-export function startLogin(data) {
+interface LoginData{
+  email:string;
+  password:string;
+}
+interface UserData {
+  email:string;
+  token:string;
+  username:string;
+}
+
+export function startLogin(data: LoginData) {
   return function (dispatch) {
     dispatch(() => {return {type: constants.USER_LOGGING_IN} })
     return fetch(`/api/token`, {method: 'post',
@@ -18,7 +21,7 @@ export function startLogin(data) {
   }
 }
 
-export function restoreUser(data) {
+export function restoreUser(data:UserData) {
   return {
     type: constants.RESTORE_USER,
     payload: data
@@ -29,7 +32,7 @@ export function login(data) {
   let username = data.username || data.email
   return {
     type: constants.USER_LOGGED_IN,
-    payload: <any>Object.assign(data, {username: username})
+    payload: <UserData>Object.assign(data, {username: username})
   }
 }
 
@@ -51,7 +54,7 @@ export function signinStart(data) {
   }
 }
 
-export function signin(data) {
+export function signin(data:Response) {
   return {
     type: constants.USER_SIGNED_IN,
     payload: data    

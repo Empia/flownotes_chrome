@@ -6,7 +6,7 @@ import {store} from '../../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 let NewPageForm = require('./NewPageForm.jsx');
 import {DropdownButton, MenuItem, Button} from 'react-bootstrap';
-import styled from 'styled-components'
+const styled = require('styled-components').default;
 
 const mapStateToProps = ({addingPage, pages, form, routing}) => ({
   addingPage,
@@ -24,8 +24,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 interface PagesSidebarProps extends React.Props<any>{
-  key:string;
-  sideBarStyles: any;
+  sideBarStyles: Object;
   pages:any;
   addingPage:boolean;
   addPage:any;
@@ -55,9 +54,7 @@ const LinkTest = styled.div`
     color: {props => props.theme.primaryColor};
     display: block;
     cursor: pointer;
-
     transition: 0.3s background ease-out;
-
     &:hover {
         background: rgba(255, 255, 255, 0.2);
     }

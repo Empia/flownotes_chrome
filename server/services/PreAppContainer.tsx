@@ -6,7 +6,7 @@ interface GroceryItemListPr extends React.Props<any>{
 interface GroceryItemListState{ 
 }
 
-class GroceryItemList extends React.Component<GroceryItemListPr, GroceryItemListState>{
+class PreAppContainer extends React.Component<GroceryItemListPr, GroceryItemListState>{
   constructor(){
     super();
   }
@@ -19,10 +19,10 @@ componentDidUpdate () {
   
   render(){
     return  (
-      <div>f</div>
+      <div>Loading</div>
     );
   }
   
 }
 
-export {GroceryItemList}
+export {PreAppContainer}

@@ -3,10 +3,10 @@ import * as ReactDOM from "react-dom/server"
 import {FlowNotePage, IFlowNotePage} from './models/FlowNotePage';
 import {FlowNoteContent, IFlowNoteContent} from './models/FlowNoteContent';
 
-import {GroceryItemList} from './services/GroceryItemList';
+import {PreAppContainer} from './services/PreAppContainer';
 
 export default function (req, res) {
-		let application = React.createFactory(GroceryItemList);
+		let application = React.createFactory(PreAppContainer);
 		
 		FlowNotePage.find((error, items) => {
 			let reactOutput = ReactDOM.renderToString(application({ }));
