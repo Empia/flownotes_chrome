@@ -1,11 +1,11 @@
 import * as React from "react";
-import Header from '../commons/Header';
-import PagesSidebar from './PagesSidebar';
+import Header from './commons/Header';
+import PagesSidebar from '../pages/PagesSidebar';
 import { connect } from 'react-redux';
 //import { EmailSignUpForm } from "redux-auth/default-theme";
 import * as url2 from 'url-browser';
-import * as actions from '../../stores/pages/PagesActions';
-import {store} from '../../main';
+import * as actions from '../stores/pages/PagesActions';
+import {store} from '../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 
 
@@ -24,7 +24,7 @@ interface PagesContainerProps extends React.Props<any>{
 }
 interface PagesContainerState{ }
 
-class PagesContainer extends React.Component<PagesContainerProps, PagesContainerState>{
+class GlobalAppContainer extends React.Component<PagesContainerProps, PagesContainerState>{
   constructor(){
     super();
   }
@@ -73,4 +73,4 @@ class PagesContainer extends React.Component<PagesContainerProps, PagesContainer
       );
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(PagesContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(GlobalAppContainer);

@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {GroceryItemList} from './components/items/GroceryItemList';
 import {AboutApplication} from './components/about/AboutApplication';
-import PagesContainer from './components/pages/PagesContainer';
+import GlobalAppContainer from './components/GlobalAppContainer';
 import UserModes from './components/user_modes/UserModes';
 import FocusedPageContainer from './components/page/FocusedPageContainer';
 import {groceryItemStore, Item} from './stores/GroceryItemStore';
@@ -91,7 +91,7 @@ function render(){
   console.log('items main');
   ReactDOM.render(<Provider store={store}>
     <Router history={browserHistory}>
-        <Route path="/" component={PagesContainer}>
+        <Route path="/" component={GlobalAppContainer}>
                 <Route path="/page/:pageId" component={FocusedPageContainer} />
                 <Route path="/foo" component={UserIsAuthenticated(AboutApplication)}/>
                 <Route path="/about" component={AboutApplication} />
