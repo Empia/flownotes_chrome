@@ -105,17 +105,19 @@ class PagesSidebar extends React.Component<GenericPageContentProps, PagesSidebar
       <div className="new-page-input">
         { props.addingPage && <NewPageForm.default pages={props.pages.items} handleSubmit={this.createPage}/> }
       </div>      
+      <NewPageModal openModal={this.openModal} afterOpenModal={this.afterOpenModal} closeModal={this.closeModal} state={this.state} />
 
       <button onClick={this.openModal} ref="add_btn" active="props.addingPage" className={addBtnActive+'btn btn-success addPage'}>Add page modal</button>
 
       <button onClick={ e => props.toggleAddPage() } active="props.addingPage" className={addBtnActive+'btn btn-success addPage'}>Add page</button>
       <ul className="pageListContainer">
         {props.pages.items.map((p, idx) => 
-          <Link to={'/page/'+p._id} key={p._id} activeClassName="active"
-                    activeStyle={{fontWeight: 'bold'}}>
           <div className="pageContainer">
             <li>
-            <span className="pagePrimaryLink">{p.title}</span>
+          <Link to={'/page/'+p._id} key={p._id} activeClassName="active"
+                    activeStyle={{fontWeight: 'bold'}}>
+            <span className="pagePrimaryLink">{p.title}</span></Link>
+            
               <div className="pageDropdownButton">
                 <DropdownButton bsStyle="default" title={''} key={'dropdown-'} id={`dropdown-basic-`}>
                   <MenuItem eventKey="1" onClick={ e => console.log(e) } >Rename</MenuItem>
@@ -132,7 +134,7 @@ class PagesSidebar extends React.Component<GenericPageContentProps, PagesSidebar
               </form>
             </div>
             */}
-          </div></Link>)}
+          </div>)}
       </ul>
       </div>);
   }

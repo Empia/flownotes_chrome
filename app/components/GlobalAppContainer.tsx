@@ -1,6 +1,6 @@
 import * as React from "react";
 import Header from './commons/Header';
-import PagesSidebar from '../pages/PagesSidebar';
+import PagesSidebar from './pages/PagesSidebar';
 import { connect } from 'react-redux';
 //import { EmailSignUpForm } from "redux-auth/default-theme";
 import * as url2 from 'url-browser';
@@ -9,14 +9,8 @@ import {store} from '../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 
 
-const mapStateToProps = ({routing}) => ({
-  routing
-});
-
-const mapDispatchToProps = dispatch => ({
-});
-
-
+const mapStateToProps = ({routing}) => ({routing});
+const mapDispatchToProps = dispatch => ({});
 
 interface PagesContainerProps extends React.Props<any>{
   key:string;
@@ -60,7 +54,6 @@ class GlobalAppContainer extends React.Component<PagesContainerProps, PagesConta
     return  (
       <div>
         <div className="header_component">
-          <input name="content_value" class="form-control" type="text" />
           <Header />
         </div>
         <div className="pagesSidebar_component">  
