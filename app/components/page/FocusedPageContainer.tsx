@@ -336,8 +336,6 @@ moveCard(dragIndex, hoverIndex) {
                           moveCard={this.moveCard} />
                   );
         })*/}        
-        <BasicDialog />
-        <EditContentModal />
         {/*
         <Select
             name="form-field-name"

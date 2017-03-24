@@ -105,7 +105,6 @@ class PagesSidebar extends React.Component<GenericPageContentProps, PagesSidebar
       <div className="new-page-input">
         { props.addingPage && <NewPageForm.default pages={props.pages.items} handleSubmit={this.createPage}/> }
       </div>      
-      <NewPageModal openModal={this.openModal} afterOpenModal={this.afterOpenModal} closeModal={this.closeModal} state={this.state} />
 
       <button onClick={this.openModal} ref="add" active="props.addingPage" className={addBtnActive+'btn btn-success addPage'}>Add page modal</button>
 

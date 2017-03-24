@@ -60,6 +60,7 @@ class PagesContainer extends React.Component<PagesContainerProps, PagesContainer
     return  (
       <div>
         <div className="header_component">
+          <input name="content_value" class="form-control" type="text" />
           <Header />
         </div>
         <div className="pagesSidebar_component">  
