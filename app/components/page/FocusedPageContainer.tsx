@@ -15,13 +15,13 @@ import EditContentModal from './forms/EditContentModal';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var update = require('react/lib/update');
 //import * as Addons from 'react-addons-update';
-import DragCard from '../commons/commons_drag/drag/DragCard';
+import DragCard from '../commons/drag/DragCard';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import * as MouseBackEnd from 'react-dnd-mouse-backend';
 import {DropdownButton, MenuItem, Button} from 'react-bootstrap';
 
-import {CustomDragLayer} from './../commons/commons_drag/drag/CustomDragLayer' 
+import {CustomDragLayer} from './../commons/drag/CustomDragLayer' 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
@@ -200,8 +200,8 @@ moveCard(dragIndex, hoverIndex) {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.pageId !== this.props.params.pageId && false) {
-      console.log('componentWillReceiveProps: ', this.props.pages);
+    if (nextProps.params.pageId !== this.props.params.pageId) {
+      console.log('PageContentForm pages', this.props.pages);
       store.dispatch(actions.fetchPageContent(nextProps.params.pageId)).then(() =>
         console.log(store.getState())
       )    
@@ -336,12 +336,9 @@ moveCard(dragIndex, hoverIndex) {
                           moveCard={this.moveCard} />
                   );
         })*/}        
-        <EditContentModal />
         <BasicDialog />
-                
+        <EditContentModal />
         {/*
-        
-
         <Select
             name="form-field-name"
             value="two"
@@ -392,6 +389,22 @@ moveCard(dragIndex, hoverIndex) {
                        pressDelay={10}
                        items={this.sortFunction(this.props.pageContents.page_content)} 
                        onSortEnd={this.onSortEnd} />
+
+        {/*<div className="pageContent__contentList">
+            {this.sortFunction(this.props.pageContents.page_content).map((p, idx) => 
+          <div>
+          <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
+          <DragCard key={idx}
+                    index={p.order}
+                    id={p._id}
+                    text={p._id}
+                    moveCard={this.moveCard}>
+                  <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
+          </DragCard>
+          <CustomDragLayer p={p}></CustomDragLayer></div>)}
+        </div>
+        */}
+
       </div>);
   }    
   onSortEnd = ({oldIndex, newIndex}) => {
