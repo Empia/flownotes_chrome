@@ -7,6 +7,7 @@ import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 let NewPageForm = require('./NewPageForm.jsx');
 import {DropdownButton, MenuItem, Button} from 'react-bootstrap';
 const styled = require('styled-components').default;
+import NewPageModal from './forms/NewPageModal';
 
 const mapStateToProps = ({addingPage, pages, form, routing}) => ({
   addingPage,
@@ -17,6 +18,7 @@ const mapStateToProps = ({addingPage, pages, form, routing}) => ({
 const mapDispatchToProps = dispatch => ({
     toggleAddPage: () => dispatch(actions.toggleAddPage()),
     removePage: (pageId) => dispatch(actions.removePage(pageId)),
+    openNewPageForm: () => dispatch(actions.toggleAddPage()),
    // updatePage: (pageId) => dispatch(actions.removePage(pageId)),
     addPage: (page) => dispatch(actions.addPage(page)),
     updatePage: (pageId, page) => dispatch(actions.updatePage(pageId, page)),
@@ -86,19 +88,14 @@ class PagesSidebar extends React.Component<GenericPageContentProps, PagesSidebar
   }
 
 
-  openModal = () => {
-    this.setState({modalIsOpen: true});
-  }
-
+  openModal = () => {this.setState({modalIsOpen: true})}
+  closeModal = () => {this.setState({modalIsOpen: false})}
   afterOpenModal = () => {
     // references are now sync'd and can be accessed.
+    console.log('this.refs', this.refs);
     let el = this.refs as any
-    el.subtitle.style.color = '#f00';
-  }
-
-  closeModal = () => {
-    this.setState({modalIsOpen: false});
-  }
+    el.add.style.color = 'white';
+  }  
 
   render(){
     console.log('rerendered', this);
@@ -108,6 +105,10 @@ class PagesSidebar extends React.Component<GenericPageContentProps, PagesSidebar
       <div className="new-page-input">
         { props.addingPage && <NewPageForm.default pages={props.pages.items} handleSubmit={this.createPage}/> }
       </div>      
+      <NewPageModal openModal={this.openModal} afterOpenModal={this.afterOpenModal} closeModal={this.closeModal} state={this.state} />
+
+      <button onClick={this.openModal} ref="add" active="props.addingPage" className={addBtnActive+'btn btn-success addPage'}>Add page modal</button>
+
       <button onClick={ e => props.toggleAddPage() } active="props.addingPage" className={addBtnActive+'btn btn-success addPage'}>Add page</button>
       <ul className="pageListContainer">
         {props.pages.items.map((p, idx) => 

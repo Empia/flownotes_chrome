@@ -63,7 +63,7 @@ class PagesContainer extends React.Component<PagesContainerProps, PagesContainer
           <Header />
         </div>
         <div className="pagesSidebar_component">  
-          <PagesSidebar key="te" sideBarStyles={sideBarProp.styles} />
+          <PagesSidebar sideBarStyles={sideBarProp.styles} />
         </div>
         <div className={containerLayout}>
           { this.props.children }
