@@ -200,8 +200,8 @@ moveCard(dragIndex, hoverIndex) {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.pageId !== this.props.params.pageId) {
-      console.log('PageContentForm pages', this.props.pages);
+    if (nextProps.params.pageId !== this.props.params.pageId && false) {
+      console.log('componentWillReceiveProps: ', this.props.pages);
       store.dispatch(actions.fetchPageContent(nextProps.params.pageId)).then(() =>
         console.log(store.getState())
       )    
@@ -336,9 +336,12 @@ moveCard(dragIndex, hoverIndex) {
                           moveCard={this.moveCard} />
                   );
         })*/}        
-        <BasicDialog />
-        <EditContentModal />
         {/*
+        <EditContentModal />
+        <BasicDialog />
+                
+        
+
         <Select
             name="form-field-name"
             value="two"
