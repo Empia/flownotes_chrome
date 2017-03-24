@@ -4,19 +4,23 @@ import { connect } from 'react-redux';
 import * as actions from '../../stores/pages/PagesActions';
 import {store} from '../../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
-let NewPageForm = require('./NewPageForm.jsx');
+let NewPageForm = require('./forms/NewPageForm.jsx');
+let EditPageForm = require('./forms/EditPageForm.jsx');
+
 import {DropdownButton, MenuItem, Button} from 'react-bootstrap';
 const styled = require('styled-components').default;
 import NewPageModal from './forms/NewPageModal';
 
-const mapStateToProps = ({addingPage, pages, form, routing}) => ({
+const mapStateToProps = ({addingPage, editingPage, pages, form, routing}) => ({
   addingPage,
+  editingPage,
   pages,
   form,
   routing
 });
 const mapDispatchToProps = dispatch => ({
     toggleAddPage: () => dispatch(actions.toggleAddPage()),
+    toggleEditPage:(pageId) => dispatch(actions.toggleEditPage(pageId)),
     removePage: (pageId) => dispatch(actions.removePage(pageId)),
     openNewPageForm: () => dispatch(actions.toggleAddPage()),
    // updatePage: (pageId) => dispatch(actions.removePage(pageId)),
@@ -30,12 +34,14 @@ interface PagesSidebarProps extends React.Props<any>{
 interface PagesSidebarState{modalIsOpen: any;}
 interface StateProps {
   addingPage:any;
+  editingPage:any;
   pages:any;
   form:any;
   routing:any;  
 }
 interface DispatchProps {
   toggleAddPage:any;
+  toggleEditPage:any;
   removePage:any;
   addPage:any;
   updatePage:any;
@@ -88,40 +94,61 @@ class PagesSidebar extends React.Component<GenericPageContentProps, PagesSidebar
   }
 
 
-  openModal = () => {this.setState({modalIsOpen: true})}
-  closeModal = () => {this.setState({modalIsOpen: false})}
+  openModal = () => {this.props.toggleAddPage()}
+  closeModal = () => {this.props.toggleAddPage()}
+  openEditModal = () => {this.props.toggleEditPage()}
+  closeEditModal = () => {this.props.toggleEditPage()}  
   afterOpenModal = () => {
-    // references are now sync'd and can be accessed.
-    console.log('this.refs', this.refs);
     let el = this.refs as any
     el.add_btn.style.color = 'white';
   }  
+  editFormInitialValues = (pages, pageId) => {
+    if (pageId !== undefined && pages !== undefined) {
+      return {
+        title: pages.find(function(p){return p._id == pageId}).title
+      }
+    } else {
+      return {}
+    }
+  }
 
   render(){
-    console.log('rerendered', this);
     let props = this.props;
     let addBtnActive = props.addingPage ? 'active ' : '' 
     return  (<div className="page__sidebar" style={props.sideBarStyles}>
-      <div className="new-page-input">
+      {/*<div className="new-page-input">
         { props.addingPage && <NewPageForm.default pages={props.pages.items} handleSubmit={this.createPage}/> }
       </div>      
-      <NewPageModal openModal={this.openModal} afterOpenModal={this.afterOpenModal} closeModal={this.closeModal} state={this.state} />
-
-      <button onClick={this.openModal} ref="add_btn" active="props.addingPage" className={addBtnActive+'btn btn-success addPage'}>Add page modal</button>
-
       <button onClick={ e => props.toggleAddPage() } active="props.addingPage" className={addBtnActive+'btn btn-success addPage'}>Add page</button>
+      */}
+
+      {/* Modals */}
+      <NewPageModal openModal={this.openModal} afterOpenModal={this.afterOpenModal} closeModal={this.closeModal} state={props.addingPage}>
+        <NewPageForm.default pages={props.pages.items} handleSubmit={this.createPage}/>
+      </NewPageModal>
+
+
+      <NewPageModal openModal={this.openEditModal} afterOpenModal={this.afterOpenModal} 
+                    closeModal={this.closeEditModal} 
+                    state={props.editingPage.state}>
+        <EditPageForm.default pages={props.pages.items} 
+                              initialValues={this.editFormInitialValues(props.pages.items, props.editingPage.pageId)} 
+                              pageId={props.editingPage.pageId} handleSubmit={this.createPage}/>
+      </NewPageModal>
+
+
+      <button onClick={this.openModal} ref="add_btn" active="props.addingPage" 
+              className={addBtnActive+'btn btn-success addPage'}>Add page</button>
       <ul className="pageListContainer">
         {props.pages.items.map((p, idx) => 
           <div className="pageContainer">
-            <li>
-          <Link to={'/page/'+p._id} key={p._id} activeClassName="active"
-                    activeStyle={{fontWeight: 'bold'}}>
-            <span className="pagePrimaryLink">{p.title}</span></Link>
-            
+            <li><Link to={'/page/'+p._id} key={p._id} activeClassName="active"
+                activeStyle={{fontWeight: 'bold'}}><span className="pagePrimaryLink">{p.title}</span></Link>
+
               <div className="pageDropdownButton">
                 <DropdownButton bsStyle="default" title={''} key={'dropdown-'} id={`dropdown-basic-`}>
-                  <MenuItem eventKey="1" onClick={ e => console.log(e) } >Rename</MenuItem>
-                  <MenuItem eventKey="2" onClick={ e => console.log(e) } >Remove</MenuItem>
+                  <MenuItem eventKey="1" onClick={ e => props.toggleEditPage(p._id) } >Rename</MenuItem>
+                  <MenuItem eventKey="2" onClick={ e => props.removePage(p._id) } >Remove</MenuItem>
                 </DropdownButton>                          
               </div>
             </li>

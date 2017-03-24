@@ -31,6 +31,14 @@ export const addingPage = (state, action) => {
     default: return !!state;
   }
 };
+export const editingPage = (state={state: false}, action) => {
+  switch (action.type) {
+    case 'TOGGLE_EDIT_PAGE': return state.state ? {state:false} : {state:true, pageId: action.pageId};
+    case 'HIDE_EDIT_PAGE': return {state:false};
+    default: return state;
+  }
+};
+
 const pagesInitialState = {
   isFetching: false,
   isFetched: false,

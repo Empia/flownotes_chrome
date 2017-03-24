@@ -284,6 +284,10 @@ transition: all 1s;
     box-shadow: black 1px 1px 7px inset;
     background: #3AA13A;
 }
+:global .ReactModal__Overlay {
+    z-index: 100;
+    transition: all 0.5s;
+}
 /*
 By default CSS exports all class names into a global selector scope. 
 Styles can be locally scoped to avoid globally scoping styles.

@@ -6,7 +6,7 @@ import GlobalAppContainer from './components/GlobalAppContainer';
 import UserModes from './components/user_modes/UserModes';
 import FocusedPageContainer from './components/page/FocusedPageContainer';
 import {groceryItemStore, Item} from './stores/GroceryItemStore';
-import {card,addingPage,pages} from './stores/pages/FlowPageStore';
+import {card,addingPage,editingPage,pages} from './stores/pages/FlowPageStore';
 import {modes, addingModes, sets_modes} from './stores/user_modes/UserModesReducers';
 
 import {pagesStore} from './stores/pages/OldFlowPageStore';
@@ -64,6 +64,7 @@ const autoRehydrateVal = autoRehydrate()
 export const store = createStore(combineReducers({
   card, 
   addingPage, 
+  editingPage,
   pages, 
   modes, addingModes,sets_modes,
   addingPageContent,

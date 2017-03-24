@@ -1,5 +1,6 @@
 import {getJWT} from '../jwt';
 
+export const toggleEditPage= (pageId) => ({type: 'TOGGLE_EDIT_PAGE', pageId: pageId});
 export const toggleAddPage= () => ({type: 'TOGGLE_ADD_CARD'});
 export const hideAddPage= () => ({type: 'HIDE_ADD_CARD'});
 export const REQUEST_PAGES = 'REQUEST_PAGES'
@@ -90,26 +91,18 @@ export function updatePage(pageId, page) {
   }
 }
 export function updatedPage(pageId, page) { return {type: 'UPDATE_PAGE', data: page, pageId: pageId} };
-
 export function removePage(pageId) {
-
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
-
   return function (dispatch) {
-
     // First dispatch: the app state is updated to inform
     // that the API call is starting.
-
     dispatch(requestRemovingPage(pageId))
-
     // The function called by the thunk middleware can return a value,
     // that is passed on as the return value of the dispatch method.
-
     // In this case, we return a promise to wait for.
     // This is not required by thunk middleware, but it is convenient for us.
-
     return fetch(`/api/pages/${pageId}`, {method: 'delete', headers: {'Authorization': getJWT() }})
       .then(response => { 
           dispatch(receiveDeletedPage(pageId));

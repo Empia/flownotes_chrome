@@ -21,16 +21,15 @@ function NewPageModal(props) {
   var openModal = props.openModal
   var afterModalOpen = props.afterOpenModal
   var closeModal = props.closeModal
-  console.log('afterModalOpen ', afterModalOpen);
   return (<div className="pageContentModal">
               <Modal
-                isOpen={state.modalIsOpen}
+                isOpen={state}
                 onAfterOpen={afterModalOpen}
                 onRequestClose={closeModal}
                 style={customStyles}
                 contentLabel="Example Modal">
-                      <button onClick={closeModal}>close</button>
-                  <span>c</span>
+                      <button onClick={closeModal}>x</button>
+                  {props.children}
               </Modal>
             </div>);
 }
