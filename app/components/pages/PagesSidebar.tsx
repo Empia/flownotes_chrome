@@ -94,7 +94,7 @@ class PagesSidebar extends React.Component<GenericPageContentProps, PagesSidebar
     // references are now sync'd and can be accessed.
     console.log('this.refs', this.refs);
     let el = this.refs as any
-    el.add.style.color = 'white';
+    el.add_btn.style.color = 'white';
   }  
 
   render(){
@@ -106,7 +106,7 @@ class PagesSidebar extends React.Component<GenericPageContentProps, PagesSidebar
         { props.addingPage && <NewPageForm.default pages={props.pages.items} handleSubmit={this.createPage}/> }
       </div>      
 
-      <button onClick={this.openModal} ref="add" active="props.addingPage" className={addBtnActive+'btn btn-success addPage'}>Add page modal</button>
+      <button onClick={this.openModal} ref="add_btn" active="props.addingPage" className={addBtnActive+'btn btn-success addPage'}>Add page modal</button>
 
       <button onClick={ e => props.toggleAddPage() } active="props.addingPage" className={addBtnActive+'btn btn-success addPage'}>Add page</button>
       <ul className="pageListContainer">
