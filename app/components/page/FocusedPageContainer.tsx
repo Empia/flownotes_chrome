@@ -336,10 +336,10 @@ moveCard(dragIndex, hoverIndex) {
                           moveCard={this.moveCard} />
                   );
         })*/}        
-        {/*
         <EditContentModal />
         <BasicDialog />
                 
+        {/*
         
 
         <Select
