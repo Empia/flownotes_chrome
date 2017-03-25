@@ -8,8 +8,6 @@ var Select = require('react-select');
 import 'react-select/dist/react-select.css';
 import * as Modal from 'react-modal';
 import GenericPageContent from './GenericPageContent';
-import BasicDialog from './forms/BasicDialog';
-import EditContentModal from './forms/EditContentModal';
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -101,7 +99,6 @@ class FocusedPageContainer extends React.Component<FocusedPageContainerProps, Fo
     this.moveCard = this.moveCard.bind(this);
     //this.page = this.props.pages;
     //this.pageId = this.props.params.pageId
-    console.log('BasicDialog', BasicDialog);
     this.state = {
       cards: [{
         id: 1,
@@ -385,10 +382,7 @@ const SortableList2 = SortableContainer((props: SortableListProps): JSX.Element 
     return <ul className="pageContent__contentList">{items}</ul>;
 });
 
-interface SortableItemProps {
-    value: string;
-}
-
+interface SortableItemProps {value: string;}
 interface SortableListProps {
     items: Array<string>;
     disabled?: boolean;

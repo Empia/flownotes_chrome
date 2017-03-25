@@ -9,6 +9,7 @@ import * as BasicDialog from './forms/BasicDialog';
 import {DropdownButton, MenuItem} from 'react-bootstrap';
 import {ParagraphContentType,LinkContentType, HeadingContentType} from './content_types/index'
 
+let PageContentEditForm = require('./forms/PageContentEditForm.jsx');
 
 
 function RemoveButton(props) {
@@ -70,6 +71,10 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
   render(){
     let p = this.props.contentObject;
     let idx = this.props.contentIdx;
+    let defaultValuesForEdit = {
+      title: p.title,
+      content_value: p.content_value
+    }
     return  (
       <div class="pageContentRoot">
       <div className="pageContentRootContainer" key={p._id}>
@@ -94,7 +99,9 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
                            content_type={p.content_type} 
                            content_title={p.title} 
                            content_value={p.content_value} />
+            <PageContentEditForm.default initialValues={defaultValuesForEdit} />                           
           </div>
+
           <div className="pageContent__contentResource-content_controls">
             <DropdownButton bsStyle="default" title={'...'} key={'dropdown-'+p._id} id={`dropdown-basic-${p._id}`}>
               <MenuItem eventKey="0" onClick={() => this.removePageSender(p.pageId,p._id)}>Remove</MenuItem>
