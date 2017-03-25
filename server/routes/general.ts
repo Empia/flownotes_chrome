@@ -22,7 +22,7 @@ export default function (router:Router){
     .post('/content/bulk/page/:pageId', auth, flowNoteContentService.addBulk)
 
     .delete('/content/:id', auth, flowNoteContentService.remove)
-    .patch('/content/:id', auth, flowNoteContentService.update)
+    .post('/content/update/:id', auth, flowNoteContentService.update)
     .patch('/content/order/:id', auth, flowNoteContentService.updateOrder)
     
 

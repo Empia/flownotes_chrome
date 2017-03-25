@@ -112,12 +112,32 @@ class FlowNoteContentService{
    * @param {String} myParam
    */  
   update(req, res:Response){
-    FlowNoteContent.findOne({_id:req.body._id, userId: req.user[0]._id}, (err, doc) => {
-      for(let key in req.body){
-        doc[key] = req.body[key];
+    console.log('update', req.body);
+    let contentId = req.params.id;
+    FlowNoteContent.findOne({_id: contentId, userId: req.user[0]._id}, (err, doc) => {
+      console.log('update doc', doc);
+      if (doc.content_type === 'Link' && req.body.content_value !== doc.content_value) {
+        var client = new MetaInspector(normalizeUrl(req.body.content_value), { timeout: 15000 });
+        client.on("fetch", () => {
+              doc['title'] = client.title;
+              doc['content_value'] = req.body.content_value;
+              doc['states'] = [{
+                name: 'initiated',
+                ison: true,
+                ison_rate: 100                
+              }];       
+              doc.save();
+              res.status(200).send({op: 'updating', status: 'good', fields: ['title', 'content_value']});         
+        });
+        client.on("error", (err) => console.log('err',err));
+        return client.fetch(); 
+      } else {
+        for(let key in req.body){
+          doc[key] = req.body[key];
+        }
+        doc.save();
+        return res.status(200).send({op: 'updating', status: 'good', fields: ['title']});
       }
-      doc.save();
-      res.status(200).send(null);
     });
   }
 
@@ -129,7 +149,7 @@ class FlowNoteContentService{
   updateOrder(req, res:Response){
     let order = req.body.order
     let contentId = req.params.id;
-    FlowNoteContent.findOne({_id:req.body._id, userId: req.user[0]._id}, (err, doc) => {
+    FlowNoteContent.findOne({_id: contentId, userId: req.user[0]._id}, (err, doc) => {
       doc['order'] = req.body['order'];
       // update order of others in this page
       doc.save();

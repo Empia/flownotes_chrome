@@ -17,7 +17,7 @@ function conn(){
 var config = {
   mongoUrl: 'mongodb://localhost/flownotes'
 }
-var db = connect(config.mongoUrl, {
+const db = connect(config.mongoUrl, {
   server: {
     socketOptions: {
       socketTimeoutMS: 6000,

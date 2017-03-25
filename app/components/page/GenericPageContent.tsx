@@ -71,10 +71,11 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
   editPageSender =  (evt) => {
       evt.preventDefault();
       console.log('editPageSender', evt);
-      console.log('edit', this.props.form['edit-page-form'])
-      let values = this.props.form['edit-page-form'].values
+      console.log('edit', this.props.form)
+      let id = 'edit_page_form_'+this.props.contentObject._id
+      let values = this.props.form[id].values
       console.log('pageId', values);
-      this.props.updatePageContent(values.pageId, values.pageContentId, {content_value:values.content_value})
+      this.props.updatePageContent(values.pageId, values.pageContentId, {title: values.title, content_value:values.content_value})
   };
 
   render(){
@@ -82,7 +83,9 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
     let idx = this.props.contentIdx;
     let defaultValuesForEdit = {
       title: p.title,
-      content_value: p.content_value
+      content_value: p.content_value,
+      pageId: p.inPageId,
+      pageContentId: p._id
     }
     return  (
       <div class="pageContentRoot">
@@ -108,7 +111,7 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
                            content_type={p.content_type} 
                            content_title={p.title} 
                            content_value={p.content_value} />
-            <PageContentEditForm.default handleSubmit={this.editPageSender} initialValues={defaultValuesForEdit} />                           
+            <PageContentEditForm.default form={'edit_page_form_'+p._id} handleSubmit={this.editPageSender} initialValues={defaultValuesForEdit} />                           
           </div>
 
           <div className="pageContent__contentResource-content_controls">

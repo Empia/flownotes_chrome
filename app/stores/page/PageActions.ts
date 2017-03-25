@@ -145,9 +145,16 @@ export function requestUpdatingPageContent(pageId, pageContentId) {
 }
 export function updatePageContent(pageId, pageContentId, content) {
   return function (dispatch) {
+    let contentToUpdate = {
+        title: content.title, 
+        content_value: content.content_value
+    }    
+    console.log('updatePageContent', JSON.stringify(contentToUpdate));
     dispatch(requestUpdatingPageContent(pageId, pageContentId))
-    return fetch(`/api/content/${pageContentId}`, {method: 'patch', headers: {'Authorization': getJWT()} })
-      .then(response => { 
+    return fetch(`/api/content/update/${pageContentId}`, {method: 'post', headers: {'Content-Type': 'application/json',
+                                                                                    'Authorization': getJWT()}, 
+      body: JSON.stringify(contentToUpdate)
+    }).then(response => { 
           console.log(response);
           dispatch(receiveUpdatePageContent(pageId, pageContentId));
       })
