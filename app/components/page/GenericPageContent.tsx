@@ -5,7 +5,6 @@ import {store} from '../../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
 import { connect } from 'react-redux';
 import { openDialog, closeDialog } from 'redux-dialog';
-import * as BasicDialog from './forms/BasicDialog';
 import {DropdownButton, MenuItem} from 'react-bootstrap';
 import {ParagraphContentType,LinkContentType, HeadingContentType} from './content_types/index'
 
@@ -33,16 +32,18 @@ function ContentRender(props) {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-interface StateProps {}
-const mapStateToProps = ({addingPageContent, pageContents, pages, selectedPage}) => ({});
+interface StateProps {form:any;}
+const mapStateToProps = ({addingPageContent, pageContents, pages, selectedPage, form}) => ({form});
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 interface DispatchProps {
   removePageContent: (pageId: void, pageContentId: void) => void;
   openDialog: any;
+  updatePageContent: (pageId:string, pageContentId:string, content:any) => void;
 }
 const mapDispatchToProps = dispatch => ({
     removePageContent: (pageId, pageContentId) => dispatch(actions.removePageContent(pageId, pageContentId)),
-    openDialog: (dialogId) => dispatch(openDialog(dialogId))
+    openDialog: (dialogId) => dispatch(openDialog(dialogId)),
+    updatePageContent: (pageId, pageContentId, content) => dispatch(actions.updatePageContent(pageId, pageContentId, content))
 });
 ////////////////////////////////////////////////////////
 interface GenericPageContentOwnProps extends React.Props<any>{
@@ -67,6 +68,14 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
           this.props.openDialog(modalId); 
     }
   }
+  editPageSender =  (evt) => {
+      evt.preventDefault();
+      console.log('editPageSender', evt);
+      console.log('edit', this.props.form['edit-page-form'])
+      let values = this.props.form['edit-page-form'].values
+      console.log('pageId', values);
+      this.props.updatePageContent(values.pageId, values.pageContentId, {content_value:values.content_value})
+  };
 
   render(){
     let p = this.props.contentObject;
@@ -99,7 +108,7 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
                            content_type={p.content_type} 
                            content_title={p.title} 
                            content_value={p.content_value} />
-            <PageContentEditForm.default initialValues={defaultValuesForEdit} />                           
+            <PageContentEditForm.default handleSubmit={this.editPageSender} initialValues={defaultValuesForEdit} />                           
           </div>
 
           <div className="pageContent__contentResource-content_controls">
