@@ -27,11 +27,12 @@ import {CustomDragLayer} from './../commons/drag/CustomDragLayer'
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
 
-const mapStateToProps = ({addingPageContent, pageContents, pages, selectedPage}) => ({
+const mapStateToProps = ({addingPageContent, pageContents, pages, selectedPage, form}) => ({
   addingPageContent,
   pageContents,
   pages,
-  selectedPage
+  selectedPage,
+  form
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -52,6 +53,7 @@ interface FocusedPageContainerProps extends React.Props<any>{
   addingPageContent: any;
   pageContents: any;
   selectedPage: any;
+  form: any;
   pages: any;
   moveCard?:any;
 
@@ -327,59 +329,31 @@ moveCard(dragIndex, hoverIndex) {
         <h3 className="pageContent__pageHeader">
           Page {this.props.pages.selectedPage ? this.props.pages.selectedPage.title : '' } 
         </h3>
-        {/*this.state.cards.map((card, i) => {
-                  return (
-                    <DragCard key={card.id}
-                          index={i}
-                          id={card.id}
-                          text={card.text}
-                          moveCard={this.moveCard} />
-                  );
-        })*/}        
-        {/*
-        <Select
-            name="form-field-name"
-            value="two"
-            options={this.options(this.props.pages.items)}
-            onChange={this.logChange}
-        />
-        <Button onClick={ e => this.props.toggleAddPageContent() }>Add lots of content</Button>
-        */}
+
 
         <div className="pageContent__mainControlGroup">
           <div className="pageContent__contentCreateButton">
             <Button onClick={ e => this.props.toggleAddPageContent() }>Add content</Button>
           </div>
+
           <div className="pageContent__contentCreateToggle">
              { this.props.addingPageContent && <PageContentForm.default 
                                             pageId={this.props.params.pageId} 
                                             initialValues={initialValues} 
+                                            newContentFormValues={this.props.form}
                                             form={'new_content_form'}
                                             onSubmit={this.createPageContent}/>}
-             <div className="pageContentModal">
-              <Button onClick={this.openModal}>Open Modal</Button>
-              <Modal
-                isOpen={this.state.modalIsOpen}
-                onAfterOpen={this.afterOpenModal}
-                onRequestClose={this.closeModal}
-                style={customStyles}
-                contentLabel="Example Modal">
-                  <PageContentForm.default 
-                    pageId={this.props.params.pageId} 
-                    initialValues={initialValues} 
-                    form={'new_content_form'}
-                    onSubmit={this.createPageContent}/>
-              </Modal>
+          </div>          
+
+          <div className="pageContent__sortableDropdown pageContent__sortableButtons">
+            <div className="sortTypeButtons">
+              <Button active={this.sortingBy('order_asc') } onClick={ e => this.toggleSortInfo('order_asc') }>By Order</Button>
+              <Button active={this.sortingBy('date_asc') } onClick={ e => this.toggleSortInfo('date_asc') }>By Date</Button>
             </div>
-          </div> 
-          <div className="pageContent__sortableDropdown">
-            <DropdownButton bsStyle="default" title={'Sort'} key={'dropdown-'} id={`dropdown-basic-`}>
-              <MenuItem eventKey="1" onClick={ e => this.toggleSortInfo('order_asc') } active={this.sortingBy('order_asc') }>By Order</MenuItem>
-              <MenuItem eventKey="2" onClick={ e => this.toggleSortInfo('date_asc') } active={this.sortingBy('date_asc') }>By Date</MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey="3" active={this.sortingPosBy('order_asc') } onClick={ e => this.toggleSortInfo('asc', 'pos') }>ASC</MenuItem>
-              <MenuItem eventKey="4" active={this.sortingPosBy('order_desc') } onClick={ e => this.toggleSortInfo('desc', 'pos') }>DESC</MenuItem>
-            </DropdownButton>          
+            <div className="sortPosotionButtons">
+              <Button active={this.sortingPosBy('order_asc') } onClick={ e => this.toggleSortInfo('asc', 'pos') }>ASC</Button>
+              <Button active={this.sortingPosBy('order_desc') } onClick={ e => this.toggleSortInfo('desc', 'pos') }>DESC</Button>     
+            </div>
           </div>
         </div>
 
@@ -387,21 +361,6 @@ moveCard(dragIndex, hoverIndex) {
                        pressDelay={10}
                        items={this.sortFunction(this.props.pageContents.page_content)} 
                        onSortEnd={this.onSortEnd} />
-
-        {/*<div className="pageContent__contentList">
-            {this.sortFunction(this.props.pageContents.page_content).map((p, idx) => 
-          <div>
-          <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
-          <DragCard key={idx}
-                    index={p.order}
-                    id={p._id}
-                    text={p._id}
-                    moveCard={this.moveCard}>
-                  <GenericPageContent contentObject={p} key={idx} contentIdx={idx} />
-          </DragCard>
-          <CustomDragLayer p={p}></CustomDragLayer></div>)}
-        </div>
-        */}
 
       </div>);
   }    
