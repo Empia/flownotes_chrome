@@ -19,13 +19,17 @@ class FlowNotePageService{
 	update(req, res:Response){
 		console.log('update', req.body.title);
 		FlowNotePage.findOne({_id:req.body._id, userId: req.user[0]._id}, (err, doc) => {
-			
+			console.log('doc first', doc);
 			if (doc) {
 				for(let key in req.body){
 					console.log('key', key, req.body[key]);
 					console.log('k', doc[key]);
-					doc[key] = req.body[key];
+				  if (key !== 'createdAt') {
+						doc[key] = req.body[key];
+				  }
 				}
+				doc['updatedAt'] = new Date(Date.now());
+				console.log('doc last', doc);
 				doc.save();
 				res.status(200).send({status: 'updated', pageId: req.body._id});
 			}

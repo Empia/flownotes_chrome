@@ -105,6 +105,7 @@ class PagesSidebar extends React.Component<GenericPageContentProps, PagesSidebar
   editFormInitialValues = (pages, pageId) => {
     if (pageId !== undefined && pages !== undefined) {
       return {
+        pageId: pageId,
         title: pages.find(function(p){return p._id == pageId}).title
       }
     } else {
@@ -116,12 +117,6 @@ class PagesSidebar extends React.Component<GenericPageContentProps, PagesSidebar
     let props = this.props;
     let addBtnActive = props.addingPage ? 'active ' : '' 
     return  (<div className="page__sidebar" style={props.sideBarStyles}>
-      {/*<div className="new-page-input">
-        { props.addingPage && <NewPageForm.default pages={props.pages.items} handleSubmit={this.createPage}/> }
-      </div>      
-      <button onClick={ e => props.toggleAddPage() } active="props.addingPage" className={addBtnActive+'btn btn-success addPage'}>Add page</button>
-      */}
-
       {/* Modals */}
       <NewPageModal openModal={this.openModal} afterOpenModal={this.afterOpenModal} closeModal={this.closeModal} state={props.addingPage}>
         <NewPageForm.default pages={props.pages.items} handleSubmit={this.createPage}/>
@@ -133,14 +128,14 @@ class PagesSidebar extends React.Component<GenericPageContentProps, PagesSidebar
                     state={props.editingPage.state}>
         <EditPageForm.default pages={props.pages.items} 
                               initialValues={this.editFormInitialValues(props.pages.items, props.editingPage.pageId)} 
-                              pageId={props.editingPage.pageId} handleSubmit={this.createPage}/>
+                              pageId={props.editingPage.pageId} handleSubmit={this.editPageSender}/>
       </NewPageModal>
 
 
       <button onClick={this.openModal} ref="add_btn" active="props.addingPage" 
               className={addBtnActive+'btn btn-success addPage'}>Add page</button>
       <ul className="pageListContainer">
-        {props.pages.items.map((p, idx) => 
+        {props.pages.items.sort((b,c) => (+ new Date(b.createdAt)) - (+ new Date(c.createdAt)) ).map((p, idx) => 
           <div className="pageContainer">
             <li><Link to={'/page/'+p._id} key={p._id} activeClassName="active"
                 activeStyle={{fontWeight: 'bold'}}><span className="pagePrimaryLink">{p.title}</span></Link>
@@ -174,11 +169,13 @@ class PagesSidebar extends React.Component<GenericPageContentProps, PagesSidebar
     this.props.toggleAddPage();
   }
   
-  editPageSender =  (evt, pageId, page) => {
+  editPageSender =  (evt) => {
       evt.preventDefault();
-      console.log('editPageSender', this.refs, evt.currentTarget);
-      var title = (ReactDOM.findDOMNode(this.refs['update-'+pageId]) as HTMLInputElement).value;
-      this.props.updatePage(pageId, {title})
+      console.log('editPageSender', evt);
+      console.log('edit', this.props.form['edit-page-form'])
+      let values = this.props.form['edit-page-form'].values
+      console.log('pageId', values);
+      this.props.updatePage(values.pageId, {title:values.title})
   };
 
 
