@@ -176,6 +176,7 @@ user-select: none;
     margin-bottom: 10px;
     box-shadow: 1px 1px 2px #dbdbdb;
     padding: 2px 14px;
+    overflow: hidden;
 }
 :global .btn.btn-default {
     background: white;
@@ -288,6 +289,29 @@ transition: all 1s;
     z-index: 100;
     transition: all 0.5s;
 }
+
+
+
+
+
+:global .pageContent__sortableDropdown.pageContent__sortableButtons .sortTypeButtons {
+  display: inline-block;
+  float: left;
+}
+:global .pageContent__sortableDropdown.pageContent__sortableButtons .sortPosotionButtons {
+  display: inline-block;
+  margin-left: 22px;
+}
+:global .pageContent__sortableDropdown.pageContent__sortableButtons .sortPosotionButtons .btn {
+  margin: 1px 3px;
+}
+:global .pageContent__sortableDropdown.pageContent__sortableButtons .sortTypeButtons .btn {
+  margin: 1px 3px;
+}
+:global .pageContentEditForm {
+    margin-top: 7px;
+}
+
 /*
 By default CSS exports all class names into a global selector scope. 
 Styles can be locally scoped to avoid globally scoping styles.

@@ -106,12 +106,17 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
         </div>
         */}
           <div className="pageContent__contentResource-content_value">
-            <ContentRender content_page={p.page} 
+            <ContentRender className="ContentRender" 
+                           content_page={p.page} 
                            content_order={p.order}
                            content_type={p.content_type} 
                            content_title={p.title} 
                            content_value={p.content_value} />
-            <PageContentEditForm.default form={'edit_page_form_'+p._id} handleSubmit={this.editPageSender} initialValues={defaultValuesForEdit} />                           
+            <div className="pageContentEditForm">                             
+              <PageContentEditForm.default form={'edit_page_form_'+p._id} 
+                                           handleSubmit={this.editPageSender} 
+                                           initialValues={defaultValuesForEdit} />                           
+            </div>
           </div>
 
           <div className="pageContent__contentResource-content_controls">
