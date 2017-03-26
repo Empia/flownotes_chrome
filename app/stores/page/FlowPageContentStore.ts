@@ -40,6 +40,27 @@ export const addingPageContent = (state, action) => {
   }
 };
 
+const pageContentsEditTogglesInitialState = {
+  page_content_toggle: []
+}
+export const editPageContentsTogglesStore = (state = pageContentsEditTogglesInitialState, action) => {
+  switch (action.type) {
+    case 'TOGGLE_EDIT_PAGE_CONTENT':
+      let toggler = state.page_content_toggle.find(el => el == action.editPageContentId)
+      if (toggler) {
+        return (<any>Object).assign({}, state, {
+          page_content_toggle: state.page_content_toggle.filter(e => e !== action.editPageContentId),
+        });
+      } else {
+        return (<any>Object).assign({}, state, {
+          page_content_toggle: state.page_content_toggle.concat([action.editPageContentId]),
+        });
+      }
+    default: 
+      return state;      
+  }
+}
+
 const pageContentsInitialState = {
   isPageContentsFetching: false,
   sortBy: 'order_asc',

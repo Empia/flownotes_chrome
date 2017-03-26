@@ -23,6 +23,15 @@ console.log('selectPage');
   }
 }
 
+
+export const editPageContentsToggles = (pageContentId) => {
+console.log('selectPage');
+ return {
+    type: 'TOGGLE_EDIT_PAGE_CONTENT',
+    editPageContentId: pageContentId
+  }
+}
+
 export const requestPageContent = (pageId) => {
   return {
     type: REQUEST_PAGE_CONTENT

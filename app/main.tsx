@@ -10,7 +10,7 @@ import {card,addingPage,editingPage,pages} from './stores/pages/FlowPageStore';
 import {modes, addingModes, sets_modes} from './stores/user_modes/UserModesReducers';
 
 import {pagesStore} from './stores/pages/OldFlowPageStore';
-import {addingPageContent,pageContents} from './stores/page/FlowPageContentStore';
+import {addingPageContent,pageContents,editPageContentsTogglesStore} from './stores/page/FlowPageContentStore';
 import { dialogReducer } from 'redux-dialog';
 import {userReducer} from './stores/userReducer';
 import {restoreUser} from './stores/userActions';
@@ -65,6 +65,7 @@ export const store = createStore(combineReducers({
   card, 
   addingPage, 
   editingPage,
+  editPageContentsTogglesStore,
   pages, 
   modes, addingModes,sets_modes,
   addingPageContent,

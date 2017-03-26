@@ -32,17 +32,21 @@ function ContentRender(props) {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-interface StateProps {form:any;}
-const mapStateToProps = ({addingPageContent, pageContents, pages, selectedPage, form}) => ({form});
+interface StateProps {form:any;editPageContentsTogglesStore:any;}
+const mapStateToProps = ({addingPageContent, pageContents, pages, selectedPage, form, editPageContentsTogglesStore}) => ({
+  form, 
+  editPageContentsTogglesStore});
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 interface DispatchProps {
   removePageContent: (pageId: void, pageContentId: void) => void;
   openDialog: any;
   updatePageContent: (pageId:string, pageContentId:string, content:any) => void;
+  editPageContentToggling: (id: string) => void;
 }
 const mapDispatchToProps = dispatch => ({
     removePageContent: (pageId, pageContentId) => dispatch(actions.removePageContent(pageId, pageContentId)),
     openDialog: (dialogId) => dispatch(openDialog(dialogId)),
+    editPageContentToggling: (id) => dispatch(actions.editPageContentsToggles(id)),
     updatePageContent: (pageId, pageContentId, content) => dispatch(actions.updatePageContent(pageId, pageContentId, content))
 });
 ////////////////////////////////////////////////////////
@@ -77,6 +81,20 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
       console.log('pageId', values);
       this.props.updatePageContent(values.pageId, values.pageContentId, {title: values.title, content_value:values.content_value})
   };
+  editPageContentToggle = (evt) => {
+    evt.preventDefault();    
+    this.props.editPageContentToggling(this.props.contentObject._id)
+  }
+  isOnEdit = (id) => {
+    return this.props.editPageContentsTogglesStore.page_content_toggle.find(c => c == id) !== undefined
+  }
+  isDisplay = (bol) => {
+    if (bol) {
+      return {display: 'initial'}
+    } else {
+      return {display: 'none'}
+    }
+  }
 
   render(){
     let p = this.props.contentObject;
@@ -106,13 +124,17 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
         </div>
         */}
           <div className="pageContent__contentResource-content_value">
+            <button onClick={this.editPageContentToggle}>Edit toggle</button>
+            
+            <div style={this.isDisplay(!this.isOnEdit(p._id))}>
             <ContentRender className="ContentRender" 
                            content_page={p.page} 
                            content_order={p.order}
                            content_type={p.content_type} 
                            content_title={p.title} 
                            content_value={p.content_value} />
-            <div className="pageContentEditForm">                             
+            </div>
+            <div className="pageContentEditForm" style={this.isDisplay(this.isOnEdit(p._id))}>                             
               <PageContentEditForm.default form={'edit_page_form_'+p._id} 
                                            handleSubmit={this.editPageSender} 
                                            initialValues={defaultValuesForEdit} />                           
