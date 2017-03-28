@@ -1,1 +1,3 @@
-import "../css/options.css";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("../css/options.css");

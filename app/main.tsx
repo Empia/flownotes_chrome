@@ -89,21 +89,21 @@ const persistConfig = { /* ... */ }
 //store.subscribe( () => console.log(store.getState() ))
 
 
+const routes = (
+<Route path="/" component={GlobalAppContainer}>
+  <Route path="/page/:pageId" component={FocusedPageContainer} />
+  <Route path="/foo" component={UserIsAuthenticated(AboutApplication)}/>
+  <Route path="/about" component={AboutApplication} />
+  <Route path="/modes" component={UserModes} />
+  <Route path="/login" component={Login} />
+  <Route path="/signup" component={SignUp} />
+</Route>);
+
 function render(){
   console.log('items main');
   ReactDOM.render(<Provider store={store}>
     <Router history={browserHistory}>
-        <Route path="/" component={GlobalAppContainer}>
-                <Route path="/page/:pageId" component={FocusedPageContainer} />
-                <Route path="/foo" component={UserIsAuthenticated(AboutApplication)}/>
-                <Route path="/about" component={AboutApplication} />
-                <Route path="/modes" component={UserModes} />
-
-                <Route path="/login" component={Login} />
-                <Route path="/signup" component={SignUp} />
-
-        </Route>
-
+        {routes}
     </Router>
     </Provider>, document.getElementById('app'));
   //  ReactDOM.render(<GroceryItemList  items={items} />, document.getElementById('app'));

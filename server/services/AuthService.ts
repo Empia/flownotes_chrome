@@ -25,9 +25,12 @@ var genRandomString = function(length){
  * @param {string} salt - Data to be validated.
  */
 var sha512 = function(password, salt){
-    var hash = crypto.createHmac('sha512', salt); /** Hashing algorithm sha512 */
-    hash.update(password);
+    console.log('sha512', password, salt);
+
+    var hash = crypto.createHmac('sha512', salt.toString()); /** Hashing algorithm sha512 */
+    hash.update(password.toString());
     var value = hash.digest('hex');
+    console.log('value', value);
     return {
         salt:salt,
         passwordHash:value
@@ -35,6 +38,7 @@ var sha512 = function(password, salt){
 };
 
 function saltHashPassword(userpassword) {
+    console.log('genRandomString', genRandomString(16));
     var salt = genRandomString(16); /** Gives us salt of length 16 */
     var passwordData = sha512(userpassword, salt);
     console.log('UserPassword = '+userpassword);
@@ -78,12 +82,14 @@ console.log('token', req.body.email)
 if (req.body.email && req.body.password) {
     Accounts.find({email: email}, function(errForProb, probUsers) {
       let probUser = probUsers[0];
-      let probUserSalt = probUser.salt
-      Accounts.find({email: email, password: sha512(password, probUserSalt) }, function(err, users) {
-        let user = users[0];
+      let probUserSalt = !probUser.salt ? genRandomString(16) : probUser.salt
+      Accounts.find({email: email, password: sha512(password, probUserSalt).passwordHash }, function(err, users) {
         if (err) { return res.sendStatus(401); }
-        if (!user) { return res.sendStatus(401) }
-        if (user.password != password) { return res.sendStatus(401) }
+        console.log('login attempt:', users);
+        if (!users) { return res.sendStatus(401) }
+        let user = users[0];
+
+        //if (user.password != password) { return res.sendStatus(401) }
           var payload = {
               id: user._id,
               aud: 'localhost'
