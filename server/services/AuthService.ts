@@ -165,10 +165,12 @@ confOpts:any = {
                 return token;
             }
         } else {
+          console.log('req');
           return token;
         }
 },
  secretOrKey: "secret",
+ passReqToCallback: true,
  //issuer: "accounts.localhost.com",
  //audience: "localhost"
 }

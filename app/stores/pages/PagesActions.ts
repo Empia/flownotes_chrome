@@ -5,6 +5,7 @@ export const toggleAddPage= () => ({type: 'TOGGLE_ADD_CARD'});
 export const hideAddPage= () => ({type: 'HIDE_ADD_CARD'});
 export const REQUEST_PAGES = 'REQUEST_PAGES'
 export const RECEIVE_PAGES = 'RECEIVE_PAGES'
+export const NOT_RECEIVING_PAGES = 'NOT_RECEIVING_PAGES'
 export const REQUEST_REMOVING_PAGE = 'REQUEST_REMOVING_PAGE'
 export const RECIEVE_REMOVING_PAGE = 'RECIEVE_REMOVING_PAGE'
 
@@ -22,6 +23,12 @@ export const receivePages = (json) => {
     receivedAt: Date.now()
   }
 }
+export const notReceivingPages = () => {
+  return {
+    type: NOT_RECEIVING_PAGES
+  }
+}
+
 export function fetchPages() {
 
   // Thunk middleware knows how to handle functions.
@@ -30,30 +37,27 @@ export function fetchPages() {
 
   return function (dispatch) {
 
-    // First dispatch: the app state is updated to inform
-    // that the API call is starting.
-
-    dispatch(requestPages())
-
-    // The function called by the thunk middleware can return a value,
-    // that is passed on as the return value of the dispatch method.
-
-    // In this case, we return a promise to wait for.
-    // This is not required by thunk middleware, but it is convenient for us.
-
-    return fetch(`/api/pages/`, {headers: {'Authorization': getJWT()} })
-      .then(response => response.json())
-      .then(json =>
-
-        // We can dispatch many times!
-        // Here, we update the app state with the results of the API call.
-
-        dispatch(receivePages(json))
-      )
-
-      // In a real world app, you also want to
-      // catch any error in the network call.
-  }
+    if (getJWT() == '') {
+      dispatch(notReceivingPages())
+    } else {
+        // First dispatch: the app state is updated to inform
+        // that the API call is starting.
+        dispatch(requestPages())
+        // The function called by the thunk middleware can return a value,
+        // that is passed on as the return value of the dispatch method.
+        // In this case, we return a promise to wait for.
+        // This is not required by thunk middleware, but it is convenient for us.
+        return fetch(`/api/pages/`, {headers: {'Authorization': getJWT()} })
+          .then(response => response.json())
+          .then(json =>
+            // We can dispatch many times!
+            // Here, we update the app state with the results of the API call.
+            dispatch(receivePages(json))
+          )
+          // In a real world app, you also want to
+          // catch any error in the network call.
+      }
+    }
 }
 
 

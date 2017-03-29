@@ -7,7 +7,7 @@ import {dispatcher, IDispatchPayload} from '../../dispatcher';
 import {restHelper} from  '../../helpers/RestHelper';
 
 import {
-  REQUEST_PAGES, RECEIVE_PAGES,REQUEST_REMOVING_PAGE,RECIEVE_REMOVING_PAGE
+  REQUEST_PAGES, RECEIVE_PAGES,REQUEST_REMOVING_PAGE,RECIEVE_REMOVING_PAGE, NOT_RECEIVING_PAGES
 } from './PagesActions'
 
 interface Page{
@@ -52,6 +52,8 @@ export const pages = (state = pagesInitialState, action) => {
       return (<any>Object).assign({}, state, {
         isFetching: true,
       });
+    case NOT_RECEIVING_PAGES: 
+      return state;
     case RECEIVE_PAGES:
       return (<any>Object).assign({}, state, {
         isFetching: false,

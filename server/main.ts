@@ -53,7 +53,7 @@ passport.use('jwt',new JwtStrategy(authService.confOpts, function(jwt_payload, d
   console.log('jwt_payload', jwt_payload);
     //var user = users[payload.id] || null;
         Accounts.find({_id: jwt_payload.id}, function(err, user) {
-          console.log('user', user);
+          console.log('user', err, user);
             if (err) {
                 return done(err, false);
             }
@@ -69,6 +69,7 @@ passport.use('jwt',new JwtStrategy(authService.confOpts, function(jwt_payload, d
 passport.use('local', new Strategy(
   function(username, password, cb) {
     authService.findByUsername(username, function(err, user) {
+      console.log('local user', err, user);      
       if (err) { return cb(err); }
       if (!user) { return cb(null, false); }
       if (user.password != password) { return cb(null, false); }

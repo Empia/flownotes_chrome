@@ -11,9 +11,23 @@ var jwt = require("jwt-simple");
 
 export default function (router:Router){
     let auth = passport.authenticate("jwt", {session: false})
+    
+    let authFN = function(req, res, next) {
+      return passport.authenticate("jwt", function(err, user, info) {
+        console.log('boom');
+        if (err) { return res.status(401).send(err); }
+        if (!user) { return res.status(401).send('{"status": "unauthorized"}', err, user, info); }
+        /*
+        req.logIn(user, function(err) {
+          if (err) { return console.log(err); }
+          return res.send('/users/' + user.username);
+            });
+        */
+      })(req, res, next);
+    }
 
-	router
-	.get('/pages', auth, flowNotePageService.getList)
+
+	router.get('/pages', authFN, flowNotePageService.getList)
 	.post('/pages', auth, flowNotePageService.add)
 	.delete('/pages/:id', auth, flowNotePageService.remove)
     .patch('/pages/:id', auth, flowNotePageService.update)
