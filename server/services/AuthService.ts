@@ -84,9 +84,9 @@ if (req.body.email && req.body.password) {
       let probUser = probUsers[0];
       let probUserSalt = !probUser.salt ? genRandomString(16) : probUser.salt
       Accounts.find({email: email, password: sha512(password, probUserSalt).passwordHash }, function(err, users) {
-        if (err) { return res.sendStatus(401); }
+        if (err) { return res.status(401).send('{"status": "unauthorized"}')}
         console.log('login attempt:', users);
-        if (!users) { return res.sendStatus(401) }
+        if (!users) { return res.status(401).send('{"status": "unauthorized"}') }
         let user = users[0];
 
         //if (user.password != password) { return res.sendStatus(401) }
@@ -103,7 +103,7 @@ if (req.body.email && req.body.password) {
           });      
       });
     });
-} else { return res.sendStatus(401) }
+} else { return res.status(401).send('{"status": "unauthorized"}') }
 }
 
 logout = (req, res) => {

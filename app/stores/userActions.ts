@@ -29,10 +29,16 @@ export function restoreUser(data:UserData) {
 }
 
 export function login(data) {
-  let username = data.username || data.email
-  return {
-    type: constants.USER_LOGGED_IN,
-    payload: <UserData>Object.assign(data, {username: username})
+  if (data.status && data.status == 'unauthorized') {
+    return {
+      type: constants.CANT_LOGGED_IN
+    }
+  } else {
+    let username = data.username || data.email
+    return {
+      type: constants.USER_LOGGED_IN,
+      payload: <UserData>Object.assign(data, {username: username})
+    }
   }
 }
 

@@ -38,7 +38,10 @@ export function fetchPages() {
   return function (dispatch) {
 
     if (getJWT() == '') {
-      dispatch(notReceivingPages())
+      return new Promise(function(resolve, reject) {
+        dispatch(notReceivingPages())
+        resolve('')
+      });
     } else {
         // First dispatch: the app state is updated to inform
         // that the API call is starting.

@@ -1,4 +1,5 @@
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
+export const CANT_LOGGED_IN = 'CANT_LOGGED_IN';
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 export const USER_LOGGING_IN = 'USER_LOGGING_IN';
 export const USER_SIGNED_IN = 'USER_SIGNED_IN';

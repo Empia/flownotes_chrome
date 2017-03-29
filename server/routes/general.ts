@@ -10,9 +10,9 @@ import {authService} from '../services/AuthService';
 var jwt = require("jwt-simple");
 
 export default function (router:Router){
-    let auth = passport.authenticate("jwt", {session: false})
+    let authFN = passport.authenticate("jwt", {session: false})
     
-    let authFN = function(req, res, next) {
+    let auth = function(req, res, next) {
       return passport.authenticate("jwt", function(err, user, info) {
         console.log('boom');
         if (err) { return res.status(401).send(err); }
@@ -27,7 +27,7 @@ export default function (router:Router){
     }
 
 
-	router.get('/pages', authFN, flowNotePageService.getList)
+	router.get('/pages', auth, flowNotePageService.getList)
 	.post('/pages', auth, flowNotePageService.add)
 	.delete('/pages/:id', auth, flowNotePageService.remove)
     .patch('/pages/:id', auth, flowNotePageService.update)
