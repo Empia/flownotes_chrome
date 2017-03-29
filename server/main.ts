@@ -53,7 +53,7 @@ passport.use('jwt',new JwtStrategy(authService.confOpts, function(jwt_payload, d
   console.log('jwt_payload', jwt_payload);
     //var user = users[payload.id] || null;
         Accounts.find({_id: jwt_payload.id}, function(err, user) {
-          console.log('user', err, user);
+          console.log('user', err, user, done);
             if (err) {
                 return done(err, false);
             }

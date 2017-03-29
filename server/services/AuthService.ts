@@ -81,12 +81,14 @@ let password = req.body.password;
 console.log('token', req.body.email)
 if (req.body.email && req.body.password) {
     Accounts.find({email: email}, function(errForProb, probUsers) {
+      if (probUsers.length < 1) { return res.status(401).send('{"status": "unauthorized", "msg":"no user"}')}
+        
       let probUser = probUsers[0];
       let probUserSalt = !probUser.salt ? genRandomString(16) : probUser.salt
       Accounts.find({email: email, password: sha512(password, probUserSalt).passwordHash }, function(err, users) {
         if (err) { return res.status(401).send('{"status": "unauthorized"}')}
         console.log('login attempt:', users);
-        if (!users) { return res.status(401).send('{"status": "unauthorized"}') }
+        if (!users || (users[0] == undefined) ) { return res.status(401).send('{"status": "unauthorized", "msg": "password"}') }
         let user = users[0];
 
         //if (user.password != password) { return res.sendStatus(401) }
