@@ -75,7 +75,7 @@ export function signinStart(data) {
     return fetch(`/api/signUp/`, {method: 'post',
       headers: {'Content-Type': 'application/json'},  body: JSON.stringify({email: data.email, password: data.password})})
       .then(response => response.json())
-      .then(json => dispatch(signin(json)))   
+      .then(json => dispatch(startLogin({email: data.email, password: data.password})))   
   }
 }
 

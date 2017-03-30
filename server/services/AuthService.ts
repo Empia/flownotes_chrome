@@ -69,8 +69,14 @@ signUp = (req, res, next) => {
     let pass = saltHashPassword(account.password)
     account.password = pass.password
     account.salt     = pass.salt
-    account.save((err, data:IAccounts) => 
-        res.status(200).send(Object.assign(req.body, {_id: data._id}) ));
+    account.save((err, data:IAccounts) => { 
+        console.log('account.save',data, err)
+        res.json({
+              token: 'JWT '+ pass.password,
+              username: data.username,
+              email: data.email
+          })
+    })
   //});
 }
 
