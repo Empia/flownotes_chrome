@@ -112,11 +112,13 @@ function render(){
 //groceryItemStore.onChange(render);
 getStoredState(persistConfig, (err, restoredState:any) => {
   // restore user
-console.log('restoredState',restoredState)
-store.dispatch(restoreUser(restoredState.user.data));
-store.dispatch(fetchPages()).then(() =>
-   console.log('store.getState ',store.getState())
-)
+  console.log('restoredState',restoredState)
+  if (restoredState.user) {
+    store.dispatch(restoreUser(restoredState.user.data));
+    store.dispatch(fetchPages()).then(() =>
+       console.log('store.getState ',store.getState())
+    )
+  }
 })
 
 var firstLoad = false 

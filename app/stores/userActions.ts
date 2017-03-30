@@ -1,5 +1,6 @@
 import * as constants from './userReducer'
-
+import {fetchPages} from './pages/PagesActions';
+import {getJWT} from './jwt';
 
 interface LoginData{
   email:string;
@@ -11,13 +12,26 @@ interface UserData {
   username:string;
 }
 
+export function userAppInit() {
+  return 
+}
+
 export function startLogin(data: LoginData) {
   return function (dispatch) {
     dispatch(() => {return {type: constants.USER_LOGGING_IN} })
     return fetch(`/api/token`, {method: 'post',
       headers: {'Content-Type': 'application/json'},  body: JSON.stringify({email: data.email, password: data.password})})
       .then(response => response.json())
-      .then(json => dispatch(login(json)))      
+      .then(json => {
+        let rr = new Promise(function(resolve, reject) {
+          resolve(dispatch(login(json)))
+        });               
+        rr.then((r:any) => { 
+          localStorage.setItem('reduxPersist:user', JSON.stringify({ data: r.payload, isLoading: false }))      
+          console.log('preformed', getJWT());
+          dispatch(fetchPages())
+      })
+      })      
   }
 }
 
@@ -28,7 +42,7 @@ export function restoreUser(data:UserData) {
   }
 }
 
-export function login(data) {
+export function login(data):any {
   if (data.status && data.status == 'unauthorized') {
     return {
       type: constants.CANT_LOGGED_IN
@@ -42,12 +56,17 @@ export function login(data) {
   }
 }
 
-export function logout() {
-  return {
-    type: constants.USER_LOGGED_OUT
-  }
+export function logoutRoutine(dispatch) {
+  dispatch(fetchPages())
+  dispatch({ type: constants.USER_LOGGED_OUT })
 }
 
+export function logout() {
+  return function (dispatch) {
+    localStorage.removeItem('reduxPersist:user')  
+    return logoutRoutine(dispatch)
+}
+}
 
 
 export function signinStart(data) {

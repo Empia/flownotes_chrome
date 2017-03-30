@@ -53,7 +53,7 @@ export const pages = (state = pagesInitialState, action) => {
         isFetching: true,
       });
     case NOT_RECEIVING_PAGES: 
-      return state;
+      return pagesInitialState;
     case RECEIVE_PAGES:
       return (<any>Object).assign({}, state, {
         isFetching: false,
