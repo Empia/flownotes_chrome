@@ -40,10 +40,8 @@ setImmediate(function () {
   pino.info('after setImmediate')
 })
 pino.error(new Error('an error'))
-
 var child = pino.child({ a: 'property' })
 //child.info('hello child!')
-
 var childsChild = child.child({ another: 'property' })
 //childsChild.info('hello baby..')
 */
@@ -58,9 +56,9 @@ passport.use('jwt',new JwtStrategy(authService.confOpts, function(jwt_payload, d
                 return done(err, false);
             }
             if (user) {
-                done(null, user);
+                return done(null, user);
             } else {
-                done(null, false);
+                return done(null, false);
                 // or you could create a new account
             }        
         });

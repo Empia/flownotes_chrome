@@ -5,6 +5,7 @@ class FlowNotePageService{
 	constructor(){}
 	
 	getList(req, res:Response){
+		console.log('getList:',req.baseUrl);
 		return FlowNotePage.find({ userId: req.user[0]._id}, (err, data) => res.send(data));
 	}
 	

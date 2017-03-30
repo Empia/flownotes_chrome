@@ -82,7 +82,7 @@ console.log('token', req.body.email)
 if (req.body.email && req.body.password) {
     Accounts.find({email: email}, function(errForProb, probUsers) {
       if (probUsers.length < 1) { return res.status(401).send('{"status": "unauthorized", "msg":"no user"}')}
-        
+
       let probUser = probUsers[0];
       let probUserSalt = !probUser.salt ? genRandomString(16) : probUser.salt
       Accounts.find({email: email, password: sha512(password, probUserSalt).passwordHash }, function(err, users) {
@@ -172,7 +172,6 @@ confOpts:any = {
         }
 },
  secretOrKey: "secret",
- passReqToCallback: true,
  //issuer: "accounts.localhost.com",
  //audience: "localhost"
 }

@@ -17,6 +17,9 @@ export default function (router:Router){
         console.log('boom');
         if (err) { return res.status(401).send(err); }
         if (!user) { return res.status(401).send('{"status": "unauthorized"}', err, user, info); }
+        console.log('logIn', user);
+        req.user = user;
+        next(null, user);
         /*
         req.logIn(user, function(err) {
           if (err) { return console.log(err); }
