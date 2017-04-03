@@ -4,6 +4,7 @@ import * as actions from '../../stores/user_modes/UserModesActions';
 import { connect } from 'react-redux';
 import ReactDOM = require("react-dom");
 import {store} from '../../main';
+var Select = require('react-select');
 
 interface UserModesPr extends React.Props<any>{
    addingModes:any;
@@ -75,6 +76,7 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
   refs: {
     [key: string]: (Element);
     add: (HTMLInputElement);
+    nested: (HTMLInputElement);
   }
 
  componentDidMount () {}  
@@ -84,6 +86,8 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
     if (evt.which !== 13) return;
     console.log('ref', this.refs);
     var title = (ReactDOM.findDOMNode(this.refs.add) as HTMLInputElement).value;
+    var nested = (ReactDOM.findDOMNode(this.refs.nested) as HTMLInputElement).value;
+
     this.props.addMode({title});
     this.props.toggleAddMode();
   }
@@ -121,6 +125,29 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
     } else {
       return ''
     }
+  }
+  onChange(event) {
+      if (this.props.input.onChange) {
+          this.props.input.onChange(event.value); // <-- To be aligned with how redux-form publishes its CHANGE action payload. The event received is an object with 2 keys: "value" and "label"
+      }
+  }  
+  nestedFormOptions = () => {
+    return [{value: 'Link', label: 'Link'},
+            {value: 'Heading', label: 'Heading'},
+            {value: 'Paragraph', label: 'Paragraph'}]
+  }
+  addModeForm = (createMode) => {
+    <div className="createModeForm">
+      <input ref="add" />
+      <Select
+          {...this.props}
+          value={''}
+          onBlur={() => this.props.input.onBlur(this.props.input.value)}
+          onChange={this.onChange.bind(this)}
+          options={this.nestedFormOptions} // <-- Receive options from the form
+      />
+      <button onClick={createMode}></button>
+    </div>
   }
 
   render(){
