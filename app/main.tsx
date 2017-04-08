@@ -109,7 +109,6 @@ function render(){
   //  ReactDOM.render(<GroceryItemList  items={items} />, document.getElementById('app'));
 }
 
-//groceryItemStore.onChange(render);
 getStoredState(persistConfig, (err, restoredState:any) => {
   // restore user
   console.log('restoredState',restoredState)

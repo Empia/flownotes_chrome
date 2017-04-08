@@ -7,17 +7,17 @@ import {store} from '../../main';
 var Select = require('react-select');
 
 interface UserModesPr extends React.Props<any>{
-   addingModes:any;
+  addingModes:any;
   modes:any;
   sets_modes:any;
- toggleAddMode:any;
-removeMode:any;
-switchMode:any;
-addMode:any;
-updateMode:any;
-fetchSetsModes:any;
-updatedSetMode:any;
-removeSetMode:any;
+  toggleAddMode:any;
+  removeMode:any;
+  switchMode:any;
+  addMode:any;
+  updateMode:any;
+  fetchSetsModes:any;
+  updatedSetMode:any;
+  removeSetMode:any;
 }
 interface UserModesState{}
 
