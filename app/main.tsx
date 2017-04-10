@@ -4,6 +4,7 @@ import {GroceryItemList} from './components/items/GroceryItemList';
 import {AboutApplication} from './components/about/AboutApplication';
 import GlobalAppContainer from './components/GlobalAppContainer';
 import UserModes from './components/user_modes/UserModes';
+import Tagger from './components/tagger/Tagger';
 import FocusedPageContainer from './components/page/FocusedPageContainer';
 import {groceryItemStore, Item} from './stores/GroceryItemStore';
 import {card,addingPage,editingPage,pages} from './stores/pages/FlowPageStore';
@@ -16,6 +17,7 @@ import {userReducer} from './stores/userReducer';
 import {restoreUser} from './stores/userActions';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
+import SettingsComponent from './components/settings/SettingsComponent';
 
 import {fetchPages} from './stores/pages/PagesActions';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
@@ -95,6 +97,8 @@ const routes = (
   <Route path="/foo" component={UserIsAuthenticated(AboutApplication)}/>
   <Route path="/about" component={AboutApplication} />
   <Route path="/modes" component={UserModes} />
+  <Route path="/tagger" component={Tagger} />
+  <Route path="/settings" component={SettingsComponent} />
   <Route path="/login" component={Login} />
   <Route path="/signup" component={SignUp} />
 </Route>);

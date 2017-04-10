@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { openDialog, closeDialog } from 'redux-dialog';
 import {DropdownButton, MenuItem} from 'react-bootstrap';
 import {ParagraphContentType,LinkContentType, HeadingContentType} from './content_types/index'
+import DecompositionContainer from './DecompositionContainer';
 
 let PageContentEditForm = require('./forms/PageContentEditForm.jsx');
 
@@ -160,6 +161,7 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
           </div>
           <div className="pageContent__contentResource-content_type">order: { p.order } date: {p.createdAt} content_type: {p.content_type}</div>
         </div>
+        <DecompositionContainer />
       </div>);
   }  
 }

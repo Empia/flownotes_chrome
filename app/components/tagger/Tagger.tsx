@@ -9,6 +9,7 @@ import NewUserModeModal from './forms/NewUserModeModal';
 var NewUserModeForm = require('./forms/NewUserModeForm.jsx');
 import {DropdownButton, MenuItem, Button} from 'react-bootstrap';
 import UserModeSubNav from '../commons/UserModeSubNav';
+
 interface UserModesPr extends React.Props<any>{
   addingModes:any;
   modes:any;
@@ -66,7 +67,7 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export class UserModes extends React.Component<UserModesPr, UserModesState>{
+export class Tagger extends React.Component<UserModesPr, UserModesState>{
   constructor(){
     super();
     console.log(this);
@@ -154,7 +155,7 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
         <Button onClick={ e =>
                              this.props.toggleAddMode() }>Add mode</Button>
         </div>
-        <div className="user-modes-overview-title"><h4>Modes</h4></div>
+        <div className="user-modes-overview-title"><h4>Tagger</h4></div>
       </div>
 
       <ul className="user-modes-overview-list">
@@ -203,4 +204,4 @@ export class UserModes extends React.Component<UserModesPr, UserModesState>{
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserModes);
+export default connect(mapStateToProps, mapDispatchToProps)(Tagger);

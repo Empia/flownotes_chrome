@@ -74,9 +74,8 @@ border-radius: 4px;
 transition: all .2s;
 }
 :global .pageListContainer .pageContainer:hover {
-    background: #8080801a;
+    background: rgba(128, 128, 128, 0.1);
 }
-
 :global .pageListContainer .pageContainer:hover .pageDropdownButton {
     opacity: 1;
 }
@@ -109,7 +108,67 @@ height: 23px;
 :global .pageDropdownButton .dropdown-menu {
     left: -120px;
 }
+/*
+Content decompose
+*/
+:global .pageContent__contentDecompose {
+    width: 95%;
+    background: white;
+    left: 5%;
+    margin-top: -10px;
+    box-shadow: 0px 2px 3px #dbdbdb inset;
+    margin: -10px auto;
+    padding: 10px 20px;
+}
 
+:global .pageContent__contentDecompose .pageContent__contentDecomposeElement {
+    border-bottom: 1px solid #e1e1e180;
+    padding: 5px 5px;
+    display: block;
+    margin-bottom: 6px;
+    overflow: hidden;
+}
+:global .pageContent__contentDecompose .pageContent__contentDecomposeElement:last-child {
+    border: none;
+}
+:global .pageContent__contentDecompose .pageContent__contentDecomposeElement .pageContent__contentDecompose-type {
+display: inline-block;
+float: left;
+font-size: 11px;
+margin-right: 25px;
+margin-top: 2px;
+font-weight: 900;
+color: #575757;
+width: 40px;
+}
+:global .pageContent__contentDecompose .pageContent__contentDecomposeElement .pageContent__contentDecompose-title {
+    display: inline-block;
+    float: left;
+}
+:global .pageContent__contentDecompose-value {
+    display: inline-block;
+    float: right;
+    width: 20%;
+    text-align: right;
+}
+:global .pageContent__contentDecompose-valueItem {
+    display: inline-block;
+    float: left;
+}
+:globa .pageContent__contentDecompose-valueActions {
+    display: inline-block;
+    float: left;
+    margin-left: 30px;
+}
+:global .pageContent__contentDecompose-valueActions .pageContent__contentDecompose-valueAction {
+    display: inline-block;
+    float: left;
+    margin-right: 15px;
+    margin-top: 0px;
+}
+
+/*
+*/
 
 :global .pageContent__contentList {
   /*
@@ -251,13 +310,15 @@ color: #589adb;
 }
 :global html, :global body {
   background: rgba(164, 180, 176, 0.04);
+  background: linear-gradient(to bottom,rgba(164, 180, 176, 0.04) 0,rgba(185, 185, 185, 0.08) 100%);
 
 }
 :global .flonotes_logo {
-    width: 104px;
+    width: 143px;
     display: inline-block;
     float: left;
-    margin-top: -28px;
+    margin-top: -46px;
+    margin-bottom: -23px;
 }
 :global .header_component {
     position: relative;
@@ -310,6 +371,36 @@ transition: all 1s;
 }
 :global .pageContentEditForm {
     margin-top: 7px;
+}
+
+
+/*
+User modes
+*/
+
+:global .user-modes-container {
+    width: 100%;
+    margin: 0 auto;
+    margin-left: 4%;
+}
+
+:global .user-modes-container .user-modes-overview {
+    background: white;
+    width: 100%;
+    padding: 18px 24px;
+    margin-bottom: 20px;
+}
+:global .user-modes-overview-topbar {
+    display: block;
+}
+:global .user-modes-overview-topbar .user-modes-overview-create-button {
+    display: inline-block;
+    float: right;
+}
+:global .user-modes-overview-topbar .user-modes-overview-title {
+    display: inline-block;
+    margin-bottom: 15px;
+    margin-top: -5px;
 }
 
 /*

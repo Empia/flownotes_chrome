@@ -19,6 +19,8 @@ var JwtStrategy = require('passport-jwt').Strategy,
 import {authService} from './services/AuthService';
 import {Accounts} from './models/Account';
 import chatBot from './bot';
+import {Mongoose, connect, connection} from "mongoose";
+
 
 
 var pino = require('pino')()
@@ -165,6 +167,8 @@ app.get('/about', startup)
   .use((<any>express).static(__dirname + '/../.tmp'))
 app.get('/modes', startup)
   .use((<any>express).static(__dirname + '/../.tmp'))
+app.get('/tagger', startup)
+  .use((<any>express).static(__dirname + '/../.tmp'))
 app.get('/login', startup)
   .use((<any>express).static(__dirname + '/../.tmp'))
 app.get('/signup', startup)
@@ -201,6 +205,11 @@ if (cluster.isMaster) {
   server.listen(7777);
 }
 
-
+process.on('SIGINT', function() {  
+  connection.close(function () { 
+    console.log('Mongoose default connection disconnected through app      termination'); 
+    process.exit(0); 
+  }); 
+}); 
 	
 general_routes(router);

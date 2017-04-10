@@ -28,9 +28,10 @@ class GlobalAppContainer extends React.Component<PagesContainerProps, PagesConta
       display: "inline-block",
       float: "left",
       width: "15%",
-      borderRight: "1px solid rgb(228, 236, 234)",
+
+      borderRight: "1px solid rgb(251, 251, 251)",
       boxShadow: "1px 1px 1px #edeaea80",
-      background: "#f1f9f7 none repeat scroll 0% 0%",
+      background: "none 0% 0% repeat scroll rgba(212, 212, 212, 0.22)",
       padding: "17px 7px",
       position: 'fixed',
       marginTop: '-90px',   
