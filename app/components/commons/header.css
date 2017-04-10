@@ -376,10 +376,17 @@ transition: all 1s;
   margin-left: 22px;
 }
 :global .pageContent__sortableDropdown.pageContent__sortableButtons .sortPosotionButtons .btn {
-  margin: 1px 3px;
+    margin: 1px 3px;
+    height: 27px;
+}
+:global .pageContent__sortableDropdown.pageContent__sortableButtons .sortPosotionButtons .btn.active {
+    background-color: #d4d4d4;
 }
 :global .pageContent__sortableDropdown.pageContent__sortableButtons .sortTypeButtons .btn {
   margin: 1px 3px;
+}
+:global .pageContent__sortableDropdown.pageContent__sortableButtons .sortTypeButtons .btn.active {
+background-color: #d4d4d4;
 }
 :global .pageContentEditForm {
     margin-top: 7px;
@@ -414,6 +421,58 @@ User modes
     margin-bottom: 15px;
     margin-top: -5px;
 }
+/*
+*/
+
+
+
+
+
+
+
+:global .LinkContentLinkFavicon {
+    display: inline-block;
+    float: left;
+}
+:global .LinkContentLinkFaviconTest {
+    width: 40px;
+    height: 40px;
+    background: red;
+}
+:global .LinkContentLinkPrimary {
+    display: inline-block;
+    float: left;
+    margin-top: -14px;
+    margin-left: 10px;
+}
+
+:global .arrow-icon {
+    width: 16px;
+    height: 16px;
+}
+:global .arrow-icon path#arrow-up {
+    fill: #595959;
+    stroke: #969696;
+}
+
+:global .arrow-icon path#arrow-down {
+    fill: #595959;
+    stroke: #969696;
+}
+:global .arrow-icon-down.arrow-icon {
+    margin-top: -8px;
+    padding-top: 6px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+
+
+
+
+
+
+
 
 /*
 By default CSS exports all class names into a global selector scope. 

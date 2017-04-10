@@ -15,8 +15,14 @@ class LinkContentType extends React.Component<LinkContentTypeProps, LinkContentT
     render () {
         let props = this.props
         return <div className="LinkContentLinkContainer">
+        <div className="LinkContentLinkFavicon">
+          <div className="LinkContentLinkFaviconTest">
+          </div>
+        </div>
+        <div className="LinkContentLinkPrimary">
          <h3 className="LinkContentLinkTitle">{props.content_title}</h3>
           <a className="LinkContentLinkA" href={normalizeUrl(props.content_value)}>{normalizeUrl(props.content_value)}</a>
+        </div>
         </div>;
     }
 }

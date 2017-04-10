@@ -123,8 +123,8 @@ class Header extends React.Component<HeaderProps, HeaderState>{
                 <a onClick={this.onClick2}>Log out</a></div>
               </li>  : ""            
               }
+            </div>
           </ul>
-        </div>
         <div style={this.subpanelStyles} className={styles.primaryHeader__secondaryMenu + ' top_bar_right'}>
           <form onSubmit={this.onSearch}>
             <div className={styles.menu}>

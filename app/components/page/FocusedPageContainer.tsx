@@ -25,6 +25,19 @@ import {CustomDragLayer} from './../commons/drag/CustomDragLayer'
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
 
+const ArrowIconUp = () => {
+  return (
+          <div className="arrow-icon-up arrow-icon" dangerouslySetInnerHTML={{__html: `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 16 20" 
+style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<path id="arrow-up" d="M15.293,10.293L8.707,3.707c-0.389-0.389-1.025-0.389-1.414,0l-6.586,6.586C0.318,10.682,0.45,11,1,11h14  C15.55,11,15.682,10.682,15.293,10.293z"/></svg>`}}></div>)
+};
+const ArrowIconDown = () => {
+  return (
+          <div className="arrow-icon-down arrow-icon" dangerouslySetInnerHTML={{__html: `<svg xmlns="http://www.w3.org/2000/svg" 
+xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 16 20" style="enable-background:new 0 0 16 16;" \
+xml:space="preserve"><path id="arrow-down" d="M15,5H1C0.45,5,0.318,5.318,0.707,5.707l6.586,6.586c0.389,0.389,1.025,0.389,1.414,0l6.586-6.586  C15.682,5.318,15.55,5,15,5z"/></svg>`}}></div>);
+};
+
 const mapStateToProps = ({addingPageContent, pageContents, pages, selectedPage, form}) => ({
   addingPageContent,
   pageContents,
@@ -291,10 +304,13 @@ moveCard(dragIndex, hoverIndex) {
 
 
   toggleSortInfo = (name, param = "object") => {
+    console.log('toggleSortInfo', name, param);
     if (param !== "pos") {
-     return this.props.contentSortBy(param);
+     return this.props.contentSortBy(name);
     } else {
-     return this.props.contentSortBy(this.props.pageContents.sortBy.split('_')[0]+"_"+name);    
+     var p = this.props.pageContents.sortBy.split('_')[0]+"_"+name
+     console.log('p', p);
+     return this.props.contentSortBy(p);    
     }
   }
   sortFunction = (page_content) => {
@@ -348,8 +364,8 @@ moveCard(dragIndex, hoverIndex) {
               <Button active={this.sortingBy('date_asc') } onClick={ e => this.toggleSortInfo('date_asc') }>By Date</Button>
             </div>
             <div className="sortPosotionButtons">
-              <Button active={this.sortingPosBy('order_asc') } onClick={ e => this.toggleSortInfo('asc', 'pos') }>ASC</Button>
-              <Button active={this.sortingPosBy('order_desc') } onClick={ e => this.toggleSortInfo('desc', 'pos') }>DESC</Button>     
+              <Button active={this.sortingPosBy('order_asc') } onClick={ e => this.toggleSortInfo('asc', 'pos') }><ArrowIconUp/></Button>
+              <Button active={this.sortingPosBy('order_desc') } onClick={ e => this.toggleSortInfo('desc', 'pos') }><ArrowIconDown/></Button>     
             </div>
           </div>
         </div>
