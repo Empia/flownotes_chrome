@@ -52,7 +52,11 @@ class Header extends React.Component<HeaderProps, HeaderState>{
      <div className={styles.top_bar}>
         <div className="top_bar_left">
           <ul className={styles.menu}>
+          <div className="product-detail-section">
             <li className="menu_text product_logo">
+              <IndexLink to="/" 
+                activeClassName={styles.active}  
+                activeStyle={{fontWeight: 'bold'}}>      
               <div className="flonotes_logo" dangerouslySetInnerHTML={{__html: `<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
    viewBox="0 0 400 300" enable-background="new 0 0 400 300" xml:space="preserve">
 <g id="_x23_593b43ff">
@@ -79,10 +83,9 @@ class Header extends React.Component<HeaderProps, HeaderState>{
     C258.9,139.1,262.1,136,266.2,135 M267.5,143.6c-4.5,1.8-1.3,9.1,3.1,6.8C275,148.6,271.8,141.4,267.5,143.6z"/>
 </g>
 </svg>`}}></div>
-              
-              <IndexLink to="/" 
-                activeClassName={styles.active}  
-                activeStyle={{fontWeight: 'bold'}}>Flownotes</IndexLink></li>
+<span className="primary-product-title">Flownotes</span></IndexLink></li>
+</div>
+          <div className="product-detail-outter-nav">
 
             { this.props.user.data !== null ?
 
@@ -115,8 +118,8 @@ class Header extends React.Component<HeaderProps, HeaderState>{
                 <span>{this.props.user.data.username + " "}</span>
               <IndexLink to="/settings" 
               activeClassName={styles.active} 
-              activeStyle={{fontWeight: 'bold'}}>settings</IndexLink>                
-              
+              activeStyle={{fontWeight: 'bold'}}>Settings</IndexLink>                
+
                 <a onClick={this.onClick2}>Log out</a></div>
               </li>  : ""            
               }
@@ -134,6 +137,7 @@ class Header extends React.Component<HeaderProps, HeaderState>{
             </div>
           </form>
         </div>
+      </div>
       </div>
     );
   }

@@ -7,6 +7,10 @@ margin-top: -4px;
 width: 100%;
 box-shadow: 1px 1px 3px #8181811a;
 }
+.menu {
+    display: flex;
+    justify-content: space-between;
+}
 
 .top_bar .menu li {
     display: inline-block;
@@ -320,6 +324,14 @@ color: #589adb;
     margin-top: -46px;
     margin-bottom: -23px;
 }
+:global .primary-product-title {
+    margin-left: -26px;
+    margin-top: -5px;
+    display: inline-block;
+    float: left;
+    font-size: 18px;
+}
+
 :global .header_component {
     position: relative;
     z-index: 3;
