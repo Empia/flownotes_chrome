@@ -93,12 +93,12 @@ const persistConfig = { /* ... */ }
 
 const routes = (
 <Route path="/" component={GlobalAppContainer}>
-  <Route path="/page/:pageId" component={FocusedPageContainer} />
+  <Route path="/page/:pageId" component={UserIsAuthenticated(FocusedPageContainer)} />
   <Route path="/foo" component={UserIsAuthenticated(AboutApplication)}/>
   <Route path="/about" component={AboutApplication} />
-  <Route path="/modes" component={UserModes} />
-  <Route path="/tagger" component={Tagger} />
-  <Route path="/settings" component={SettingsComponent} />
+  <Route path="/modes" component={UserIsAuthenticated(UserModes)} />
+  <Route path="/tagger" component={UserIsAuthenticated(Tagger)} />
+  <Route path="/settings" component={UserIsAuthenticated(SettingsComponent)} />
   <Route path="/login" component={Login} />
   <Route path="/signup" component={SignUp} />
 </Route>);

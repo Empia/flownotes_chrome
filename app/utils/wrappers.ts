@@ -2,12 +2,13 @@
 const redux_auth_wrapper_1 = require("redux-auth-wrapper");
 const react_router_redux_1 = require("react-router-redux");
 export const UserIsAuthenticated = redux_auth_wrapper_1.UserAuthWrapper({
-    authSelector: state => state.user,
+    authSelector: state => state.user.data,
     redirectAction: react_router_redux_1.routerActions.replace,
+    failureRedirectPath: '/login',
     wrapperDisplayName: 'UserIsAuthenticated'
 });
 export const UserIsAdmin = redux_auth_wrapper_1.UserAuthWrapper({
-    authSelector: state => state.user,
+    authSelector: state => state.user.data,
     redirectAction: react_router_redux_1.routerActions.replace,
     failureRedirectPath: '/',
     wrapperDisplayName: 'UserIsAdmin',
@@ -15,7 +16,7 @@ export const UserIsAdmin = redux_auth_wrapper_1.UserAuthWrapper({
     allowRedirectBack: false
 });
 export const VisibleOnlyAdmin = redux_auth_wrapper_1.UserAuthWrapper({
-    authSelector: state => state.user,
+    authSelector: state => state.user.data,
     wrapperDisplayName: 'VisibleOnlyAdmin',
     predicate: user => user.isAdmin,
     FailureComponent: null

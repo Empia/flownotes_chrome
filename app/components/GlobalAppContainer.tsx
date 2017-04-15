@@ -7,14 +7,19 @@ import * as url2 from 'url-browser';
 import * as actions from '../stores/pages/PagesActions';
 import {store} from '../main';
 import { Router, Route, Link, browserHistory, withRouter } from "react-router";
+import {push} from 'react-router-redux';
 
 
-const mapStateToProps = ({routing}) => ({routing});
-const mapDispatchToProps = dispatch => ({});
+const mapStateToProps = ({routing, user}) => ({routing, user});
+const mapDispatchToProps = dispatch => ({
+  redirectToAuthAction: () => {  dispatch(push('/login')); }
+});
 
 interface PagesContainerProps extends React.Props<any>{
   key:string;
   routing: any;
+  user:any;
+  redirectToAuthAction: any;
 }
 interface PagesContainerState{ }
 
@@ -47,8 +52,16 @@ class GlobalAppContainer extends React.Component<PagesContainerProps, PagesConta
       return {withBar: false, styles: Object.assign(defaultStyles, {display: 'none'})};
     }
   }
+  redirectToAuth = ():void => {
+    let pathname = this.props.routing.locationBeforeTransitions.pathname;
+    let matchPage = pathname.match('/login')
+    if (!this.props.user.data && !matchPage) {
+      this.props.redirectToAuthAction()
+    }
+  }
   
   render(){
+    this.redirectToAuth()
     const sideBarProp = this.sideBarVisibility();
     let croped = sideBarProp.withBar ? 'croped' : '';
     const containerLayout = `${croped} focusedPageContainer`

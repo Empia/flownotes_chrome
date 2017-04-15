@@ -1,7 +1,7 @@
 import * as constants from './userReducer'
 import {fetchPages} from './pages/PagesActions';
 import {getJWT} from './jwt';
-
+import {push} from 'react-router-redux';
 interface LoginData{
   email:string;
   password:string;
@@ -27,9 +27,13 @@ export function startLogin(data: LoginData) {
           resolve(dispatch(login(json)))
         });               
         rr.then((r:any) => { 
+          // CHECK IF AUTH SUCCESS
           localStorage.setItem('reduxPersist:user', JSON.stringify({ data: r.payload, isLoading: false }))      
           console.log('preformed', getJWT());
-          dispatch(fetchPages())
+          if (getJWT() !== '') {
+            dispatch(fetchPages())
+            dispatch(push('/'));
+          }
       })
       })      
   }
@@ -59,6 +63,7 @@ export function login(data):any {
 export function logoutRoutine(dispatch) {
   dispatch(fetchPages())
   dispatch({ type: constants.USER_LOGGED_OUT })
+  dispatch(push('/login'));
 }
 
 export function logout() {
