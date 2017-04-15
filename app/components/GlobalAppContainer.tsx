@@ -34,10 +34,10 @@ class GlobalAppContainer extends React.Component<PagesContainerProps, PagesConta
       background: "none 0% 0% repeat scroll rgba(212, 212, 212, 0.22)",
       padding: "17px 7px",
       position: 'fixed',
-      marginTop: '-90px',   
+      marginTop: '0px',   
       height: '100%',
       zIndex: '1',
-      paddingTop: '88px'    
+      paddingTop: '67px'     
     }
     let pathname = this.props.routing.locationBeforeTransitions.pathname;
     let matchPage = pathname.match('/page')

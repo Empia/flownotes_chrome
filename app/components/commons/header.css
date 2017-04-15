@@ -56,11 +56,12 @@ box-shadow: 1px 1px 3px #8181811a;
     float: left;
     padding-left: 29px;
     width: 80%;
+    margin-top: 85px;
 }
 
 :global .croped.focusedPageContainer {
     margin-left: 15%;
-    margin-top: -5px;
+    margin-top: 60px;
 }
 :global .pageListContainer {
     list-style: none;
@@ -240,6 +241,7 @@ user-select: none;
     box-shadow: 1px 1px 2px #dbdbdb;
     padding: 2px 14px;
     overflow: hidden;
+    border-radius: 3px;
 }
 :global .btn.btn-default {
     background: white;
@@ -333,8 +335,9 @@ color: #589adb;
 }
 
 :global .header_component {
-    position: relative;
+    position: fixed;
     z-index: 3;
+    width: 100%;
 }
 :global .btn.btn-success {
     background: none;
