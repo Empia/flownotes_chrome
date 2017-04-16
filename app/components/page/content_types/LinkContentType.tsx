@@ -23,7 +23,7 @@ class LinkContentType extends React.Component<LinkContentTypeProps, LinkContentT
         return <div className="LinkContentLinkContainer">
         <div className="LinkContentLinkFavicon">
           <div className="LinkContentLinkFaviconTest">
-            <img src={icon_protocol+icon_hostname+'/favicon.ico'}/>
+            <img src={'//'+icon_hostname+'/favicon.ico'}/>
           </div>
         </div>
         <div className="LinkContentLinkPrimary">

@@ -5,7 +5,8 @@ import q from 'q';
 import OrderingService from './OrderingService';
 const normalizeUrl = require('normalize-url');
 var fetchFavicon = require('@meltwater/fetch-favicon');
- 
+const {getMetadata, metadataRules} = require('page-metadata-parser');
+
 class FlowNoteContentService{
   constructor(){}
   
@@ -125,12 +126,23 @@ class FlowNoteContentService{
             }];       
         console.log('fetch', flowNoteContent.title);
         var fetchFavicons = require('@meltwater/fetch-favicon').fetchFavicons
-        var favicon = fetchFavicons('flowNoteContent.content_value')
-        favicon.then(function(f) {
-          console.log(f);
-          flowNoteContent.meta = [{key: "favicon", value: f[0]}]
-          return res.status(200).send(flowNoteContent);
-        });
+        var favicon = fetchFavicons(flowNoteContent.content_value)
+        const parseFavicon = require('parse-favicon')
+        const axios = require('axios')
+ 
+        axios.get(flowNoteContent.content_value)
+        .then(({ data: html }) => {
+          var ff = parseFavicon(html, { baseURI: flowNoteContent.content_value, allowUseNetwork: true, allowParseImage: true })
+          favicon.then(function(f) {
+            console.log(f, ff);
+            flowNoteContent.meta = [{key: "favicon", value: JSON.stringify(f) }]
+            return res.status(200).send(flowNoteContent);
+          });
+
+        })
+
+
+
       });
       client.on("error", (err) => console.log('err',err));
       return client.fetch(); 
