@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { LocalForm, Control } from 'react-redux-form';
+import { Form, Control } from 'react-redux-form';
 
 export default class NewLoginForm extends React.Component<{}, {}>{
   handleChange(values) { console.log("values", values); }
@@ -7,14 +7,14 @@ export default class NewLoginForm extends React.Component<{}, {}>{
   handleSubmit(values) { console.log("values", values); }
   render() {
     return (
-      <LocalForm
+      <Form model="new_forms.user_login"
         onUpdate={(form) => this.handleUpdate(form)}
         onChange={(values) => this.handleChange(values)}
         onSubmit={(values) => this.handleSubmit(values)}
       >
         <Control.text model=".username" />
         <Control.text model=".password" />
-      </LocalForm>
+      </Form>
     );
   }
 }

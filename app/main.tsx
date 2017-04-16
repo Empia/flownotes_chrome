@@ -32,7 +32,7 @@ import * as createLogger from 'redux-logger';
 import {Provider} from "react-redux";
 import { reducer as formReducer } from 'redux-form';
 import {UserIsAuthenticated} from './utils/wrappers';
-
+import { combineForms } from 'react-redux-form';
 import {persistStore, getStoredState,createPersistor, autoRehydrate} from 'redux-persist'
 import * as io from 'socket.io-client';
 /*
@@ -68,6 +68,9 @@ export const store = createStore(combineReducers({
   addingPage, 
   editingPage,
   editPageContentsTogglesStore,
+  new_forms: combineForms({
+    login_user: {email: '', password: ''},
+  }, 'new_forms'),
   pages, 
   modes, addingModes,sets_modes,
   addingPageContent,
