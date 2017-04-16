@@ -133,12 +133,16 @@ class FlowNoteContentService{
         axios.get(flowNoteContent.content_value)
         .then(({ data: html }) => {
           var ff = parseFavicon(html, { baseURI: flowNoteContent.content_value, allowUseNetwork: true, allowParseImage: true })
+          ff.then(function(f2) {
           favicon.then(function(f) {
-            console.log(f, ff);
-            flowNoteContent.meta = [{key: "favicon", value: JSON.stringify(f) }]
+            console.log(f);
+            console.log('')
+            console.log(ff);
+            flowNoteContent.meta = [{key: "favicon", value: JSON.stringify([f, f2]) }]
             return res.status(200).send(flowNoteContent);
           });
 
+          });
         })
 
 
