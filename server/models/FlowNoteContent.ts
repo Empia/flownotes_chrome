@@ -4,6 +4,10 @@ export interface ILabels {
 value: string;
 name: string;
 }
+export interface IMeta {
+  key: string;
+  value: string;
+}
 export interface IConState {
   name: string;
   ison: boolean;
@@ -21,6 +25,7 @@ interface IFlowNoteContent extends Document {
   labels:Array<ILabels>;
   id?:string;
   userId:string;
+  meta?:Array<IMeta>;
   
   states:Array<IConState>;
 
@@ -43,6 +48,8 @@ let FlowNoteContentSchema = new Schema({
         value: { type: String},
         name: { type: String}
   }],
+  meta: [{key: {type: String}, value: {type: String}}],
+  
   states:[{
         name: { type: String},
         ison: { type: Boolean},

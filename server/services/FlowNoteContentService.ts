@@ -4,7 +4,8 @@ var MetaInspector = require('node-metainspector');
 import q from 'q';
 import OrderingService from './OrderingService';
 const normalizeUrl = require('normalize-url');
-
+var fetchFavicon = require('@meltwater/fetch-favicon');
+ 
 class FlowNoteContentService{
   constructor(){}
   
@@ -36,7 +37,7 @@ class FlowNoteContentService{
    * @method myFunction
    * @param {String} myParam
    */    
-  addContentFn = (pageId, content, flowNoteContent, res, req) => {
+  addContentFn = (pageId, flowNoteContent, res, req) => {
     console.log('main pageId', pageId);
     const saveContentFn = (flowNoteContent) => {
           flowNoteContent.save((err, data:IFlowNoteContent) => {
@@ -85,7 +86,7 @@ class FlowNoteContentService{
    let contents = req.body
     q.all(contents.map((content) => {
         let flowNoteContent = new FlowNoteContent(req.body);
-         this.addContentFn(pageId, content, flowNoteContent, undefined, req);
+         this.addContentFn(pageId, flowNoteContent, undefined, req);
        })).then(function(data) {
         res.status(200).send(data);
     });
@@ -102,8 +103,47 @@ class FlowNoteContentService{
     console.log('add page content', pageId);
     let flowNoteContent = new FlowNoteContent(req.body);
     console.log('req.body', req.body);
-    this.addContentFn(pageId, flowNoteContent, flowNoteContent, res, req);
+    this.addContentFn(pageId, flowNoteContent, res, req);
   }
+
+
+  preview = (req, res:Response) => {
+    // pageId
+    let flowNoteContent = new FlowNoteContent(req.body);
+    this.previewContentFn(flowNoteContent, res, req);
+  }
+  previewContentFn = (flowNoteContent, res, req) => {
+   // Init content
+    if (flowNoteContent.content_type == "Link") {
+      var client = new MetaInspector(normalizeUrl(flowNoteContent.content_value), { timeout: 15000 });
+      client.on("fetch", () => {
+            flowNoteContent['title'] = client.title;
+            flowNoteContent['states'] = [{
+              name: 'initiated',
+              ison: true,
+              ison_rate: 100                
+            }];       
+        console.log('fetch', flowNoteContent.title);
+        var fetchFavicons = require('@meltwater/fetch-favicon').fetchFavicons
+        var favicon = fetchFavicons('flowNoteContent.content_value')
+        favicon.then(function(f) {
+          console.log(f);
+          flowNoteContent.meta = [{key: "favicon", value: f[0]}]
+          return res.status(200).send(flowNoteContent);
+        });
+      });
+      client.on("error", (err) => console.log('err',err));
+      return client.fetch(); 
+    } else {
+            flowNoteContent['states'] = [{
+              name: 'initiated',
+              ison: true,
+              ison_rate: 100                
+            }];           
+      return res.status(200).send(flowNoteContent);
+    }    
+  };
+
 
   
   /**

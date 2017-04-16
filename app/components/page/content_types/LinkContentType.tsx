@@ -1,5 +1,6 @@
 import * as React from 'react';
 const normalizeUrl = require('normalize-url');
+var URL = require('url-parse');
 
 interface LinkContentTypeProps extends React.Props<any>{
   content_value:string;
@@ -11,12 +12,18 @@ interface LinkContentTypeProps extends React.Props<any>{
 interface LinkContentTypeState{ 
 }
 
+
 class LinkContentType extends React.Component<LinkContentTypeProps, LinkContentTypeState>{
     render () {
         let props = this.props
+        let url = URL(normalizeUrl(props.content_value))
+        let icon_protocol = url.protocol;
+        let icon_hostname = url.host;
+
         return <div className="LinkContentLinkContainer">
         <div className="LinkContentLinkFavicon">
           <div className="LinkContentLinkFaviconTest">
+            <img src={icon_protocol+icon_hostname+'/favicon.ico'}/>
           </div>
         </div>
         <div className="LinkContentLinkPrimary">

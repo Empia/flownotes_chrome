@@ -35,6 +35,7 @@ export default function (router:Router){
 	.delete('/pages/:id', auth, flowNotePageService.remove)
     .patch('/pages/:id', auth, flowNotePageService.update)
     .get('/content/page/:pageId', auth, flowNoteContentService.getList)
+    .post('/content/preview', flowNoteContentService.preview)
     .post('/content/page/:pageId', auth, flowNoteContentService.add)
     .post('/content/bulk/page/:pageId', auth, flowNoteContentService.addBulk)
 

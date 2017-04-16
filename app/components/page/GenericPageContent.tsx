@@ -162,7 +162,9 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
           </div>
           <div className="pageContent__contentResource-content_type">order: { p.order } date: {p.createdAt} content_type: {p.content_type}</div>
         </div>
+        {/*
         <DecompositionContainer />
+        */}
       </div>);
   }  
 }
