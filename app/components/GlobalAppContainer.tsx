@@ -12,7 +12,9 @@ import {push} from 'react-router-redux';
 
 const mapStateToProps = ({routing, user}) => ({routing, user});
 const mapDispatchToProps = dispatch => ({
-  redirectToAuthAction: () => {  dispatch(push('/login')); }
+  redirectToAuthAction: () => {  dispatch(push('/login')); },
+  redirectToIndexAction: () => {  dispatch(push('/')); }
+
 });
 
 interface PagesContainerProps extends React.Props<any>{
@@ -20,6 +22,7 @@ interface PagesContainerProps extends React.Props<any>{
   routing: any;
   user:any;
   redirectToAuthAction: any;
+  redirectToIndexAction: any;
 }
 interface PagesContainerState{ }
 
@@ -55,8 +58,14 @@ class GlobalAppContainer extends React.Component<PagesContainerProps, PagesConta
   redirectToAuth = ():void => {
     let pathname = this.props.routing.locationBeforeTransitions.pathname;
     let matchPage = pathname.match('/login')
-    if (!this.props.user.data && !matchPage) {
-      this.props.redirectToAuthAction()
+    
+    if ( (this.props.user.data == null) && !matchPage) {
+      console.log('this.props.redirectToAuthAction')
+      this.props.redirectToAuthAction();
+    }
+    if (matchPage && ((this.props.user.data != null) || (this.props.user.data != undefined) )) {
+      console.log('this.props.redirectToIndexAction')
+      this.props.redirectToIndexAction();
     }
   }
   

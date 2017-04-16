@@ -2,7 +2,9 @@ import * as React from 'react';
 import { routerActions } from 'react-router-redux'
 import { connect } from 'react-redux'
 import Header from '../commons/Header';
-
+import { SubmissionError } from 'redux-form'
+import NewLoginForm from './NewLoginForm';
+ 
 import {startLogin, logout} from '../../stores/userActions';
 //import LoginForm from './LoginForm';
 let LoginForm = require('./LoginForm.jsx');
@@ -90,6 +92,7 @@ class Auth extends React.Component<AuthGeneralProps, {}>{
               initialValues={{email: '', password: ''}} 
               form={'login_form'}
               handleSubmit={this.handleLogin} />
+            <NewLoginForm />
             {/*<input type="text" ref="email" />
             <input type="text" ref="password" />
 

@@ -112,7 +112,7 @@ class Header extends React.Component<HeaderProps, HeaderState>{
             { this.props.user.data !== null ?
              this.aditionalStuff() : <span></span>
             }
-              { this.props.user.data !== null && this.props.user.data.username !== undefined ?  
+              { (this.props.user.data != undefined && this.props.user.data !== null) && this.props.user.data.username != undefined ?  
               <li className="HeaderUserCredentials">
                 <div className="HeaderUserCredentialsContainer">
                 <span>{this.props.user.data.username + " "}</span>

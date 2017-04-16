@@ -2,6 +2,8 @@ import * as constants from './userReducer'
 import {fetchPages} from './pages/PagesActions';
 import {getJWT} from './jwt';
 import {push} from 'react-router-redux';
+import { SubmissionError } from 'redux-form'
+
 interface LoginData{
   email:string;
   password:string;
@@ -33,6 +35,9 @@ export function startLogin(data: LoginData) {
           if (getJWT() !== '') {
             dispatch(fetchPages())
             dispatch(push('/'));
+          } else {
+            console.log('SubmissionError')
+            throw new SubmissionError({ password: 'Wrong password', _error: 'Login failed!' });
           }
       })
       })      
