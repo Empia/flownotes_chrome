@@ -69,6 +69,10 @@ box-shadow: 1px 1px 3px #8181811a;
     overflow-x: scroll;
     height: 100%;
 }
+:global .pageListContainer .pageContainer:last-child {
+    margin-bottom: 30px;
+}
+
 :global .pageListContainer .pageContainer {
     padding: 6px 7px 0px 14px;
 font-size: 16px;
@@ -288,7 +292,7 @@ Content type
 }
 :global .LinkContentLinkTitle {
     display: block;
-    max-width: 755px;
+    max-width: 699px;
     width: 100%;
     overflow: hidden;
     white-space: nowrap;

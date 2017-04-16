@@ -135,11 +135,12 @@ class GenericPageContent extends React.Component<GenericPageContentProps, {}>{
                            content_title={p.title} 
                            content_value={p.content_value} />
             </div>
-            <div className="pageContentEditForm" style={this.isDisplay(this.isOnEdit(p._id))}>                             
+            { this.isOnEdit(p._id) ? 
+            (<div className="pageContentEditForm">                             
               <PageContentEditForm.default form={'edit_page_form_'+p._id} 
                                            handleSubmit={this.editPageSender} 
                                            initialValues={defaultValuesForEdit} />                           
-            </div>
+            </div>): ''}
           </div>
 
           <div className="pageContent__contentResource-content_controls">
