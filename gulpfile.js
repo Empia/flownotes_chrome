@@ -46,7 +46,8 @@ gulp.task('bundle', function () {
     var b = browserify({
         entries: 'app/main.js',
         debug: true,
-        plugin: [watchify]
+        plugin: [watchify],
+        open: false
     });
     b.on('update', bundle);
     bundle();
@@ -60,6 +61,7 @@ gulp.task('serve', ['watch-ts', 'watch-css', 'live-server'], function () {
     browserSync.init(null, {
         proxy: 'http://localhost:7777',
         port: 3000,
-        files: ['./.tmp/*.js', './.tmp/*.less']
+        files: ['./.tmp/*.js', './.tmp/*.less'],
+        open: false
     });
 });
