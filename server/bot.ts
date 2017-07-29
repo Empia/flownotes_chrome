@@ -1,5 +1,7 @@
 var TelegramBot = require('node-telegram-bot-api');
 import {commands} from './chat_bot_core/commands';
+var fs = require('fs');
+
 
 
 
@@ -29,11 +31,23 @@ const bot = {
                 one_time_keyboard: true,
                 keyboard: [
                   ['/help'],
-                  ['/mode']
+                  ['/mode'],
+                  ['/list']
                 ]
               })
             };          
-          bot.sendMessage(chatId, msg.text.toString()+' fuck bitches', opts);
+          //
+          var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+          var regex = new RegExp(expression);
+
+          // find every link
+          var links = msg.text.toString().match(regex);
+
+          // append every link
+          links.forEach((data) =>  fs.appendFileSync('bulk2.txt', data+'\n'))
+
+          bot.sendMessage(chatId, 'appended', opts);
+        
         }
 
 
@@ -51,6 +65,16 @@ bot.onText(/\/start/, function onLoveText(msg) {
     })
   };
   bot.sendMessage(msg.chat.id, '.............?', opts);
+});
+
+
+
+bot.onText(/\/list/, function onEditableText(msg) {
+  const opts = {
+    reply_to_message_id: msg.message_id,
+  };
+  bot.sendMessage(msg.chat.id, '.............?', opts);
+
 });
 
 /////////////////////////////////////////////

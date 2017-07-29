@@ -88,6 +88,11 @@ Have fun and rock this world!`;
     return { response: answer };
   },
 
+  list: function(msg: any):responseExecutedCommandObject {
+    console.log('list links');
+    return { response: answer };
+  },
+
 ///////////////////////////////////////////////////// LINK CRUD
 addLink: function(msg:any):responseExecutedCommandObject {
   console.log('addLink');
@@ -125,6 +130,9 @@ switchMode: function(msg:any):responseExecutedCommandObject {
   resolveCmd: function(cmdText):resolvedCommandObject {
     if (cmdText === "/start") {
       return {resolved: true, cmd: 'start' }
+    } 
+    if (cmdText === "/list") {
+      return {resolved: true, cmd: 'list' }
     } 
     if (cmdText === "/help") {
       return {resolved: true, cmd: 'help' }
