@@ -23,7 +23,11 @@ const bot = {
                 keyboard: []
               })
             };
-          bot.sendMessage(chatId, response, opts);
+            if (doneCmd.responses !== undefined) {
+              doneCmd.responses.filter(res => (res !== "")).forEach(res => (bot.sendMessage(chatId, res, opts)))
+            } else {
+              bot.sendMessage(chatId, response, opts);
+            }
         } else {
           const opts = {
               reply_to_message_id: msg.message_id,
@@ -73,8 +77,7 @@ bot.onText(/\/list/, function onEditableText(msg) {
   const opts = {
     reply_to_message_id: msg.message_id,
   };
-  bot.sendMessage(msg.chat.id, '.............?', opts);
-
+  //bot.sendMessage(msg.chat.id, '.............?', opts);
 });
 
 /////////////////////////////////////////////

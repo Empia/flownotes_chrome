@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 // commands.ts
 // auth
 // help
@@ -11,6 +13,7 @@ interface resolvedCommandObject {
 }
 interface responseExecutedCommandObject {
   response: string
+  responses?:string[]
   caption?: string
 }
 
@@ -90,7 +93,8 @@ Have fun and rock this world!`;
 
   list: function(msg: any):responseExecutedCommandObject {
     console.log('list links');
-    return { response: answer };
+    var content = fs.readFileSync('bulk2.txt');
+    return { response: content, responses: content.toString().split('\n') };
   },
 
 ///////////////////////////////////////////////////// LINK CRUD
