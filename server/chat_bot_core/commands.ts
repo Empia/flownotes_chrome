@@ -85,6 +85,8 @@ const commands = {
     console.log('welcome');
     var answer = `Commands:
   /add https://.... Append URL
+  /list Show list of URLs
+  
   /fetch Show all URLs
   /remove URL_id remove URL
 Have fun and rock this world!`;
@@ -92,9 +94,17 @@ Have fun and rock this world!`;
   },
 
   list: function(msg: any):responseExecutedCommandObject {
-    console.log('list links');
+    console.log('list links', msg.text);
+    var numberPattern = /\d+/g;
+
+    var offset = 0;
+    if (msg.text.match(numberPattern) !== null && msg.text.match(numberPattern).length > 0) {
+      offset = msg.text.match(numberPattern)[0]
+    }
     var content = fs.readFileSync('bulk2.txt');
-    return { response: content, responses: content.toString().split('\n') };
+    var paginatedContent:string[] = content.toString().split('\n').slice(Math.max(content.toString().split('\n').length - offset, 1));
+    var totalLinks:string = "Total count of links are: "+content.toString().split('\n').length.toString()
+    return { response: content, responses: paginatedContent.concat([totalLinks]) };
   },
 
 ///////////////////////////////////////////////////// LINK CRUD
@@ -135,7 +145,7 @@ switchMode: function(msg:any):responseExecutedCommandObject {
     if (cmdText === "/start") {
       return {resolved: true, cmd: 'start' }
     } 
-    if (cmdText === "/list") {
+    if (cmdText.split(' ')[0] === "/list") {
       return {resolved: true, cmd: 'list' }
     } 
     if (cmdText === "/help") {

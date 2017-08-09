@@ -23,9 +23,9 @@ const bot = {
                 keyboard: []
               })
             };
-            if (doneCmd.responses !== undefined) {
+            if (doneCmd.responses !== undefined) { // multiple responses
               doneCmd.responses.filter(res => (res !== "")).forEach(res => (bot.sendMessage(chatId, res, opts)))
-            } else {
+            } else {                               // one response
               bot.sendMessage(chatId, response, opts);
             }
         } else {
