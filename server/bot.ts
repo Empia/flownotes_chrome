@@ -48,9 +48,12 @@ const bot = {
           var links = msg.text.toString().match(regex);
 
           // append every link
-          links.forEach((data) =>  fs.appendFileSync('bulk2.txt', data+'\n'))
+          if (links !== null && links.length > 0) {
+            links.forEach((data) =>  fs.appendFileSync('bulk2.txt', data+'\n'))
+            bot.sendMessage(chatId, 'appended', opts);
+          } else {
 
-          bot.sendMessage(chatId, 'appended', opts);
+          }
         
         }
 
