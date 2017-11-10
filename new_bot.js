@@ -6,6 +6,7 @@ const TelegrafFlow = require('telegraf-flow')
 const { Scene, enter, leave } = TelegrafFlow
 const TelegrafWit = require('telegraf-wit')
 require('shelljs/global');
+import database from './database';
 
 
 var heys = []
@@ -70,7 +71,7 @@ app.startPolling()
 console.log('NOTER IS RUNNING');  
 console.log('***************');
 console.log('***************');
-console.log('database', undefined);
+console.log('database', database);
 
 
 
