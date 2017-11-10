@@ -8,6 +8,24 @@ const TelegrafWit = require('telegraf-wit')
 require('shelljs/global');
 
 
+var heys = []
+var express = require('express');
+var webapp = express();
+
+webapp.get('/test/:id', function (req, res) {
+  let par = req.param('id')
+  heys.push(par  )
+  console.log(par)
+  res.send(par);
+});
+
+webapp.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});
+
+
+
+
 const BOT_TOKEN = '477224067:AAEc-vWiNMlnxYnUIHXsJ6vZqrqznFlIXTw';
 
 const greeterScene = new Scene('greeter')
@@ -37,6 +55,8 @@ app.command('start', ({ from, reply }) => {
   return reply('Welcome!')
 })
 app.hears('hi', (ctx) => ctx.reply('Hey there!'))
+app.hears('test', (ctx) => heys.forEach(c => (ctx.reply(c)) ))
+
 app.on('sticker', (ctx) => ctx.reply('👍'))
 
 
