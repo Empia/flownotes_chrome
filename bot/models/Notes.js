@@ -1,25 +1,38 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 
 const schema = new Schema({ 
   title:String,
-  content_desc?:String,
+  content_desc:String,
   content_type: String,
   content_value: String,
-  inPageId?:String,
-  inContent?:String,
-  labels:Array,// <ILabels>;
-  id?:String;
+  inPageId:String,
+  inContent:String,
+  labels:{ type: Array, default: []};// <ILabels>;
   userId:String;
-  meta?:Array,// <IMeta>;
-  states:Array,// <IConState>;
-  inPagesIds?:Array<String>;
-  order?:number;  
-
-  createdAt?:Date;
-  updatedAt?:Date; 
-
-
+  userProvider: String;
+  meta:{ type: Array, default: []},// <IMeta>;
+  states:{ type: Array, default: []},// <IConState>;
+  order: { type: Number, default: 0 },  
+  createdAt: { type: Date, default: Date.now},
+  updatedAt: { type: Date, default: Date.now}
  });
+
+
+
+var NoteModel = mongoose.model('Notes', schema);
+
+
+
+export const removeNote = ((id) => NoteModel.findByIdAndRemove() );
+export const findNote = ((id) => NoteModel.find({"_id": id}) );
+export const findNotes = (() => NoteModel.find({}) );
+export const saveNote = ((note) => new NoteModel(note).save() );
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class MusicTrack {
  constructor(content, limit = 5) {
