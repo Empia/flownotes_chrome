@@ -1,11 +1,12 @@
-process.env.NODE_ENV = 'test';
-process.env.PUBLIC_URL = '';
+//process.env.NODE_ENV = 'test';
+//process.env.PUBLIC_URL = '';
 // Load environment variables from .env file. Suppress warnings using silent
 // if this file is missing. dotenv will never modify any environment variables
 // that have already been set.
 // https://github.com/motdotla/dotenv
 //require('dotenv').config({ silent: true });
-va1r;
+/*
+var;
 jest2 = require('jest');
 const argv = process.argv.slice(2);
 // Watch unless on CI or in coverage mode
@@ -24,3 +25,6 @@ process.stdout.write = function (chunk, encoding, callback) {
     return realWrite.call(this, chunk, encoding, callback);
 };
 jest.run(argv);
+*/
+var z = 10;
+console.log(z);
