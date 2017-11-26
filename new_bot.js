@@ -10,10 +10,14 @@ import database from './database';
 
 
 import startScene from './bot/commands/start';
+import settingScene from './bot/commands/settings';
+import noteScene from './bot/commands/notes';
+import feedbackScene from './bot/commands/feedback';
+
 import {BOT_TOKEN} from './constants';
 
 const flow = new TelegrafFlow(
-  [startScene], { 
+  [startScene, settingScene, noteScene, feedbackScene], { 
     sessionName: 'data', ttl: 0 
 });
 

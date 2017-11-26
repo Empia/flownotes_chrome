@@ -21,8 +21,12 @@
     "url": "https://github.com/Empia/flownotes-chrome/issues"
   },
   "ava": {
-    "files": ["tests/*.js"],
-    "source": ["bot/**/*.{js,jsx}"],
+    "files": [
+      "tests/*.js"
+    ],
+    "source": [
+      "bot/**/*.{js,jsx}"
+    ],
     "concurrency": 5,
     "failFast": true,
     "failWithoutAssertions": false,
@@ -40,7 +44,7 @@
     "fifo": "^2.3.0",
     "lodash": "^4.17.4",
     "mongodb": "^2.2.33",
-    "mongoose": "^4.12.4",
+    "mongoose": "^4.13.5",
     "node-id3": "^0.1.0",
     "node-schedule": "^1.2.5",
     "shelljs": "^0.7.8",

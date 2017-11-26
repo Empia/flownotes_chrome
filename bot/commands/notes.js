@@ -3,8 +3,8 @@ const commandParts = require('telegraf-command-parts');
 const TelegrafFlow = require('telegraf-flow');
 const { Scene, enter, leave } = TelegrafFlow
 
-const settingsScene = new Scene('settings');
-settingsScene.enter((ctx) =>  ctx.reply(`Выберите язык / Language selector`, keyboard));
+const noteScene = new Scene('notes');
+noteScene.enter((ctx) =>  ctx.reply(`Выберите язык / Language selector`, keyboard));
 
 const keyboard = Markup
     .keyboard([
@@ -15,7 +15,7 @@ const keyboard = Markup
     .extra()
 
 
-settingsScene.on('message', (ctx) => {
+noteScene.on('message', (ctx) => {
 	// create feedback
 	if (ctx.message.text == "English") {
 	  ctx['data'].language = "en";
@@ -31,4 +31,4 @@ settingsScene.on('message', (ctx) => {
 	}
 });
 
-export default settingsScene;
+export default noteScene;

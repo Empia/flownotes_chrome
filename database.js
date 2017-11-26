@@ -2,14 +2,14 @@ var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
 // Connection URL
-var url = 'mongodb://noterrr:12344321@ds255455.mlab.com:55455/noterrr';
+var url = 'mongodb://tuner:12344321@ds042417.mlab.com:42417/tunerrr';
 // Use connect method to connect to the Server
-var db = MongoClient.connect(url, function(err, db) {
-  assert.equal(null, err);
-  console.log('databaseName: ', db.s.databaseName);
-  console.log("Connected correctly to server");
 
-  return db;
-});
+var mongoose = require('mongoose');
+var db = mongoose.connect(url, { useMongoClient: true });
+mongoose.Promise = global.Promise;
+//console.log('databaseName: ', db..databaseName);
+//console.log("Connected correctly to server");
+
 
 export default db;

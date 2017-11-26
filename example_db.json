@@ -3,11 +3,12 @@
     {
       "id": "53170594:53170594",
       "data": {
-        "counter": 3,
+        "counter": 7,
         "_flow": {
           "id": "start",
           "_state": {}
-        }
+        },
+        "language": "ru"
       }
     }
   ],
@@ -105,6 +106,94 @@
         },
         "date": 1511696223,
         "text": "🔍 Notes"
+      }
+    ],
+    [
+      {
+        "message_id": 52,
+        "from": {
+          "id": 53170594,
+          "is_bot": false,
+          "first_name": "Stan 🔥",
+          "last_name": "Sobolev",
+          "username": "stansob",
+          "language_code": "en"
+        },
+        "chat": {
+          "id": 53170594,
+          "first_name": "Stan 🔥",
+          "last_name": "Sobolev",
+          "username": "stansob",
+          "type": "private"
+        },
+        "date": 1511697778,
+        "text": "🔍 Notes"
+      }
+    ],
+    [
+      {
+        "message_id": 73,
+        "from": {
+          "id": 53170594,
+          "is_bot": false,
+          "first_name": "Stan 🔥",
+          "last_name": "Sobolev",
+          "username": "stansob",
+          "language_code": "en"
+        },
+        "chat": {
+          "id": 53170594,
+          "first_name": "Stan 🔥",
+          "last_name": "Sobolev",
+          "username": "stansob",
+          "type": "private"
+        },
+        "date": 1511698227,
+        "text": "☸ Settings"
+      }
+    ],
+    [
+      {
+        "message_id": 74,
+        "from": {
+          "id": 53170594,
+          "is_bot": false,
+          "first_name": "Stan 🔥",
+          "last_name": "Sobolev",
+          "username": "stansob",
+          "language_code": "en"
+        },
+        "chat": {
+          "id": 53170594,
+          "first_name": "Stan 🔥",
+          "last_name": "Sobolev",
+          "username": "stansob",
+          "type": "private"
+        },
+        "date": 1511698244,
+        "text": "☸ Settings"
+      }
+    ],
+    [
+      {
+        "message_id": 81,
+        "from": {
+          "id": 53170594,
+          "is_bot": false,
+          "first_name": "Stan 🔥",
+          "last_name": "Sobolev",
+          "username": "stansob",
+          "language_code": "en"
+        },
+        "chat": {
+          "id": 53170594,
+          "first_name": "Stan 🔥",
+          "last_name": "Sobolev",
+          "username": "stansob",
+          "type": "private"
+        },
+        "date": 1511698253,
+        "text": "☸ Settings"
       }
     ]
   ]
