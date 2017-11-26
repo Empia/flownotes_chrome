@@ -13,9 +13,6 @@ feedbackScene.enter((ctx) => {
 });
 
 feedbackScene.on('message', (ctx) => {
-	// create feedback
-	saveFeedback({telegramLogin: ctx.chat.username, message: ctx.message.text }).then(f => { console.log(f) });
-	ctx.reply('Спасибо');
 	ctx.flow.enter('start');
 });
 

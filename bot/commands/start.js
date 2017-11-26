@@ -58,7 +58,7 @@ startScene.hears('Записаться', (ctx) => {
 	ctx.reply('Спасибо! Мы с вами свяжемся', Markup.removeKeyboard().extra())
 });
 
-startScene.hears('😎 Guides', ctx => ctx.reply('Guides!', keyboard))
+startScene.hears('🔍 Notes', enter('notes'));
 startScene.hears('📞 Feedback', enter('feedback'));
 startScene.hears('☸ Settings', enter('settings'));
 
