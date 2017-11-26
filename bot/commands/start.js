@@ -25,7 +25,7 @@ const addSubscriber = (ctx) => {
 const startScene = new Scene('start')
 const keyboard = Markup
     .keyboard([
-      ['🔍 Servers'], // '😎 Guides', '👥 Job board' Row1 with 2 buttons
+      ['🔍 Notes'], // '😎 Guides', '👥 Job board' Row1 with 2 buttons
       ['📞 Feedback', '☸ Setting'], // '☸ Setting',  Row2 with 2 buttons
     ])
     .oneTime()
@@ -47,7 +47,7 @@ const keyboardEmppty = Markup
     .extra()
 
 startScene.enter((ctx) => { 
-    ctx.reply(mainScreenMessage, keyboard);
+    ctx.reply("mainScreenMessage", keyboard);
     //ctx.reply(`Мы в открытой бете, оставьте заявку на участие`, keyboard);
 });
 

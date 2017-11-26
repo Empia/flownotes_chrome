@@ -1,20 +1,24 @@
 const Telegraf = require('telegraf'),
   LocalSession = require('telegraf-session-local')
-const { Markup, reply } = require('telegraf')
+const { Markup, reply } = require('telegraf');
 const commandParts = require('telegraf-command-parts');
-const TelegrafFlow = require('telegraf-flow')
+const TelegrafFlow = require('telegraf-flow');
 const { Scene, enter, leave } = TelegrafFlow
-const TelegrafWit = require('telegraf-wit')
+const TelegrafWit = require('telegraf-wit');
 require('shelljs/global');
 import database from './database';
 
+
 import startScene from './bot/commands/start';
-import settingsScene from './bot/commands/settings'
+import {BOT_TOKEN} from './constants';
 
-const BOT_TOKEN = '477224067:AAEc-vWiNMlnxYnUIHXsJ6vZqrqznFlIXTw';
-const flow = new TelegrafFlow([startScene, settingsScene], { ttl: 10 });
+const flow = new TelegrafFlow(
+  [startScene], { 
+    sessionName: 'data', ttl: 0 
+});
+
+
 const app = new Telegraf(BOT_TOKEN);
-
 app.use(commandParts());
 
 // Name of session property object in Telegraf Context (default: 'session')
@@ -41,18 +45,17 @@ app.use(flow.middleware())
 app.use(commandParts());
 //app.use(Telegraf.log())
 
-app.use(async (ctx, next) => {
-  const start = new Date()
-  await next()
-  const ms = new Date() - start
-  console.log('Response time %sms', ms)
-})
-
 
 
 app.command('start', enter('start'));
+
 app.command('scene', ctx => console.log(ctx.flow));
-app.command('language', ((ctx) => ctx.reply(ctx[sessionProperty].language) ));
+
+
+
+
+// confirm order
+app.command('confirm', (ctx) => ctx.reply('confirm'))
 
 
 console.log('sessionProperty',sessionProperty);
@@ -76,40 +79,17 @@ app.on('text', (ctx, next) => {
   // `property`+'DB' is a name of property which contains lowdb instance (`dataDB`)
   return next()
 })
+app.use(flow.middleware())
 
 app.use(commandParts());
 app.startPolling()
 
 
 
-/////////////////////////////////////////////////////////
-
-
-var express = require('express');
-var webapp = express();
-webapp.get('/test/:id', function (req, res) {
-  let par = req.param('id')
-  heys.push(par  )
-  console.log(par)
-  res.send(par);
-});
-webapp.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
-
-
-
-
-
-app.command('start', ({ from, reply }) => {
-  console.log('start', from)
-  return reply('Welcome!')
-});
-
-app.startPolling()
-
-
 console.log('NOTER IS RUNNING');  
+console.log(`on token ${BOT_TOKEN}`)
 console.log('***************');
 console.log('***************');
 console.log('database', database);
+
+
