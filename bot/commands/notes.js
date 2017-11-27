@@ -15,7 +15,7 @@ const keyboard = Markup
     .extra()
 
 noteScene.enter((ctx) => { 
-	ctx.reply(`Скидывайте сюда ссылки и я добавлю их в колленцию`, keyboard);
+	ctx.reply(`Скидывайте сюда ссылки и я добавлю их в коллекцию`, keyboard);
 });
 noteScene.leave((ctx) => { 
 	ctx.reply(`Вы добавили ${5} ссылок`);
