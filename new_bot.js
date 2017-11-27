@@ -8,7 +8,6 @@ const TelegrafWit = require('telegraf-wit');
 require('shelljs/global');
 import database from './database';
 
-
 import startScene from './bot/commands/start';
 import settingScene from './bot/commands/settings';
 import noteScene from './bot/commands/notes';
@@ -52,10 +51,7 @@ app.use(commandParts());
 
 
 app.command('start', enter('start'));
-
-app.command('scene', ctx => console.log(ctx.flow));
-
-
+app.command('scene', ctx => ctx.reply(ctx.flow.state));
 
 
 // confirm order
