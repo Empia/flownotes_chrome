@@ -1,4 +1,4 @@
-const { Markup, reply } = require('telegraf')
+const { Markup, reply, Telegraf, Extra } = require('telegraf')
 const commandParts = require('telegraf-command-parts');
 const TelegrafFlow = require('telegraf-flow');
 const { Scene, enter, leave } = TelegrafFlow
@@ -68,6 +68,37 @@ noteScene.command('start', (ctx) => {
 
 
 
+const testMenu = Extra
+  .markdown()
+  .markup((m) => m.inlineKeyboard([
+    m.callbackButton('Remove', 'remove'),
+    m.callbackButton('Move to collection', 'toCollection')
+
+  ]))
+
+const aboutMenu = Extra
+  .markdown()
+  .markup((m) => m.keyboard([
+    m.callbackButton('⬅️ Back')
+  ]).resize())
+
+noteScene.hears('test', (ctx) => {
+  ctx.reply('test message', testMenu).then(() => {
+    ctx.reply('about', aboutMenu)
+  })
+})
+
+noteScene.action('remove', (ctx) => ctx.answerCallbackQuery('remove!'))
+noteScene.action('toCollection', (ctx) => ctx.answerCallbackQuery('toCollection!'))
+
+noteScene.hears('test', (ctx) => {    
+  ctx.reply('test message', testMenu).then(() => {
+    ctx.reply('about', aboutMenu)
+  })
+});
+
+
+
 
 noteScene.on('message', (ctx) => {
   console.log('onMessage', ctx.message);
@@ -75,7 +106,7 @@ noteScene.on('message', (ctx) => {
   let url = ctx.message.text 
   if (validUrl.isUri(url)) {
 	  saveNote(addNoteByUrl(url, telegramLogin)).then((c) => {
-	  	  ctx.reply(`Added ${url}`, keyboard)
+	  	  ctx.reply(`Added ${url}`, testMenu)
 	  })
   } else {
   	  ctx.reply('Incorrect url', keyboard)
