@@ -61,6 +61,11 @@ noteScene.hears('Back', (ctx) => {
 	ctx.flow.enter('start');
 });
 
+noteScene.command('start', (ctx) => {
+	ctx.flow.enter('start');
+});
+
+
 
 
 

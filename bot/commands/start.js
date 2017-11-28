@@ -33,7 +33,7 @@ const keyboard = Markup
 
 
 startScene.enter((ctx) => { 
-    ctx.reply(welcomeMessage);
+    ctx.reply(welcomeMessage, keyboard);
     ctx.reply(mainScreenMessage, keyboard);
     //ctx.reply(`Мы в открытой бете, оставьте заявку на участие`, keyboard);
 });
