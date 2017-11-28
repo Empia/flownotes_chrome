@@ -3,7 +3,7 @@
     {
       "id": "53170594:53170594",
       "data": {
-        "counter": 10,
+        "counter": 11,
         "_flow": {
           "id": "notes",
           "_state": {}
@@ -260,6 +260,35 @@
         },
         "date": 1511788323,
         "text": "Назад"
+      }
+    ],
+    [
+      {
+        "message_id": 300,
+        "from": {
+          "id": 53170594,
+          "is_bot": false,
+          "first_name": "Stan 🔥",
+          "last_name": "Sobolev",
+          "username": "stansob",
+          "language_code": "en"
+        },
+        "chat": {
+          "id": 53170594,
+          "first_name": "Stan 🔥",
+          "last_name": "Sobolev",
+          "username": "stansob",
+          "type": "private"
+        },
+        "date": 1511878255,
+        "text": "https://lenta.ru/",
+        "entities": [
+          {
+            "offset": 0,
+            "length": 17,
+            "type": "url"
+          }
+        ]
       }
     ]
   ]

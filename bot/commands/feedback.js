@@ -9,7 +9,7 @@ import {saveFeedback} from '../models/feedback';
 const feedbackScene = new Scene('feedback');
 
 feedbackScene.enter((ctx) => { 
-	ctx.reply(`Привет! Оставьте отзыв и мы свяжемся с вами.`);
+	ctx.reply(`Hey! Please send your feedback about me. It will really helpful and I promise that I will be better`);
 });
 
 feedbackScene.on('message', (ctx) => {

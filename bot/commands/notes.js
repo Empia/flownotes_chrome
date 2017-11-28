@@ -5,6 +5,7 @@ const { Scene, enter, leave } = TelegrafFlow
 const {getMetadata, metadataRules} = require('page-metadata-parser');
 var MetaInspector = require('node-metainspector');
 const normalizeUrl = require('normalize-url');
+var validUrl = require('valid-url');
 
 import {removeNote,
 findNote,
@@ -15,24 +16,24 @@ const noteScene = new Scene('notes');
 
 const keyboard = Markup
     .keyboard([
-      ['Свежие', 'Коллекции', 'Активность'], // '☸ Setting',  Row2 with 2 buttons
-      ['Назад']
+      ['Shoutbox', 'Collections', 'By activities'], // '☸ Setting',  Row2 with 2 buttons
+      ['Back']
     ])
     .oneTime()
     .resize()
     .extra()
 
 noteScene.enter((ctx) => { 
-	ctx.reply(`Скидывайте сюда ссылки и я добавлю их в коллекцию`, keyboard);
+	ctx.reply(`Send me links and I will add them to shoutbox`, keyboard);
 });
 noteScene.leave((ctx) => { 
-	ctx.reply(`Вы добавили ${5} ссылок`);
+	ctx.reply(`You have been added ${5} links`);
 });
 
 
 
 const addNoteByUrl = (url, userId) => {
-	console.log('addNoteByUrl', url);
+	//console.log('addNoteByUrl', url);
 		 return {title: "client.title",
 						  content_desc:'',
 						  content_type: 'url',
@@ -50,14 +51,13 @@ const addNoteByUrl = (url, userId) => {
 
 
 
-noteScene.hears('Свежие', (ctx) => {
+noteScene.hears('Shoutbox', (ctx) => {
 	findNotes().then((notes) => {
 		notes.map(note => ctx.reply(note));
 	})
-})
+});
 
-
-noteScene.hears('Назад', (ctx) => {
+noteScene.hears('Back', (ctx) => {
 	ctx.flow.enter('start');
 });
 
@@ -65,18 +65,16 @@ noteScene.hears('Назад', (ctx) => {
 
 
 noteScene.on('message', (ctx) => {
-  console.log('onMessage', ctx.message.text);
+  console.log('onMessage', ctx.message);
   let telegramLogin =  ctx.chat.username
   let url = ctx.message.text 
-  if (url !== undefined && url !== "") {
+  if (validUrl.isUri(url)) {
 	  saveNote(addNoteByUrl(url, telegramLogin)).then((c) => {
-	  	  ctx.reply('Added')
-
+	  	  ctx.reply(`Added ${url}`, keyboard)
 	  })
   } else {
-  	  ctx.reply('Incorrect url')
+  	  ctx.reply('Incorrect url', keyboard)
   }
-
 });
 
 export default noteScene;

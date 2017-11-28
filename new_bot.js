@@ -58,9 +58,9 @@ app.command('scene', ctx => ctx.reply(ctx.flow.state));
 app.command('confirm', (ctx) => ctx.reply('confirm'))
 
 
-console.log('sessionProperty',sessionProperty);
+//console.log('sessionProperty',sessionProperty);
 app.command('/stats', (ctx) => {
-  console.log('ctx.data', ctx.data);
+  //console.log('ctx.data', ctx.data);
   let msg = `Using session object from [Telegraf Context](http://telegraf.js.org/context.html) (\`ctx\`), named \`${sessionProperty}\`\n`
      msg += `Database has \`${ctx[sessionProperty].counter}\` messages from @${ctx.from.username}`
   ctx.replyWithMarkdown(msg)

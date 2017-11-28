@@ -31,21 +31,6 @@ const keyboard = Markup
     .resize()
     .extra()
 
-const keyboardBeta = Markup
-    .keyboard([
-      ['Записаться'], // Row1 with 2 buttons
-    ])
-    .oneTime()
-    .resize()
-    .extra()
-
-const keyboardEmppty = Markup
-    .keyboard([
-      ['Записаться'], // Row1 with 2 buttons
-    ])
-    .oneTime()
-    .resize()
-    .extra()
 
 startScene.enter((ctx) => { 
     ctx.reply(welcomeMessage);
@@ -53,10 +38,6 @@ startScene.enter((ctx) => {
     //ctx.reply(`Мы в открытой бете, оставьте заявку на участие`, keyboard);
 });
 
-startScene.hears('Записаться', (ctx) => {
-	addSubscriber(ctx);
-	ctx.reply('Спасибо! Мы с вами свяжемся', Markup.removeKeyboard().extra())
-});
 
 startScene.hears('🔍 Notes', enter('notes'));
 startScene.hears('📞 Feedback', enter('feedback'));
