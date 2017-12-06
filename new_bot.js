@@ -12,11 +12,12 @@ import startScene from './bot/commands/start';
 import settingScene from './bot/commands/settings';
 import noteScene from './bot/commands/notes';
 import feedbackScene from './bot/commands/feedback';
+import activityScene from './bot/commands/activities';
 
 import {BOT_TOKEN} from './constants';
 
 const flow = new TelegrafFlow(
-  [startScene, settingScene, noteScene, feedbackScene], { 
+  [startScene, settingScene, noteScene, feedbackScene, activityScene], { 
     sessionName: 'data', ttl: 0 
 });
 

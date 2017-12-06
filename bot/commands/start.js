@@ -25,7 +25,7 @@ const addSubscriber = (ctx) => {
 const startScene = new Scene('start')
 const keyboard = Markup
     .keyboard([
-      ['🔍 Notes'], // '😎 Guides', '👥 Job board' Row1 with 2 buttons
+      ['🔍 Notes','🚀 Activities'], // '😎 Guides', '👥 Job board' Row1 with 2 buttons
       ['📞 Feedback', '☸ Settings'], // '☸ Setting',  Row2 with 2 buttons
     ])
     .oneTime()
@@ -43,6 +43,9 @@ startScene.enter((ctx) => {
 startScene.hears('🔍 Notes', enter('notes'));
 startScene.hears('📞 Feedback', enter('feedback'));
 startScene.hears('☸ Settings', enter('settings'));
+startScene.hears('🚀 Activities', enter('activities'));
+
+
 
 startScene.command('test_create', (ctx) => {
     saveActivity({
