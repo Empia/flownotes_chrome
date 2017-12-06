@@ -3,6 +3,7 @@ const commandParts = require('telegraf-command-parts');
 const TelegrafFlow = require('telegraf-flow');
 const { Scene, enter, leave } = TelegrafFlow
 import {mainScreenMessage, welcomeMessage} from '../../constants';
+import {findActivities, saveActivity} from '../models/Activities';
 
 var betaSubscribers = [];
 
@@ -43,6 +44,22 @@ startScene.hears('🔍 Notes', enter('notes'));
 startScene.hears('📞 Feedback', enter('feedback'));
 startScene.hears('☸ Settings', enter('settings'));
 
+startScene.command('test_create', (ctx) => {
+    saveActivity({
+      title: 'test activity'
+     }).then((c) => {
+        ctx.reply('created');
+     });
+});
+
+startScene.command('test', (ctx) => {
+    //console.log(findActivities());
+    findActivities().then(c => {
+        console.log('collection');
+        console.log(c);
+        ctx.reply(c);
+    });
+});
 
 
 export default startScene;
